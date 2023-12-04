@@ -24,6 +24,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.postgresql:postgresql'
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.0'
+    implementation 'com.auth0:java-jwt:4.4.0'
+    implementation 'de.huxhorn.sulky:de.huxhorn.sulky.ulid:8.2.0'
 }
 
 test {
