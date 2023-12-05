@@ -1,4 +1,4 @@
 package com.linkmart.models;
 
-public class category {
+public class Offer {
 }

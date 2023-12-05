@@ -1,4 +1,4 @@
 package com.linkmart.models;
 
-public class report_case {
+public class CategoryField {
 }

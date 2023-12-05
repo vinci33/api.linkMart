@@ -1,4 +1,4 @@
 package com.linkmart.models;
 
-public class orders {
+public class Orders {
 }

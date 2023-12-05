@@ -1,4 +1,4 @@
 package com.linkmart.models;
 
-public class order_status {
+public class Review {
 }

@@ -1,4 +1,4 @@
 package com.linkmart.models;
 
-public class offer {
+public class Request {
 }
