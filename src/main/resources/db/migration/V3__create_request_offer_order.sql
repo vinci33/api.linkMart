@@ -37,8 +37,8 @@ CREATE TABLE logistic_company (
 );
 
 CREATE TABLE request (
-    id SERIAL PRIMARY KEY,
-    created_by INTEGER not null REFERENCES users(id),
+    id TEXT PRIMARY KEY,
+    created_by TEXT not null REFERENCES users(id),
     location_id INTEGER not null REFERENCES location(id),
     category_id INTEGER not null REFERENCES category(id),
     item TEXT not null,
@@ -52,9 +52,9 @@ CREATE TABLE request (
 );
 
 CREATE TABLE offer (
-    id SERIAL PRIMARY KEY,
-    request_id INTEGER not null REFERENCES request(id),
-    provider_id INTEGER not null REFERENCES provider(id),
+    id TEXT PRIMARY KEY,
+    request_id TEXT not null REFERENCES request(id),
+    provider_id TEXT not null REFERENCES provider(id),
     status_id INTEGER not null REFERENCES status(id),
     estimated_process_time INTEGER not null,
     offer_price INTEGER not null,
@@ -64,8 +64,8 @@ CREATE TABLE offer (
 );
 
 CREATE TABLE orders (
-    id SERIAL PRIMARY KEY,
-    offer_id INTEGER not null REFERENCES offer(id),
+    id TEXT PRIMARY KEY,
+    offer_id TEXT not null REFERENCES offer(id),
     order_status_id INTEGER not null REFERENCES order_status(id),
     logistic_company_id INTEGER not null REFERENCES logistic_company(id),
     shipping_order_no INTEGER not null,
@@ -75,7 +75,7 @@ CREATE TABLE orders (
 
 CREATE TABLE review (
     id SERIAL PRIMARY KEY,
-    orders_id INTEGER not null REFERENCES orders(id),
+    orders_id TEXT not null REFERENCES orders(id),
     company_url VARCHAR(255) not null,
     created_at TIMESTAMP default NOW(),
     updated_at TIMESTAMP default NOW()
@@ -83,8 +83,8 @@ CREATE TABLE review (
 
 CREATE TABLE report_case (
     id SERIAL PRIMARY KEY,
-    orders_id INTEGER not null REFERENCES orders(id),
-    handler INTEGER not null REFERENCES admins(id),
+    orders_id TEXT not null REFERENCES orders(id),
+    handler TEXT not null REFERENCES admins(id),
     status_id INTEGER not null REFERENCES status(id),
     report_description TEXT not null,
     created_at TIMESTAMP default NOW(),
