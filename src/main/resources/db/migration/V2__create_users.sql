@@ -20,10 +20,10 @@ CREATE TABLE user_address (
 CREATE TABLE user_payment_method (
     id SERIAL PRIMARY KEY,
     user_id TEXT not null REFERENCES users(id),
-    payment_method VARCHAR(255) not null,
-    card_no VARCHAR (16) not null,
-    card_holder_name VARCHAR(255) not null,
-    expiry_date VARCHAR(5) not null CHECK (expiry_date ~ '^[0-9]{2}/[0-9]{2}$'),
+    payment_method VARCHAR(255) ,
+    card_no VARCHAR (16) ,
+    card_holder_name VARCHAR(255) ,
+    expiry_date VARCHAR(5)  CHECK (expiry_date ~ '^[0-9]{2}/[0-9]{2}$'),
     created_at TIMESTAMP default NOW(),
     updated_at TIMESTAMP default NOW()
 );

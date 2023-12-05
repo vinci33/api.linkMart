@@ -82,9 +82,9 @@ CREATE TABLE review (
 );
 
 CREATE TABLE report_case (
-    id SERIAL PRIMARY KEY,
+    id TEXT PRIMARY KEY,
     orders_id TEXT not null REFERENCES orders(id),
-    handler TEXT not null REFERENCES admins(id),
+    admins_id TEXT not null REFERENCES admins(id),
     status_id INTEGER not null REFERENCES status(id),
     report_description TEXT not null,
     created_at TIMESTAMP default NOW(),

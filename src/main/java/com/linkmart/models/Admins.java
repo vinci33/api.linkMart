@@ -1,19 +1,17 @@
 package com.linkmart.models;
 
 import de.huxhorn.sulky.ulid.ULID;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "admins")
 public class Admins {
     @Id
-    private String id;
+    private String id;//ULID
     @Column(name="username", unique = true)
     private String username; //unique
     @Column(name="password")
@@ -22,10 +20,19 @@ public class Admins {
     @Column(name="created_at", insertable=false, updatable=false)
     private Timestamp createdAt;
 
+    @OneToMany(mappedBy="admins")
+    private List<ReportCase> reportCasesList;
 
     public Admins() {
         ULID ulid = new ULID();
         this.id = ulid.nextULID();
+    }
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -62,9 +69,6 @@ public class Admins {
                 '}';
     }
 
-    public String getId() {
-        return id;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -79,7 +83,5 @@ public class Admins {
         return Objects.hash(id, username, password, createdAt);
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+
 }

@@ -12,6 +12,7 @@ public class AdminsTest {
         ULID ulid = new ULID();
         String newId = ulid.nextULID();
         System.out.println("The generated ULID is: " + newId);
+        System.out.println("The generated ULID from admins is: " + admins.getId());
         admins.setId(newId);
         assertEquals(newId, admins.getId());
     }
