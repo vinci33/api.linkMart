@@ -44,6 +44,6 @@ public class AppConfig {
                                 )
                 )
                 .security(List.of(new SecurityRequirement().addList(securitySchemeName)))
-                .info(new Info().title("Memo Wall").version("1.0.0"));
+                .info(new Info().title("linkMart").version("1.0.0"));
     }
 }

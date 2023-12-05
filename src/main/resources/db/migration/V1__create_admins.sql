@@ -3,8 +3,7 @@ CREATE TABLE admins (
     id TEXT PRIMARY KEY,
     username  VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(72) NOT NULL,
-    created_at DATE default NOW(),
-    updated_at DATE default NOW()
+    created_at TIMESTAMP default NOW()
 );
 
 COMMIT;
