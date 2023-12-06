@@ -8,7 +8,7 @@ on:
 env:
   TEST__DB_NAME: linkmart
   TEST__DB_USERNAME: hotinglo
-  TEST__DB_PASSWORD: 1993
+  TEST__DB_PASSWORD: postgres
   TEST__DB_HOSTNAME: postgres
   TEST__DB_PORT: 5432
 
