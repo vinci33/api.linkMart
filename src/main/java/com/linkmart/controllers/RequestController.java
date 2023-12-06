@@ -24,14 +24,15 @@ public class RequestController {
     S3Service s3Service;
 
     @PostMapping(value = "/api/request", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String postRequest (@RequestBody RequestForm requestForm) {
-        String created_by = requestForm.getCreated_by();
-        int location_id = requestForm.getLocation_id();
-        int category_id = requestForm.getCategory_id();
-        String item = requestForm.getItem();
-        MultipartFile image = requestForm.getImage();
-        String url = requestForm.getUrl();
+    public String postRequest (@RequestBody Request request) {
+        String created_by = request.getCreated_by();
+        int location_id = request.getLocation_id();
+        int category_id = request.getCategory_id();
+        String item = request.getItem();
+        MultipartFile image = request.getImage();
+        String url = request.getUrl();
 
-
+        var result = requestRepository.saveAndFlush(request);
+        return "success";
     }
 }
