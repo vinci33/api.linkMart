@@ -24,7 +24,7 @@ public class Request {
     @Column(name = "item")
     private String item;
     @Column(name = "image")
-    private MultipartFile image;
+    private String image;
     @Column(name = "url")
     private String url;
     @Column(name = "quantity")
@@ -80,11 +80,11 @@ public class Request {
         this.item = item;
     }
 
-    public MultipartFile getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(MultipartFile image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
