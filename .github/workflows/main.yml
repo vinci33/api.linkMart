@@ -18,7 +18,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
       - run: |
-          cd api.linkMart/
+          cd /api.linkMart
           ./gradlew clean test bootJar --refresh-dependencies
       - name: Login to Docker Hub
         uses: docker/login-action@v2
