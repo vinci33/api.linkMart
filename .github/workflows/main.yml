@@ -5,13 +5,6 @@ on:
       - "production"
   workflow_dispatch:
 
-env:
-  TEST__DB_NAME: linkmart
-  TEST__DB_USERNAME: hotinglo
-  TEST__DB_PASSWORD: postgres
-  TEST__DB_HOSTNAME: postgres
-  TEST__DB_PORT: 5432
-
 jobs:
   test-and-build-dockerize-server:
     runs-on: ubuntu-latest
