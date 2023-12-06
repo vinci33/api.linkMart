@@ -1,4 +1,4 @@
 package com.linkmart.models;
 
-public class Request {
+public class Logistic_company {
 }
