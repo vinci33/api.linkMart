@@ -1,11 +1,8 @@
 package com.linkmart.models;
 
 import de.huxhorn.sulky.ulid.ULID;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import org.springframework.web.multipart.MultipartFile;
+import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 
@@ -29,13 +26,17 @@ public class Request {
     private String url;
     @Column(name = "quantity")
     private int quantity;
+    @Column(name = "offer_price")
+    private int offer_price;
     @Column(name = "request_remark")
     private String request_remark;
     @Column(name = "created_at", insertable = false, updatable = false)
-    private Timestamp createdAt;
+    @CreationTimestamp
+    private String createdAt;
     @Column(name = "updated_at", insertable = false, updatable = false)
-    private Timestamp updatedAt;
-    public void RequestCase() {
+    @CreationTimestamp
+    private String updatedAt;
+    public void makeRequestCase() {
         ULID ulid = new ULID();
         this.id = ulid.nextULID();
     }
@@ -112,19 +113,27 @@ public class Request {
         this.request_remark = request_remark;
     }
 
-    public Timestamp getCreatedAt() {
+    public int getOffer_price() {
+        return offer_price;
+    }
+
+    public void setOffer_price(int offer_price) {
+        this.offer_price = offer_price;
+    }
+
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Timestamp getUpdatedAt() {
+    public String getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
+    public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
     }
 
@@ -136,9 +145,10 @@ public class Request {
                 ", location_id=" + location_id +
                 ", category_id=" + category_id +
                 ", item='" + item + '\'' +
-                ", image=" + image +
+                ", image='" + image + '\'' +
                 ", url='" + url + '\'' +
                 ", quantity=" + quantity +
+                ", offer_price=" + offer_price +
                 ", request_remark='" + request_remark + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
