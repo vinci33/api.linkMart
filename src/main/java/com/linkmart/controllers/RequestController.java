@@ -35,4 +35,9 @@ public class RequestController {
         var result = requestRepository.saveAndFlush(request);
         return "success";
     }
+
+    @GetMapping(value = "/test")
+    public String test() {
+        return "test cicd success";
+    }
 }
