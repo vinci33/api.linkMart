@@ -24,15 +24,17 @@ public class RequestController {
     S3Service s3Service;
 
     @PostMapping(value = "/api/request", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String postRequest (@RequestBody Request request) {
+    public String postRequest (@RequestBody Request request, @RequestParam("image") MultipartFile file) {
+        var path = s3Service.uploadFile(file);
         String created_by = request.getCreated_by();
         int location_id = request.getLocation_id();
         int category_id = request.getCategory_id();
         String item = request.getItem();
-        MultipartFile image = request.getImage();
+//        String image = request.getImage(path);
         String url = request.getUrl();
 
         var result = requestRepository.saveAndFlush(request);
+        logger.info(result.toString());
         return "success";
     }
 }
