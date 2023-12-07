@@ -24,6 +24,8 @@ public class User {
 
     @Column(name="created_at", insertable=false, updatable=false)
     private Timestamp createdAt;
+    @Column(name="updated_at", insertable=false, updatable=false)
+    private Timestamp updatedAt;
 
     @OneToMany(mappedBy="user" , cascade={CascadeType.REMOVE, CascadeType.MERGE})
     private List<UserAddress> userAddressList;
@@ -116,6 +118,4 @@ public class User {
         this.updatedAt = updatedAt;
     }
 
-    @Column(name="updated_at", insertable=false, updatable=false)
-    private Timestamp updatedAt;
 }
