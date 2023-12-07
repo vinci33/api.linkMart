@@ -30,7 +30,7 @@ public class RequestController {
         int location_id = request.getLocation_id();
         int category_id = request.getCategory_id();
         String item = request.getItem();
-//        String image = request.getImage(path);
+        MultipartFile image = request.getImage();
         String url = request.getUrl();
 
         var result = requestRepository.saveAndFlush(request);
