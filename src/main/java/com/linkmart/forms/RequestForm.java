@@ -1,6 +1,6 @@
 package com.linkmart.forms;
 
-import com.linkmart.models.Request;
+import com.linkmart.models.RequestModel;
 import org.springframework.web.multipart.MultipartFile;
 
 public class RequestForm {
@@ -77,8 +77,8 @@ public class RequestForm {
         this.request_remark = request_remark;
     }
 
-    public Request postRequest(){
-        var request = new Request();
+    public RequestModel postRequest(){
+        var request = new RequestModel();
         request.setCreated_by(this.created_by);
         request.setLocation_id(this.location_id);
         request.setCategory_id(this.category_id);

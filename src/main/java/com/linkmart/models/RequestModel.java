@@ -4,11 +4,11 @@ import de.huxhorn.sulky.ulid.ULID;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "request")
-public class Request {
+public class RequestModel {
 
     @Id
     private String id;
@@ -20,8 +20,6 @@ public class Request {
     private int category_id;
     @Column(name = "item")
     private String item;
-    @Column(name = "image")
-    private String image;
     @Column(name = "url")
     private String url;
     @Column(name = "quantity")
@@ -36,6 +34,16 @@ public class Request {
     @Column(name = "updated_at", insertable = false, updatable = false)
     @CreationTimestamp
     private String updatedAt;
+
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            mappedBy="requestId", cascade={CascadeType.ALL})
+    private List<ImageModel> images;
+
+    public List<ImageModel> getImages() {
+        return images;
+    }
+
     public void makeRequestCase() {
         ULID ulid = new ULID();
         this.id = ulid.nextULID();
@@ -79,14 +87,6 @@ public class Request {
 
     public void setItem(String item) {
         this.item = item;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public String getUrl() {
@@ -145,7 +145,7 @@ public class Request {
                 ", location_id=" + location_id +
                 ", category_id=" + category_id +
                 ", item='" + item + '\'' +
-                ", image='" + image + '\'' +
+                ", image='" + images + '\'' +
                 ", url='" + url + '\'' +
                 ", quantity=" + quantity +
                 ", offer_price=" + offer_price +

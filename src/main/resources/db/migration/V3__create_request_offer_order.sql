@@ -99,7 +99,7 @@ CREATE TABLE report_case (
 );
 
 CREATE TABLE image (
-    id TEXT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     request_id TEXT not null REFERENCES request(id),
     image_path TEXT,
     is_primary BOOLEAN not null,

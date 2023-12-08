@@ -1,6 +1,6 @@
 package com.linkmart.controllers;
 
-import com.linkmart.models.Request;
+import com.linkmart.models.RequestModel;
 import com.linkmart.service.RequestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,25 +18,27 @@ public class RequestController {
     RequestService requestService;
 
     @PostMapping(value = "/request")
-    public Request postRequest (@ModelAttribute Request requestForm, @RequestParam("image_file") MultipartFile file) {
+    public RequestModel postRequest (@ModelAttribute RequestModel requestModelForm,
+                                     @RequestParam("image_file") MultipartFile file) {
         try{
-            var request = requestService.postRequest(requestForm.getCreated_by(),requestForm.getLocation_id(),
-                    requestForm.getCategory_id(),requestForm.getItem(),
-                    file,requestForm.getUrl(),
-                    requestForm.getQuantity(),requestForm.getRequest_remark(), requestForm.getOffer_price());
+            var request = requestService.postRequest(requestModelForm.getCreated_by(),
+                    requestModelForm.getLocation_id(), requestModelForm.getCategory_id(),
+                    requestModelForm.getItem(), requestModelForm.getUrl(),
+                    requestModelForm.getQuantity(), requestModelForm.getRequest_remark(),
+                    requestModelForm.getOffer_price(), file);
             return request;
         }catch (Exception e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
-    @PostMapping(value = "/uploadfile")
-    public String upload (@RequestParam("image") MultipartFile file) {
-        try{
-            var path = requestService.upload(file);
-            return path;
-        }catch (Exception e){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-        }
-    }
+//    @PostMapping(value = "/uploadfile")
+//    public String upload (@RequestParam("image") MultipartFile file) {
+//        try{
+//            var path = requestService.upload(file);
+//            return path;
+//        }catch (Exception e){
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+//        }
+//    }
 }

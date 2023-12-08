@@ -1,9 +1,6 @@
 package com.linkmart.dtos;
 
-import com.linkmart.models.Request;
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
-import org.hibernate.annotations.CreationTimestamp;
+import com.linkmart.models.ImageModel;
 
 import java.util.List;
 
@@ -20,7 +17,7 @@ public class RequestContent {
     private String request_remark;
     private String createdAt;
     private String updatedAt;
-    private List<Request> requests;
+    private List<ImageModel> images;
 
 
 }
