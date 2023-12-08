@@ -1,6 +1,8 @@
 package com.linkmart.models;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
 
@@ -16,12 +18,14 @@ public class ImageModel {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="request_id", updatable = false, insertable = false)
-    private RequestModel requestId;
+    private RequestModel requestModel;
 
     @Column(name = "image_path")
     private String image_path;
     @Column(name = "created_at", insertable = false, updatable = false)
+    @CreationTimestamp
     private Timestamp created_at;
+    @UpdateTimestamp
     @Column(name = "updated_at", insertable = false, updatable = false)
     private Timestamp updated_at;
 
@@ -70,7 +74,7 @@ public class ImageModel {
         return "ImageModel{" +
                 "id='" + id + '\'' +
                 ", request_id='" + request_id + '\'' +
-                ", requestId=" + requestId +
+                ", requestModel=" + requestModel +
                 ", image_path='" + image_path + '\'' +
                 ", created_at=" + created_at +
                 ", updated_at=" + updated_at +

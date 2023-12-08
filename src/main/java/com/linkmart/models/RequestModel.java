@@ -3,6 +3,7 @@ package com.linkmart.models;
 import de.huxhorn.sulky.ulid.ULID;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.List;
 
@@ -32,13 +33,17 @@ public class RequestModel {
     @CreationTimestamp
     private String createdAt;
     @Column(name = "updated_at", insertable = false, updatable = false)
-    @CreationTimestamp
+    @UpdateTimestamp
     private String updatedAt;
 
     @OneToMany(
             fetch = FetchType.LAZY,
-            mappedBy="requestId", cascade={CascadeType.ALL})
+            mappedBy="requestModel", cascade={CascadeType.ALL})
     private List<ImageModel> images;
+
+    public void setImages(List<ImageModel> images) {
+        this.images = images;
+    }
 
     public List<ImageModel> getImages() {
         return images;

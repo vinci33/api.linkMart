@@ -1,5 +1,6 @@
 package com.linkmart.controllers;
 
+import com.linkmart.forms.RequestForm;
 import com.linkmart.models.RequestModel;
 import com.linkmart.service.RequestService;
 import org.slf4j.Logger;
@@ -19,9 +20,9 @@ public class RequestController {
 
     @PostMapping(value = "/request")
     public RequestModel postRequest (@ModelAttribute RequestModel requestModelForm,
-                                     @RequestParam("image_file") MultipartFile file) {
+                                    @RequestParam("image_file") MultipartFile file) {
         try{
-            var request = requestService.postRequest(requestModelForm.getCreated_by(),
+            RequestModel request = requestService.postRequest(requestModelForm.getCreated_by(),
                     requestModelForm.getLocation_id(), requestModelForm.getCategory_id(),
                     requestModelForm.getItem(), requestModelForm.getUrl(),
                     requestModelForm.getQuantity(), requestModelForm.getRequest_remark(),

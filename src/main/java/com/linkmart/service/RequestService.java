@@ -4,6 +4,7 @@ import com.linkmart.models.ImageModel;
 import com.linkmart.models.RequestModel;
 import com.linkmart.repositories.ImageRepository;
 import com.linkmart.repositories.RequestRepository;
+import com.linkmart.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.naming.AuthenticationException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class RequestService {
@@ -21,7 +24,7 @@ public class RequestService {
     RequestRepository requestRepository;
 
     @Autowired
-    ImageRepository imageRepository;
+    UserRepository userRepository;
 
     @Autowired
     S3Service s3Service;
@@ -33,6 +36,8 @@ public class RequestService {
                                     MultipartFile file)
             throws AuthenticationException
     {
+        var username = userRepository.findByUserId(created_by);
+        logger.info(username);
         var newRequest = new RequestModel();
         newRequest.setCreated_by(created_by);
         newRequest.setLocation_id(location_id);
@@ -47,8 +52,16 @@ public class RequestService {
         ImageModel image = new ImageModel();
         String imagePath = s3Service.uploadFile(file);
         image.setImage_path(imagePath);
-        newRequest = this.requestRepository.saveAndFlush(newRequest);
-        this.imageRepository.save(image);
+        image.setRequest_id(newRequest.getId());
+        List<ImageModel> images = new ArrayList<>();
+        images.add(image);
+        newRequest.setImages(images);
+
+        var result = this.requestRepository.saveAndFlush(newRequest);
+        newRequest.setCreated_by(username);
+        newRequest.setCreatedAt(result.getCreatedAt());
+        newRequest.setUpdatedAt(result.getUpdatedAt());
+
         return newRequest;
     }
 

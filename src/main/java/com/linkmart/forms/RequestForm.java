@@ -1,14 +1,17 @@
 package com.linkmart.forms;
 
+import com.linkmart.models.ImageModel;
 import com.linkmart.models.RequestModel;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 public class RequestForm {
     private String created_by;
     private int location_id;
     private int category_id;
     private String item;
-    private MultipartFile image;
+    private List<ImageModel> image;
     private String url;
     private int quantity;
     private String request_remark;
@@ -45,11 +48,11 @@ public class RequestForm {
         this.item = item;
     }
 
-    public MultipartFile getImage() {
+    public List<ImageModel> getImage() {
         return image;
     }
 
-    public void setImage(MultipartFile image) {
+    public void setImage(List<ImageModel> image) {
         this.image = image;
     }
 

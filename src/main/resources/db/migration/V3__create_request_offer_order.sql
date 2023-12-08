@@ -102,7 +102,6 @@ CREATE TABLE image (
     id SERIAL PRIMARY KEY,
     request_id TEXT not null REFERENCES request(id),
     image_path TEXT,
-    is_primary BOOLEAN not null,
     created_at TIMESTAMP default NOW(),
     updated_at TIMESTAMP default NOW()
 );
