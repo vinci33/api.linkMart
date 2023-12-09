@@ -24,10 +24,11 @@ public class ImageModel {
     private String image_path;
     @Column(name = "created_at", insertable = false, updatable = false)
     @CreationTimestamp
-    private Timestamp created_at;
-    @UpdateTimestamp
+    private Timestamp createdAt;
+
     @Column(name = "updated_at", insertable = false, updatable = false)
-    private Timestamp updated_at;
+    @UpdateTimestamp
+    private Timestamp updatedAt;
 
     public String getId() {
         return id;
@@ -53,20 +54,20 @@ public class ImageModel {
         this.image_path = image_path;
     }
 
-    public Timestamp getCreated_at() {
-        return created_at;
+    public Timestamp getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated_at(Timestamp created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public Timestamp getUpdated_at() {
-        return updated_at;
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setUpdated_at(Timestamp updated_at) {
-        this.updated_at = updated_at;
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @Override
@@ -76,8 +77,8 @@ public class ImageModel {
                 ", request_id='" + request_id + '\'' +
                 ", requestModel=" + requestModel +
                 ", image_path='" + image_path + '\'' +
-                ", created_at=" + created_at +
-                ", updated_at=" + updated_at +
+                ", createdAt='" + createdAt + '\'' +
+                ", updatedAt='" + updatedAt + '\'' +
                 '}';
     }
 }

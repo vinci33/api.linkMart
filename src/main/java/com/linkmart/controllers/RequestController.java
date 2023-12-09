@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -20,7 +21,7 @@ public class RequestController {
 
     @PostMapping(value = "/request")
     public RequestModel postRequest (@ModelAttribute RequestModel requestModelForm,
-                                    @RequestParam("image_file") MultipartFile file) {
+                                    @RequestParam("image_file") List<MultipartFile> file) {
         try{
             RequestModel request = requestService.postRequest(requestModelForm.getCreated_by(),
                     requestModelForm.getLocation_id(), requestModelForm.getCategory_id(),
@@ -33,13 +34,4 @@ public class RequestController {
         }
     }
 
-//    @PostMapping(value = "/uploadfile")
-//    public String upload (@RequestParam("image") MultipartFile file) {
-//        try{
-//            var path = requestService.upload(file);
-//            return path;
-//        }catch (Exception e){
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-//        }
-//    }
 }

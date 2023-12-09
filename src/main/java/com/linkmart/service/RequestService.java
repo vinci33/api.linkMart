@@ -3,6 +3,7 @@ package com.linkmart.service;
 import com.linkmart.models.ImageModel;
 import com.linkmart.models.RequestModel;
 import com.linkmart.repositories.ImageRepository;
+import com.linkmart.repositories.LocationRepository;
 import com.linkmart.repositories.RequestRepository;
 import com.linkmart.repositories.UserRepository;
 import org.slf4j.Logger;
@@ -27,17 +28,20 @@ public class RequestService {
     UserRepository userRepository;
 
     @Autowired
+    LocationRepository locationRepository;
+
+    @Autowired
     S3Service s3Service;
 
     @Transactional
     public RequestModel postRequest(String created_by, Integer location_id, Integer category_id,
                                     String item, String url,
                                     Integer quantity, String request_remark, Integer offer_price,
-                                    MultipartFile file)
+                                    List<MultipartFile> files)
             throws AuthenticationException
     {
         var username = userRepository.findByUserId(created_by);
-        logger.info(username);
+        var locationName = locationRepository.findByLocationId(location_id);
         var newRequest = new RequestModel();
         newRequest.setCreated_by(created_by);
         newRequest.setLocation_id(location_id);
@@ -48,28 +52,30 @@ public class RequestService {
         newRequest.setRequest_remark(request_remark);
         newRequest.makeRequestCase();
         newRequest.setOffer_price(offer_price);
+        logger.info(files.toString());
 
-        ImageModel image = new ImageModel();
-        String imagePath = s3Service.uploadFile(file);
-        image.setImage_path(imagePath);
-        image.setRequest_id(newRequest.getId());
         List<ImageModel> images = new ArrayList<>();
-        images.add(image);
+        for (MultipartFile file: files) {
+            String imagePath = s3Service.uploadFile(file);
+            ImageModel image = new ImageModel();
+            image.setImage_path(imagePath);
+            image.setRequest_id(newRequest.getId());
+            images.add(image);
+        }
         newRequest.setImages(images);
+        logger.info(newRequest.toString());
 
         var result = this.requestRepository.saveAndFlush(newRequest);
-        newRequest.setCreated_by(username);
-        newRequest.setCreatedAt(result.getCreatedAt());
-        newRequest.setUpdatedAt(result.getUpdatedAt());
+//        newRequest.setImages(result.getImages());
+//        newRequest.setCreated_by(username);
+//        newRequest.setCreatedAt(result.getCreatedAt());
+//        newRequest.setUpdatedAt(result.getUpdatedAt());
 
         return newRequest;
     }
 
-    public ImageModel uploadImage(MultipartFile image, String request_id){
-        var imagePath = s3Service.uploadFile(image);
-        var newImage = new ImageModel();
-        newImage.setImage_path(imagePath);
-        newImage.setRequest_id(request_id);
-        return newImage;
+    public RequestModel getMyRequest(String userId){
+        var result = this.requestRepository.findRequestByUserId(userId);
+        return result;
     }
 }

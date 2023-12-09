@@ -25,10 +25,11 @@ INSERT INTO logistic_company(company_name, company_url) VALUES   ('DHL', 'https:
 
 INSERT INTO category(category_name) VALUES ('Clothes'),('Figure');
 
-INSERT INTO category_field(category_id, category_field_name) VALUES ('1','apparel_type'),
-                                                                 ('1','gender'),
-                                                                 ('1','size'),
-                                                                 ('1','color');
+INSERT INTO category_field(category_id, is_option,category_field_name) VALUES ('1',TRUE,'apparel_type'),
+                                                                 ('1',TRUE,'gender'),
+                                                                 ('1',TRUE,'size'),
+                                                                 ('1',TRUE,'color'),
+                                                                 ('1', FALSE, 'brand');
 
 
 

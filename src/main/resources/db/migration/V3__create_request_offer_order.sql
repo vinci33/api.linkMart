@@ -25,12 +25,14 @@ CREATE TABLE request (
     id TEXT PRIMARY KEY,
     created_by TEXT not null REFERENCES users(id),
     location_id INTEGER not null REFERENCES location(id),
-    category_id INTEGER not null REFERENCES category(id),
     item TEXT not null,
-    url VARCHAR(255) not null,
+    item_detail JSON,
+    url VARCHAR(255),
     quantity INTEGER not null,
     request_remark TEXT,
-    offer_price INTEGER not null,
+    offer_price INTEGER,
+    has_offer Boolean not null default TRUE,
+    is_active Boolean not null default TRUE,
     created_at TIMESTAMP default NOW(),
     updated_at TIMESTAMP default NOW()
 );
@@ -38,22 +40,16 @@ CREATE TABLE request (
 CREATE TABLE category_field (
     id SERIAL PRIMARY KEY,
     category_id INTEGER not null REFERENCES category(id),
+    is_option Boolean not null,
     category_field_name TEXT not null,
-    created_at TIMESTAMP default NOW()
+    created_at TIMESTAMP default NOW(),
+    updated_at TIMESTAMP default NOW()
 );
 
 CREATE TABLE category_field_option (
     id SERIAL PRIMARY KEY,
     category_field_id INTEGER not null REFERENCES category_field(id),
     category_field_option TEXT not null,
-    created_at TIMESTAMP default NOW()
-);
-
-CREATE TABLE category_result (
-    id SERIAL PRIMARY KEY,
-    request_id TEXT not null REFERENCES request(id),
-    category_id INTEGER not null REFERENCES category(id),
-    category_field_option_id INTEGER not null REFERENCES category_field_option(id),
     created_at TIMESTAMP default NOW()
 );
 
@@ -101,7 +97,8 @@ CREATE TABLE report_case (
 CREATE TABLE image (
     id SERIAL PRIMARY KEY,
     request_id TEXT not null REFERENCES request(id),
-    image_path TEXT,
+    image_path TEXT not null,
+    is_active Boolean not null default TRUE,
     created_at TIMESTAMP default NOW(),
     updated_at TIMESTAMP default NOW()
 );
