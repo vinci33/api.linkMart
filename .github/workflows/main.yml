@@ -1,4 +1,4 @@
-name: todo-ci-cd
+name: api.fight2gether.com CI/CD
 on:
   push:
     branches:
