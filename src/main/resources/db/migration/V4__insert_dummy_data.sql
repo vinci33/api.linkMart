@@ -3,18 +3,20 @@ INSERT INTO users(id,username,user_email,password) VALUES('01HHAWPJ6068YT0685RZ5
 
 INSERT INTO status(status_name) VALUES ('in-progress'),('aborted'),('rejected'),('completed');
 
+INSERT INTO order_status(order_status) VALUES ('created'),('in-progress'),('shipped'),('completed');
+
 INSERT INTO provider_verification(user_id,status_id,id_document,address_document) VALUES ('1', '1', 'A123456', '123 Fake Street');
 
-INSERT INTO location(location_name) VALUES   ('United States'),
-                                             ('China'),
-                                             ('Japan'),
-                                             ('United Kingdom'),
-                                             ('France'),
-                                             ('Germany'),
-                                             ('United Arab Emirates'),
-                                             ('South Korea'),
-                                             ('Italy'),
-                                             ('Singapore');
+INSERT INTO location(location_name) VALUES   ('🇺🇸 United States'),
+                                             ('🇨🇳 China'),
+                                             ('🇯🇵 Japan'),
+                                             ('🇬🇧 United Kingdom'),
+                                             ('🇫🇷 France'),
+                                             ('🇩🇪 Germany '),
+                                             ('🇦🇪 United Arab Emirates'),
+                                             ('🇰🇷 South Korea'),
+                                             ('🇮🇹 Italy '),
+                                             ('🇸🇬 Singapore');
 
 INSERT INTO provider(id,user_id,location_id,provider_verification_id) VALUES ('1', '1', '1', '1');
 

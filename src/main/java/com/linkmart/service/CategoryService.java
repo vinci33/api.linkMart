@@ -1,7 +1,10 @@
 package com.linkmart.service;
 
+import com.linkmart.dtos.CategoryFieldOptionDto;
+import com.linkmart.mappers.CategoryFieldMapper;
 import com.linkmart.models.CategoryFieldModel;
 import com.linkmart.models.CategoryFieldOptionModel;
+import com.linkmart.models.ImageModel;
 import com.linkmart.repositories.CategoryFieldOptionRepository;
 import com.linkmart.repositories.CategoryFieldRepository;
 import org.slf4j.Logger;
@@ -23,16 +26,7 @@ public class CategoryService {
     CategoryFieldOptionRepository categoryFieldOptionRepository;
 
     public List<CategoryFieldModel>  getCategoryFieldOption (Integer categoryId) {
-        var categoryFieldIds = categoryFieldRepository.findCategoryFieldIdByCategoryId(categoryId);
-        List<CategoryFieldModel>  categoryField = categoryFieldRepository.findCategoryFieldByCategoryId(1);
-        logger.info(categoryFieldIds.toString());
-        //build categoryField
-        var category = new CategoryFieldModel();
-        List<CategoryFieldOptionModel> fieldOption = this.categoryFieldOptionRepository.findCategoryFieldOptionByCategoryFieldId(1);
-        category.setCategoryFieldOptions(fieldOption);
-//        category.setCategoryFieldId(categoryField.getCategoryFieldId());
-//        category.setCategoryId(categoryField.getCategoryId());
-//        category.setCategoryFieldName(categoryField.getCategoryFieldName());
+        List<CategoryFieldModel> categoryField = categoryFieldRepository.findCategoryFieldByCategoryId(categoryId);
         return categoryField;
     }
 }

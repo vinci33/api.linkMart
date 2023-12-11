@@ -1,6 +1,8 @@
 package com.linkmart.controllers;
 
 import com.linkmart.dtos.CategoryDto;
+import com.linkmart.dtos.CategoryFieldDto;
+import com.linkmart.mappers.CategoryFieldMapper;
 import com.linkmart.mappers.CategoryMapper;
 import com.linkmart.models.CategoryFieldModel;
 import com.linkmart.models.CategoryFieldOptionModel;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -37,10 +40,11 @@ public class CategoryController {
         return CategoryMapper.INSTANCE.getAllCategory(result);
     }
 
+    //ask james
     @GetMapping(value = "/category/{categoryId}")
-    public List<CategoryFieldModel>  getCategoryField(@PathVariable int categoryId) {
-        var categoryIdList = this.categoryService.getCategoryFieldOption(categoryId);
-        return categoryIdList;
+    public List<CategoryFieldDto>  getCategoryField(@PathVariable int categoryId) {
+        List<CategoryFieldModel> categoryField = this.categoryService.getCategoryFieldOption(categoryId);
+        return CategoryFieldMapper.INSTANCE.getAllCategoryField(categoryField);
     }
 
     @GetMapping(value = "/category/field/{categoryFieldId}")
