@@ -1,4 +1,5 @@
 INSERT INTO users(password,username,user_email,id) VALUES('123','testing','testing@gmail.com','1');
+INSERT INTO users(id,username,user_email,password) VALUES('01HHAWPJ6068YT0685RZ5AY3XF','su','test@gmail.com','$2a$10$xoRl/KKuoriNmgsoZwsrMOwm.5I02Wr/apjqn6hIpI0fhanUBMEwS');
 
 INSERT INTO status(status_name) VALUES ('in-progress'),('aborted'),('rejected'),('completed');
 

@@ -11,3 +11,6 @@ spring.flyway.cleanDisabled=true
 
 server.error.include-message=always
 server.error.include-stacktra
+
+
+jwt.secret=

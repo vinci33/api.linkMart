@@ -2,6 +2,7 @@ package com.linkmart.models;
 
 import de.huxhorn.sulky.ulid.ULID;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -20,6 +21,7 @@ public class User {
     private String password;
 
     @Column(name="user_email", unique = true)
+    @Email(message = "Email should be valid")
     private String userEmail; //unique
 
     @Column(name="created_at", insertable=false, updatable=false)
@@ -43,6 +45,14 @@ public class User {
     public User() {
         ULID ulid = new ULID();
         this.id = ulid.nextULID();
+    }
+
+    public User( String username, String password, String userEmail) {
+        ULID ulid = new ULID();
+        this.id = ulid.nextULID();
+        this.username = username;
+        this.password = password;
+        this.userEmail = userEmail;
     }
 
     public String getId() {
