@@ -1,17 +1,15 @@
 package com.linkmart.models;
 
 import de.huxhorn.sulky.ulid.ULID;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import org.springframework.web.multipart.MultipartFile;
+import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
-import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "request")
-public class Request {
+public class RequestModel {
 
     @Id
     private String id;
@@ -23,19 +21,35 @@ public class Request {
     private int category_id;
     @Column(name = "item")
     private String item;
-    @Column(name = "image")
-    private String image;
     @Column(name = "url")
     private String url;
     @Column(name = "quantity")
     private int quantity;
+    @Column(name = "offer_price")
+    private int offer_price;
     @Column(name = "request_remark")
     private String request_remark;
     @Column(name = "created_at", insertable = false, updatable = false)
-    private Timestamp createdAt;
+    @CreationTimestamp
+    private String createdAt;
     @Column(name = "updated_at", insertable = false, updatable = false)
-    private Timestamp updatedAt;
-    public void RequestCase() {
+    @UpdateTimestamp
+    private String updatedAt;
+
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            mappedBy="requestModel", cascade={CascadeType.ALL})
+    private List<ImageModel> images;
+
+    public void setImages(List<ImageModel> images) {
+        this.images = images;
+    }
+
+    public List<ImageModel> getImages() {
+        return images;
+    }
+
+    public void makeRequestCase() {
         ULID ulid = new ULID();
         this.id = ulid.nextULID();
     }
@@ -80,14 +94,6 @@ public class Request {
         this.item = item;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     public String getUrl() {
         return url;
     }
@@ -112,19 +118,27 @@ public class Request {
         this.request_remark = request_remark;
     }
 
-    public Timestamp getCreatedAt() {
+    public int getOffer_price() {
+        return offer_price;
+    }
+
+    public void setOffer_price(int offer_price) {
+        this.offer_price = offer_price;
+    }
+
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Timestamp getUpdatedAt() {
+    public String getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
+    public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
     }
 
@@ -136,9 +150,10 @@ public class Request {
                 ", location_id=" + location_id +
                 ", category_id=" + category_id +
                 ", item='" + item + '\'' +
-                ", image=" + image +
+                ", image='" + images + '\'' +
                 ", url='" + url + '\'' +
                 ", quantity=" + quantity +
+                ", offer_price=" + offer_price +
                 ", request_remark='" + request_remark + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +

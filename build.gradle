@@ -32,8 +32,10 @@ dependencies {
     implementation 'de.huxhorn.sulky:de.huxhorn.sulky.ulid:8.2.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine'
     testImplementation 'org.mockito:mockito-core'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
     implementation 'com.amazonaws:aws-java-sdk-s3:1.12.484'
+    implementation 'at.favre.lib:bcrypt:0.10.2'
 }
 
 test {

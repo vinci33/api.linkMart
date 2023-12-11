@@ -35,14 +35,6 @@ CREATE TABLE location (
     updated_at TIMESTAMP default NOW()
 );
 
-CREATE TABLE provider(
-    id TEXT PRIMARY KEY,
-    user_id TEXT not null REFERENCES users(id),
-    location_id INTEGER not null REFERENCES location(id),
-    created_at TIMESTAMP default NOW(),
-    updated_at TIMESTAMP default NOW()
-);
-
 CREATE TABLE status (
     id SERIAL PRIMARY KEY,
     status_name VARCHAR(255) not null,
@@ -53,7 +45,6 @@ CREATE TABLE status (
  CREATE TABLE provider_verification (
     id SERIAL PRIMARY KEY,
     user_id TEXT not null REFERENCES users(id),
-    provider_id TEXT not null REFERENCES provider(id),
     status_id INTEGER not null REFERENCES status(id),
     id_document VARCHAR(255) not null,
     address_document VARCHAR(255) not null,
@@ -61,6 +52,13 @@ CREATE TABLE status (
     updated_at TIMESTAMP default NOW()
  );
 
-
+ CREATE TABLE provider(
+     id TEXT PRIMARY KEY,
+     user_id TEXT not null REFERENCES users(id),
+     location_id INTEGER not null REFERENCES location(id),
+     provider_verification_id INTEGER not null REFERENCES provider_verification(id),
+     created_at TIMESTAMP default NOW(),
+     updated_at TIMESTAMP default NOW()
+ );
 
 COMMIT;
