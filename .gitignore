@@ -45,6 +45,6 @@ bin/
 application.properties
 flyway.conf
 config/env.properties
-docker-compose.yml
+
 ```
 
