@@ -33,7 +33,7 @@ INSERT INTO category_field(category_id, is_option,category_field_name) VALUES ('
 
 
 
-INSERT INTO category_field_option(category_field_id, category_field_option) VALUES ('1','T-shirt'),
+INSERT INTO category_field_option(category_field_id, category_field_option_name) VALUES ('1','T-shirt'),
                                                                                  ('1','Jeans'),
                                                                                  ('1','Dress'),
                                                                                  ('2','Men'),

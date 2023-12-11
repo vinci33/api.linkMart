@@ -16,9 +16,7 @@ CREATE TABLE logistic_company (
 
 CREATE TABLE category (
     id SERIAL PRIMARY KEY,
-    category_name TEXT not null,
-    created_at TIMESTAMP default NOW(),
-    updated_at TIMESTAMP default NOW()
+    category_name TEXT not null
 );
 
 CREATE TABLE request (
@@ -41,16 +39,13 @@ CREATE TABLE category_field (
     id SERIAL PRIMARY KEY,
     category_id INTEGER not null REFERENCES category(id),
     is_option Boolean not null,
-    category_field_name TEXT not null,
-    created_at TIMESTAMP default NOW(),
-    updated_at TIMESTAMP default NOW()
+    category_field_name TEXT not null
 );
 
 CREATE TABLE category_field_option (
     id SERIAL PRIMARY KEY,
     category_field_id INTEGER not null REFERENCES category_field(id),
-    category_field_option TEXT not null,
-    created_at TIMESTAMP default NOW()
+    category_field_option_name TEXT not null
 );
 
 CREATE TABLE offer (

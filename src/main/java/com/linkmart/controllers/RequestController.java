@@ -23,6 +23,7 @@ public class RequestController {
     public RequestModel postRequest (@ModelAttribute RequestModel requestModelForm,
                                     @RequestParam("image_file") List<MultipartFile> file) {
         try{
+            logger.info(file.toString());
             RequestModel request = requestService.postRequest(requestModelForm.getCreated_by(),
                     requestModelForm.getLocation_id(), requestModelForm.getCategory_id(),
                     requestModelForm.getItem(), requestModelForm.getUrl(),
