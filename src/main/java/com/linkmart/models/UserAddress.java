@@ -12,7 +12,7 @@ public class UserAddress {
     private int id;
 
     @Column(name = "user_id")
-    private int userId;
+    private String userId;
 
     @Column(name = "address")
     private String address;
@@ -50,11 +50,11 @@ public class UserAddress {
         this.id = id;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

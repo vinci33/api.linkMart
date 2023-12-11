@@ -18,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 
@@ -41,7 +43,7 @@ public class AppConfig {
                         new Server().url("http://localhost:8080")
                 )
                 .addServersItem(
-                        new Server().url("https://your-app.com") // Replaced with your app hostname
+                        new Server().url("https://api.fight2gether.com")
                 )
                 .components(
                         new Components()
@@ -69,4 +71,18 @@ public class AppConfig {
                 .build();
         return s3client;
     }
-}
+
+        @Bean
+        public WebMvcConfigurer corsConfigurer() {
+            return new WebMvcConfigurer() {
+                @Override
+                public void addCorsMappings(CorsRegistry registry) {
+                    registry.addMapping("/**")
+                            .allowedMethods("*")
+                            .allowedHeaders("*")
+                            .allowedOrigins("http://localhost:3000","https://linkmart.com");
+                }
+            };
+        }
+    }
+
