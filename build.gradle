@@ -41,3 +41,7 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+tasks.bootJar {
+    archiveFileName.set("api.linkmart.jar")
+}
