@@ -23,9 +23,10 @@ CREATE TABLE request (
     id TEXT PRIMARY KEY,
     created_by TEXT not null REFERENCES users(id),
     location_id INTEGER not null REFERENCES location(id),
+    category_id INTEGER not null REFERENCES category(id),
     item TEXT not null,
-    item_detail JSON,
-    url VARCHAR(255),
+    item_detail JSONB,
+    url VARCHAR(1000),
     quantity INTEGER not null,
     request_remark TEXT,
     offer_price INTEGER,
@@ -66,6 +67,7 @@ CREATE TABLE orders (
     order_status_id INTEGER not null REFERENCES order_status(id),
     logistic_company_id INTEGER not null REFERENCES logistic_company(id),
     shipping_order_no INTEGER not null,
+    user_address_id INTEGER not null REFERENCES user_address(id),
     created_at TIMESTAMP default NOW(),
     updated_at TIMESTAMP default NOW()
 );

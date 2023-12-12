@@ -1,24 +1,33 @@
 package com.linkmart.models;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import de.huxhorn.sulky.ulid.ULID;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.type.SqlTypes;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Table(name = "request")
-public class RequestModel {
+public class RequestModel{
 
     @Id
     private String id;
     @Column(name = "created_by")
-    private String created_by;
+    private String createBy;
     @Column(name = "location_id")
-    private int location_id;
+    private int locationId;
     @Column(name = "category_id")
-    private int category_id;
+    private int categoryId;
+
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(name = "item_detail", columnDefinition = "jsonb")
+    private ItemDetailModel itemDetail;
     @Column(name = "item")
     private String item;
     @Column(name = "url")
@@ -26,9 +35,9 @@ public class RequestModel {
     @Column(name = "quantity")
     private int quantity;
     @Column(name = "offer_price")
-    private int offer_price;
+    private int offerPrice;
     @Column(name = "request_remark")
-    private String request_remark;
+    private String requestRemark;
     @Column(name = "created_at", insertable = false, updatable = false)
     @CreationTimestamp
     private String createdAt;
@@ -41,19 +50,6 @@ public class RequestModel {
             mappedBy="requestModel", cascade={CascadeType.ALL})
     private List<ImageModel> images;
 
-    public void setImages(List<ImageModel> images) {
-        this.images = images;
-    }
-
-    public List<ImageModel> getImages() {
-        return images;
-    }
-
-    public void makeRequestCase() {
-        ULID ulid = new ULID();
-        this.id = ulid.nextULID();
-    }
-
     public String getId() {
         return id;
     }
@@ -62,28 +58,41 @@ public class RequestModel {
         this.id = id;
     }
 
-    public String getCreated_by() {
-        return created_by;
+    public void makeRequestCase() {
+        ULID ulid = new ULID();
+        this.id = ulid.nextULID();
     }
 
-    public void setCreated_by(String created_by) {
-        this.created_by = created_by;
+    public String getCreateBy() {
+        return createBy;
     }
 
-    public int getLocation_id() {
-        return location_id;
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
     }
 
-    public void setLocation_id(int location_id) {
-        this.location_id = location_id;
+    public int getLocationId() {
+        return locationId;
     }
 
-    public int getCategory_id() {
-        return category_id;
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
     }
 
-    public void setCategory_id(int category_id) {
-        this.category_id = category_id;
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public ItemDetailModel getItemDetail() {
+        return itemDetail;
+    }
+
+    public void setItemDetail(ItemDetailModel itemDetail) {
+        this.itemDetail = itemDetail;
     }
 
     public String getItem() {
@@ -110,20 +119,20 @@ public class RequestModel {
         this.quantity = quantity;
     }
 
-    public String getRequest_remark() {
-        return request_remark;
+    public int getOfferPrice() {
+        return offerPrice;
     }
 
-    public void setRequest_remark(String request_remark) {
-        this.request_remark = request_remark;
+    public void setOfferPrice(int offerPrice) {
+        this.offerPrice = offerPrice;
     }
 
-    public int getOffer_price() {
-        return offer_price;
+    public String getRequestRemark() {
+        return requestRemark;
     }
 
-    public void setOffer_price(int offer_price) {
-        this.offer_price = offer_price;
+    public void setRequestRemark(String requestRemark) {
+        this.requestRemark = requestRemark;
     }
 
     public String getCreatedAt() {
@@ -142,21 +151,11 @@ public class RequestModel {
         this.updatedAt = updatedAt;
     }
 
-    @Override
-    public String toString() {
-        return "Request{" +
-                "id='" + id + '\'' +
-                ", created_by='" + created_by + '\'' +
-                ", location_id=" + location_id +
-                ", category_id=" + category_id +
-                ", item='" + item + '\'' +
-                ", image='" + images + '\'' +
-                ", url='" + url + '\'' +
-                ", quantity=" + quantity +
-                ", offer_price=" + offer_price +
-                ", request_remark='" + request_remark + '\'' +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
+    public List<ImageModel> getImages() {
+        return images;
+    }
+
+    public void setImages(List<ImageModel> images) {
+        this.images = images;
     }
 }

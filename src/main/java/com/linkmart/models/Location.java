@@ -10,7 +10,8 @@ import java.util.List;
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "id")
+    private int locationId;
 
     @Column(name = "location_name")
     private String locationName;
@@ -27,19 +28,19 @@ public class Location {
     @Override
     public String toString() {
         return "Location{" +
-                "id=" + id +
+                "id=" + locationId +
                 ", locationName='" + locationName + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
     }
 
-    public int getId() {
-        return id;
+    public int getLocationId() {
+        return locationId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
     }
 
     public String getLocationName() {

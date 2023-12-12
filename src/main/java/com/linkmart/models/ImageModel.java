@@ -12,7 +12,8 @@ public class ImageModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    @Column(name = "id")
+    private String imageId;
     @Column(name = "request_id")
     private String request_id;
 
@@ -30,12 +31,12 @@ public class ImageModel {
     @UpdateTimestamp
     private Timestamp updatedAt;
 
-    public String getId() {
-        return id;
+    public String getImageId() {
+        return imageId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setImageId(String imageId) {
+        this.imageId = imageId;
     }
 
     public String getRequest_id() {
@@ -73,12 +74,12 @@ public class ImageModel {
     @Override
     public String toString() {
         return "ImageModel{" +
-                "id='" + id + '\'' +
+                "imageId='" + imageId + '\'' +
                 ", request_id='" + request_id + '\'' +
                 ", requestModel=" + requestModel +
                 ", image_path='" + image_path + '\'' +
-                ", createdAt='" + createdAt + '\'' +
-                ", updatedAt='" + updatedAt + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
                 '}';
     }
 }

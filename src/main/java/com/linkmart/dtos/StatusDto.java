@@ -1,16 +1,16 @@
 package com.linkmart.dtos;
 
 public class StatusDto {
-    private int id;
+    private int StatusId;
 
     private String statusName;
 
-    public int getId() {
-        return id;
+    public int getStatusId() {
+        return StatusId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setStatusId(int statusId) {
+        StatusId = statusId;
     }
 
     public String getStatusName() {
@@ -24,7 +24,7 @@ public class StatusDto {
     @Override
     public String toString() {
         return "StatusDto{" +
-                "id=" + id +
+                "StatusId=" + StatusId +
                 ", statusName='" + statusName + '\'' +
                 '}';
     }

@@ -1,8 +1,10 @@
 package com.linkmart.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.linkmart.models.ImageModel;
+import com.linkmart.models.ItemDetailModel;
 import com.linkmart.models.RequestModel;
-import com.linkmart.repositories.ImageRepository;
 import com.linkmart.repositories.LocationRepository;
 import com.linkmart.repositories.RequestRepository;
 import com.linkmart.repositories.UserRepository;
@@ -13,9 +15,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+
 import javax.naming.AuthenticationException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class RequestService {
@@ -34,25 +39,21 @@ public class RequestService {
     S3Service s3Service;
 
     @Transactional
-    public RequestModel postRequest(String created_by, Integer location_id, Integer category_id,
-                                    String item, String url,
-                                    Integer quantity, String request_remark, Integer offer_price,
+    public RequestModel postRequest(String createdBy, Integer locationId, Integer categoryId,
+                                    String itemDetail, String item, String url,
+                                    Integer quantity, String requestRemark, Integer offerPrice,
                                     List<MultipartFile> files)
-            throws AuthenticationException
-    {
-        var username = userRepository.findByUserId(created_by);
-        var locationName = locationRepository.findByLocationId(location_id);
+            throws AuthenticationException {
         var newRequest = new RequestModel();
-        newRequest.setCreated_by(created_by);
-        newRequest.setLocation_id(location_id);
-        newRequest.setCategory_id(category_id);
+        newRequest.setCreateBy(createdBy);
+        newRequest.setLocationId(locationId);
+        newRequest.setCategoryId(categoryId);
         newRequest.setItem(item);
         newRequest.setUrl(url);
         newRequest.setQuantity(quantity);
-        newRequest.setRequest_remark(request_remark);
+        newRequest.setRequestRemark(requestRemark);
         newRequest.makeRequestCase();
-        newRequest.setOffer_price(offer_price);
-        logger.info(files.toString());
+        newRequest.setOfferPrice(offerPrice);
 
         List<ImageModel> images = new ArrayList<>();
         for (MultipartFile file: files) {
@@ -62,20 +63,33 @@ public class RequestService {
             image.setRequest_id(newRequest.getId());
             images.add(image);
         }
+
         newRequest.setImages(images);
-        logger.info(newRequest.toString());
+
+        Gson g = new Gson();
+        ItemDetailModel itemDetailModel = g.fromJson(itemDetail, ItemDetailModel.class);
+
+        newRequest.setItemDetail(itemDetailModel);
 
         var result = this.requestRepository.saveAndFlush(newRequest);
-//        newRequest.setImages(result.getImages());
-//        newRequest.setCreated_by(username);
-//        newRequest.setCreatedAt(result.getCreatedAt());
-//        newRequest.setUpdatedAt(result.getUpdatedAt());
+        newRequest.setImages(result.getImages());
+        newRequest.setCreateBy(result.getCreateBy());
+        newRequest.setCreatedAt(result.getCreatedAt());
+        newRequest.setUpdatedAt(result.getUpdatedAt());
 
         return newRequest;
+    }
+
+
+    @Transactional
+    public RequestModel getRequest(){
+
     }
 
     public RequestModel getMyRequest(String userId){
         var result = this.requestRepository.findRequestByUserId(userId);
         return result;
     }
+
+
 }

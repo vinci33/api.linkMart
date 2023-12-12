@@ -16,6 +16,8 @@ import java.util.Objects;
 
 public class UserService {
 
+    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
     @Autowired
     private UserRepository userRepository;
 

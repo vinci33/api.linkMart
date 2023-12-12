@@ -10,27 +10,38 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/api")
 public class RequestController {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     RequestService requestService;
 
-    @PostMapping(value = "/request")
-    public RequestModel postRequest (@ModelAttribute RequestModel requestModelForm,
-                                    @RequestParam("image_file") List<MultipartFile> file) {
+    @PostMapping(value = "/api/request")
+    public RequestModel postRequest (@ModelAttribute RequestForm requestModelForm,
+                                     @RequestParam("itemDetail") String itemDetail,
+                                     @RequestParam("imageFile") List<MultipartFile> file) {
         try{
-            logger.info(file.toString());
-            RequestModel request = requestService.postRequest(requestModelForm.getCreated_by(),
-                    requestModelForm.getLocation_id(), requestModelForm.getCategory_id(),
-                    requestModelForm.getItem(), requestModelForm.getUrl(),
-                    requestModelForm.getQuantity(), requestModelForm.getRequest_remark(),
-                    requestModelForm.getOffer_price(), file);
+            RequestModel request = requestService.postRequest(requestModelForm.getCreatedBy(),
+                    requestModelForm.getLocationId(), requestModelForm.getCategoryId(),
+                    itemDetail,requestModelForm.getItem(), requestModelForm.getUrl(),
+                    requestModelForm.getQuantity(), requestModelForm.getRequestRemark(),
+                    requestModelForm.getOfferPrice(), file);
             return request;
-        }catch (Exception e){
+        } catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    @GetMapping(value = "/request")
+    public RequestModel postRequest () {
+        try{
+            RequestModel request = requestService.
+            return request;
+        } catch (Exception e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }

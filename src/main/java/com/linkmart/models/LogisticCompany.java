@@ -11,7 +11,8 @@ import java.util.List;
 public class LogisticCompany {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "id")
+    private int logisticCompanyId;
 
     @Column(name = "company_name")
     private String companyName;
@@ -30,12 +31,12 @@ public class LogisticCompany {
             cascade={CascadeType.REMOVE, CascadeType.MERGE})
     private List<Orders> orders;
 
-    public int getId() {
-        return id;
+    public int getLogisticCompanyId() {
+        return logisticCompanyId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setLogisticCompanyId(int logisticCompanyId) {
+        this.logisticCompanyId = logisticCompanyId;
     }
 
     public String getCompanyName() {
@@ -73,11 +74,12 @@ public class LogisticCompany {
     @Override
     public String toString() {
         return "LogisticCompany{" +
-                "id=" + id +
+                "logisticCompanyId=" + logisticCompanyId +
                 ", companyName='" + companyName + '\'' +
                 ", companyUrl='" + companyUrl + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
+                ", orders=" + orders +
                 '}';
     }
 }
