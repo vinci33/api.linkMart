@@ -51,9 +51,21 @@ public class UserService {
         }
     }
 
+    public void validateUserId(String userId) {
+        var userByUserId = userRepository.findUserById(userId);
+        if (userByUserId == null ) {
+            throw new IllegalArgumentException("Invalid UserId ");
+        }
+    }
+
     public User createUser(String email, String password) {
-        validateUserEmail(email);
-        validateUsername(email);
+        try {
+            validateUserEmail(email);
+            validateUsername(email);
+        } catch (IllegalArgumentException e) {
+            logger.error(e.getMessage());
+            throw e;
+        }
         var user = new User();
         user.setUserEmail(email);
         user.setUsername(email); // Default username will be email;
@@ -90,5 +102,11 @@ public class UserService {
                 .withIssuedAt(new Date())
                 .withExpiresAt(expireDate)
                 .sign(Algorithm.HMAC256(Objects.requireNonNull(env.getProperty("jwt.secret"))));
+    }
+
+    public Object getUserNameById(String userId) {
+        validateUserId(userId);
+        var user = userRepository.findUserById(userId);
+        return user.getUsername();
     }
 }

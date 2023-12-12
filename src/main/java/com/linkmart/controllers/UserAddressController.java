@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/user")
@@ -27,12 +28,14 @@ public class UserAddressController {
         final Logger logger = LoggerFactory.getLogger(this.getClass());
 
         @GetMapping("/address")
-        public List<UserAddressDto> getUserAddress() {
+        public UserAddressDto getUserAddress() {
             try {
                 var userId = (String)request.getAttribute("userId");
-               List<UserAddressDto> userAddressDtos = userAddressService.findUserAddressByUserId(userId);
-                return userAddressDtos;
-
+                List<UserAddressDto> getAllUserAddress = userAddressService.findUserAddressByUserId("1");
+                List<String> addresses = getAllUserAddress.stream()
+                        .map(UserAddressDto::getAddress)
+                        .collect(Collectors.toList());
+                return new UserAddressDto(addresses);
             } catch (Exception e) {
                 logger.error(e.getMessage());
                 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "UNAUTHORIZED", e);

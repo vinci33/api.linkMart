@@ -10,7 +10,7 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 @Mapper
-public interface CategoryFieldMapper {
+public interface   CategoryFieldMapper {
     CategoryFieldMapper INSTANCE = Mappers.getMapper(CategoryFieldMapper.class);
 
     List<CategoryFieldOptionDto> getAllCategoryFieldOption (List<CategoryFieldOptionModel> categoryFieldId);

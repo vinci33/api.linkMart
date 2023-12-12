@@ -63,3 +63,8 @@ VALUES
   ('3','1', 1, 1, 'clothes', '{"size": "S", "color": "blue", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.ssense.com/en-hk/men/product/wooyoungmi/off-white-crewneck-sweater', 1, '無縫羽絨連帽外套', 1900, FALSE, true, '2023-12-12 20:21:59.936233', '2023-12-12 20:21:59.936233'),
   ('4', '1',1, 1, 'clothes', '{"size": "S", "color": "blue", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.lululemon.com.hk/en-hk/c/sale/specials', 1, '無縫羽絨連帽外套', 1900, FALSE, true, '2023-12-12 20:22:39.631992', '2023-12-12 20:22:39.631992'),
   ('5', '1',1, 1, 'clothes', '{"size": "S", "color": "blue", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.lululemon.com.hk/en-hk/p/metal-vent-tech-short-sleeve-shirt-2.0/prod140003.html?dwvar_prod140003_color=59331', 1, '無縫羽絨連帽外套', 1900, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832');
+
+ INSERT INTO user_address(id, user_id, address, is_primary)VALUES
+ ('1','1','13/f, 11 kennedy Road',true),
+ ('2','1','flat a,19/f, 8 Star Street',false),
+ ('3','1','Rm B, house A, 17 Bowen Rd',false);

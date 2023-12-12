@@ -31,7 +31,7 @@ public class AdminGuardFilter extends OncePerRequestFilter {
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         var pathMatcher = new AntPathMatcher();
         List<String> matchedPatterns = List.of(
-                "/api/admin/*","/user*"
+                "/api/admin/*"
         );
 
         return !matchedPatterns

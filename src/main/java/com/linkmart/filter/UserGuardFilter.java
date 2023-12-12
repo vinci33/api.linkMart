@@ -56,7 +56,7 @@ public class UserGuardFilter extends OncePerRequestFilter {
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         var pathMatcher = new AntPathMatcher();
         List<String> matchedPatterns = List.of(
-                "/api/*/*/*"
+                "/user/*/*/*"
         );
 
         return !matchedPatterns
