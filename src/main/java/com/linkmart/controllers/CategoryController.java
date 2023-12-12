@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "")
 public class CategoryController {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
 
