@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  linkmart:
+    depends_on:
+      - postgres
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    image: 'vinci33/jadc28:latest'
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./config:/usr/src/app/config
+  postgres:
+    image: 'postgres:13'
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: linkmart
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data

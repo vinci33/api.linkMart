@@ -35,4 +35,8 @@ public class RequestController {
         }
     }
 
+    @GetMapping(value = "/")
+    public String test() {
+        return "test cicd success";
+    }
 }
