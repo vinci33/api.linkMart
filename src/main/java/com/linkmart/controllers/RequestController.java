@@ -12,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class RequestController {
@@ -36,18 +35,4 @@ public class RequestController {
         }
     }
 
-    @GetMapping(value = "/request")
-    public RequestModel postRequest () {
-        try{
-            RequestModel request = requestService.
-            return request;
-        } catch (Exception e){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-        }
-    }
-
-    @GetMapping(value = "/")
-    public String test() {
-        return "test cicd success";
-    }
 }

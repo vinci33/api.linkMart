@@ -81,10 +81,10 @@ public class RequestService {
     }
 
 
-    @Transactional
-    public RequestModel getRequest(){
-
-    }
+//    @Transactional
+//    public RequestModel getRequest(){
+//
+//    }
 
     public RequestModel getMyRequest(String userId){
         var result = this.requestRepository.findRequestByUserId(userId);
