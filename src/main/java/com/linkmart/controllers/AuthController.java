@@ -2,9 +2,9 @@ package com.linkmart.controllers;
 import com.linkmart.dtos.ResponseWithToken;
 import com.linkmart.forms.LoginForm;
 import com.linkmart.models.RandomGenModel;
-import com.linkmart.service.UserService;
 import com.linkmart.models.RandomGenModel;
 import com.linkmart.services.UserService;
+import com.linkmart.utils.UtilMethod;
 import org.springframework.core.env.Environment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,10 +19,11 @@ import java.util.Random;
 public class AuthController {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
 
     @Autowired
     UserService userService;
+
 
     @Autowired
     Environment env;
@@ -42,7 +43,7 @@ public class AuthController {
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public ResponseWithToken signup (@RequestBody LoginForm loginForm){
         try{
-            var username = generateRandomString(10);
+            var username = UtilMethod.generateRandomString(10);
             if (!loginForm.getUsername().isEmpty()) {
                 username = loginForm.getUsername();
             }
@@ -55,23 +56,7 @@ public class AuthController {
         }
     }
 
-    private static String generateRandomString(int length) {
-        // Create an instance of Random
-        Random random = new Random();
 
-        // Create a StringBuilder to store the random string
-        StringBuilder stringBuilder = new StringBuilder(length);
-
-        // Generate random characters and append them to the StringBuilder
-        for (int i = 0; i < length; i++) {
-            int randomIndex = random.nextInt(CHARACTERS.length());
-            char randomChar = CHARACTERS.charAt(randomIndex);
-            stringBuilder.append(randomChar);
-        }
-
-        // Get the final random string
-        return stringBuilder.toString();
-    }
     @GetMapping("/")
     public String hello() {
         return "Hello World  deploy from github actions";
