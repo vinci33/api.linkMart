@@ -41,6 +41,7 @@ public class UserService {
             throw new IllegalArgumentException("Email already exists");
         }
     }
+
     public void validateUsername(String username) {
         var usersByUsername = userRepository.findUserByUsername(username);
         if (!usersByUsername.isEmpty()) {

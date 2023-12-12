@@ -30,7 +30,7 @@ CREATE TABLE request (
     quantity INTEGER not null,
     request_remark TEXT,
     offer_price INTEGER,
-    has_offer Boolean not null default TRUE,
+    has_offer Boolean not null default FALSE,
     is_active Boolean not null default TRUE,
     created_at TIMESTAMP default NOW(),
     updated_at TIMESTAMP default NOW()

@@ -42,7 +42,7 @@ public class RequestController {
     @GetMapping(value = "/request")
     public List<RequestModel> getAllRequest () {
         try{
-            return requestRepository.findAll();
+            return requestService.getAllRequest();
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

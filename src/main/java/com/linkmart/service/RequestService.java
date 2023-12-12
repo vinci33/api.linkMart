@@ -86,6 +86,11 @@ public class RequestService {
 //
 //    }
 
+    public List<RequestModel> getAllRequest( ){
+        var result = this.requestRepository.getAllRequest();
+        return result;
+    }
+
     public RequestModel getMyRequest(String userId){
         var result = this.requestRepository.findRequestByUserId(userId);
         return result;
