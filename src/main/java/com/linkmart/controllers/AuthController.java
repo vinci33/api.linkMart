@@ -1,7 +1,7 @@
 package com.linkmart.controllers;
 import com.linkmart.dtos.ResponseWithToken;
 import com.linkmart.forms.LoginForm;
-import com.linkmart.service.UserService;
+import com.linkmart.services.UserService;
 import org.springframework.core.env.Environment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +38,7 @@ public class AuthController {
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public ResponseWithToken signup (@RequestBody LoginForm loginForm){
         try{
-            var user = userService.createUser(loginForm.getEmail(), loginForm.getUsername(), loginForm.getPassword());
+            var user = userService.createUser(loginForm.getEmail(), loginForm.getPassword());
             return new ResponseWithToken(true, "Signup success", user.getId());
         }catch(Exception e){
             logger.error(e.getMessage());
@@ -49,7 +49,7 @@ public class AuthController {
 
     @GetMapping("/")
     public String hello() {
-        return "Hello World  deploy from docker";
+        return "Hello World  deploy from github actions";
     }
 
 }

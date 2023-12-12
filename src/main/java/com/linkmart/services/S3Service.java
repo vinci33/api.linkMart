@@ -1,4 +1,4 @@
-package com.linkmart.service;
+package com.linkmart.services;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;

@@ -1,8 +1,7 @@
-package com.linkmart.service;
+package com.linkmart.services;
 
 import com.linkmart.models.ImageModel;
 import com.linkmart.models.RequestModel;
-import com.linkmart.repositories.ImageRepository;
 import com.linkmart.repositories.LocationRepository;
 import com.linkmart.repositories.RequestRepository;
 import com.linkmart.repositories.UserRepository;

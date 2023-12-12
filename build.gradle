@@ -36,6 +36,8 @@ dependencies {
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
     implementation 'com.amazonaws:aws-java-sdk-s3:1.12.484'
     implementation 'at.favre.lib:bcrypt:0.10.2'
+    implementation 'org.apache.logging.log4j:log4j-core:2.14.1'
+
 }
 
 test {

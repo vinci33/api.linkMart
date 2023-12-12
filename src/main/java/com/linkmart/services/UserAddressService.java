@@ -1,4 +1,4 @@
-package com.linkmart.service;
+package com.linkmart.services;
 
 import com.linkmart.dtos.UserAddressDto;
 import com.linkmart.models.UserAddress;

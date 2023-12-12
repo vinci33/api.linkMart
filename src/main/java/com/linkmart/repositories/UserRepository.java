@@ -8,6 +8,8 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface UserRepository extends JpaRepository<User,String> {
+
+
     @Query(value = """
            Select username from users where users.id = :created_by
             """, nativeQuery = true)
@@ -16,4 +18,6 @@ public interface UserRepository extends JpaRepository<User,String> {
     List<User> findUserByUsername(String username);
 
     List<User>findUserByUserEmail(String userEmail);
+
+    void deleteByUserEmail(String userEmail);
 }
