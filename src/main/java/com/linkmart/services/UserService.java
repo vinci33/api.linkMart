@@ -21,6 +21,8 @@ public class UserService {
 
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
+    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
     @Autowired
      UserRepository userRepository;
 
@@ -55,6 +57,16 @@ public class UserService {
         var user = new User();
         user.setUserEmail(email);
         user.setUsername(email); // Default username will be email;
+        user.setPassword(BCrypt.withDefaults().hashToString(10, password.toCharArray()));
+        return userRepository.saveAndFlush(user);
+    }
+
+    public User createUserWithRandom(String email,String Username, String password) {
+        validateUserEmail(email);
+        validateUsername(Username);
+        var user = new User();
+        user.setUserEmail(email);
+        user.setUsername(Username); // Random username ;
         user.setPassword(BCrypt.withDefaults().hashToString(10, password.toCharArray()));
         return userRepository.saveAndFlush(user);
     }

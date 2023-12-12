@@ -3,6 +3,7 @@ import com.linkmart.dtos.ResponseWithToken;
 import com.linkmart.forms.LoginForm;
 import com.linkmart.models.RandomGenModel;
 import com.linkmart.service.UserService;
+import com.linkmart.models.RandomGenModel;
 import com.linkmart.services.UserService;
 import org.springframework.core.env.Environment;
 import org.slf4j.Logger;
@@ -45,7 +46,7 @@ public class AuthController {
             if (!loginForm.getUsername().isEmpty()) {
                 username = loginForm.getUsername();
             }
-            var user = userService.createUser(loginForm.getEmail(), username, loginForm.getPassword());
+            var user = userService.createUserWithRandom(loginForm.getEmail(), username, loginForm.getPassword());
             return new ResponseWithToken(true, "Signup success", user.getId());
         }catch(Exception e) {
             logger.error(e.getMessage());
