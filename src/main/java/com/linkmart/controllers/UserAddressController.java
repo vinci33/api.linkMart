@@ -1,8 +1,7 @@
 package com.linkmart.controllers;
 
 import com.linkmart.dtos.UserAddressDto;
-import com.linkmart.models.UserAddress;
-import com.linkmart.service.UserAddressService;
+import com.linkmart.services.UserAddressService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

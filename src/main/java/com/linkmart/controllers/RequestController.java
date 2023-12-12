@@ -1,7 +1,7 @@
 package com.linkmart.controllers;
 
-import com.linkmart.forms.RequestForm;
 import com.linkmart.models.RequestModel;
+import com.linkmart.services.RequestService;
 import com.linkmart.repositories.RequestRepository;
 import com.linkmart.service.RequestService;
 import org.slf4j.Logger;

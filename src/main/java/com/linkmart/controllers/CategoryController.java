@@ -8,7 +8,7 @@ import com.linkmart.models.CategoryFieldModel;
 import com.linkmart.models.CategoryFieldOptionModel;
 import com.linkmart.repositories.CategoryFieldOptionRepository;
 import com.linkmart.repositories.CategoryRepository;
-import com.linkmart.service.CategoryService;
+import com.linkmart.services.CategoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.linkmart.service;
+package com.linkmart.services;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.auth0.jwt.JWT;
@@ -22,7 +22,7 @@ public class UserService {
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
     @Autowired
-    private UserRepository userRepository;
+     UserRepository userRepository;
 
     @Autowired
     Environment env;
@@ -35,7 +35,7 @@ public class UserService {
         return   userRepository.count();
     }
 
-    public void validateUserEmail(String email, String username) {
+    public void validateUserEmail(String email) {
         var usersByEmail = userRepository.findUserByUserEmail(email);
         if (!usersByEmail.isEmpty()) {
             throw new IllegalArgumentException("Email already exists");
@@ -49,12 +49,12 @@ public class UserService {
         }
     }
 
-    public User createUser(String email, String username, String password) {
-        validateUserEmail(email, username);
-        validateUsername(username);
+    public User createUser(String email, String password) {
+        validateUserEmail(email);
+        validateUsername(email);
         var user = new User();
         user.setUserEmail(email);
-        user.setUsername(username);
+        user.setUsername(email); // Default username will be email;
         user.setPassword(BCrypt.withDefaults().hashToString(10, password.toCharArray()));
         return userRepository.saveAndFlush(user);
     }
