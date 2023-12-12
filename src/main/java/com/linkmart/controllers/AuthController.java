@@ -30,7 +30,6 @@ public class AuthController {
         try{
             var jwt = userService.authenticateUser(loginForm.getEmail(), loginForm.getPassword());
             return new ResponseWithToken (true, "Login success", jwt);
-
         }catch(Exception e){
             logger.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,

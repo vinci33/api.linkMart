@@ -2,6 +2,7 @@ package com.linkmart.controllers;
 
 import com.linkmart.forms.RequestForm;
 import com.linkmart.models.RequestModel;
+import com.linkmart.repositories.RequestRepository;
 import com.linkmart.service.RequestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,9 @@ public class RequestController {
     @Autowired
     RequestService requestService;
 
+    @Autowired
+    RequestRepository requestRepository;
+
     @PostMapping(value = "/api/request")
     public RequestModel postRequest (@ModelAttribute RequestForm requestModelForm,
                                      @RequestParam("itemDetail") String itemDetail,
@@ -31,6 +35,15 @@ public class RequestController {
                     requestModelForm.getOfferPrice(), file);
             return request;
         } catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    @GetMapping(value = "/request")
+    public List<RequestModel> getAllRequest () {
+        try{
+            return requestRepository.findAll();
+        } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }

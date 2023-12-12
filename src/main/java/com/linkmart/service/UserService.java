@@ -5,6 +5,8 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.linkmart.models.User;
 import com.linkmart.repositories.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import java.util.Objects;
 @Service
 
 public class UserService {
+    final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -57,6 +60,9 @@ public class UserService {
 
     public String authenticateUser(String email, String password) {
         var users = userRepository.findUserByUserEmail(email);
+        Date expireDate = new Date(new Date().getTime() + 10000*1000000000);
+        System.out.println(expireDate);
+        logger.info(expireDate.toString());
         if (users.isEmpty()) {
             throw new Error("Missing username or password");
         }
@@ -69,7 +75,7 @@ public class UserService {
                 .withIssuer("admin")
                 .withClaim("userId", user.getId())
                 .withIssuedAt(new Date())
+                .withExpiresAt(expireDate)
                 .sign(Algorithm.HMAC256(Objects.requireNonNull(env.getProperty("jwt.secret"))));
     }
-
 }
