@@ -45,7 +45,7 @@ public class RequestService {
                                     List<MultipartFile> files)
             throws AuthenticationException {
         var newRequest = new RequestModel();
-        newRequest.setCreateBy(createdBy);
+        newRequest.setCreatedBy(createdBy);
         newRequest.setLocationId(locationId);
         newRequest.setCategoryId(categoryId);
         newRequest.setItem(item);
@@ -65,7 +65,7 @@ public class RequestService {
             String imagePath = s3Service.uploadFile(file);
             ImageModel image = new ImageModel();
             image.setImage_path(imagePath);
-            image.setRequest_id(newRequest.getId());
+            image.setRequest_id(newRequest.getRequestId());
             images.add(image);
         }
 
@@ -83,7 +83,7 @@ public class RequestService {
 
         var result = this.requestRepository.saveAndFlush(newRequest);
         newRequest.setImages(result.getImages());
-        newRequest.setCreateBy(result.getCreateBy());
+        newRequest.setCreatedBy(result.getCreatedBy());
         newRequest.setCreatedAt(result.getCreatedAt());
         newRequest.setUpdatedAt(result.getUpdatedAt());
 
@@ -92,6 +92,7 @@ public class RequestService {
 
     public List<RequestModel> getAllRequest( ){
         var result = this.requestRepository.getAllRequest();
+
         return result;
     }
 

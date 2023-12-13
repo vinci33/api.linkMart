@@ -8,18 +8,17 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.type.SqlTypes;
 
-import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 @Table(name = "request")
 public class RequestModel{
 
     @Id
-    private String id;
+    @Column(name = "id")
+    private String requestId;
     @Column(name = "created_by")
-    private String createBy;
+    private String createdBy;
     @Column(name = "location_id")
     private int locationId;
     @Column(name = "category_id")
@@ -51,25 +50,25 @@ public class RequestModel{
             mappedBy="requestModel", cascade={CascadeType.ALL})
     private List<ImageModel> images;
 
-    public String getId() {
-        return id;
+    public String getRequestId() {
+        return requestId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
     }
 
     public void makeRequestCase() {
         ULID ulid = new ULID();
-        this.id = ulid.nextULID();
+        this.requestId = ulid.nextULID();
     }
 
-    public String getCreateBy() {
-        return createBy;
+    public String getCreatedBy() {
+        return createdBy;
     }
 
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy;
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
 
     public int getLocationId() {
@@ -171,8 +170,8 @@ public class RequestModel{
     @Override
     public String toString() {
         return "RequestModel{" +
-                "id='" + id + '\'' +
-                ", createBy='" + createBy + '\'' +
+                "id='" + requestId + '\'' +
+                ", createBy='" + createdBy + '\'' +
                 ", locationId=" + locationId +
                 ", categoryId=" + categoryId +
                 ", itemDetail=" + itemDetail +

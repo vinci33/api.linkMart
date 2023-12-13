@@ -17,5 +17,4 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
            Select * from request limit 30
             """, nativeQuery = true)
     List<RequestModel> getAllRequest();
-
 }
