@@ -11,8 +11,10 @@ public class RequestDto {
     private String item;
     private String primaryImage;
     private int offerPrice;
+    private String locationName;
     private String createdAt;
     private String updatedAt;
+
 
     public String getRequestId() {
         return requestId;

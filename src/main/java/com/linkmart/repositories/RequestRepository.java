@@ -1,5 +1,6 @@
 package com.linkmart.repositories;
 
+import com.linkmart.dtos.RequestDto;
 import com.linkmart.models.RequestModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,7 +15,9 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
     RequestModel findRequestByUserId(@Param("userId") String userId);
 
     @Query(value = """
-           Select * from request limit 30
+           Select request.*, location_name 
+           from request JOIN location 
+           ON location_id = location.id limit 30
             """, nativeQuery = true)
     List<RequestModel> getAllRequest();
 }

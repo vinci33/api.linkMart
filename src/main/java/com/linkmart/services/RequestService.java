@@ -2,6 +2,7 @@ package com.linkmart.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.linkmart.dtos.RequestDto;
 import com.linkmart.models.ImageModel;
 import com.linkmart.models.ItemDetailModel;
 import com.linkmart.models.RequestModel;
@@ -92,7 +93,6 @@ public class RequestService {
 
     public List<RequestModel> getAllRequest( ){
         var result = this.requestRepository.getAllRequest();
-
         return result;
     }
 
@@ -100,6 +100,7 @@ public class RequestService {
         var result = this.requestRepository.findRequestByUserId(userId);
         return result;
     }
+
 
 
 }

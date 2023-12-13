@@ -25,7 +25,7 @@ public class RequestController {
     @Autowired
     RequestRepository requestRepository;
 
-    @PostMapping(value = "/api/request")
+    @PostMapping(value = "/api/request", consumes = {"multipart/form-data"})
     public RequestModel postRequest (@ModelAttribute RequestForm requestModelForm,
                                      @RequestParam("itemDetail") String itemDetail,
                                      @RequestParam("imageFile") List<MultipartFile> file) {
