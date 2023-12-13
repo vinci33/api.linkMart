@@ -52,12 +52,12 @@ public class RequestService {
         newRequest.setItem(item);
         newRequest.setUrl(url);
         newRequest.setQuantity(quantity);
+
         newRequest.setRequestRemark(requestRemark);
         newRequest.makeRequestCase();
-
-        logger.info(offerPrice.toString());
-        newRequest.setOfferPrice(offerPrice);
-
+        if (offerPrice != null) {
+            newRequest.setOfferPrice(offerPrice);
+        }
         MultipartFile firstFile = null;
         List<ImageModel> images = new ArrayList<>();
         for (MultipartFile file: files) {

@@ -2,6 +2,7 @@ package com.linkmart.models;
 
 import de.huxhorn.sulky.ulid.ULID;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Null;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -188,4 +189,5 @@ public class RequestModel{
                 ", images=" + images +
                 '}';
     }
+
 }
