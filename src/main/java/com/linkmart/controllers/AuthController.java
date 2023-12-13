@@ -59,7 +59,7 @@ public class AuthController {
 
     @GetMapping("/")
     public String hello() {
-        return "Hello World  deploy from github actions CICD";
+        return "Hello World  deploy from github actions CICD2";
     }
 
 }
