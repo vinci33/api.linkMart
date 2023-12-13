@@ -1,5 +1,6 @@
 package com.linkmart.controllers;
 
+import com.linkmart.dtos.AnotherRequestDto;
 import com.linkmart.dtos.RequestDto;
 import com.linkmart.filter.LogginFilter;
 import com.linkmart.filter.UserGuardFilter;
@@ -12,12 +13,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class RequestController {
@@ -69,5 +73,19 @@ public class RequestController {
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
+    }
+
+    @GetMapping(value = "/api/request?p={page}&category={category}&location={location}")
+    public Page<AnotherRequestDto> getAllRequestByCategoryAndLocation (
+            @RequestParam(name = "page", defaultValue = "0") Integer page,
+            @RequestParam(name = "category", required = false) String category,
+            @RequestParam(name = "location", required = false) String location) {
+        try {
+            var resultOfRequests = requestService.getRequestsByCategoryAndLocation(category, location, page);
+            return resultOfRequests;
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+
     }
 }
