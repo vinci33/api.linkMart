@@ -1,5 +1,6 @@
 package com.linkmart.utils;
 
+import java.util.Map;
 import java.util.Random;
 
 public class UtilMethod {
@@ -20,5 +21,14 @@ public class UtilMethod {
 
         // Get the final random string
         return stringBuilder.toString();
+    }
+
+    public Map<String, String> formDataProcesser(Map<String, String> formData, String[] keys) {
+        for (String key : keys) {
+            if (formData.get(key) == null) {
+                formData.put(key, "");
+            }
+        }
+        return formData;
     }
 }
