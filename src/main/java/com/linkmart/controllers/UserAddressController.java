@@ -1,5 +1,6 @@
 package com.linkmart.controllers;
 
+import com.linkmart.dtos.AddressList;
 import com.linkmart.dtos.UserAddressDto;
 import com.linkmart.services.UserAddressService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,14 +29,15 @@ public class UserAddressController {
         final Logger logger = LoggerFactory.getLogger(this.getClass());
 
         @GetMapping("/address")
-        public UserAddressDto getUserAddress() {
+        public AddressList getUserAddress() {
             try {
                 var userId = (String)request.getAttribute("userId");
-                List<UserAddressDto> getAllUserAddress = userAddressService.findUserAddressByUserId("1");
+
+                List<AddressList> getAllUserAddress = userAddressService.findUserAddressByUserId("1");
                 List<String> addresses = getAllUserAddress.stream()
-                        .map(UserAddressDto::getAddress)
+                        .flatMap(addressList -> addressList.getAddress().stream())
                         .collect(Collectors.toList());
-                return new UserAddressDto(addresses);
+                return new AddressList(addresses);
             } catch (Exception e) {
                 logger.error(e.getMessage());
                 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "UNAUTHORIZED", e);
