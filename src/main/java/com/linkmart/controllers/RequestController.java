@@ -1,6 +1,7 @@
 package com.linkmart.controllers;
 
 import com.linkmart.dtos.RequestDto;
+import com.linkmart.filter.LogginFilter;
 import com.linkmart.forms.RequestForm;
 import com.linkmart.mappers.RequestMapper;
 import com.linkmart.models.RequestModel;
@@ -50,14 +51,14 @@ public class RequestController {
         }
     }
 
-    @GetMapping(value = "/api/request")
-    public List<RequestDto> getAllMyRequest () {
-        try{
-
-            return requestService.getAllMyRequest();
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-        }
-    }
+//    @GetMapping(value = "/api/request")
+//    public List<RequestDto> getAllMyRequest () {
+//        try{
+//
+//            return requestService.getAllMyRequest();
+//        } catch (Exception e) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+//        }
+//    }
 
 }

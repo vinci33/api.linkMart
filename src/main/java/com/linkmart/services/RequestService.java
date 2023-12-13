@@ -54,6 +54,7 @@ public class RequestService {
         newRequest.setQuantity(quantity);
         newRequest.setRequestRemark(requestRemark);
         newRequest.makeRequestCase();
+        logger.info(offerPrice.toString());
         newRequest.setOfferPrice(offerPrice);
 
         MultipartFile firstFile = null;
@@ -70,6 +71,7 @@ public class RequestService {
             }
         }
         newRequest.setImages(images);
+
 
         Gson g = new Gson();
         ItemDetailModel itemDetailModel = g.fromJson(itemDetail, ItemDetailModel.class);

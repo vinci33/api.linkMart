@@ -16,7 +16,6 @@ public class RequestForm {
     private int offerPrice;
     private String requestRemark;
 
-
     public String getCreatedBy() {
         return createdBy;
     }
@@ -96,4 +95,6 @@ public class RequestForm {
     public void setRequestRemark(String requestRemark) {
         this.requestRemark = requestRemark;
     }
+
+
 }
