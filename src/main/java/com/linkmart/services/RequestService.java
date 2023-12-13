@@ -45,7 +45,7 @@ public class RequestService {
                                     List<MultipartFile> files)
             throws AuthenticationException {
         var newRequest = new RequestModel();
-        newRequest.setCreateBy(createdBy);
+        newRequest.setCreatedBy(createdBy);
         newRequest.setLocationId(locationId);
         newRequest.setCategoryId(categoryId);
         newRequest.setItem(item);
@@ -55,13 +55,23 @@ public class RequestService {
         newRequest.makeRequestCase();
         newRequest.setOfferPrice(offerPrice);
 
+        MultipartFile firstFile = null;
+
         List<ImageModel> images = new ArrayList<>();
         for (MultipartFile file: files) {
+            if (firstFile == null) {
+                firstFile = file; // Store the first file
+            }
             String imagePath = s3Service.uploadFile(file);
             ImageModel image = new ImageModel();
             image.setImage_path(imagePath);
-            image.setRequest_id(newRequest.getId());
+            image.setRequest_id(newRequest.getRequestId());
             images.add(image);
+        }
+
+        if (firstFile != null) {
+            String primaryImagePath = s3Service.uploadFile(firstFile);
+            newRequest.setPrimaryImage(primaryImagePath);
         }
 
         newRequest.setImages(images);
@@ -73,7 +83,7 @@ public class RequestService {
 
         var result = this.requestRepository.saveAndFlush(newRequest);
         newRequest.setImages(result.getImages());
-        newRequest.setCreateBy(result.getCreateBy());
+        newRequest.setCreatedBy(result.getCreatedBy());
         newRequest.setCreatedAt(result.getCreatedAt());
         newRequest.setUpdatedAt(result.getUpdatedAt());
 
@@ -82,6 +92,7 @@ public class RequestService {
 
     public List<RequestModel> getAllRequest( ){
         var result = this.requestRepository.getAllRequest();
+
         return result;
     }
 

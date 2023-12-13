@@ -1,6 +1,8 @@
 package com.linkmart.controllers;
 
+import com.linkmart.dtos.RequestDto;
 import com.linkmart.forms.RequestForm;
+import com.linkmart.mappers.RequestMapper;
 import com.linkmart.models.RequestModel;
 import com.linkmart.services.RequestService;
 import com.linkmart.repositories.RequestRepository;
@@ -40,9 +42,10 @@ public class RequestController {
     }
 
     @GetMapping(value = "/request")
-    public List<RequestModel> getAllRequest () {
+    public List<RequestDto> getAllRequest () {
         try{
-            return requestService.getAllRequest();
+            var result = requestService.getAllRequest();
+            return RequestMapper.INSTANCE.getAllRequest(result);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
