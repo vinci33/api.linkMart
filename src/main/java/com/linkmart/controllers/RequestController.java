@@ -45,7 +45,16 @@ public class RequestController {
     public List<RequestDto> getAllRequest () {
         try{
             return requestService.getAllRequest();
-//            return RequestMapper.INSTANCE.getAllRequest(result);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    @GetMapping(value = "/api/request")
+    public List<RequestDto> getAllMyRequest () {
+        try{
+
+            return requestService.getAllMyRequest();
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

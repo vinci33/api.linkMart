@@ -57,7 +57,6 @@ public class RequestService {
         newRequest.setOfferPrice(offerPrice);
 
         MultipartFile firstFile = null;
-
         List<ImageModel> images = new ArrayList<>();
         for (MultipartFile file: files) {
             String imagePath = s3Service.uploadFile(file);
@@ -70,12 +69,10 @@ public class RequestService {
                 newRequest.setPrimaryImage(imagePath); // Store the first file
             }
         }
-
         newRequest.setImages(images);
 
         Gson g = new Gson();
         ItemDetailModel itemDetailModel = g.fromJson(itemDetail, ItemDetailModel.class);
-
         newRequest.setItemDetail(itemDetailModel);
 
         var result = this.requestRepository.saveAndFlush(newRequest);
@@ -92,7 +89,7 @@ public class RequestService {
         return result;
     }
 
-    public RequestModel getMyRequest(String userId){
+    public RequestModel getAllMyRequest(String userId){
         var result = this.requestRepository.findRequestByUserId(userId);
         return result;
     }
