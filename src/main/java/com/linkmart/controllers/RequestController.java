@@ -2,11 +2,13 @@ package com.linkmart.controllers;
 
 import com.linkmart.dtos.RequestDto;
 import com.linkmart.filter.LogginFilter;
+import com.linkmart.filter.UserGuardFilter;
 import com.linkmart.forms.RequestForm;
 import com.linkmart.mappers.RequestMapper;
 import com.linkmart.models.RequestModel;
 import com.linkmart.services.RequestService;
 import com.linkmart.repositories.RequestRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +28,11 @@ public class RequestController {
     @Autowired
     RequestRepository requestRepository;
 
+    @Autowired
+    HttpServletRequest request;
+
     @PostMapping(value = "/api/request", consumes = {"multipart/form-data"})
     public RequestModel postRequest (
-            @RequestParam(value = "createdBy") String createdBy,
             @RequestParam(value = "locationId") Integer locationId,
             @RequestParam(value = "categoryId") Integer categoryId,
             @RequestParam(value = "itemDetail", required = false) String itemDetail,
@@ -39,14 +43,14 @@ public class RequestController {
             @RequestParam(value = "requestRemark", required = false) String requestRemark,
             @RequestParam(value = "imageFile") List<MultipartFile> file) {
         try{
-            RequestModel request = requestService.postRequest(createdBy, locationId, categoryId, itemDetail, item, url,
+            var userId = (String)request.getAttribute("userId");
+            RequestModel request = requestService.postRequest(userId, locationId, categoryId, itemDetail, item, url,
                     quantity, requestRemark,offerPrice, file);
             return request;
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
-
 
     @GetMapping(value = "/request")
     public List<RequestDto> getAllRequest () {
@@ -57,14 +61,13 @@ public class RequestController {
         }
     }
 
-//    @GetMapping(value = "/api/request")
-//    public List<RequestDto> getAllMyRequest () {
-//        try{
-//
-//            return requestService.getAllMyRequest();
-//        } catch (Exception e) {
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-//        }
-//    }
-
+    @GetMapping(value = "/api/request")
+    public List<RequestDto> getAllMyRequest (HttpServletRequest request) {
+        try{
+            var userId = (String)request.getAttribute("userId");
+            return requestService.getAllMyRequest(userId);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
 }

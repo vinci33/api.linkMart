@@ -56,11 +56,12 @@ public class UserGuardFilter extends OncePerRequestFilter {
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         var pathMatcher = new AntPathMatcher();
         List<String> matchedPatterns = List.of(
-                "/user/*/*/*"
+                "/user/*/*/*","/api/*","/api/*/*/*"
         );
 
         return !matchedPatterns
                 .stream()
                 .anyMatch(p -> pathMatcher.match(p, request.getRequestURI()));
     }
+
 }

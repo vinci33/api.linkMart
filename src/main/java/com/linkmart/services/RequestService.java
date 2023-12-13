@@ -40,13 +40,13 @@ public class RequestService {
     S3Service s3Service;
 
     @Transactional
-    public RequestModel postRequest(String createdBy, Integer locationId, Integer categoryId,
+    public RequestModel postRequest(String userId, Integer locationId, Integer categoryId,
                                     String itemDetail, String item, String url,
                                     Integer quantity, String requestRemark, Integer offerPrice,
                                     List<MultipartFile> files)
             throws AuthenticationException {
         var newRequest = new RequestModel();
-        newRequest.setCreatedBy(createdBy);
+        newRequest.setCreatedBy(userId);
         newRequest.setLocationId(locationId);
         newRequest.setCategoryId(categoryId);
         newRequest.setItem(item);
@@ -92,8 +92,8 @@ public class RequestService {
         return result;
     }
 
-    public RequestModel getAllMyRequest(String userId){
-        var result = this.requestRepository.findRequestByUserId(userId);
+    public List<RequestDto> getAllMyRequest(String userId) {
+        var result = this.requestRepository.getAllRequestByUserId(userId);
         return result;
     }
 
