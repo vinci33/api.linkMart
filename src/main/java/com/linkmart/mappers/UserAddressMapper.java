@@ -15,14 +15,11 @@ import java.util.List;
 public interface UserAddressMapper {
 
     UserAddressMapper INSTANCE = Mappers.getMapper(UserAddressMapper.class);
-    @Mapping(source = "address", target = "address", qualifiedByName = "stringToList")
-    AddressList userAddressDtoToAddressList(UserAddressDto userAddressDto);
+//    @Mapping(source = "address", target = "address")
+//    AddressList userAddressDtoToAddressList(UserAddressDto userAddressDto);
 
-    List<AddressList> toUserAddressDtos(List<UserAddressDto> userAddressDtos);
+//    List<AddressList> toUserAddressDtos(List<UserAddressDto> userAddressDtos);
 
-    @Named("stringToList")
-    default List<String> map(String value) {
-        return Arrays.asList(value.split(","));
-    }
+
 
 }
