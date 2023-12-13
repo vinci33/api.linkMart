@@ -80,7 +80,7 @@ public class AppConfig {
                     registry.addMapping("/**")
                             .allowedMethods("*")
                             .allowedHeaders("*")
-                            .allowedOrigins("*");
+                            .allowedOrigins("http://localhost:5173","https://api.fight2gether.com");
                 }
             };
         }
