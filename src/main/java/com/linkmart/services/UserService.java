@@ -10,12 +10,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.Objects;
 
 @Service
-
+@Transactional
 public class UserService {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -58,7 +59,7 @@ public class UserService {
         }
     }
 
-    public User createUser(String email, String password) {
+    public String createUser(String email, String password) {
         try {
             validateUserEmail(email);
             validateUsername(email);
@@ -70,7 +71,14 @@ public class UserService {
         user.setUserEmail(email);
         user.setUsername(email); // Default username will be email;
         user.setPassword(BCrypt.withDefaults().hashToString(10, password.toCharArray()));
-        return userRepository.saveAndFlush(user);
+        var authUser = userRepository.saveAndFlush(user);
+        return JWT.create()
+                .withIssuer("admin")
+                .withClaim("userId", authUser.getId())
+                .withIssuedAt(new Date())
+                .withExpiresAt(new Date(new Date().getTime() + 10000*1000000000))
+                .sign(Algorithm.HMAC256(Objects.requireNonNull(env.getProperty("jwt.secret"))));
+
     }
 
     public User createUserWithRandom(String email,String Username, String password) {

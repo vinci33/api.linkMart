@@ -44,11 +44,9 @@ public class AuthController {
     public ResponseWithToken signup (@RequestBody LoginForm loginForm){
         try{
             var username = UtilMethod.generateRandomString(10);
-            if (!loginForm.getUsername().isEmpty()) {
-                username = loginForm.getUsername();
-            }
-            var user = userService.createUserWithRandom(loginForm.getEmail(), username, loginForm.getPassword());
-            return new ResponseWithToken(true, "Signup success", user.getId());
+
+            var userWthJwt = userService.createUser(loginForm.getEmail(),  loginForm.getPassword());
+            return new ResponseWithToken(true, "Signup success", userWthJwt);
         }catch(Exception e) {
             logger.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
@@ -58,10 +56,9 @@ public class AuthController {
 
 
 
-
     @GetMapping("/")
     public String hello() {
-        return "Hello World  deploy from github actions";
+        return "Hello World  deploy from github actions CICD2";
     }
 
 }
