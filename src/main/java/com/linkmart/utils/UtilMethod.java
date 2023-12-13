@@ -23,10 +23,14 @@ public class UtilMethod {
         return stringBuilder.toString();
     }
 
-    public Map<String, String> formDataProcesser(Map<String, String> formData, String[] keys) {
+    public <T>Map<String, T> formDataProcessor(Map<String, T> formData, String[] keys, T defaultValue) {
         for (String key : keys) {
-            if (formData.get(key) == null) {
-                formData.put(key, "");
+            if (!formData.containsKey(key)) {
+                if (formData.get(key) instanceof String) {
+                    formData.put(key, (T) "");
+                } else if (formData.get(key) instanceof Integer) {
+                    formData.put(key, (T) Integer.valueOf(0));
+                }
             }
         }
         return formData;
