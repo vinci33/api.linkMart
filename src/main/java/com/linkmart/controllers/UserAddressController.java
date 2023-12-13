@@ -26,22 +26,22 @@ public class UserAddressController {
 
         final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-        @GetMapping("/address")
-        public AddressList getUserAddress() {
-            try {
-                var userId = (String)request.getAttribute("userId");
-
-                List<AddressList> getAllUserAddress = userAddressService.findUserAddressByUserId("1");
-                List<String> addresses = getAllUserAddress.stream()
-                        .flatMap(addressList -> addressList.getAddress().stream())
-                        .collect(Collectors.toList());
-                return new AddressList(addresses);
-            } catch (Exception e) {
-                logger.error(e.getMessage());
-                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "UNAUTHORIZED", e);
-            }
-
-        }
+//        @GetMapping("/address")
+//        public AddressList getUserAddress() {
+//            try {
+//                var userId = (String)request.getAttribute("userId");
+//
+//                List<AddressList> getAllUserAddress = userAddressService.findUserAddressByUserId("1");
+//                List<String> addresses = getAllUserAddress.stream()
+//                        .flatMap(addressList -> addressList.getAddress().stream())
+//                        .collect(Collectors.toList());
+//                return new AddressList(addresses);
+//            } catch (Exception e) {
+//                logger.error(e.getMessage());
+//                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "UNAUTHORIZED", e);
+//            }
+//
+//        }
 
 
 

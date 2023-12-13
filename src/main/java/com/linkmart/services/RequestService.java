@@ -54,6 +54,7 @@ public class RequestService {
         newRequest.setQuantity(quantity);
         newRequest.setRequestRemark(requestRemark);
         newRequest.makeRequestCase();
+
         logger.info(offerPrice.toString());
         newRequest.setOfferPrice(offerPrice);
 
