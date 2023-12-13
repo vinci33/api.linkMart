@@ -27,6 +27,7 @@ CREATE TABLE request (
     item TEXT not null,
     item_detail JSONB,
     url VARCHAR(1000),
+    primary_image String,
     quantity INTEGER not null,
     request_remark TEXT,
     offer_price INTEGER,

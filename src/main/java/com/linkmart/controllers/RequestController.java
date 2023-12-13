@@ -34,7 +34,7 @@ public class RequestController {
                     requestModelForm.getQuantity(), requestModelForm.getRequestRemark(),
                     requestModelForm.getOfferPrice(), file);
             return request;
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }

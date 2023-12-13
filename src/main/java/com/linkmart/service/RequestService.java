@@ -80,12 +80,6 @@ public class RequestService {
         return newRequest;
     }
 
-
-//    @Transactional
-//    public RequestModel getRequest(){
-//
-//    }
-
     public List<RequestModel> getAllRequest( ){
         var result = this.requestRepository.getAllRequest();
         return result;

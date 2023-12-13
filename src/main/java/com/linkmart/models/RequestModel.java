@@ -24,10 +24,11 @@ public class RequestModel{
     private int locationId;
     @Column(name = "category_id")
     private int categoryId;
-
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "item_detail", columnDefinition = "jsonb")
     private ItemDetailModel itemDetail;
+    @Column(name = "primary_image")
+    private String primaryImage;
     @Column(name = "item")
     private String item;
     @Column(name = "url")
@@ -95,6 +96,14 @@ public class RequestModel{
         this.itemDetail = itemDetail;
     }
 
+    public String getPrimaryImage() {
+        return primaryImage;
+    }
+
+    public void setPrimaryImage(String primaryImage) {
+        this.primaryImage = primaryImage;
+    }
+
     public String getItem() {
         return item;
     }
@@ -157,5 +166,25 @@ public class RequestModel{
 
     public void setImages(List<ImageModel> images) {
         this.images = images;
+    }
+
+    @Override
+    public String toString() {
+        return "RequestModel{" +
+                "id='" + id + '\'' +
+                ", createBy='" + createBy + '\'' +
+                ", locationId=" + locationId +
+                ", categoryId=" + categoryId +
+                ", itemDetail=" + itemDetail +
+                ", primaryImage='" + primaryImage + '\'' +
+                ", item='" + item + '\'' +
+                ", url='" + url + '\'' +
+                ", quantity=" + quantity +
+                ", offerPrice=" + offerPrice +
+                ", requestRemark='" + requestRemark + '\'' +
+                ", createdAt='" + createdAt + '\'' +
+                ", updatedAt='" + updatedAt + '\'' +
+                ", images=" + images +
+                '}';
     }
 }
