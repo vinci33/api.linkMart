@@ -9,7 +9,8 @@ import java.sql.Timestamp;
 public class OrderStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "id")
+    private int OrderStatusId;
 
     @Column(name = "order_status")
     private String orderStatus;
@@ -17,11 +18,12 @@ public class OrderStatus {
     @Column(name = "created_at", insertable = false, updatable = false)
     private Timestamp createdAt;
 
-    public void setId(int id) {
-        this.id = id;
+    public int getOrderStatusId() {
+        return OrderStatusId;
     }
-    public int getId() {
-        return id;
+
+    public void setOrderStatusId(int orderStatusId) {
+        OrderStatusId = orderStatusId;
     }
 
     public String getOrderStatus() {

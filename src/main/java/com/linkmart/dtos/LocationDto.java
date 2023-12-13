@@ -1,16 +1,23 @@
 package com.linkmart.dtos;
 
+import com.linkmart.models.RequestModel;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+
 public class LocationDto {
 
-    private int id;
+    private int locationId;
+
     private String locationName;
 
-    public int getId() {
-        return id;
+    public int getLocationId() {
+        return locationId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
     }
 
     public String getLocationName() {
@@ -24,7 +31,7 @@ public class LocationDto {
     @Override
     public String toString() {
         return "LocationDto{" +
-                "id=" + id +
+                "locationId=" + locationId +
                 ", locationName='" + locationName + '\'' +
                 '}';
     }

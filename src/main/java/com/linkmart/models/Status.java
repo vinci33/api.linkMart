@@ -10,7 +10,8 @@ import java.util.List;
 public class Status {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "id")
+    private int StatusId;
 
     @Column(name = "status_name")
     private String statusName;
@@ -31,19 +32,19 @@ public class Status {
     @Override
     public String toString() {
         return "Status{" +
-                "id=" + id +
+                "id=" + StatusId +
                 ", statusName='" + statusName + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
     }
 
-    public int getId() {
-        return id;
+    public int getStatusId() {
+        return StatusId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setStatusId(int statusId) {
+        StatusId = statusId;
     }
 
     public String getStatusName() {

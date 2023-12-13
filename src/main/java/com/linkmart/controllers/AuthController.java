@@ -1,7 +1,10 @@
 package com.linkmart.controllers;
 import com.linkmart.dtos.ResponseWithToken;
 import com.linkmart.forms.LoginForm;
+import com.linkmart.models.RandomGenModel;
+import com.linkmart.models.RandomGenModel;
 import com.linkmart.services.UserService;
+import com.linkmart.utils.UtilMethod;
 import org.springframework.core.env.Environment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,13 +13,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Random;
+
 @RestController
 public class AuthController {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
+
     @Autowired
     UserService userService;
+
 
     @Autowired
     Environment env;
@@ -26,26 +33,29 @@ public class AuthController {
         try{
             var jwt = userService.authenticateUser(loginForm.getEmail(), loginForm.getPassword());
             return new ResponseWithToken (true, "Login success", jwt);
-
         }catch(Exception e){
             logger.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
                     e.getMessage(),e);
-
         }
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public ResponseWithToken signup (@RequestBody LoginForm loginForm){
         try{
-            var user = userService.createUser(loginForm.getEmail(), loginForm.getPassword());
+            var username = UtilMethod.generateRandomString(10);
+            if (!loginForm.getUsername().isEmpty()) {
+                username = loginForm.getUsername();
+            }
+            var user = userService.createUserWithRandom(loginForm.getEmail(), username, loginForm.getPassword());
             return new ResponseWithToken(true, "Signup success", user.getId());
-        }catch(Exception e){
+        }catch(Exception e) {
             logger.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     e.getMessage(),e);
         }
     }
+
 
     @GetMapping("/")
     public String hello() {

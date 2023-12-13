@@ -1,12 +1,12 @@
 package com.linkmart.dtos;
 
+import java.util.List;
+
 public class UserAddressDto {
     private String address;
-    private Boolean isPrimary;
 
-    public UserAddressDto(String address, Boolean isPrimary) {
+    public UserAddressDto(String address) {
         this.address = address;
-        this.isPrimary = isPrimary;
     }
 
     public String getAddress() {
@@ -15,13 +15,5 @@ public class UserAddressDto {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public Boolean getPrimary() {
-        return isPrimary;
-    }
-
-    public void setPrimary(Boolean primary) {
-        isPrimary = primary;
     }
 }

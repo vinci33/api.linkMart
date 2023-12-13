@@ -1,16 +1,16 @@
 package com.linkmart.dtos;
 
 public class LogisticCompanyDto {
-    private int id;
+    private int logisticCompanyId;
     private String companyName;
     private String companyUrl;
 
-    public int getId() {
-        return id;
+    public int getLogisticCompanyId() {
+        return logisticCompanyId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setLogisticCompanyId(int logisticCompanyId) {
+        this.logisticCompanyId = logisticCompanyId;
     }
 
     public String getCompanyName() {
@@ -32,7 +32,7 @@ public class LogisticCompanyDto {
     @Override
     public String toString() {
         return "LogisticCompanyDto{" +
-                "id=" + id +
+                "id=" + logisticCompanyId +
                 ", companyName='" + companyName + '\'' +
                 ", companyUrl='" + companyUrl + '\'' +
                 '}';

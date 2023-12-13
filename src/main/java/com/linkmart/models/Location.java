@@ -10,7 +10,13 @@ import java.util.List;
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "id")
+    private int locationId;
+
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            mappedBy="location", cascade={CascadeType.ALL})
+    private List<RequestModel> requestModel;
 
     @Column(name = "location_name")
     private String locationName;
@@ -27,19 +33,19 @@ public class Location {
     @Override
     public String toString() {
         return "Location{" +
-                "id=" + id +
+                "id=" + locationId +
                 ", locationName='" + locationName + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
     }
 
-    public int getId() {
-        return id;
+    public int getLocationId() {
+        return locationId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
     }
 
     public String getLocationName() {
@@ -64,5 +70,13 @@ public class Location {
 
     public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public List<RequestModel> getRequestModel() {
+        return requestModel;
+    }
+
+    public void setRequestModel(List<RequestModel> requestModel) {
+        this.requestModel = requestModel;
     }
 }

@@ -1,15 +1,15 @@
 package com.linkmart.dtos;
 
 public class OrderStatusDto {
-    private int id;
+    private int OrderStatusId;
     private String orderStatus;
 
-    public int getId() {
-        return id;
+    public int getOrderStatusId() {
+        return OrderStatusId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setOrderStatusId(int orderStatusId) {
+        OrderStatusId = orderStatusId;
     }
 
     public String getOrderStatus() {
@@ -23,7 +23,7 @@ public class OrderStatusDto {
     @Override
     public String toString() {
         return "OrderStatusDto{" +
-                "id=" + id +
+                "id=" + OrderStatusId +
                 ", orderStatus='" + orderStatus + '\'' +
                 '}';
     }

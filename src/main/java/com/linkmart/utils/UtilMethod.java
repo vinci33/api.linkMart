@@ -1,13 +1,9 @@
-package com.linkmart.models;
+package com.linkmart.utils;
 
 import java.util.Random;
 
-public class RandomGenModel {
+public class UtilMethod {
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-    public String getTest() {
-        return "";
-    }
     public static String generateRandomString(int length) {
         // Create an instance of Random
         Random random = new Random();
@@ -26,4 +22,3 @@ public class RandomGenModel {
         return stringBuilder.toString();
     }
 }
-
