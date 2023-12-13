@@ -45,19 +45,21 @@ public class UserAddressController {
             }
 
         }
-//        @GetMapping("/addressInJsonFormat")
-//        public UserAddressFullDto>getUserAddressInJson(HttpServletRequest request) {
-//            try {
-//                var userId = (String)request.getAttribute("userId");
-//
-//                List<UserAddress>  getAllUserAddress = userAddressService.findUserAddressByUserIdInJson("1");
-//                return UserAddressFullMapper.INSTANCE.toUserAddressFullDto(getAllUserAddress);
-//            } catch (Exception e) {
-//                logger.error(e.getMessage());
-//                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "UNAUTHORIZED", e);
-//            }
-//
-//        }
+
+
+        @GetMapping("/addressInJsonFormat")
+        public List<UserAddressFullDto> getUserAddressInJson(HttpServletRequest request) {
+            try {
+                var userId = (String)request.getAttribute("userId");
+
+                List<UserAddress>  getAllUserAddress = userAddressService.findUserAddressByUserIdInJson("1");
+                return UserAddressFullMapper.INSTANCE.toUserAddressFullDtos(getAllUserAddress);
+            } catch (Exception e) {
+                logger.error(e.getMessage());
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "UNAUTHORIZED", e);
+            }
+
+        }
 
 
 

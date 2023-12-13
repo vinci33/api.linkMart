@@ -15,6 +15,8 @@ public class UserAddressService {
     @Autowired
     private UserAddressRepository userAddressRepository;
 
+
+    // /addressInArrayFormat
     public List<Map<String, List<String>>>  findUserAddressByUserId(String userId) {
         List<UserAddress> userAddresses = userAddressRepository.findUserAddressByUserId(userId);
 
@@ -30,6 +32,8 @@ public class UserAddressService {
         return Collections.singletonList(addressMap);
     }
 
+
+    //    /addressInJsonFormat
     public List<UserAddress>  findUserAddressByUserIdInJson(String userId) {
         return userAddressRepository.findUserAddressByUserId(userId);
     }
