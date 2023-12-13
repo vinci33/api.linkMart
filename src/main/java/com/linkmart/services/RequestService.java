@@ -55,13 +55,23 @@ public class RequestService {
         newRequest.makeRequestCase();
         newRequest.setOfferPrice(offerPrice);
 
+        MultipartFile firstFile = null;
+
         List<ImageModel> images = new ArrayList<>();
         for (MultipartFile file: files) {
+            if (firstFile == null) {
+                firstFile = file; // Store the first file
+            }
             String imagePath = s3Service.uploadFile(file);
             ImageModel image = new ImageModel();
             image.setImage_path(imagePath);
             image.setRequest_id(newRequest.getId());
             images.add(image);
+        }
+
+        if (firstFile != null) {
+            String primaryImagePath = s3Service.uploadFile(firstFile);
+            newRequest.setPrimaryImage(primaryImagePath);
         }
 
         newRequest.setImages(images);
