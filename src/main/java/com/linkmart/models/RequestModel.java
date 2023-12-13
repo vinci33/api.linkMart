@@ -1,6 +1,5 @@
 package com.linkmart.models;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import de.huxhorn.sulky.ulid.ULID;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -21,7 +20,9 @@ public class RequestModel{
     private String createdBy;
     @Column(name = "location_id")
     private int locationId;
-    @Column(name = "category_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="location_id", updatable = false, insertable = false)
+    private Location location;
     private int categoryId;
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "item_detail", columnDefinition = "jsonb")
@@ -170,8 +171,8 @@ public class RequestModel{
     @Override
     public String toString() {
         return "RequestModel{" +
-                "id='" + requestId + '\'' +
-                ", createBy='" + createdBy + '\'' +
+                "requestId='" + requestId + '\'' +
+                ", createdBy='" + createdBy + '\'' +
                 ", locationId=" + locationId +
                 ", categoryId=" + categoryId +
                 ", itemDetail=" + itemDetail +

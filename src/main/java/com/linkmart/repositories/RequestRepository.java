@@ -15,9 +15,14 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
     RequestModel findRequestByUserId(@Param("userId") String userId);
 
     @Query(value = """
-           Select request.*, location_name 
-           from request JOIN location 
-           ON location_id = location.id limit 30
+                    SELECT r.id as requestId,  l.location_name as locationName,\s
+                               r.item, r.primary_image as primaryImage, r.offer_price as offerPrice,\s
+                               r.created_at as createdAt, r.updated_at as updatedAt,
+                               u.username as createdBy
+                        FROM request r
+                        JOIN location l ON r.location_id = l.id
+                        JOIN users u ON r.created_by = u.id
+            LIMIT 30
             """, nativeQuery = true)
-    List<RequestModel> getAllRequest();
+    List<RequestDto> getAllRequest();
 }

@@ -13,6 +13,11 @@ public class Location {
     @Column(name = "id")
     private int locationId;
 
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            mappedBy="location", cascade={CascadeType.ALL})
+    private List<RequestModel> requestModel;
+
     @Column(name = "location_name")
     private String locationName;
 
@@ -65,5 +70,13 @@ public class Location {
 
     public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public List<RequestModel> getRequestModel() {
+        return requestModel;
+    }
+
+    public void setRequestModel(List<RequestModel> requestModel) {
+        this.requestModel = requestModel;
     }
 }

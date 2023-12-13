@@ -60,19 +60,15 @@ public class RequestService {
 
         List<ImageModel> images = new ArrayList<>();
         for (MultipartFile file: files) {
-            if (firstFile == null) {
-                firstFile = file; // Store the first file
-            }
             String imagePath = s3Service.uploadFile(file);
             ImageModel image = new ImageModel();
             image.setImage_path(imagePath);
             image.setRequest_id(newRequest.getRequestId());
             images.add(image);
-        }
-
-        if (firstFile != null) {
-            String primaryImagePath = s3Service.uploadFile(firstFile);
-            newRequest.setPrimaryImage(primaryImagePath);
+            if (firstFile == null) {
+                firstFile = file;
+                newRequest.setPrimaryImage(imagePath); // Store the first file
+            }
         }
 
         newRequest.setImages(images);
@@ -91,7 +87,7 @@ public class RequestService {
         return newRequest;
     }
 
-    public List<RequestModel> getAllRequest( ){
+    public List<RequestDto> getAllRequest( ){
         var result = this.requestRepository.getAllRequest();
         return result;
     }

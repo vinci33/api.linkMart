@@ -11,5 +11,5 @@ import java.util.List;
 public interface RequestMapper {
     RequestMapper INSTANCE = Mappers.getMapper(RequestMapper.class);
 
-    List<RequestDto> getAllRequest (List<RequestModel> requestModels);
+//    List<RequestDto> getAllRequest (List<RequestModel> requestModels);
 }
