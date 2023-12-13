@@ -1,8 +1,10 @@
 package com.linkmart.forms;
 
 import com.linkmart.models.ImageModel;
+import com.linkmart.utils.UtilMethod;
 
 import java.util.List;
+import java.util.Map;
 
 public class RequestForm {
     private String createdBy;
@@ -15,6 +17,38 @@ public class RequestForm {
     private int quantity;
     private int offerPrice;
     private String requestRemark;
+    private UtilMethod utilMethod = new UtilMethod();
+
+    public <T> void processFormDataString(Map<String,T> formData, T defaultValue){
+        Map<String,T> processedFormData = utilMethod.formDataProcessor(formData,new String[]{"itemDetail","item","url","requestRemark"}, defaultValue);
+
+        if (processedFormData.get("itemDetail") instanceof String) {
+            this.itemDetail = (String) processedFormData.get("itemDetail");
+        }
+        if (processedFormData.get("item") instanceof String) {
+            this.item = (String) processedFormData.get("item");
+        }
+        if (processedFormData.get("url") instanceof String) {
+            this.url = (String) processedFormData.get("url");
+        }
+        if (processedFormData.get("requestRemark") instanceof String) {
+            this.requestRemark = (String) processedFormData.get("requestRemark");
+        }
+
+    }
+    public <T> void processFormDataInteger(Map<String,T> formData, T defaultValue){
+        Map<String,T> processedFormData = utilMethod.formDataProcessor(formData,new String[]{"quantity","offerPrice"}, defaultValue);
+
+        if (processedFormData.get("quantity") instanceof Integer) {
+            this.quantity = (Integer) processedFormData.get("quantity");
+        }
+        if (processedFormData.get("offerPrice") instanceof Integer) {
+            this.offerPrice = (Integer) processedFormData.get("offerPrice");
+        }
+
+
+    }
+
 
     public String getCreatedBy() {
         return createdBy;
@@ -95,6 +129,7 @@ public class RequestForm {
     public void setRequestRemark(String requestRemark) {
         this.requestRemark = requestRemark;
     }
+
 
 
 }
