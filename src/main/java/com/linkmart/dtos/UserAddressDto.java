@@ -9,6 +9,13 @@ public class UserAddressDto {
         this.address = address;
     }
 
+    @Override
+    public String toString() {
+        return "UserAddressDto{" +
+                "address='" + address + '\'' +
+                '}';
+    }
+
     public String getAddress() {
         return address;
     }

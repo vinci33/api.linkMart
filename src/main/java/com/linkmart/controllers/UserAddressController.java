@@ -1,17 +1,23 @@
 package com.linkmart.controllers;
 
+import com.linkmart.dtos.UserAddressDto;
+import com.linkmart.dtos.UserAddressFullDto;
+import com.linkmart.mappers.UserAddressFullMapper;
+import com.linkmart.models.UserAddress;
 import com.linkmart.services.UserAddressService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -26,16 +32,26 @@ public class UserAddressController {
 
         final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-//        @GetMapping("/address")
-//        public AddressList getUserAddress() {
+        @GetMapping("/addressInArrayFormat")
+        public List<Map<String, List<String>>>  getUserAddress(HttpServletRequest request) {
+            try {
+                var userId = (String)request.getAttribute("userId");
+
+                List<Map<String, List<String>>>  getAllUserAddress = userAddressService.findUserAddressByUserId("1");
+                return getAllUserAddress;
+            } catch (Exception e) {
+                logger.error(e.getMessage());
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "UNAUTHORIZED", e);
+            }
+
+        }
+//        @GetMapping("/addressInJsonFormat")
+//        public UserAddressFullDto>getUserAddressInJson(HttpServletRequest request) {
 //            try {
 //                var userId = (String)request.getAttribute("userId");
 //
-//                List<AddressList> getAllUserAddress = userAddressService.findUserAddressByUserId("1");
-//                List<String> addresses = getAllUserAddress.stream()
-//                        .flatMap(addressList -> addressList.getAddress().stream())
-//                        .collect(Collectors.toList());
-//                return new AddressList(addresses);
+//                List<UserAddress>  getAllUserAddress = userAddressService.findUserAddressByUserIdInJson("1");
+//                return UserAddressFullMapper.INSTANCE.toUserAddressFullDto(getAllUserAddress);
 //            } catch (Exception e) {
 //                logger.error(e.getMessage());
 //                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "UNAUTHORIZED", e);
