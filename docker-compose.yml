@@ -4,9 +4,9 @@ services:
   linkmart:
     depends_on:
       - postgres
-    build:
-      context: ./
-      dockerfile: ./Dockerfile
+#    build:
+#      context: ./
+#      dockerfile: ./Dockerfile
     image: 'vinci33/jadc28:latest'
     ports:
       - '8080:8080'

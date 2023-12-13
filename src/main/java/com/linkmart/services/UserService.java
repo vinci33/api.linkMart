@@ -1,4 +1,4 @@
-package com.linkmart.service;
+package com.linkmart.services;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.auth0.jwt.JWT;
@@ -21,8 +21,10 @@ public class UserService {
 
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
+
+
     @Autowired
-    private UserRepository userRepository;
+     UserRepository userRepository;
 
     @Autowired
     Environment env;
@@ -35,7 +37,7 @@ public class UserService {
         return   userRepository.count();
     }
 
-    public void validateUserEmail(String email, String username) {
+    public void validateUserEmail(String email) {
         var usersByEmail = userRepository.findUserByUserEmail(email);
         if (!usersByEmail.isEmpty()) {
             throw new IllegalArgumentException("Email already exists");
@@ -49,12 +51,34 @@ public class UserService {
         }
     }
 
-    public User createUser(String email, String username, String password) {
-        validateUserEmail(email, username);
-        validateUsername(username);
+    public void validateUserId(String userId) {
+        var userByUserId = userRepository.findUserById(userId);
+        if (userByUserId == null ) {
+            throw new IllegalArgumentException("Invalid UserId ");
+        }
+    }
+
+    public User createUser(String email, String password) {
+        try {
+            validateUserEmail(email);
+            validateUsername(email);
+        } catch (IllegalArgumentException e) {
+            logger.error(e.getMessage());
+            throw e;
+        }
         var user = new User();
         user.setUserEmail(email);
-        user.setUsername(username);
+        user.setUsername(email); // Default username will be email;
+        user.setPassword(BCrypt.withDefaults().hashToString(10, password.toCharArray()));
+        return userRepository.saveAndFlush(user);
+    }
+
+    public User createUserWithRandom(String email,String Username, String password) {
+        validateUserEmail(email);
+        validateUsername(Username);
+        var user = new User();
+        user.setUserEmail(email);
+        user.setUsername(Username); // Random username ;
         user.setPassword(BCrypt.withDefaults().hashToString(10, password.toCharArray()));
         return userRepository.saveAndFlush(user);
     }
@@ -78,5 +102,11 @@ public class UserService {
                 .withIssuedAt(new Date())
                 .withExpiresAt(expireDate)
                 .sign(Algorithm.HMAC256(Objects.requireNonNull(env.getProperty("jwt.secret"))));
+    }
+
+    public Object getUserNameById(String userId) {
+        validateUserId(userId);
+        var user = userRepository.findUserById(userId);
+        return user.getUsername();
     }
 }

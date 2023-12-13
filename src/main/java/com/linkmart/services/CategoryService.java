@@ -1,4 +1,4 @@
-package com.linkmart.service;
+package com.linkmart.services;
 
 import com.linkmart.models.CategoryFieldModel;
 import com.linkmart.repositories.CategoryFieldOptionRepository;

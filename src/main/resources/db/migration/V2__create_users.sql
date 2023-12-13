@@ -61,4 +61,7 @@ CREATE TABLE status (
      updated_at TIMESTAMP default NOW()
  );
 
+ ALTER TABLE provider_verification ADD COLUMN provider_id VARCHAR(255);
+ ALTER TABLE provider_verification ADD CONSTRAINT fk_provider FOREIGN KEY (provider_id) REFERENCES provider(id);
+
 COMMIT;
