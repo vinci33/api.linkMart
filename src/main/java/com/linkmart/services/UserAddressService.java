@@ -20,8 +20,8 @@ public class UserAddressService {
         List<UserAddress> userAddresses = userAddressRepository.findUserAddressByUserId(userId);
         List<UserAddressDto> userAddressDtos = new ArrayList<>();
         for (UserAddress userAddress : userAddresses) {
-            UserAddressDto dto = new UserAddressDto(userAddress.getAddress(), userAddress.isPrimary());
-            userAddressDtos.add(dto);
+//            UserAddressDto dto = new UserAddressDto(userAddress.getAddress(), userAddress.isPrimary());
+//            userAddressDtos.add(dto);
         }
         return userAddressDtos;
     }
