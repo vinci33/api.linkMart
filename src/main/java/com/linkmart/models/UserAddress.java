@@ -19,7 +19,7 @@ public class UserAddress {
     private String address;
 
     @Column(name = "is_primary")
-    private boolean isPrimary;
+    private static boolean isPrimary;
 
     @Column(name = "created_at", insertable = false, updatable = false)
     private Timestamp createdAt;
@@ -80,7 +80,8 @@ public class UserAddress {
         this.address = address;
     }
 
-    public boolean isPrimary() {
+
+    public static boolean isPrimary() {
         return isPrimary;
     }
 

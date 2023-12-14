@@ -55,16 +55,18 @@ public class UserAddressService {
     }
 
     public void putUserAddressByAddressId(Integer addressId, String userId) {
+        vaildateUserAddressId(addressId);
+        vaildateUserId(userId);
         var userAdresses = userAddressRepository.findUserAddressByUserId(userId);
-//        for (UserAddress userAddress : userAdresses) {
-//            if (!userAddress.getId().equals(addressId)) {
-//                userAddress.setPrimary(true);
-//            } else {
-//                userAddress.setPrimary(false);
-//            }
-//        }
-
+        for (UserAddress userAddress : userAdresses) {
+            if (addressId == userAddress.getId()) {
+                userAddress.setPrimary(true);
+            } else {
+                userAddress.setPrimary(false);
+            }System.out.println(UserAddress.isPrimary());
+        }
 
 
     }
+
     }
