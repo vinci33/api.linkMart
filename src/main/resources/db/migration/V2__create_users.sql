@@ -11,8 +11,9 @@ CREATE TABLE users (
 CREATE TABLE user_address (
     id SERIAL PRIMARY KEY,
     user_id TEXT not null REFERENCES users(id),
-    address VARCHAR(255) not null,
+    address VARCHAR(1000) not null,
     is_primary BOOLEAN not null,
+    is_active BOOLEAN not null default TRUE,
     created_at TIMESTAMP default NOW(),
     updated_at TIMESTAMP default NOW()
 );

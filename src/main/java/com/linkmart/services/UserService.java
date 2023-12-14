@@ -9,8 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
 import java.util.Objects;
@@ -97,12 +99,12 @@ public class UserService {
         System.out.println(expireDate);
         logger.info(expireDate.toString());
         if (users.isEmpty()) {
-            throw new Error("Missing username or password");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Wrong email or password");
         }
         var user = users.get(0);
         var result = BCrypt.verifyer().verify(password.getBytes(), user.getPassword().getBytes());
         if (!result.verified) {
-            throw new Error("Missing username or password");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Wrong email or password");
         }
         return JWT.create()
                 .withIssuer("admin")
