@@ -55,8 +55,7 @@ public class UserAddressService {
 
     public void putUserAddressByAddressId(String addressId, String userId) {
 
-
         userAddressRepository.putUserAddressByAddressId(addressId, userId);
 
     }
-    }
+}
