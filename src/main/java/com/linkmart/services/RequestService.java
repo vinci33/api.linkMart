@@ -9,6 +9,8 @@ import com.linkmart.models.RequestModel;
 import com.linkmart.repositories.LocationRepository;
 import com.linkmart.repositories.RequestRepository;
 import com.linkmart.repositories.UserRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,10 @@ import java.util.List;
 
 @Service
 public class RequestService {
+
+    @PersistenceContext
+    EntityManager em;
+
     final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
@@ -112,4 +118,8 @@ public class RequestService {
         logger.info("oneRequest.getCreatedBy() = " + oneRequest.getCreatedBy());
         return oneRequest;
     }
-}
+
+//    public Page<AnotherRequestDto> getRequestsByCategoryAndLocationV2(String category, String location, int page) {
+//        this.em.getCriteriaBuilder()
+//    }
+    }

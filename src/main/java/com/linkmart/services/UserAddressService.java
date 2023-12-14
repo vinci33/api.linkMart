@@ -16,6 +16,21 @@ public class UserAddressService {
     private UserAddressRepository userAddressRepository;
 
 
+
+    public void vaildateUserAddressId(Integer addressId) {
+        var userAddressByAddressId = userAddressRepository.findById()(addressId);
+        if (userAddressByAddressId == null ) {
+            throw new IllegalArgumentException("Invalid AddressId ");
+        }
+    }
+
+    public void vaildateUserId(String userId) {
+        var userAddressByUserId = userAddressRepository.findUserAddressByUserId(userId);
+        if (userAddressByUserId == null ) {
+            throw new IllegalArgumentException("Invalid UserId ");
+        }
+    }
+
     // /addressInArrayFormat
     public List<Map<String, List<String>>>  findUserAddressByUserId(String userId) {
         List<UserAddress> userAddresses = userAddressRepository.findUserAddressByUserId(userId);
@@ -37,4 +52,11 @@ public class UserAddressService {
     public List<UserAddress>  findUserAddressByUserIdInJson(String userId) {
         return userAddressRepository.findUserAddressByUserId(userId);
     }
-}
+
+    public void putUserAddressByAddressId(String addressId, String userId) {
+
+
+        userAddressRepository.putUserAddressByAddressId(addressId, userId);
+
+    }
+    }
