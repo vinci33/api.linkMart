@@ -4,6 +4,7 @@ import com.linkmart.dtos.UserAddressDto;
 import com.linkmart.mappers.UserAddressMapper;
 import com.linkmart.models.UserAddress;
 import com.linkmart.repositories.UserAddressRepository;
+import com.linkmart.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class UserAddressService {
 
 
     public void vaildateUserAddressId(Integer addressId) {
-        var userAddressByAddressId = userAddressRepository.findById()(addressId);
+        var userAddressByAddressId = userAddressRepository.findUserAddressById(addressId);
         if (userAddressByAddressId == null ) {
             throw new IllegalArgumentException("Invalid AddressId ");
         }
@@ -53,9 +54,17 @@ public class UserAddressService {
         return userAddressRepository.findUserAddressByUserId(userId);
     }
 
-    public void putUserAddressByAddressId(String addressId, String userId) {
+    public void putUserAddressByAddressId(Integer addressId, String userId) {
+        var userAdresses = userAddressRepository.findUserAddressByUserId(userId);
+//        for (UserAddress userAddress : userAdresses) {
+//            if (!userAddress.getId().equals(addressId)) {
+//                userAddress.setPrimary(true);
+//            } else {
+//                userAddress.setPrimary(false);
+//            }
+//        }
 
-        userAddressRepository.putUserAddressByAddressId(addressId, userId);
+
 
     }
 }
