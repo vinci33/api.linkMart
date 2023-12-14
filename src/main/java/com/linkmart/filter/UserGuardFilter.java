@@ -25,7 +25,6 @@ public class UserGuardFilter extends OncePerRequestFilter {
     @Autowired
     Environment env;
 
-
     final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -54,7 +53,6 @@ public class UserGuardFilter extends OncePerRequestFilter {
             }
             request.setAttribute("userId", userId);
             filterChain.doFilter(request, response);
-
         } catch (Exception e) {
             logger.error(e.getMessage());
             response.setStatus(401);

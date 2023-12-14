@@ -19,6 +19,7 @@ public class CategoryService {
     @Autowired
     CategoryFieldOptionRepository categoryFieldOptionRepository;
 
+    //route: /category/{categoryId}
     public List<CategoryFieldModel>  getCategoryFieldOption (Integer categoryId) {
         List<CategoryFieldModel> categoryField = categoryFieldRepository.findCategoryFieldByCategoryId(categoryId);
         return categoryField;

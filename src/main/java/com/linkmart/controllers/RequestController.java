@@ -1,9 +1,10 @@
 package com.linkmart.controllers;
 
+import com.linkmart.dtos.OneRequestDto;
 import com.linkmart.dtos.AnotherRequestDto;
 import com.linkmart.dtos.RequestDto;
-import com.linkmart.filter.LogginFilter;
-import com.linkmart.filter.UserGuardFilter;
+//import com.linkmart.filter.LogginFilter;
+//import com.linkmart.filter.UserGuardFilter;
 import com.linkmart.forms.RequestForm;
 import com.linkmart.mappers.RequestMapper;
 import com.linkmart.models.RequestModel;
@@ -73,19 +74,5 @@ public class RequestController {
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
-    }
-
-    @GetMapping(value = "/api/request?p={page}&category={category}&location={location}")
-    public Page<AnotherRequestDto> getAllRequestByCategoryAndLocation (
-            @RequestParam(name = "page", defaultValue = "0") Integer page,
-            @RequestParam(name = "category", required = false) String category,
-            @RequestParam(name = "location", required = false) String location) {
-        try {
-            var resultOfRequests = requestService.getRequestsByCategoryAndLocation(category, location, page);
-            return resultOfRequests;
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-        }
-
     }
 }

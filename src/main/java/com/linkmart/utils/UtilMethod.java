@@ -23,16 +23,16 @@ public class UtilMethod {
         return stringBuilder.toString();
     }
 
-    public <T>Map<String, T> formDataProcessor(Map<String, T> formData, String[] keys, T defaultValue) {
-        for (String key : keys) {
-            if (!formData.containsKey(key)) {
-                if (formData.get(key) instanceof String) {
-                    formData.put(key, (T) "");
-                } else if (formData.get(key) instanceof Integer) {
-                    formData.put(key, (T) Integer.valueOf(0));
-                }
-            }
-        }
-        return formData;
-    }
+//    public <T>Map<String, T> formDataProcessor(Map<String, T> formData, String[] keys, T defaultValue) {
+//        for (String key : keys) {
+//            if (!formData.containsKey(key)) {
+//                if (formData.get(key) instanceof String) {
+//                    formData.put(key, (T) "");
+//                } else if (formData.get(key) instanceof Integer) {
+//                    formData.put(key, (T) Integer.valueOf(0));
+//                }
+//            }
+//        }
+//        return formData;
+//    }
 }

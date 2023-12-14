@@ -1,6 +1,7 @@
 package com.linkmart.services;
 
 import com.google.gson.Gson;
+import com.linkmart.dtos.OneRequestDto;
 import com.linkmart.dtos.AnotherRequestDto;
 import com.linkmart.dtos.RequestDto;
 import com.linkmart.models.ImageModel;
@@ -19,13 +20,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
-
 import javax.naming.AuthenticationException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class RequestService {
@@ -43,6 +40,7 @@ public class RequestService {
     @Autowired
     S3Service s3Service;
 
+    // route:/api/request
     @Transactional
     public RequestModel postRequest(String userId, Integer locationId, Integer categoryId,
                                     String itemDetail, String item, String url,
@@ -77,7 +75,6 @@ public class RequestService {
         }
         newRequest.setImages(images);
 
-
         Gson g = new Gson();
         ItemDetailModel itemDetailModel = g.fromJson(itemDetail, ItemDetailModel.class);
         newRequest.setItemDetail(itemDetailModel);
@@ -90,28 +87,18 @@ public class RequestService {
 
         return newRequest;
     }
-
+    // route: /request
     public List<RequestDto> getAllRequest( ){
         var result = this.requestRepository.getAllRequest();
         return result;
     }
 
+    // route: /api/user/request
     public List<RequestDto> getAllMyRequest(String userId) {
         var result = this.requestRepository.getAllRequestByUserId(userId);
         return result;
     }
 
 
-//    "/api/request?p={page}&category={category}&location={location}"
-    public Page<AnotherRequestDto> getRequestsByCategoryAndLocation(String category, String location, int page) {
-        if (page < 0) {
-            throw new IllegalArgumentException("Page number cannot be less than zero.");
-        }
-        Pageable pageable15 = PageRequest.of(page, 15, Sort.by("createdAt").descending());
-        var requestPage =  requestRepository.findRequestByCategoryAndLocation(category, location,pageable15);
-        if (page > 0 && !requestPage.hasContent()) {
-            throw new IllegalArgumentException("Page number is greater than the total number of pages.");
-        }
-        return requestPage;
-    }
+
 }
