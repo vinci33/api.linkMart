@@ -1,21 +1,15 @@
 package com.linkmart.dtos;
 
 public class UserAddressFullDto {
-
+    private Integer addressId;
     private String address;
-    private Boolean isPrimary;
 
-    public UserAddressFullDto(String address, Boolean isPrimary) {
-        this.address = address;
-        this.isPrimary = isPrimary;
+    public Integer getAddressId() {
+        return addressId;
     }
 
-    @Override
-    public String toString() {
-        return "UserAddressFullDto{" +
-                "address='" + address + '\'' +
-                ", isPrimary=" + isPrimary +
-                '}';
+    public void setAddressId(Integer addressId) {
+        this.addressId = addressId;
     }
 
     public String getAddress() {
@@ -26,11 +20,11 @@ public class UserAddressFullDto {
         this.address = address;
     }
 
-    public Boolean getPrimary() {
-        return isPrimary;
-    }
-
-    public void setPrimary(Boolean primary) {
-        isPrimary = primary;
+    @Override
+    public String toString() {
+        return "UserAddressFullDto{" +
+                "addressId=" + addressId +
+                ", address='" + address + '\'' +
+                '}';
     }
 }

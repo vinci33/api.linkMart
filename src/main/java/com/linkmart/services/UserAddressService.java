@@ -4,6 +4,7 @@ import com.linkmart.dtos.UserAddressDto;
 import com.linkmart.mappers.UserAddressMapper;
 import com.linkmart.models.UserAddress;
 import com.linkmart.repositories.UserAddressRepository;
+import com.linkmart.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,21 @@ public class UserAddressService {
     @Autowired
     private UserAddressRepository userAddressRepository;
 
+
+
+    public void vaildateUserAddressId(Integer addressId) {
+        var userAddressByAddressId = userAddressRepository.findUserAddressById(addressId);
+        if (userAddressByAddressId == null ) {
+            throw new IllegalArgumentException("Invalid AddressId ");
+        }
+    }
+
+    public void vaildateUserId(String userId) {
+        var userAddressByUserId = userAddressRepository.findUserAddressByUserId(userId);
+        if (userAddressByUserId == null ) {
+            throw new IllegalArgumentException("Invalid UserId ");
+        }
+    }
 
     // /addressInArrayFormat
     public List<Map<String, List<String>>>  findUserAddressByUserId(String userId) {
@@ -37,4 +53,18 @@ public class UserAddressService {
     public List<UserAddress>  findUserAddressByUserIdInJson(String userId) {
         return userAddressRepository.findUserAddressByUserId(userId);
     }
-}
+
+    public void putUserAddressByAddressId(Integer addressId, String userId) {
+        var userAdresses = userAddressRepository.findUserAddressByUserId(userId);
+//        for (UserAddress userAddress : userAdresses) {
+//            if (!userAddress.getId().equals(addressId)) {
+//                userAddress.setPrimary(true);
+//            } else {
+//                userAddress.setPrimary(false);
+//            }
+//        }
+
+
+
+    }
+    }
