@@ -14,6 +14,11 @@ public class User {
     @Id
     private String id;//ULID
 
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            mappedBy="users", cascade={CascadeType.ALL})
+    private List<RequestModel> requestModel;
+
     @Column(name="username", unique = true)
     private String username; //unique
 

@@ -5,6 +5,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "category")
@@ -17,6 +18,10 @@ public class CategoryModel {
     @Column(name = "category_name")
     private String categoryName;
 
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            mappedBy="category", cascade={CascadeType.ALL})
+    private List<RequestModel> requestModel;
 
     public int getCategoryId() {
         return categoryId;

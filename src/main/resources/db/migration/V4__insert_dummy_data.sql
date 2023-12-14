@@ -21,7 +21,7 @@ INSERT INTO provider_verification(user_id, status_id, id_document, address_docum
 
 INSERT INTO provider(id,user_id,location_id,provider_verification_id) VALUES ('1', '1', '1', '1');
 
-INSERT INTO logistic_company(company_name, company_url) VALUES   ('DHL', 'https://www.dhl.com'),
+INSERT INTO logistic_company(company_name, company_url) VALUES ('DHL', 'https://www.dhl.com'),
                                                         ('FedEx', 'https://www.fedex.com'),
                                                         ('UPS', 'https://www.ups.com'),
                                                         ('TNT Express', 'https://www.tnt.com'),
@@ -30,10 +30,10 @@ INSERT INTO logistic_company(company_name, company_url) VALUES   ('DHL', 'https:
 INSERT INTO category(category_name) VALUES ('Clothes'),('Figure');
 
 INSERT INTO category_field(category_id, is_option,category_field_name) VALUES ('1',TRUE,'apparel_type'),
-                                                                 ('1',TRUE,'gender'),
-                                                                 ('1',TRUE,'size'),
-                                                                 ('1',TRUE,'color'),
-                                                                 ('1', FALSE, 'brand');
+                                                                               ('1',TRUE,'gender'),
+                                                                                ('1',TRUE,'size'),
+                                                                                 ('1',TRUE,'color'),
+                                                                                  ('1', FALSE, 'brand');
 
 
 
@@ -64,7 +64,7 @@ VALUES
   ('01HHKFYXSVSNSZ8BJ14YSCR16H', '1',1, 1, 'clothes', '{"size": "S", "color": "blue", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.lululemon.com.hk/en-hk/c/sale/specials', 1, '無縫羽絨連帽外套', 1900, FALSE, true, '2023-12-12 20:22:39.631992', '2023-12-12 20:22:39.631992', 'http://dummyimage.com/135x100.png/cc0000/ffffff'),
   ('01HHKFYXSV27CNWMTV5QDDFWCB', '1',1, 1, 'clothes', '{"size": "S", "color": "blue", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.lululemon.com.hk/en-hk/p/metal-vent-tech-short-sleeve-shirt-2.0/prod140003.html?dwvar_prod140003_color=59331', 1, '無縫羽絨連帽外套', 1900, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'http://dummyimage.com/175x100.png/cc0000/ffffff');
 
- INSERT INTO user_address(id, user_id, address, is_primary)VALUES
+ INSERT INTO user_address(id, user_id, address, is_primary) VALUES
  ('1','1','13/f, 11 kennedy Road',true),
  ('2','1','flat a,19/f, 8 Star Street',false),
  ('3','1','Rm B, house A, 17 Bowen Rd',false);

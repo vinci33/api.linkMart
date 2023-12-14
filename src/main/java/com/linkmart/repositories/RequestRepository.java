@@ -1,8 +1,5 @@
 package com.linkmart.repositories;
-import com.linkmart.dtos.AnotherRequestDto;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import com.linkmart.dtos.OneRequestDto;
+import com.linkmart.models.ImageModel;
 import com.linkmart.dtos.RequestDto;
 import com.linkmart.models.RequestModel;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,10 +16,10 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
     List<RequestModel> findRequestByUserId(@Param("userId") String userId);
 
     @Query(value = """
-                    SELECT r.id as requestId,  l.location_name as locationName,\s
-                               r.item, r.primary_image as primaryImage, r.offer_price as offerPrice,\s
-                               r.created_at as createdAt, r.updated_at as updatedAt,
-                               u.username as createdBy
+                    SELECT r.id as requestId,  l.location_name as locationName,
+                        r.item, r.primary_image as primaryImage, r.offer_price as offerPrice,
+                        r.created_at as createdAt, r.updated_at as updatedAt,
+                        u.username as createdBy
                         FROM request r
                         JOIN location l ON r.location_id = l.id
                         JOIN users u ON r.created_by = u.id
@@ -47,4 +44,24 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
             LIMIT 30
             """, nativeQuery = true)
     List<RequestDto> getAllRequestByUserId(@Param("userId") String userId);
+
+    @Query(value = """
+                    SELECT
+                        *
+                        FROM request
+                        WHERE request.id = :requestId
+            """, nativeQuery = true)
+    RequestModel getRequestByRequestId(@Param("requestId") String requestId);
+
+    RequestModel findRequestModelByRequestId(String requestId);
+
+    @Query(value = """
+                    SELECT
+                         image.id as imageId,
+                         image_path as imagePath
+                         FROM image
+                         JOIN request ON image.request_id = request.id
+                         WHERE request.id = :requestId
+            """, nativeQuery = true)
+    ImageModel getImageByRequestId(@Param("requestId") String requestId);
 }

@@ -14,19 +14,28 @@ import java.util.List;
 @Entity
 @Table(name = "request")
 public class RequestModel{
-
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.UUID)
     private String requestId;
+
     @Column(name = "created_by")
     private String createdBy;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="created_by", updatable = false, insertable = false)
+    private User users;
+
     @Column(name = "location_id")
     private int locationId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="location_id", updatable = false, insertable = false)
     private Location location;
+
+    @Column(name = "category_id")
     private int categoryId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="category_id", updatable = false, insertable = false)
+    private CategoryModel category;
+
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "item_detail", columnDefinition = "jsonb")
     private ItemDetailModel itemDetail;
@@ -48,19 +57,11 @@ public class RequestModel{
     @Column(name = "updated_at", insertable = false, updatable = false)
     @UpdateTimestamp
     private String updatedAt;
-
     @OneToMany(
             fetch = FetchType.LAZY,
             mappedBy="requestModel", cascade={CascadeType.ALL})
     private List<ImageModel> images;
 
-    public String getRequestId() {
-        return requestId;
-    }
-
-    public void setRequestId(String requestId) {
-        this.requestId = requestId;
-    }
 
     public void makeRequestCase() {
         ULID ulid = new ULID();
@@ -170,6 +171,8 @@ public class RequestModel{
     public void setImages(List<ImageModel> images) {
         this.images = images;
     }
+
+
 
     @Override
     public String toString() {

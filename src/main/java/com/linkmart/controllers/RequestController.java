@@ -1,12 +1,8 @@
 package com.linkmart.controllers;
 
-import com.linkmart.dtos.OneRequestDto;
-import com.linkmart.dtos.AnotherRequestDto;
 import com.linkmart.dtos.RequestDto;
 //import com.linkmart.filter.LogginFilter;
 //import com.linkmart.filter.UserGuardFilter;
-import com.linkmart.forms.RequestForm;
-import com.linkmart.mappers.RequestMapper;
 import com.linkmart.models.RequestModel;
 import com.linkmart.services.RequestService;
 import com.linkmart.repositories.RequestRepository;
@@ -14,15 +10,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class RequestController {
@@ -71,6 +64,15 @@ public class RequestController {
         try{
             var userId = (String)request.getAttribute("userId");
             return requestService.getAllMyRequest(userId);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    @GetMapping(value = "/request/{requestId}")
+    public RequestModel getOneRequest (@PathVariable(value = "requestId") String requestId) {
+        try{
+            return requestService.getOneRequest(requestId);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

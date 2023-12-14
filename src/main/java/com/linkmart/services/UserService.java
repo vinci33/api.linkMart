@@ -93,18 +93,18 @@ public class UserService {
         return userRepository.saveAndFlush(user);
     }
 
-    public String authenticateUser(String email, String password) {
+    public String authenticateUser(String email, String password) throws Exception {
         var users = userRepository.findUserByUserEmail(email);
         Date expireDate = new Date(new Date().getTime() + 10000*1000000000);
         System.out.println(expireDate);
         logger.info(expireDate.toString());
         if (users.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Wrong email or password");
+            throw new Exception("Wrong email or password");
         }
         var user = users.get(0);
         var result = BCrypt.verifyer().verify(password.getBytes(), user.getPassword().getBytes());
         if (!result.verified) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Wrong email or password");
+            throw new Exception("Wrong email or password");
         }
         return JWT.create()
                 .withIssuer("admin")

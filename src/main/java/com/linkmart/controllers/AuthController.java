@@ -19,11 +19,8 @@ import java.util.Random;
 public class AuthController {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-
-
     @Autowired
     UserService userService;
-
 
     @Autowired
     Environment env;
@@ -34,8 +31,9 @@ public class AuthController {
             var jwt = userService.authenticateUser(loginForm.getEmail(), loginForm.getPassword());
             return new ResponseWithToken ( "Login success", jwt);
         }catch(Exception e){
+            logger.error("test");
             logger.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     e.getMessage(),e);
         }
     }
