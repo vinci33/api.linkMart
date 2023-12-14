@@ -46,7 +46,7 @@ public class AuthController {
             var username = UtilMethod.generateRandomString(10);
 
             var userWthJwt = userService.createUser(loginForm.getEmail(),  loginForm.getPassword());
-            return new ResponseWithToken(true, "Signup success", userWthJwt);
+            return new ResponseWithToken("Signup success", userWthJwt);
         }catch(Exception e) {
             logger.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,

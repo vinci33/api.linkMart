@@ -47,5 +47,4 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
             LIMIT 30
             """, nativeQuery = true)
     List<RequestDto> getAllRequestByUserId(@Param("userId") String userId);
-    //01HHHG4RGFN0JHKWSJMY3X0E9Q
 }

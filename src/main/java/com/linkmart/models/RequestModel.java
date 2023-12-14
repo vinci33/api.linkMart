@@ -17,6 +17,7 @@ public class RequestModel{
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String requestId;
     @Column(name = "created_by")
     private String createdBy;
