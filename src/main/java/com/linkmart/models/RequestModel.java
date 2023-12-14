@@ -2,12 +2,10 @@ package com.linkmart.models;
 
 import de.huxhorn.sulky.ulid.ULID;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Null;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.type.SqlTypes;
-import org.springframework.lang.Nullable;
 
 import java.util.List;
 
@@ -39,6 +37,7 @@ public class RequestModel{
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "item_detail", columnDefinition = "jsonb")
     private ItemDetailModel itemDetail;
+
     @Column(name = "primary_image")
     private String primaryImage;
     @Column(name = "item")
@@ -57,11 +56,19 @@ public class RequestModel{
     @Column(name = "updated_at", insertable = false, updatable = false)
     @UpdateTimestamp
     private String updatedAt;
+
     @OneToMany(
             fetch = FetchType.LAZY,
             mappedBy="requestModel", cascade={CascadeType.ALL})
     private List<ImageModel> images;
 
+    public String getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
+    }
 
     public void makeRequestCase() {
         ULID ulid = new ULID();
@@ -171,7 +178,6 @@ public class RequestModel{
     public void setImages(List<ImageModel> images) {
         this.images = images;
     }
-
 
 
     @Override

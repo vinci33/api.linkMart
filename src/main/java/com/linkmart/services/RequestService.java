@@ -1,6 +1,7 @@
 package com.linkmart.services;
 
 import com.google.gson.Gson;
+import com.linkmart.dtos.AnotherRequestDto;
 import com.linkmart.dtos.RequestDto;
 import com.linkmart.models.ImageModel;
 import com.linkmart.models.ItemDetailModel;
@@ -34,7 +35,6 @@ public class RequestService {
     @Autowired
     S3Service s3Service;
 
-    // route:/api/request
     @Transactional
     public RequestModel postRequest(String userId, Integer locationId, Integer categoryId,
                                     String itemDetail, String item, String url,
@@ -69,6 +69,7 @@ public class RequestService {
         }
         newRequest.setImages(images);
 
+
         Gson g = new Gson();
         ItemDetailModel itemDetailModel = g.fromJson(itemDetail, ItemDetailModel.class);
         newRequest.setItemDetail(itemDetailModel);
@@ -81,20 +82,34 @@ public class RequestService {
 
         return newRequest;
     }
-    // route: /request
     public List<RequestDto> getAllRequest( ){
         var result = this.requestRepository.getAllRequest();
         return result;
     }
 
-    // route: /api/user/request
     public List<RequestDto> getAllMyRequest(String userId) {
         var result = this.requestRepository.getAllRequestByUserId(userId);
         return result;
     }
 
     public RequestModel getOneRequest(String requestId) {
-        var oneRequest = this.requestRepository.findRequestModelByRequestId(requestId);
+        var result = this.requestRepository.findRequestModelByRequestId(requestId);
+        var oneRequest = new RequestModel();
+        oneRequest.setRequestId(result.getRequestId());
+        oneRequest.setCreatedBy(userRepository.findByUserId(result.getCreatedBy()));
+        oneRequest.setLocationId(result.getLocationId());
+        oneRequest.setCategoryId(result.getCategoryId());
+        oneRequest.setItem(result.getItem());
+        oneRequest.setUrl(result.getUrl());
+        oneRequest.setQuantity(result.getQuantity());
+        oneRequest.setRequestRemark(result.getRequestRemark());
+        oneRequest.setOfferPrice(result.getOfferPrice());
+        oneRequest.setImages(result.getImages());
+        oneRequest.setItemDetail(result.getItemDetail());
+        oneRequest.setCreatedAt(result.getCreatedAt());
+        oneRequest.setUpdatedAt(result.getUpdatedAt());
+        oneRequest.setPrimaryImage(result.getPrimaryImage());
+        logger.info("oneRequest.getCreatedBy() = " + oneRequest.getCreatedBy());
         return oneRequest;
     }
 }

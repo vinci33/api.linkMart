@@ -24,6 +24,7 @@ public class ImageModel {
 
     @Column(name = "image_path")
     private String image_path;
+
     @Column(name = "created_at", insertable = false, updatable = false)
     @CreationTimestamp
     private Timestamp createdAt;
