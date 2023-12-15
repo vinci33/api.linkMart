@@ -12,11 +12,12 @@ import java.util.List;
 public interface UserPaymentMethodMapper {
     UserPaymentMethodMapper INSTANCE = Mappers.getMapper(UserPaymentMethodMapper.class);
 
-
+    @Mapping(source = "id", target = "payment_method_id")
     @Mapping(source = "paymentMethod", target = "payment_method")
     @Mapping(source = "cardNo", target = "card_no")
     @Mapping(source = "cardHolderName", target = "card_holder_name")
     @Mapping(source = "expiryDate", target = "expiry_date")
+
     UserPaymentMethodDto toUserPaymentMethodDto(UserPaymentMethod userPaymentMethod);
     List<UserPaymentMethodDto> toUserPaymentMethodDtos(Iterable<UserPaymentMethod> userPaymentMethods);
 }

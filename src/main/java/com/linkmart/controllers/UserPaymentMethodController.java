@@ -58,5 +58,35 @@ public class UserPaymentMethodController {
         }
     }
 
+    @PutMapping("/payment/{paymentMethodId}")
+    public ResponseWithMessage updatePaymentMethodByPaymentMethodId(@PathVariable Integer paymentMethodId,
+                                                                    @RequestBody UserPaymentMethodForm userPaymentMethodForm,
+                                                                    HttpServletRequest request) {
+        if (userPaymentMethodForm == null || userPaymentMethodForm.getPayment_method() == null || userPaymentMethodForm.getPayment_method().isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid request body");
+        }
+        try {
+            var userId = (String)request.getAttribute("userId");
+            userPaymentMethodService.updatePaymentMethodByPaymentMethodId(paymentMethodId, userId, userPaymentMethodForm);
+            return new ResponseWithMessage(true, "User Payment Method had been updated");
+        } catch (IllegalArgumentException e) {
+            logger.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+
+    @DeleteMapping("/payment/{paymentMethodId}")
+    public ResponseWithMessage deleteUserPaymentMethodById(@PathVariable Integer paymentMethodId, HttpServletRequest request) {
+        try {
+            var userId = (String)request.getAttribute("userId");
+            userPaymentMethodService.deleteUserPaymentMethodByPaymentMethodId(paymentMethodId, userId);
+            return new ResponseWithMessage(true, "User Payment Method had been deleted");
+        } catch (IllegalArgumentException e) {
+            logger.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
 
 }

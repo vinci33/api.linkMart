@@ -54,4 +54,27 @@ public class UserPaymentMethodService {
         userPaymentMethod.setExpiryDate(userPaymentMethodForm.getExpiry_date());
         userPaymentMethodRepository.saveAndFlush(userPaymentMethod);
     }
+
+    public void deleteUserPaymentMethodByPaymentMethodId(Integer paymentMethodId, String userId) {
+        validateUserPaymentMethodId(paymentMethodId);
+        validateUserId(userId);
+        userPaymentMethodRepository.deleteUserPaymentMethodByIdAndUserId(paymentMethodId, userId);
+    }
+
+    public void updatePaymentMethodByPaymentMethodId(Integer paymentMethodId, String userId, UserPaymentMethodForm userPaymentMethodForm) {
+        validateUserPaymentMethodId(paymentMethodId);
+        validateUserId(userId);
+        UserPaymentMethod targetUserPaymentMethod = userPaymentMethodRepository.findUserPaymentmethodByIdAndUserId(paymentMethodId, userId);
+        if (targetUserPaymentMethod != null) {
+            targetUserPaymentMethod.setPaymentMethod(userPaymentMethodForm.getPayment_method());
+            targetUserPaymentMethod.setCardNo(userPaymentMethodForm.getCard_no());
+            targetUserPaymentMethod.setCardHolderName(userPaymentMethodForm.getCard_holder_name());
+            targetUserPaymentMethod.setExpiryDate(userPaymentMethodForm.getExpiry_date());
+            userPaymentMethodRepository.saveAndFlush(targetUserPaymentMethod);
+        } else {
+                    throw new IllegalArgumentException("Invalid PaymentMethodId");
+                }
+
+
+    }
 }

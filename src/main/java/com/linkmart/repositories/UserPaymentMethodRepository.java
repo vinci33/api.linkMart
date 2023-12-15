@@ -1,6 +1,7 @@
 package com.linkmart.repositories;
 
 import com.linkmart.models.UserPaymentMethod;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -11,4 +12,8 @@ public interface UserPaymentMethodRepository extends JpaRepository<UserPaymentMe
 
     List<UserPaymentMethod> findUserPaymentMethodByUserId(String userId);
 
+    @Transactional
+    void deleteUserPaymentMethodByIdAndUserId(Integer id, String userId);
+
+    UserPaymentMethod findUserPaymentmethodByIdAndUserId(Integer paymentMethodId, String userId);
 }
