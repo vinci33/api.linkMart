@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -121,8 +122,8 @@ public class UserService {
         return user.getUsername();
     }
 
-    public UserWithProviderIdDto getAllUser() {
+    public List<UserWithProviderIdDto> getAllUser() {
           var userWithProviderId = userRepository.getAllUserWithProviderId();
-        return (UserWithProviderIdDto) userWithProviderId;
+        return (List<UserWithProviderIdDto>) userWithProviderId;
     }
 }

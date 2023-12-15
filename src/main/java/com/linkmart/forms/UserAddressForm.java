@@ -1,16 +1,21 @@
 package com.linkmart.forms;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 
 public class UserAddressForm {
-    @NotNull
+
     private String address;
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public String getAddress() {
         return address;
     }
 
-    public UserAddressForm(String address) {
+    public UserAddressForm(@JsonProperty("address")String address) {
         this.address = address;
     }
 
