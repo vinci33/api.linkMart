@@ -2,6 +2,7 @@ package com.linkmart.repositories;
 
 import com.linkmart.models.Offer;
 import com.linkmart.models.Provider;
+import com.linkmart.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,4 +17,14 @@ public interface ProviderRepository extends JpaRepository<Provider,String> {
                         WHERE provider.user_id = :userId
             """, nativeQuery = true)
     String getIdByUserId(@Param("userId")String userId);
+    Provider findProviderByUserId(String userId);
+
+    Provider findProviderById(String id);
+
+
+
+
+
+
+
 }

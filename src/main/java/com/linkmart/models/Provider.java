@@ -19,6 +19,15 @@ public class Provider {
     @Column(name = "location_id")
     private Integer locationId;
 
+//    @Column(name = "provider_verification_id")
+//    private Integer providerVerificationId;
+
+    @Column(name = "star_of_efficiency")
+    private Float starOfEfficiency;
+
+    @Column(name = "star_of_attitude")
+    private Float starOfAttitude;
+
     @Column(name = "created_at", insertable = false, updatable = false)
     private Timestamp createdAt;
 
@@ -39,20 +48,31 @@ public class Provider {
     @OneToMany(mappedBy="provider" , cascade={CascadeType.REMOVE, CascadeType.MERGE})
     private List<ProviderVerification> providerVerificationList;
 
+    @OneToMany(mappedBy="provider" , cascade={CascadeType.REMOVE, CascadeType.MERGE})
+    private List<Review> reviewList;
+
+
     public Provider() {
         ULID ulid = new ULID();
         this.id = ulid.nextULID();
     }
 
-    @Override
-    public String toString() {
-        return "Provider{" +
-                "id='" + id + '\'' +
-                ", userId='" + userId + '\'' +
-                ", locationId=" + locationId +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
+
+
+    public Float getStarOfEfficiency() {
+        return starOfEfficiency;
+    }
+
+    public void setStarOfEfficiency(Float starOfEfficiency) {
+        this.starOfEfficiency = starOfEfficiency;
+    }
+
+    public Float getStarOfAttitude() {
+        return starOfAttitude;
+    }
+
+    public void setStarOfAttitude(Float starOfAttitude) {
+        this.starOfAttitude = starOfAttitude;
     }
 
     public String getId() {

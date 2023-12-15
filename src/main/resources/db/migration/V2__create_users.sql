@@ -42,27 +42,31 @@ CREATE TABLE status (
     updated_at TIMESTAMP default NOW()
  );
 
+ CREATE TABLE provider(
+     id TEXT PRIMARY KEY,
+     user_id TEXT not null REFERENCES users(id),
+     location_id INTEGER not null REFERENCES location(id),
+--     provider_verification_id INTEGER not null REFERENCES provider_verification(id),
+     star_of_efficiency float,
+     star_of_attitude float,
+     created_at TIMESTAMP default NOW(),
+     updated_at TIMESTAMP default NOW()
+ );
+
  CREATE TABLE provider_verification (
     id SERIAL PRIMARY KEY,
     user_id TEXT not null REFERENCES users(id),
     status_id INTEGER not null REFERENCES status(id),
+    provider_id VARCHAR(255) not null REFERENCES provider(id),
     id_document VARCHAR(255) not null,
     address_document VARCHAR(255) not null,
     created_at TIMESTAMP default NOW(),
     updated_at TIMESTAMP default NOW()
  );
 
- CREATE TABLE provider(
-     id TEXT PRIMARY KEY,
-     user_id TEXT not null REFERENCES users(id),
-     location_id INTEGER not null REFERENCES location(id),
-     provider_verification_id INTEGER not null REFERENCES provider_verification(id),
-     created_at TIMESTAMP default NOW(),
-     updated_at TIMESTAMP default NOW()
- );
 
- ALTER TABLE provider_verification ADD COLUMN provider_id VARCHAR(255);
- ALTER TABLE provider_verification ADD CONSTRAINT fk_provider FOREIGN KEY (provider_id) REFERENCES provider(id);
+-- ALTER TABLE provider_verification ADD COLUMN provider_id VARCHAR(255);
+-- ALTER TABLE provider_verification ADD CONSTRAINT fk_provider FOREIGN KEY (provider_id) REFERENCES provider(id);
 
 
  INSERT INTO users(id,username,user_email,password) VALUES('01HHMV7DKG4Z9JNT1P8DESHW8X','testing2@gmail.com','testing2@gmail.com','$2a$10$dlpXjjRA.JAiDma7jjoXaeGF2FotqNYBNY9R4Y6e2ELaycKOtl5De');

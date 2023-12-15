@@ -77,6 +77,8 @@ CREATE TABLE review (
     id SERIAL PRIMARY KEY,
     orders_id TEXT not null REFERENCES orders(id),
     provider_id TEXT not null REFERENCES provider(id),
+    review_efficiency integer,
+    review_attitude integer,
     review_remark TEXT,
     created_at TIMESTAMP default NOW(),
     updated_at TIMESTAMP default NOW()

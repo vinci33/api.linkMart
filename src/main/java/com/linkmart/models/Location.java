@@ -11,7 +11,7 @@ public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int locationId;
+    private int id;
 
     @OneToMany(
             fetch = FetchType.LAZY,
@@ -33,7 +33,7 @@ public class Location {
     @Override
     public String toString() {
         return "Location{" +
-                "id=" + locationId +
+                "id=" + id +
                 ", locationName='" + locationName + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
@@ -41,11 +41,11 @@ public class Location {
     }
 
     public int getLocationId() {
-        return locationId;
+        return id;
     }
 
     public void setLocationId(int locationId) {
-        this.locationId = locationId;
+        this.id = locationId;
     }
 
     public String getLocationName() {

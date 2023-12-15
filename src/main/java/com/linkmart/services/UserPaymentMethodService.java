@@ -19,6 +19,9 @@ public class UserPaymentMethodService {
     @Autowired
     private UserPaymentMethodRepository userPaymentMethodRepository;
 
+    @Autowired
+    UserService userService;
+
     public UserPaymentMethodService(UserPaymentMethodRepository userPaymentMethodRepository) {
         this.userPaymentMethodRepository = userPaymentMethodRepository;
     }
@@ -31,21 +34,16 @@ public class UserPaymentMethodService {
         }
     }
 
-    public void validateUserId(String userId) {
-        var userPaymentMethodByUserId = userPaymentMethodRepository.findUserPaymentMethodByUserId(userId);
-        if (userPaymentMethodByUserId.isEmpty()) {
-            throw new IllegalArgumentException("Invalid UserId ");
-        }
-    }
+
 
     public List<UserPaymentMethod> findUserPaymentMethodByUserId(String userId) {
-        validateUserId((userId));
+        userService.validateUserId((userId));
         return userPaymentMethodRepository.findUserPaymentMethodByUserId(userId);
 
     }
 
     public void createUserPaymentMethod(String userId, UserPaymentMethodForm userPaymentMethodForm) {
-        validateUserId(userId);
+        userService.validateUserId((userId));
         UserPaymentMethod userPaymentMethod = new UserPaymentMethod();
         userPaymentMethod.setUserId(userId);
         userPaymentMethod.setPaymentMethod(userPaymentMethodForm.getPayment_method());
@@ -57,14 +55,14 @@ public class UserPaymentMethodService {
 
     public void deleteUserPaymentMethodByPaymentMethodId(Integer paymentMethodId, String userId) {
         validateUserPaymentMethodId(paymentMethodId);
-        validateUserId(userId);
+        userService.validateUserId((userId));
         userPaymentMethodRepository.deleteUserPaymentMethodByIdAndUserId(paymentMethodId, userId);
     }
 
     public void updatePaymentMethodByPaymentMethodId(Integer paymentMethodId, String userId, UserPaymentMethodForm userPaymentMethodForm) {
         validateUserPaymentMethodId(paymentMethodId);
-        validateUserId(userId);
-        UserPaymentMethod targetUserPaymentMethod = userPaymentMethodRepository.findUserPaymentmethodByIdAndUserId(paymentMethodId, userId);
+        userService.validateUserId((userId));
+        UserPaymentMethod targetUserPaymentMethod = userPaymentMethodRepository.findUserPaymentMethodByIdAndUserId(paymentMethodId, userId);
         if (targetUserPaymentMethod != null) {
             targetUserPaymentMethod.setPaymentMethod(userPaymentMethodForm.getPayment_method());
             targetUserPaymentMethod.setCardNo(userPaymentMethodForm.getCard_no());

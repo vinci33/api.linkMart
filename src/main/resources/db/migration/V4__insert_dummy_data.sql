@@ -18,6 +18,10 @@ INSERT INTO location(location_name) VALUES   ('🇺🇸 United States'),
                                              ('🇮🇹 Italy '),
                                              ('🇸🇬 Singapore');
 
+--INSERT INTO provider_verification(user_id, status_id,provider_id, id_document, address_document) VALUES ('1', '1', '1','A123456', '123 Fake Street');
+
+INSERT INTO provider(id,user_id,location_id,star_of_efficiency,star_of_attitude ) VALUES ('1', '1', '1', '5','5');
+
 INSERT INTO logistic_company(company_name, company_url) VALUES ('DHL', 'https://www.dhl.com'),
                                                         ('FedEx', 'https://www.fedex.com'),
                                                         ('UPS', 'https://www.ups.com'),
@@ -77,11 +81,11 @@ VALUES
  ('01HHKFYXSV27CNWMTV5QDDFWCB','https://tamashiiweb.com/images/item/item_0000013885_22mSOSGZ_04.jpg',true),
  ('01HHKFYXSV27CNWMTV5QDDFWCB','https://tamashiiweb.com/images/item/item_0000013885_22mSOSGZ_03.jpg',true);
 
-INSERT INTO provider_verification (user_id, status_id, id_document, address_document) VALUES
- ('01HHMV7DKG4Z9JNT1P8DESHW8X', '4', 'A654321', '321 HAHA Street');
+--INSERT INTO provider_verification (user_id, status_id,provider_id, id_document, address_document) VALUES
+-- ('01HHMV7DKG4Z9JNT1P8DESHW8X', '4','1', 'A654321', '321 HAHA Street');
 
-INSERT INTO provider (id, user_id, location_id, provider_verification_id) VALUES
-('01HHMV7DKG4Z9JNT1P8DESHW8R', '01HHMV7DKG4Z9JNT1P8DESHW8X', '1', '1');
+INSERT INTO provider (id, user_id, location_id) VALUES
+('01HHMV7DKG4Z9JNT1P8DESHW8R', '01HHMV7DKG4Z9JNT1P8DESHW8X', '1');
 
 
  INSERT INTO user_payment_method (id, user_id, payment_method, card_no, card_holder_name, expiry_date) VALUES
@@ -90,3 +94,13 @@ INSERT INTO provider (id, user_id, location_id, provider_verification_id) VALUES
  ('3','01HHMV7DKG4Z9JNT1P8DESHW8X','American Express','1234567890123456','testing','12/22'),
  ('4','01HHMV7DKG4Z9JNT1P8DESHW8X','Union Pay','1234567890123456','testing','12/22'),
  ('5','01HHMV7DKG4Z9JNT1P8DESHW8X','Paypal','1234567890123456','testing','12/22');
+
+
+--testing provider
+INSERT INTO users (id, username, user_email, password) VALUES
+ ('01HHQRCV54C81AAERBR58E2DAN', 'kdl@gmail.com', 'kdl@gmail.com', '$2a$10$JScQcGKhFIvXLkPzLdE5/.NXPstdQnmj/csKoMrDuTmoRskfTx3V6');
+--user_id:01HHQRCV54C81AAERBR58E2DAN
+--password: "1234"
+--JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhZG1pbiIsInVzZXJJZCI6IjAxSEhRUkNWNTRDODFBQUVSQlI1OEUyREFOIiwiaWF0IjoxNzAyNjc4MTI5LCJleHAiOjE3MDM5OTQyNjR9.M4Fr-2Esjo3odBf5qGrwKakcaZECuwLKIaWQDFKuYoQ
+ INSERT INTO provider (id, user_id, location_id, star_of_efficiency, star_of_attitude) VALUES
+ ('01HHQVX80K4HAD2YMTHW6970VG', '01HHQRCV54C81AAERBR58E2DAN', '1','5','5');

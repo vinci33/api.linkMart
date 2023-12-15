@@ -5,6 +5,7 @@ import com.linkmart.forms.UserAddressForm;
 import com.linkmart.mappers.UserAddressMapper;
 import com.linkmart.models.UserAddress;
 import com.linkmart.repositories.UserAddressRepository;
+import com.linkmart.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,8 @@ public class UserAddressService {
     @Autowired
     private UserAddressRepository userAddressRepository;
 
+    @Autowired
+    UserService userService;
     public UserAddressService(UserAddressRepository userAddressRepository) {
         this.userAddressRepository = userAddressRepository;
     }
@@ -32,15 +35,10 @@ public class UserAddressService {
         }
     }
 
-    public void validateUserId(String userId) {
-        var userAddressByUserId = userAddressRepository.findUserAddressByUserId(userId);
-        if (userAddressByUserId.isEmpty()) {
-            throw new IllegalArgumentException("Invalid UserId ");
-        }
-    }
+
 
     public void validateUserAddressIsPrimary(String userId){
-        validateUserId(userId);
+        userService.validateUserId(userId);
         var userAddresses = userAddressRepository.findUserAddressByUserId(userId);
         boolean anyPrimary = userAddresses.stream().anyMatch(UserAddress::isPrimary);
         if (!anyPrimary) {
@@ -55,7 +53,7 @@ public class UserAddressService {
 
     // /addressInArrayFormat
     public List<Map<String, List<String>>>  findUserAddressByUserId(String userId) {
-        validateUserId(userId);
+        userService.validateUserId(userId);
         List<UserAddress> userAddresses = userAddressRepository.findUserAddressByUserId(userId);
         List<UserAddressDto> userAddressDtos = UserAddressMapper.INSTANCE.toUserAddressDtos(userAddresses);
         List<String> addresses = userAddressDtos.stream()
@@ -69,13 +67,13 @@ public class UserAddressService {
 
     //    /addressInJsonFormat
     public List<UserAddress>  findUserAddressByUserIdInJson(String userId) {
-        validateUserId(userId);
+        userService.validateUserId(userId);
         return userAddressRepository.findUserAddressByUserId(userId);
     }
 
     public void putUserAddressByAddressId(Integer addressId, String userId) {
         validateUserAddressId(addressId);
-        validateUserId(userId);
+        userService.validateUserId(userId);
         var userAddresses = userAddressRepository.findUserAddressByUserId(userId);
         for (UserAddress userAddress : userAddresses) {
             boolean newIsPrimary = userAddress.getId() == (addressId);
@@ -90,13 +88,13 @@ public class UserAddressService {
 
     public void deleteUserAddressByAddressId(Integer addressId, String userId) {
         validateUserAddressId(addressId);
-        validateUserId(userId);
+        userService.validateUserId(userId);
         userAddressRepository.deleteUserAddressByIdAndUserId(addressId,userId);
         validateUserAddressIsPrimary(userId);
     }
 
     public void createUserAddress(UserAddressForm userAddressForm, String userId) {
-            validateUserId(userId);
+          userService.validateUserId(userId);
           UserAddress userAddress = new UserAddress();
           userAddress.setUserId(userId);
           userAddress.setAddress(userAddressForm.getAddress());
