@@ -7,6 +7,7 @@ import com.linkmart.dtos.RequestDto;
 import com.linkmart.models.ImageModel;
 import com.linkmart.models.ItemDetailModel;
 import com.linkmart.models.RequestModel;
+import com.linkmart.repositories.CategoryRepository;
 import com.linkmart.repositories.LocationRepository;
 import com.linkmart.repositories.RequestRepository;
 import com.linkmart.repositories.UserRepository;
@@ -38,6 +39,9 @@ public class RequestService {
 
     @Autowired
     LocationRepository locationRepository;
+
+    @Autowired
+    CategoryRepository categoryRepository;
 
     @Autowired
     S3Service s3Service;
@@ -107,6 +111,8 @@ public class RequestService {
         oneRequest.setCreatedBy(userRepository.findByUserId(result.getCreatedBy()));
         oneRequest.setLocationId(result.getLocationId());
         oneRequest.setLocationName(location);
+        oneRequest.setCategoryId(result.getCategoryId());
+        oneRequest.setCategoryName(categoryRepository.findCategoryNameByCategoryId(result.getCategoryId()));
         oneRequest.setPrimaryImage(result.getPrimaryImage());
         oneRequest.setItem(result.getItem());
         oneRequest.setItemDetail(result.getItemDetail());

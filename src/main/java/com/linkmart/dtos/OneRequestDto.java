@@ -10,6 +10,8 @@ public class OneRequestDto {
     private String createdBy;
     private Integer locationId;
     private String locationName;
+    private int categoryId;
+    private String categoryName;
     private String primaryImage;
     private String item;
     private ItemDetailModel itemDetail;
@@ -131,5 +133,21 @@ public class OneRequestDto {
 
     public void setItemDetail(ItemDetailModel itemDetail) {
         this.itemDetail = itemDetail;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 }
