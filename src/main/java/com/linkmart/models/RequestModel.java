@@ -23,7 +23,7 @@ public class RequestModel{
     private User users;
 
     @Column(name = "location_id")
-    private int locationId;
+    private Integer locationId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="location_id", updatable = false, insertable = false)
     private Location location;
@@ -83,11 +83,11 @@ public class RequestModel{
         this.createdBy = createdBy;
     }
 
-    public int getLocationId() {
+    public Integer getLocationId() {
         return locationId;
     }
 
-    public void setLocationId(int locationId) {
+    public void setLocationId(Integer locationId) {
         this.locationId = locationId;
     }
 
@@ -179,14 +179,40 @@ public class RequestModel{
         this.images = images;
     }
 
+    public User getUsers() {
+        return users;
+    }
+
+    public void setUsers(User users) {
+        this.users = users;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public CategoryModel getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryModel category) {
+        this.category = category;
+    }
 
     @Override
     public String toString() {
         return "RequestModel{" +
                 "requestId='" + requestId + '\'' +
                 ", createdBy='" + createdBy + '\'' +
+                ", users=" + users +
                 ", locationId=" + locationId +
+                ", location=" + location +
                 ", categoryId=" + categoryId +
+                ", category=" + category +
                 ", itemDetail=" + itemDetail +
                 ", primaryImage='" + primaryImage + '\'' +
                 ", item='" + item + '\'' +
@@ -199,5 +225,4 @@ public class RequestModel{
                 ", images=" + images +
                 '}';
     }
-
 }

@@ -1,22 +1,18 @@
 package com.linkmart.dtos;
 
-import com.linkmart.models.ImageModel;
-import com.linkmart.models.ItemDetailModel;
-import com.linkmart.models.Location;
+import com.linkmart.models.*;
 import com.linkmart.repositories.LocationRepository;
 
 import java.util.List;
 
 public class OneRequestDto {
-    private LocationRepository locationRepository;
     private String requestId;
     private String createdBy;
-    private int locationId;
+    private Integer locationId;
     private String locationName;
-    private String categoryName;
-    private ItemDetailModel itemDetail;
     private String primaryImage;
     private String item;
+    private ItemDetailModel itemDetail;
     private String url;
     private int Quantity;
     private int offerPrice;
@@ -41,36 +37,20 @@ public class OneRequestDto {
         this.createdBy = createdBy;
     }
 
-    public int getLocationId() {
+    public Integer getLocationId() {
         return locationId;
     }
 
-    public void setLocationId(int locationId) {
+    public void setLocationId(Integer locationId) {
         this.locationId = locationId;
     }
 
     public String getLocationName() {
-            return locationName;
+        return locationName;
     }
 
     public void setLocationName(String locationName) {
         this.locationName = locationName;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public ItemDetailModel getItemDetail() {
-        return itemDetail;
-    }
-
-    public void setItemDetail(ItemDetailModel itemDetail) {
-        this.itemDetail = itemDetail;
     }
 
     public String getPrimaryImage() {
@@ -143,5 +123,13 @@ public class OneRequestDto {
 
     public void setImages(List<ImageModel> images) {
         this.images = images;
+    }
+
+    public ItemDetailModel getItemDetail() {
+        return itemDetail;
+    }
+
+    public void setItemDetail(ItemDetailModel itemDetail) {
+        this.itemDetail = itemDetail;
     }
 }

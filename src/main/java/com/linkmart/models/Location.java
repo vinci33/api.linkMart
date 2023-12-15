@@ -79,5 +79,4 @@ public class Location {
     public void setRequestModel(List<RequestModel> requestModel) {
         this.requestModel = requestModel;
     }
-
 }

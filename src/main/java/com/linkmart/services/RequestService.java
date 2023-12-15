@@ -2,6 +2,7 @@ package com.linkmart.services;
 
 import com.google.gson.Gson;
 import com.linkmart.dtos.AnotherRequestDto;
+import com.linkmart.dtos.OneRequestDto;
 import com.linkmart.dtos.RequestDto;
 import com.linkmart.models.ImageModel;
 import com.linkmart.models.ItemDetailModel;
@@ -98,12 +99,26 @@ public class RequestService {
         return result;
     }
 
-    public RequestModel getOneRequest(String requestId) {
-        var result = this.requestRepository.findRequestModelByRequestId(requestId);
-        var oneRequest = new RequestModel();
+    public OneRequestDto getOneRequest(String requestId) {
+        var result = this.requestRepository.getRequestByRequestId(requestId);
+        var oneRequest = new OneRequestDto();
+        var location = this.locationRepository.findByLocationId(result.getLocationId());
         oneRequest.setRequestId(result.getRequestId());
         oneRequest.setCreatedBy(userRepository.findByUserId(result.getCreatedBy()));
-        return result;
+        oneRequest.setLocationId(result.getLocationId());
+        oneRequest.setLocationName(location);
+        oneRequest.setPrimaryImage(result.getPrimaryImage());
+        oneRequest.setItem(result.getItem());
+        oneRequest.setItemDetail(result.getItemDetail());
+        oneRequest.setUrl(result.getUrl());
+        oneRequest.setQuantity(result.getQuantity());
+        oneRequest.setOfferPrice(result.getOfferPrice());
+        oneRequest.setRequestRemark(result.getRequestRemark());
+        oneRequest.setCreatedAt(result.getCreatedAt());
+        oneRequest.setUpdatedAt(result.getUpdatedAt());
+        oneRequest.setImages(result.getImages());
+        oneRequest.setCreatedBy(userRepository.findByUserId(result.getCreatedBy()));
+        return oneRequest;
     }
 
 //    public Page<AnotherRequestDto> getRequestsByCategoryAndLocationV2(String category, String location, int page) {

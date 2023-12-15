@@ -85,9 +85,6 @@ public class UserAddressService {
 
         }
     }
-<<<<<<< HEAD
-}
-=======
 
     public void deleteUserAddressByAddressId(Integer addressId, String userId) {
         validateUserAddressId(addressId);
@@ -107,4 +104,3 @@ public class UserAddressService {
 }
 
 
->>>>>>> 941739c6d9e77dc10ce22e7314ae4288c19b3876

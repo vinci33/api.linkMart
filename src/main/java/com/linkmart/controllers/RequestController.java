@@ -1,11 +1,7 @@
 package com.linkmart.controllers;
 
-import com.linkmart.dtos.AnotherRequestDto;
 import com.linkmart.dtos.OneRequestDto;
 import com.linkmart.dtos.RequestDto;
-import com.linkmart.filter.LogginFilter;
-import com.linkmart.filter.UserGuardFilter;
-import com.linkmart.mappers.RequestMapper;
 import com.linkmart.models.RequestModel;
 import com.linkmart.services.RequestService;
 import com.linkmart.repositories.RequestRepository;
@@ -77,7 +73,7 @@ public class RequestController {
     public OneRequestDto getOneRequest (@PathVariable(value = "requestId") String requestId) {
         try{
             var result = requestService.getOneRequest(requestId);
-            return RequestMapper.INSTANCE.getOneRequest(result);
+            return result;
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
