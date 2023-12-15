@@ -1,7 +1,6 @@
 package com.linkmart.services;
 
 import com.google.gson.Gson;
-import com.linkmart.dtos.AnotherRequestDto;
 import com.linkmart.dtos.OneRequestDto;
 import com.linkmart.dtos.RequestDto;
 import com.linkmart.models.ImageModel;
@@ -97,7 +96,7 @@ public class RequestService {
         }
     }
 
-
+    @Transactional
     public List<RequestDto> getAllRequest( ) throws Exception {
         try {
             var result = this.requestRepository.getAllRequest();
@@ -106,7 +105,7 @@ public class RequestService {
             throw new Exception("Cannot get all request");
         }
     }
-
+    @Transactional
     public List<RequestDto> getAllMyRequest(String userId) {
         try {
             var result = this.requestRepository.getAllRequestByUserId(userId);
@@ -115,7 +114,7 @@ public class RequestService {
             throw new IllegalArgumentException("Cannot get all my request");
         }
     }
-
+    @Transactional
     public OneRequestDto getOneRequest(String requestId) throws Exception {
         try {
             var result = this.requestRepository.getRequestByRequestId(requestId);
@@ -143,11 +142,9 @@ public class RequestService {
             throw new Exception("Cannot get one request");
         }
     }
-
+    @Transactional
     public void deleteRequest(String requestId, String userId) throws Exception {
         try {
-            System.out.println(requestId);
-            System.out.println(userId);
             var request = requestRepository.findCreatedByByRequestId(requestId);
             System.out.println("Deleting request with id: " + request);
             if (!request.equals(userId)) {
