@@ -99,8 +99,6 @@ public class UserAddressService {
           userAddress.setUserId(userId);
           userAddress.setAddress(userAddressForm.getAddress());
           userAddress.setPrimary(true);
-          userAddress.setCreatedAt(Timestamp.from(Instant.now()));
-          userAddress.setUpdatedAt(Timestamp.from(Instant.now()));
           userAddressRepository.saveAndFlush(userAddress);
     }
 }
