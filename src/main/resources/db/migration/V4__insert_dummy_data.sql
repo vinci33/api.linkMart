@@ -20,7 +20,7 @@ INSERT INTO location(location_name) VALUES   ('🇺🇸 United States'),
 
 --INSERT INTO provider_verification(user_id, status_id,provider_id, id_document, address_document) VALUES ('1', '1', '1','A123456', '123 Fake Street');
 
-INSERT INTO provider(id,user_id,location_id,star_of_efficiency,star_of_attitude ) VALUES ('1', '1', '1', '5','5');
+--INSERT INTO provider(id,user_id,location_id,star_of_efficiency,star_of_attitude ) VALUES ('1', '1', '1', '5','5');
 
 INSERT INTO logistic_company(company_name, company_url) VALUES ('DHL', 'https://www.dhl.com'),
                                                         ('FedEx', 'https://www.fedex.com'),
