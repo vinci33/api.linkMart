@@ -3,6 +3,7 @@ package com.linkmart.services;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.linkmart.dtos.UserWithProviderIdDto;
 import com.linkmart.models.User;
 import com.linkmart.repositories.UserRepository;
 import org.slf4j.Logger;
@@ -118,5 +119,10 @@ public class UserService {
         validateUserId(userId);
         var user = userRepository.findUserById(userId);
         return user.getUsername();
+    }
+
+    public UserWithProviderIdDto getAllUser() {
+          var userWithProviderId = userRepository.getAllUserWithProviderId();
+        return (UserWithProviderIdDto) userWithProviderId;
     }
 }

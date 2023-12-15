@@ -103,20 +103,7 @@ public class RequestService {
         var oneRequest = new RequestModel();
         oneRequest.setRequestId(result.getRequestId());
         oneRequest.setCreatedBy(userRepository.findByUserId(result.getCreatedBy()));
-        oneRequest.setLocationId(result.getLocationId());
-        oneRequest.setCategoryId(result.getCategoryId());
-        oneRequest.setItem(result.getItem());
-        oneRequest.setUrl(result.getUrl());
-        oneRequest.setQuantity(result.getQuantity());
-        oneRequest.setRequestRemark(result.getRequestRemark());
-        oneRequest.setOfferPrice(result.getOfferPrice());
-        oneRequest.setImages(result.getImages());
-        oneRequest.setItemDetail(result.getItemDetail());
-        oneRequest.setCreatedAt(result.getCreatedAt());
-        oneRequest.setUpdatedAt(result.getUpdatedAt());
-        oneRequest.setPrimaryImage(result.getPrimaryImage());
-        logger.info("oneRequest.getCreatedBy() = " + oneRequest.getCreatedBy());
-        return oneRequest;
+        return result;
     }
 
 //    public Page<AnotherRequestDto> getRequestsByCategoryAndLocationV2(String category, String location, int page) {

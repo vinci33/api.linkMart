@@ -65,9 +65,11 @@ VALUES
   ('01HHKFYXSV27CNWMTV5QDDFWCB', '1',1, 1, 'clothes', '{"size": "S", "color": "blue", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.lululemon.com.hk/en-hk/p/metal-vent-tech-short-sleeve-shirt-2.0/prod140003.html?dwvar_prod140003_color=59331', 1, '無縫羽絨連帽外套', 1900, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'http://dummyimage.com/175x100.png/cc0000/ffffff');
 
  INSERT INTO user_address(id, user_id, address, is_primary) VALUES
- ('1','1','13/f, 11 kennedy Road',true),
- ('2','1','flat a,19/f, 8 Star Street',false),
- ('3','1','Rm B, house A, 17 Bowen Rd',false);
+ ('1','01HHMV7DKG4Z9JNT1P8DESHW8X','13/f, 11 kennedy Road',false),
+ ('2','01HHMV7DKG4Z9JNT1P8DESHW8X','flat a,19/f, 8 Star Street',true),
+ ('3','01HHMV7DKG4Z9JNT1P8DESHW8X','Rm B, house A, 17 Bowen Rd',false),
+ ('5','01HHMV7DKG4Z9JNT1P8DESHW8X','Rm B ,5/f, Eva Court ,36 Macdonnell Rd',false),
+ ('6','01HHMV7DKG4Z9JNT1P8DESHW8X','Rm C, Manly Mansion, Robinson Rd',false);
 
  INSERT INTO image (request_id, image_path, is_active) VALUES
  ('01HHKFYXSSTKGTSGJ4TPMC096E','http://dummyimage.com/225x100.png/5fa2dd/ffffff',true),

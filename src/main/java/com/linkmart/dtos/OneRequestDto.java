@@ -2,11 +2,13 @@ package com.linkmart.dtos;
 
 import com.linkmart.models.ImageModel;
 import com.linkmart.models.ItemDetailModel;
+import com.linkmart.models.Location;
 import com.linkmart.repositories.LocationRepository;
 
 import java.util.List;
 
 public class OneRequestDto {
+    private LocationRepository locationRepository;
     private String requestId;
     private String createdBy;
     private int locationId;
@@ -48,8 +50,7 @@ public class OneRequestDto {
     }
 
     public String getLocationName() {
-        var result = LocationRepository.findByLocationId(locationId);
-        return result;
+            return locationName;
     }
 
     public void setLocationName(String locationName) {

@@ -56,7 +56,7 @@ public class AuthController {
 
     @GetMapping("/")
     public String hello() {
-        return "Hello World  deploy from github actions CICD2";
+        return "https://api.fight2gether.com/swagger-ui/index.html";
     }
 
 }

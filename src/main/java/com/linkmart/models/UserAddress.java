@@ -19,12 +19,12 @@ public class UserAddress {
     private String address;
 
     @Column(name = "is_primary")
-    private boolean isPrimary;
+    private  boolean isPrimary;
 
     @Column(name = "created_at", insertable = false, updatable = false)
     private Timestamp createdAt;
 
-    @Column(name = "updated_at", insertable = false, updatable = false)
+    @Column(name = "updated_at", insertable = false)
     private Timestamp updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -33,6 +33,34 @@ public class UserAddress {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public boolean isPrimary() {
+        return isPrimary;
+    }
+
+    public void setPrimary(boolean primary) {
+        isPrimary = primary;
     }
 
     @Override
@@ -60,33 +88,9 @@ public class UserAddress {
         return Objects.hash(id, userId, address, isPrimary, createdAt, updatedAt, user);
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
-    public String getUserId() {
-        return userId;
-    }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public boolean isPrimary() {
-        return isPrimary;
-    }
-
-    public void setPrimary(boolean primary) {
-        isPrimary = primary;
-    }
 
     public Timestamp getCreatedAt() {
         return createdAt;
