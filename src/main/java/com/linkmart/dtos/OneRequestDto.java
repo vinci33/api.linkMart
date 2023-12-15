@@ -1,7 +1,6 @@
 package com.linkmart.dtos;
 
 import com.linkmart.models.*;
-import com.linkmart.repositories.LocationRepository;
 
 import java.util.List;
 

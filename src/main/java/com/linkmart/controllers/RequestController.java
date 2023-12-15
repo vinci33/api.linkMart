@@ -2,6 +2,8 @@ package com.linkmart.controllers;
 
 import com.linkmart.dtos.OneRequestDto;
 import com.linkmart.dtos.RequestDto;
+import com.linkmart.dtos.RequestResponseWithMessageDto;
+import com.linkmart.dtos.ResponseWithMessage;
 import com.linkmart.models.RequestModel;
 import com.linkmart.services.RequestService;
 import com.linkmart.repositories.RequestRepository;
@@ -22,9 +24,6 @@ public class RequestController {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     RequestService requestService;
-
-    @Autowired
-    RequestRepository requestRepository;
 
     @Autowired
     HttpServletRequest request;
@@ -63,6 +62,7 @@ public class RequestController {
     public List<RequestDto> getAllMyRequest (HttpServletRequest request) {
         try{
             var userId = (String)request.getAttribute("userId");
+            logger.info(userId);
             return requestService.getAllMyRequest(userId);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
@@ -78,4 +78,16 @@ public class RequestController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
+
+    @DeleteMapping(value = "/api/request/{requestId}")
+    public RequestResponseWithMessageDto delectRequest (@PathVariable(value = "requestId") String requestId) {
+        try{
+            var userId = (String)request.getAttribute("userId");
+            requestService.deleteRequest(requestId, userId);
+            return new RequestResponseWithMessageDto("Delete request success");
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
 }

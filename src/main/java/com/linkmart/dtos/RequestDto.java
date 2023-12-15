@@ -1,14 +1,18 @@
 package com.linkmart.dtos;
 
 
+import com.linkmart.models.ImageModel;
 import com.linkmart.models.RequestModel;
 
-public class RequestDto {
-    private String requestId;
-    private String createdBy;
-    private String locationName;
-    private String categoryName;
-    private String item;
-    private String primaryImage;
-    RequestModel requestModel;
+import java.util.List;
+
+public interface RequestDto {
+    String getRequestId();
+    String getCreatedBy();
+    String getLocationName();
+    String getPrimaryImage();
+    int getOfferPrice();
+    String getItem();
+    String getCreatedAt();
+    String getUpdatedAt();
 }

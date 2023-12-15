@@ -19,13 +19,17 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
     List<RequestModel> findRequestByUserId(@Param("userId") String userId);
 
     @Query(value = """
-                    SELECT r.id as requestId,  l.location_name as locationName,
-                        r.item, r.primary_image as primaryImage, r.offer_price as offerPrice,
-                        r.created_at as createdAt, r.updated_at as updatedAt,
-                        u.username as createdBy
-                        FROM request r
-                        JOIN location l ON r.location_id = l.id
-                        JOIN users u ON r.created_by = u.id
+                    SELECT r.id as requestId,
+                     u.username as createdBy,
+                     l.location_name as locationName,
+                     r.item, 
+                     r.primary_image as primaryImage, 
+                     r.offer_price as offerPrice,
+                     r.created_at as createdAt, 
+                     r.updated_at as updatedAt
+                     FROM request r
+                     JOIN location l ON r.location_id = l.id
+                     JOIN users u ON r.created_by = u.id
             LIMIT 30
             """, nativeQuery = true)
     List<RequestDto> getAllRequest();
@@ -56,15 +60,5 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
             """, nativeQuery = true)
     RequestModel getRequestByRequestId(@Param("requestId") String requestId);
 
-    RequestModel findRequestModelByRequestId(String requestId);
-
-    @Query(value = """
-                    SELECT
-                         image.id as imageId,
-                         image_path as imagePath
-                         FROM image
-                         JOIN request ON image.request_id = request.id
-                         WHERE request.id = :requestId
-            """, nativeQuery = true)
-    ImageModel getImageByRequestId(@Param("requestId") String requestId);
+    void deleteRequestByRequestId(String requestId);
 }
