@@ -56,7 +56,7 @@ INSERT INTO category_field_option(category_field_id, category_field_option_name)
                                                                                  ('4','White'),
                                                                                  ('4','Gray');
 
-INSERT INTO request(id, created_by, location_id, category_id, item, item_detail, url, quantity, request_remark, provider_price, has_offer, is_active, created_at, updated_at, primary_image)
+INSERT INTO request(id, created_by, location_id, category_id, item, item_detail, url, quantity, request_remark, offer_price, has_offer, is_active, created_at, updated_at, primary_image)
 VALUES
   ('01HHKFYXSSTKGTSGJ4TPMC096E','1', 1, 1, 'clothes', '{"size": "S", "color": "blue", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.uniqlo.com.hk/zh_HK/index.html', 1, '男裝 無縫羽絨連帽外套', 900, FALSE, true, '2023-12-12 20:20:17.367665', '2023-12-12 20:20:17.367665', 'http://dummyimage.com/225x100.png/5fa2dd/ffffff'),
   ('01HHKFYXST6C48MQ886K9EARM5','1', 1, 1, 'clothes', '{"size": "S", "color": "blue", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.dior.com/zh_hk/fashion/products', 1, '無縫羽絨連帽外套', 1900, FALSE, true, '2023-12-12 20:21:05.972918', '2023-12-12 20:21:05.972918','http://dummyimage.com/210x100.png/cc0000/ffffff'),

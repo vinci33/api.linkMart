@@ -30,7 +30,7 @@ CREATE TABLE request (
     primary_image TEXT,
     quantity INTEGER not null,
     request_remark TEXT,
-    provider_price INTEGER,
+    offer_price INTEGER,
     has_offer Boolean not null default FALSE,
     is_active Boolean not null default TRUE,
     created_at TIMESTAMP default NOW(),
@@ -56,7 +56,7 @@ CREATE TABLE offer (
     provider_id TEXT not null REFERENCES provider(id),
     offer_status_id INTEGER not null REFERENCES status(id) default 1,
     estimated_process_time INTEGER not null,
-    offer_price INTEGER not null,
+    provider_price INTEGER not null,
     offer_remark TEXT not null,
     created_at TIMESTAMP default NOW(),
     updated_at TIMESTAMP default NOW()
@@ -77,8 +77,6 @@ CREATE TABLE review (
     id SERIAL PRIMARY KEY,
     orders_id TEXT not null REFERENCES orders(id),
     provider_id TEXT not null REFERENCES provider(id),
-    review_efficiency INTEGER not null,
-    review_attitude INTEGER not null,
     review_remark TEXT,
     created_at TIMESTAMP default NOW(),
     updated_at TIMESTAMP default NOW()

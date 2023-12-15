@@ -20,10 +20,12 @@ public class Offer {
 
     @Column(name = "provider_id")
     private String providerId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="provider_id", updatable = false, insertable = false)
+    private Provider provider;
 
     @Column(name = "offer_status_id")
     private int offerStatusId;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="offer_status_id", updatable = false, insertable = false)
     private Status status;
@@ -127,5 +129,21 @@ public class Offer {
 
     public void setRequestModel(RequestModel requestModel) {
         this.requestModel = requestModel;
+    }
+
+    public Provider getProvider() {
+        return provider;
+    }
+
+    public void setProvider(Provider provider) {
+        this.provider = provider;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

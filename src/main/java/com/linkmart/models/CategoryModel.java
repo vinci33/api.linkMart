@@ -35,6 +35,13 @@ public class CategoryModel {
         this.categoryName = categoryName;
     }
 
+    public List<RequestModel> getRequestModel() {
+        return requestModel;
+    }
+
+    public void setRequestModel(List<RequestModel> requestModel) {
+        this.requestModel = requestModel;
+    }
 
     @Override
     public String toString() {

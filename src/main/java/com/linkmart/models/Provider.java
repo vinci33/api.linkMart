@@ -34,6 +34,9 @@ public class Provider {
     private Location location;
 
     @OneToMany(mappedBy="provider" , cascade={CascadeType.REMOVE, CascadeType.MERGE})
+    List<Offer> offerList;
+
+    @OneToMany(mappedBy="provider" , cascade={CascadeType.REMOVE, CascadeType.MERGE})
     private List<ProviderVerification> providerVerificationList;
 
     public Provider() {
@@ -90,5 +93,13 @@ public class Provider {
 
     public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public List<Offer> getOfferList() {
+        return offerList;
+    }
+
+    public void setOfferList(List<Offer> offerList) {
+        this.offerList = offerList;
     }
 }
