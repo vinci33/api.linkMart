@@ -59,6 +59,10 @@ public class RequestModel{
             fetch = FetchType.LAZY,
             mappedBy="requestModel", cascade={CascadeType.ALL})
     private List<ImageModel> images;
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            mappedBy="requestModel", cascade={CascadeType.ALL})
+    private List<Offer> offers;
 
     public String getRequestId() {
         return requestId;
@@ -199,6 +203,14 @@ public class RequestModel{
 
     public void setCategory(CategoryModel category) {
         this.category = category;
+    }
+
+    public List<Offer> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(List<Offer> offers) {
+        this.offers = offers;
     }
 
     @Override

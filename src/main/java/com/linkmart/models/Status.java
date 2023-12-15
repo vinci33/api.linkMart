@@ -28,6 +28,8 @@ public class Status {
     @OneToMany(mappedBy = "status", cascade={CascadeType.REMOVE, CascadeType.MERGE})
     private List<ReportCase> reportCaseList;
 
+    @OneToMany(mappedBy = "status", cascade={CascadeType.REMOVE, CascadeType.MERGE})
+    private List<Offer> offerList;
     //TODO: Add relationship with other tables as one-to-many>provider_verification, offer, report_case
     @Override
     public String toString() {
