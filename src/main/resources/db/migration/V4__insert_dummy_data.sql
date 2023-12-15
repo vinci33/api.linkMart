@@ -77,3 +77,10 @@ VALUES
  ('01HHKFYXSTSBKPZX0HYDZ85KDE','http://dummyimage.com/165x100.png/dddddd/000000',true),
  ('01HHKFYXSVSNSZ8BJ14YSCR16H','http://dummyimage.com/135x100.png/cc0000/ffffff',true),
  ('01HHKFYXSV27CNWMTV5QDDFWCB','http://dummyimage.com/175x100.png/cc0000/ffffff',true);
+
+ INSERT INTO user_payment_method (id, user_id, payment_method, card_no, card_holder_name, expiry_date) VALUES
+ ('1','01HHMV7DKG4Z9JNT1P8DESHW8X','Visa','1234567890123456','testing','12/22'),
+ ('2','01HHMV7DKG4Z9JNT1P8DESHW8X','Master','1234567890123456','testing','12/22'),
+ ('3','01HHMV7DKG4Z9JNT1P8DESHW8X','American Express','1234567890123456','testing','12/22'),
+ ('4','01HHMV7DKG4Z9JNT1P8DESHW8X','Union Pay','1234567890123456','testing','12/22'),
+ ('5','01HHMV7DKG4Z9JNT1P8DESHW8X','Paypal','1234567890123456','testing','12/22');

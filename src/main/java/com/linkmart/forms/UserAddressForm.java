@@ -1,7 +1,7 @@
 package com.linkmart.forms;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.validation.constraints.NotNull;
+
 
 public class UserAddressForm {
 
