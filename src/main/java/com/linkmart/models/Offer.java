@@ -33,8 +33,8 @@ public class Offer {
     @Column(name = "estimated_process_time")
     private int estimatedProcessTime;
 
-    @Column(name = "provider_price")
-    private int providerPrice;
+    @Column(name = "price")
+    private int price;
 
     @Column(name = "offer_remark")
     private String offerRemark;
@@ -46,7 +46,7 @@ public class Offer {
     private String updatedAt;
 
 
-    public void makeRequestCase() {
+    public void makeOfferCase() {
         ULID ulid = new ULID();
         this.offerId = ulid.nextULID();
     }
@@ -91,12 +91,12 @@ public class Offer {
         this.estimatedProcessTime = estimatedProcessTime;
     }
 
-    public int getProviderPrice() {
-        return providerPrice;
+    public int getPrice() {
+        return price;
     }
 
-    public void setProviderPrice(int providerPrice) {
-        this.providerPrice = providerPrice;
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public String getOfferRemark() {
@@ -123,27 +123,6 @@ public class Offer {
         this.updatedAt = updatedAt;
     }
 
-    public RequestModel getRequestModel() {
-        return requestModel;
-    }
 
-    public void setRequestModel(RequestModel requestModel) {
-        this.requestModel = requestModel;
-    }
 
-    public Provider getProvider() {
-        return provider;
-    }
-
-    public void setProvider(Provider provider) {
-        this.provider = provider;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
 }

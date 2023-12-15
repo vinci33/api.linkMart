@@ -54,9 +54,9 @@ CREATE TABLE offer (
     id TEXT PRIMARY KEY,
     request_id TEXT not null REFERENCES request(id),
     provider_id TEXT not null REFERENCES provider(id),
-    offer_status_id INTEGER not null REFERENCES status(id) default 1,
+    offer_status_id INTEGER not null REFERENCES status(id),
     estimated_process_time INTEGER not null,
-    provider_price INTEGER not null,
+    price INTEGER not null,
     offer_remark TEXT not null,
     created_at TIMESTAMP default NOW(),
     updated_at TIMESTAMP default NOW()

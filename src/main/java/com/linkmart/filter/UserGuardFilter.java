@@ -61,7 +61,6 @@ public class UserGuardFilter extends OncePerRequestFilter {
             response.setStatus(401);
             response.setContentType("application/json");
             response.getWriter().write("{\"message\":\"Permission Denied\"}");
-
         }
     }
     @Override

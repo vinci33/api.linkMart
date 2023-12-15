@@ -72,11 +72,11 @@ public class Location {
         this.updatedAt = updatedAt;
     }
 
-    public List<RequestModel> getRequestModel() {
-        return requestModel;
-    }
-
     public void setRequestModel(List<RequestModel> requestModel) {
         this.requestModel = requestModel;
+    }
+
+    public List<RequestModel> getRequestModel() {
+        return requestModel;
     }
 }

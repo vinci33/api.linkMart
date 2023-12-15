@@ -181,38 +181,6 @@ public class RequestModel{
         this.images = images;
     }
 
-    public User getUsers() {
-        return users;
-    }
-
-    public void setUsers(User users) {
-        this.users = users;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    public CategoryModel getCategory() {
-        return category;
-    }
-
-    public void setCategory(CategoryModel category) {
-        this.category = category;
-    }
-
-    public List<Offer> getOffers() {
-        return offers;
-    }
-
-    public void setOffers(List<Offer> offers) {
-        this.offers = offers;
-    }
-
     @Override
     public String toString() {
         return "RequestModel{" +
