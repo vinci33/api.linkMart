@@ -1,5 +1,6 @@
 package com.linkmart.repositories;
 
+import com.linkmart.dtos.UserWithProviderIdDto;
 import com.linkmart.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,4 +23,12 @@ public interface UserRepository extends JpaRepository<User,String> {
     void deleteByUserEmail(String userEmail);
 
     User findUserById(String Id);
+
+    @Query(value = """
+            SELECT username, provider.id AS provider_id
+            FROM users
+            LEFT JOIN provider ON user.id = provider.user_id
+            GROUP BY user.id;
+            """, nativeQuery = true)
+    List<UserWithProviderIdDto> getAllUserWithProviderId();
 }

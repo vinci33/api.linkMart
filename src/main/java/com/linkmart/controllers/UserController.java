@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping(value = "/api")
+//@RequestMapping(value = "/api")
 public class UserController {
 
     @Autowired
@@ -35,12 +35,24 @@ public class UserController {
 
     }
 
-    @GetMapping("/api/user")
+    @GetMapping("/user")
     public ResponseWithMessage getUser() {
       try {
           var userId = (String)request.getAttribute("userId");
             var user = userService.getUserNameById(userId);
             return new ResponseWithMessage(true, "User name: " + user);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "UNAUTHORIZED", e);
+        }
+
+    }
+
+    @GetMapping("/user/userAndProvider")
+    public ResponseWithMessage getAllUser() {
+      try {
+            var userWithProviderId = userService.getAllUser();
+            return new ResponseWithMessage(true, "User name and provider_id " + userWithProviderId);
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "UNAUTHORIZED", e);
