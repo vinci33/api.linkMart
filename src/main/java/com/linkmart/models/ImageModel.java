@@ -14,9 +14,9 @@ public class ImageModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private String imageId;
+    private int imageId;
     @Column(name = "request_id")
-    private String request_id;
+    private String requestId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="request_id", updatable = false, insertable = false)
@@ -33,20 +33,20 @@ public class ImageModel {
     @UpdateTimestamp
     private Timestamp updatedAt;
 
-    public String getImageId() {
+    public int getImageId() {
         return imageId;
     }
 
-    public void setImageId(String imageId) {
+    public void setImageId(int imageId) {
         this.imageId = imageId;
     }
 
-    public String getRequest_id() {
-        return request_id;
+    public String getRequestId() {
+        return requestId;
     }
 
-    public void setRequest_id(String request_id) {
-        this.request_id = request_id;
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
     }
 
     public String getImage_path() {
@@ -77,7 +77,7 @@ public class ImageModel {
     public String toString() {
         return "ImageModel{" +
                 "imageId='" + imageId + '\'' +
-                ", request_id='" + request_id + '\'' +
+                ", request_id='" + requestId + '\'' +
                 ", requestModel=" + requestModel +
                 ", image_path='" + image_path + '\'' +
                 ", createdAt=" + createdAt +

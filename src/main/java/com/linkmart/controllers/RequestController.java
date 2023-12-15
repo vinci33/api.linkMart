@@ -80,8 +80,9 @@ public class RequestController {
     }
 
     @DeleteMapping(value = "/api/request/{requestId}")
-    public RequestResponseWithMessageDto delectRequest (@PathVariable(value = "requestId") String requestId) {
+    public RequestResponseWithMessageDto deleteRequest (HttpServletRequest request, @PathVariable(value = "requestId") String requestId) {
         try{
+            System.out.println(request.getAttribute("userId"));
             var userId = (String)request.getAttribute("userId");
             requestService.deleteRequest(requestId, userId);
             return new RequestResponseWithMessageDto("Delete request success");

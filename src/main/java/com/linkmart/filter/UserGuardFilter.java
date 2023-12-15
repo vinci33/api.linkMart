@@ -44,14 +44,17 @@ public class UserGuardFilter extends OncePerRequestFilter {
             if (token == null) {
                 throw new Exception("Invalid Token");
             }
+
             var decode = JWT.require(Algorithm.HMAC256(Objects.requireNonNull(env.getProperty("jwt.secret"))))
                     .build()
                     .verify(token);
             var userId = decode.getClaim("userId").asString();
+
             if (userId == null) {
                 throw new Exception("No UserId In Token");
             }
             request.setAttribute("userId", userId);
+
             filterChain.doFilter(request, response);
         } catch (Exception e) {
             logger.error(e.getMessage());

@@ -7,10 +7,7 @@ import com.linkmart.dtos.RequestDto;
 import com.linkmart.models.ImageModel;
 import com.linkmart.models.ItemDetailModel;
 import com.linkmart.models.RequestModel;
-import com.linkmart.repositories.CategoryRepository;
-import com.linkmart.repositories.LocationRepository;
-import com.linkmart.repositories.RequestRepository;
-import com.linkmart.repositories.UserRepository;
+import com.linkmart.repositories.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.slf4j.Logger;
@@ -44,6 +41,9 @@ public class RequestService {
     CategoryRepository categoryRepository;
 
     @Autowired
+    ImageRepository imageRepository;
+
+    @Autowired
     S3Service s3Service;
 
     @Transactional
@@ -72,7 +72,7 @@ public class RequestService {
                 String imagePath = s3Service.uploadFile(file);
                 ImageModel image = new ImageModel();
                 image.setImage_path(imagePath);
-                image.setRequest_id(newRequest.getRequestId());
+                image.setRequestId(newRequest.getRequestId());
                 images.add(image);
                 if (firstFile == null) {
                     firstFile = file;
@@ -146,13 +146,16 @@ public class RequestService {
 
     public void deleteRequest(String requestId, String userId) throws Exception {
         try {
-            var request = this.requestRepository.getRequestByRequestId(requestId);
-            logger.info("Deleting request with id: " + request);
-            if (!request.getCreatedBy().equals(userId)) {
+            System.out.println(requestId);
+            System.out.println(userId);
+            var request = requestRepository.findCreatedByByRequestId(requestId);
+            System.out.println("Deleting request with id: " + request);
+            if (!request.equals(userId)) {
                 throw new Exception("You are not the owner of this request");
             }
-            this.requestRepository.deleteRequestByRequestId(requestId);
+            requestRepository.deleteRequestByRequestId(requestId);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             throw new Exception("Cannot delete request");
         }
     }

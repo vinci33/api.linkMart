@@ -5,13 +5,16 @@ import com.linkmart.dtos.RequestDto;
 import com.linkmart.models.RequestModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.awt.print.Pageable;
 import java.util.List;
 
+@Transactional
 public interface RequestRepository extends JpaRepository<RequestModel, Integer> {
     @Query(value = """
             Select * from request where created_by = :userId
@@ -59,6 +62,14 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
                         WHERE request.id = :requestId
             """, nativeQuery = true)
     RequestModel getRequestByRequestId(@Param("requestId") String requestId);
+    @Query(value = """
+                    SELECT
+                        created_by
+                        FROM request
+                        WHERE request.id = :requestId
+            """, nativeQuery = true)
+    String findCreatedByByRequestId(@Param("requestId") String requestId);
 
+    @Modifying
     void deleteRequestByRequestId(String requestId);
 }
