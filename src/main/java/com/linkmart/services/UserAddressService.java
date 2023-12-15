@@ -20,6 +20,10 @@ public class UserAddressService {
     @Autowired
     private UserAddressRepository userAddressRepository;
 
+    public UserAddressService(UserAddressRepository userAddressRepository) {
+        this.userAddressRepository = userAddressRepository;
+    }
+
     public void validateUserAddressId(Integer addressId) {
         var userAddressByAddressId = userAddressRepository.findUserAddressById(addressId);
         System.out.println("userAddressByAddressId"+userAddressByAddressId);

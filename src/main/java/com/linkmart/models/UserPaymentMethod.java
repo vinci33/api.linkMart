@@ -12,7 +12,7 @@ public class UserPaymentMethod {
     private int id;
 
     @Column(name = "user_id")
-    private int userId;
+    private String userId;
 
     @Column(name = "payment_method")
     private String paymentMethod;
@@ -29,7 +29,7 @@ public class UserPaymentMethod {
     @Column(name = "created_at", insertable = false, updatable = false)
     private Timestamp createdAt;
 
-    @Column(name = "updated_at", insertable = false, updatable = false)
+    @Column(name = "updated_at", insertable = false)
     private Timestamp updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -58,11 +58,11 @@ public class UserPaymentMethod {
         this.id = id;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

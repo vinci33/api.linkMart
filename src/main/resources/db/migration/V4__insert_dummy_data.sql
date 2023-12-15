@@ -85,3 +85,11 @@ INSERT INTO provider_verification (user_id, status_id, id_document, address_docu
 
 INSERT INTO provider (id, user_id, location_id, provider_verification_id) VALUES
 ('01HHMV7DKG4Z9JNT1P8DESHW8R', '01HHMV7DKG4Z9JNT1P8DESHW8X', '1', '2');
+
+
+ INSERT INTO user_payment_method (id, user_id, payment_method, card_no, card_holder_name, expiry_date) VALUES
+ ('1','01HHMV7DKG4Z9JNT1P8DESHW8X','Visa','1234567890123456','testing','12/22'),
+ ('2','01HHMV7DKG4Z9JNT1P8DESHW8X','Master','1234567890123456','testing','12/22'),
+ ('3','01HHMV7DKG4Z9JNT1P8DESHW8X','American Express','1234567890123456','testing','12/22'),
+ ('4','01HHMV7DKG4Z9JNT1P8DESHW8X','Union Pay','1234567890123456','testing','12/22'),
+ ('5','01HHMV7DKG4Z9JNT1P8DESHW8X','Paypal','1234567890123456','testing','12/22');
