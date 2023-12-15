@@ -48,6 +48,7 @@ public class OfferService {
             offer.setPrice(price);
             offer.setEstimatedProcessTime(estimatedProcessTime);
             offer.setOfferRemark(offerRemark);
+            requestRepository.updateRequestStatusIdByRequestId(requestId);
             logger.info("offer: " + offer);
             offerRepository.saveAndFlush(offer);
         } catch (Exception e) {

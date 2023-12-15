@@ -33,6 +33,7 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
                      FROM request r
                      JOIN location l ON r.location_id = l.id
                      JOIN users u ON r.created_by = u.id
+                     WHERE r.is_active = true
             LIMIT 30
             """, nativeQuery = true)
     List<RequestDto> getAllRequest();
@@ -72,4 +73,12 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
 
     @Modifying
     void deleteRequestByRequestId(String requestId);
+
+    @Modifying
+    @Query(value = """
+                    UPDATE request
+                    SET has_offer = true
+                    WHERE id = :requestId
+            """, nativeQuery = true)
+    void updateRequestStatusIdByRequestId(@Param("requestId") String requestId);
 }
