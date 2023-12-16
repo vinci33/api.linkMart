@@ -37,9 +37,16 @@ public class Provider {
     @Column(name = "updated_at", insertable = false, updatable = false)
     private Timestamp updatedAt;
 
+    @Column(name = "provider_verification_id")
+    private Integer providerVerificationId;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", updatable = false, insertable = false)
     private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "provider_verification_id", updatable = false, insertable = false)
+    private ProviderVerification providerVerification;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "location_id", updatable = false, insertable = false)
