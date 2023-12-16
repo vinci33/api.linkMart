@@ -1,5 +1,6 @@
 package com.linkmart.controllers;
 
+import com.linkmart.dtos.GetOneOfferDto;
 import com.linkmart.dtos.RequestResponseWithMessageDto;
 import com.linkmart.models.Offer;
 import com.linkmart.services.OfferService;
@@ -7,9 +8,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class OfferController {
@@ -35,6 +36,18 @@ public class OfferController {
             return new RequestResponseWithMessageDto("Offer created successfully");
         } catch (Exception e) {
             throw new Exception("Cannot create offer in controller");
+        }
+    }
+
+    @GetMapping(value = "/api/offer/request/{requestId}")
+    public List<GetOneOfferDto> getOfferByRequestId (
+            @PathVariable(value = "requestId") String requestId) throws Exception {
+        try{
+            var userId = (String)request.getAttribute("userId");
+            logger.info("userId: " + userId);
+            return offerService.getOfferByRequestId(userId, requestId);
+        } catch (Exception e) {
+            throw new Exception("Cannot get offer in controller");
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.linkmart.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import de.huxhorn.sulky.ulid.ULID;
 import jakarta.persistence.*;
 
@@ -7,6 +9,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Table(name = "provider")
 public class Provider {
 
@@ -42,7 +45,8 @@ public class Provider {
     @JoinColumn(name = "location_id", updatable = false, insertable = false)
     private Location location;
 
-    @OneToMany(mappedBy="provider" , cascade={CascadeType.REMOVE, CascadeType.MERGE})
+    @OneToMany(fetch = FetchType.LAZY,
+            mappedBy="provider")
     List<Offer> offerList;
 
     @OneToMany(mappedBy="provider" , cascade={CascadeType.REMOVE, CascadeType.MERGE})
@@ -56,8 +60,6 @@ public class Provider {
         ULID ulid = new ULID();
         this.id = ulid.nextULID();
     }
-
-
 
     public Float getStarOfEfficiency() {
         return starOfEfficiency;
@@ -115,11 +117,4 @@ public class Provider {
         this.updatedAt = updatedAt;
     }
 
-    public List<Offer> getOfferList() {
-        return offerList;
-    }
-
-    public void setOfferList(List<Offer> offerList) {
-        this.offerList = offerList;
-    }
 }

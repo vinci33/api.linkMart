@@ -20,7 +20,8 @@ public class Offer {
 
     @Column(name = "provider_id")
     private String providerId;
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @ManyToOne
     @JoinColumn(name="provider_id", updatable = false, insertable = false)
     private Provider provider;
 
@@ -124,5 +125,11 @@ public class Offer {
     }
 
 
+    public Provider getProvider() {
+        return provider;
+    }
 
+    public void setProvider(Provider provider) {
+        this.provider = provider;
+    }
 }

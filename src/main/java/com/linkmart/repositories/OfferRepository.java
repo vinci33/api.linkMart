@@ -3,6 +3,8 @@ package com.linkmart.repositories;
 import com.linkmart.models.Offer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface OfferRepository extends JpaRepository<Offer, Integer> {
+import java.util.List;
 
+public interface OfferRepository extends JpaRepository<Offer, String> {
+    Offer findByRequestId(String requestId);
 }
