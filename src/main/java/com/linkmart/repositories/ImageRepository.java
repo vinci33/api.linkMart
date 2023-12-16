@@ -12,10 +12,10 @@ import java.util.List;
 
 @Transactional
 public interface ImageRepository extends JpaRepository<ImageModel, Integer> {
+    @Modifying
     @Query(value = """
-           Select * from request where created_by = :userId
+           UPDATE image SET is_active = false
+           WHERE image.id = :imageId
             """, nativeQuery = true)
-    RequestModel findRequestByUserId(@Param("userId") String userId);
-
-    List<ImageModel> findByRequestId(String requestId);
+    void updateImageIsActiveByImageId(@Param("imageId") Integer imageId);
 }

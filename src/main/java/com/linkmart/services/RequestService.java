@@ -44,6 +44,7 @@ public class RequestService {
     @Autowired
     S3Service s3Service;
 
+    //route: POST: /api/request
     @Transactional
     public RequestModel postRequest(String userId, Integer locationId, Integer categoryId,
                                     String itemDetail, String item, String url,
@@ -95,6 +96,7 @@ public class RequestService {
         }
     }
 
+    //route: GET: /request
     @Transactional
     public List<RequestDto> getAllRequest( ) throws Exception {
         try {
@@ -104,6 +106,8 @@ public class RequestService {
             throw new Exception("Cannot get all request");
         }
     }
+
+    //route: GET: /api/request (with is_active = true)
     @Transactional
     public List<RequestDto> getAllMyRequest(String userId) {
         try {
@@ -113,6 +117,8 @@ public class RequestService {
             throw new IllegalArgumentException("Cannot get all my request");
         }
     }
+
+    //route: GET: /request/{requestId}
     @Transactional
     public OneRequestDto getOneRequest(String requestId) throws Exception {
         try {
@@ -141,6 +147,8 @@ public class RequestService {
             throw new Exception("Cannot get one request");
         }
     }
+
+    //route: PUT: /api/request/{requestId}
     @Transactional
     public void deleteRequest(String requestId, String userId) throws Exception {
         try {
@@ -149,10 +157,59 @@ public class RequestService {
             if (!request.equals(userId)) {
                 throw new Exception("You are not the owner of this request");
             }
-            requestRepository.deleteRequestByRequestId(requestId);
+            requestRepository.updateRequestIsActiveByRequestId(requestId);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             throw new Exception("Cannot delete request");
+        }
+    }
+
+    //route: PUT: /api/request/update/{requestId}
+    @Transactional
+    public void updateRequest(String requestId, String userId, String itemDetail, String item, String url,
+                              Integer quantity, String requestRemark, Integer offerPrice,
+                              List<MultipartFile> files)
+            throws Exception {
+        try {
+            var request = requestRepository.findCreatedByByRequestId(requestId);
+            if (!request.equals(userId)) {
+                throw new Exception("You are not the owner of this request");
+            }
+            var result = requestRepository.getRequestByRequestId(requestId);
+            if (itemDetail != null) {
+                Gson g = new Gson();
+                ItemDetailModel itemDetailModel = g.fromJson(itemDetail, ItemDetailModel.class);
+                result.setItemDetail(itemDetailModel);
+            }
+            if (item != null) {
+                result.setItem(item);
+            }
+            if (url != null) {
+                result.setUrl(url);
+            }
+            if (quantity != null) {
+                result.setQuantity(quantity);
+            }
+            if (offerPrice != null) {
+                result.setOfferPrice(offerPrice);
+            }
+            if (requestRemark != null) {
+                result.setRequestRemark(requestRemark);
+            }
+            if (files != null) {
+                List<ImageModel> images = new ArrayList<>();
+                for (MultipartFile file: files) {
+                    String imagePath = s3Service.uploadFile(file);
+                    ImageModel image = new ImageModel();
+                    image.setImage_path(imagePath);
+                    image.setRequestId(result.getRequestId());
+                    images.add(image);
+                }
+                result.setImages(images);
+            }
+            requestRepository.saveAndFlush(result);
+        } catch (Exception e) {
+            throw new Exception("Cannot update request");
         }
     }
 

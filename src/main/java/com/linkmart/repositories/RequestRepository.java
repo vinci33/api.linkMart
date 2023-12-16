@@ -34,6 +34,7 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
                      JOIN location l ON r.location_id = l.id
                      JOIN users u ON r.created_by = u.id
                      WHERE r.is_active = true
+                     ORDER BY created_at DESC
             LIMIT 30
             """, nativeQuery = true)
     List<RequestDto> getAllRequest();
@@ -52,6 +53,8 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
                     JOIN users ON request.created_by = users.id
                     JOIN location ON request.location_id = location.id
                     WHERE request.created_by = :userId
+                    AND request.is_active = true
+                    ORDER BY updated_at DESC
             LIMIT 30
             """, nativeQuery = true)
     List<RequestDto> getAllRequestByUserId(@Param("userId") String userId);
@@ -61,6 +64,7 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
                         *
                         FROM request
                         WHERE request.id = :requestId
+                        ORDER BY updated_at DESC
             """, nativeQuery = true)
     RequestModel getRequestByRequestId(@Param("requestId") String requestId);
     @Query(value = """
@@ -68,16 +72,24 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
                         created_by
                         FROM request
                         WHERE request.id = :requestId
+                        ORDER BY updated_at DESC
             """, nativeQuery = true)
     String findCreatedByByRequestId(@Param("requestId") String requestId);
 
     @Modifying
-    void deleteRequestByRequestId(String requestId);
+    @Query(value = """
+                    UPDATE request
+                    SET is_active = false,
+                    updated_at = NOW()
+                    WHERE id = :requestId
+            """, nativeQuery = true)
+    void updateRequestIsActiveByRequestId(@Param("requestId") String requestId);
 
     @Modifying
     @Query(value = """
                     UPDATE request
-                    SET has_offer = true
+                    SET has_offer = true,
+                    updated_at = NOW()
                     WHERE id = :requestId
             """, nativeQuery = true)
     void updateRequestStatusIdByRequestId(@Param("requestId") String requestId);

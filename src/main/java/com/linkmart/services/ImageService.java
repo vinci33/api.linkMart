@@ -16,9 +16,10 @@ public class ImageService {
     ImageRepository imageRepository;
 
     @Transactional
-    public void deleteRequestImage(Integer imageId) throws Exception {
+    public void updateRequestImage(Integer imageId) throws Exception {
         try {
-            imageRepository.deleteById(imageId);
+            System.out.println("imageId: " + imageId);
+            imageRepository.updateImageIsActiveByImageId(imageId);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

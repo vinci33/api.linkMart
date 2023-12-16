@@ -14,7 +14,7 @@ public class ImageModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int imageId;
+    private Integer imageId;
     @Column(name = "request_id")
     private String requestId;
 
@@ -33,11 +33,11 @@ public class ImageModel {
     @UpdateTimestamp
     private Timestamp updatedAt;
 
-    public int getImageId() {
+    public Integer getImageId() {
         return imageId;
     }
 
-    public void setImageId(int imageId) {
+    public void setImageId(Integer imageId) {
         this.imageId = imageId;
     }
 

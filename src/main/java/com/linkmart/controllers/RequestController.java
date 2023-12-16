@@ -77,7 +77,7 @@ public class RequestController {
         }
     }
 
-    @DeleteMapping(value = "/api/request/{requestId}")
+    @PutMapping(value = "/api/request/{requestId}")
     public RequestResponseWithMessageDto deleteRequest (HttpServletRequest request, @PathVariable(value = "requestId") String requestId) {
         try{
             var userId = (String)request.getAttribute("userId");
@@ -88,5 +88,24 @@ public class RequestController {
         }
     }
 
+    @PutMapping(value = "/api/request/update/{requestId}")
+    public RequestResponseWithMessageDto updateRequest (HttpServletRequest request,
+                                                        @PathVariable(value = "requestId") String requestId,
+                                                        @RequestParam(value = "itemDetail", required = false) String itemDetail,
+                                                        @RequestParam(value = "item", required = false) String item,
+                                                        @RequestParam(value = "url", required = false) String url,
+                                                        @RequestParam(value = "quantity", required = false) Integer quantity,
+                                                        @RequestParam(value = "offerPrice", required = false) Integer offerPrice,
+                                                        @RequestParam(value = "requestRemark", required = false) String requestRemark,
+                                                        @RequestParam(value = "imageFile", required = false) List<MultipartFile> file) {
+        try{
+            var userId = (String)request.getAttribute("userId");
+            requestService.updateRequest(requestId, userId, itemDetail, item, url,
+                    quantity, requestRemark, offerPrice, file);
+            return new RequestResponseWithMessageDto("Update request success");
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
 
 }
