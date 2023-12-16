@@ -89,8 +89,8 @@ public class OfferService {
             String userName = userRepository.findByUserId(provider.getUserId());
             String status = statusRepository.findStatusName(offer.getOfferStatusId());
 
-            List<GetOneOfferDto> getManyOfferDto = new ArrayList<>();            GetOneOfferDto getOneOfferDto = new GetOneOfferDto();
-
+            List<GetOneOfferDto> getManyOfferDto = new ArrayList<>();
+            GetOneOfferDto getOneOfferDto = new GetOneOfferDto();
             getOneOfferDto.setOfferId(offer.getOfferId());
             getOneOfferDto.setRequestId(offer.getRequestId());
             getOneOfferDto.setProviderId(offer.getProviderId());
