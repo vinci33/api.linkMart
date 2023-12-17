@@ -25,17 +25,16 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
                     SELECT r.id as requestId,
                      u.username as createdBy,
                      l.location_name as locationName,
-                     r.item, 
-                     r.primary_image as primaryImage, 
+                     r.item,
+                     r.primary_image as primaryImage,
                      r.offer_price as offerPrice,
-                     r.created_at as createdAt, 
+                     r.created_at as createdAt,
                      r.updated_at as updatedAt
                      FROM request r
                      JOIN location l ON r.location_id = l.id
                      JOIN users u ON r.created_by = u.id
                      WHERE r.is_active = true
-                     ORDER BY request.created_at DESC
-            LIMIT 30
+                     ORDER BY r.created_at DESC
             """, nativeQuery = true)
     List<RequestDto> getAllRequest();
 

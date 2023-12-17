@@ -83,7 +83,7 @@ public class AppConfig {
                         .allowedHeaders("*")
                         .allowedOrigins("http://localhost:5173",
                                 "https://linkmart.yt20chill.me/",
-                                "https://lm.yt20chill.me/");
+                                "https://lm.yt20chill.me/","https://localhost:8081");
             }
         };
     }

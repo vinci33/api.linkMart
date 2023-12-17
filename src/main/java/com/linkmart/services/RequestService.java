@@ -156,7 +156,7 @@ public class RequestService {
 
     //route: GET: /request
     @Transactional
-    public List<RequestDto> getAllRequest( ) throws Exception {
+    public List<RequestDto> getAllRequest() throws Exception {
         try {
             var result = this.requestRepository.getAllRequest();
             return result;

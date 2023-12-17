@@ -9,10 +9,10 @@ import java.util.List;
 public interface RequestDto {
     String getRequestId();
     String getCreatedBy();
+    String getItem();
     String getLocationName();
     String getPrimaryImage();
     int getOfferPrice();
-    String getItem();
     String getCreatedAt();
     String getUpdatedAt();
 }
