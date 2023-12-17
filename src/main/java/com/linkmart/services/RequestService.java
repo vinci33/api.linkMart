@@ -70,7 +70,7 @@ public class RequestService {
             for (MultipartFile file: files) {
                 String imagePath = s3Service.uploadFile(file);
                 ImageModel image = new ImageModel();
-                image.setImage_path(imagePath);
+                image.setImagePath(imagePath);
                 image.setRequestId(newRequest.getRequestId());
                 images.add(image);
                 if (firstFile == null) {
@@ -121,7 +121,7 @@ public class RequestService {
             List<ImageModel> images = new ArrayList<>();
             for (String urlImage: urlImages) {
                 ImageModel image = new ImageModel();
-                image.setImage_path(urlImage);
+                image.setImagePath(urlImage);
                 image.setRequestId(newRequest.getRequestId());
                 images.add(image);
                 if (firstFile == null) {
@@ -132,7 +132,7 @@ public class RequestService {
             for (MultipartFile file: files) {
                 String imagePath = s3Service.uploadFile(file);
                 ImageModel image = new ImageModel();
-                image.setImage_path(imagePath);
+                image.setImagePath(imagePath);
                 image.setRequestId(newRequest.getRequestId());
                 images.add(image);
             }
@@ -259,7 +259,7 @@ public class RequestService {
                 for (MultipartFile file: files) {
                     String imagePath = s3Service.uploadFile(file);
                     ImageModel image = new ImageModel();
-                    image.setImage_path(imagePath);
+                    image.setImagePath(imagePath);
                     image.setRequestId(result.getRequestId());
                     images.add(image);
                 }

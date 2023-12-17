@@ -23,7 +23,7 @@ public class ImageModel {
     private RequestModel requestModel;
 
     @Column(name = "image_path")
-    private String image_path;
+    private String imagePath;
 
     @Column(name = "created_at", insertable = false, updatable = false)
     @CreationTimestamp
@@ -49,12 +49,12 @@ public class ImageModel {
         this.requestId = requestId;
     }
 
-    public String getImage_path() {
-        return image_path;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setImage_path(String image_path) {
-        this.image_path = image_path;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public Timestamp getCreatedAt() {
@@ -79,7 +79,7 @@ public class ImageModel {
                 "imageId='" + imageId + '\'' +
                 ", request_id='" + requestId + '\'' +
                 ", requestModel=" + requestModel +
-                ", image_path='" + image_path + '\'' +
+                ", image_path='" + imagePath + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';

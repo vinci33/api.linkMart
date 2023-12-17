@@ -13,11 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 public interface ProviderRepository extends JpaRepository<Provider,String> {
     @Query(value = """
                     SELECT
-                        id
+                        provider.id
                         FROM provider
                         WHERE provider.user_id = :userId
             """, nativeQuery = true)
     String getIdByUserId(@Param("userId")String userId);
+
     Provider findProviderByUserId(String userId);
     Provider findProviderById(String id);
 }

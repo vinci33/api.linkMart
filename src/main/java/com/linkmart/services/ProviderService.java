@@ -55,9 +55,9 @@ public class ProviderService {
 
     }
 
-    public String getProviderIdByUserId(String userId) {
-        validateProviderUserId(userId);
-        var providerByUserId = providerRepository.findProviderByUserId(userId);
-        return providerByUserId.getId();
+    public String checkIfProvider(String userId) {
+        var providerByUserId = providerRepository.getIdByUserId(userId);
+        logger.info("providerByUserId: " + providerByUserId);
+        return providerByUserId;
     }
 }

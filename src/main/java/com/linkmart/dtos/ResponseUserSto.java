@@ -1,4 +1,4 @@
 package com.linkmart.dtos;
 
-public record ResponseUserSto (String userId, String providerId){
+public record ResponseUserSto (Object username, String providerId){
 }

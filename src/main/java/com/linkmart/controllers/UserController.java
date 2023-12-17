@@ -47,12 +47,12 @@ public class UserController {
     public ResponseUserSto getUser() {
       try {
           var userId = (String)request.getAttribute("userId");
+          logger.info("userId: " + userId);
             var user = userService.getUserNameById(userId);
-            var providerId = providerService.getProviderIdByUserId(userId);
-            if (providerId == null) {
-                providerId = "null";
-            }
-            return new ResponseUserSto("username: " + user, "providerId" + providerId );
+            logger.info("user: " + user);
+            var providerId = providerService.checkIfProvider(userId);
+            logger.info("providerId: " + providerId);
+            return new ResponseUserSto(user, providerId );
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "UNAUTHORIZED", e);

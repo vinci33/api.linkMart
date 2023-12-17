@@ -116,7 +116,7 @@ public class UserService {
                 .sign(Algorithm.HMAC256(Objects.requireNonNull(env.getProperty("jwt.secret"))));
     }
 
-    public Object getUserNameById(String userId) {
+    public String getUserNameById(String userId) {
         validateUserId(userId);
         var user = userRepository.findUserById(userId);
         return user.getUsername();
