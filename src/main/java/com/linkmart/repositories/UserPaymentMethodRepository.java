@@ -12,6 +12,7 @@ public interface UserPaymentMethodRepository extends JpaRepository<UserPaymentMe
 
     List<UserPaymentMethod> findUserPaymentMethodByUserId(String userId);
 
+    List<UserPaymentMethod> findUserPaymentMethodByUserIdOrderByCreatedAtDesc(String userId);
     @Transactional
     void deleteUserPaymentMethodByIdAndUserId(Integer id, String userId);
 

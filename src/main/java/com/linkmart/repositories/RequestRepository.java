@@ -93,6 +93,8 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
             """, nativeQuery = true)
     void updateRequestStatusIdByRequestId(@Param("requestId") String requestId);
 
+    RequestModel findRequestModelByRequestId(String requestId);
+
     @Modifying
     @Query(value = """
             SELECT

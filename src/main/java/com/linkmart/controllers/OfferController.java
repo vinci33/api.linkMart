@@ -1,15 +1,17 @@
 package com.linkmart.controllers;
 
+import com.linkmart.dtos.AcceptOfferForm;
 import com.linkmart.dtos.GetOneOfferDto;
 import com.linkmart.dtos.OfferDto;
 import com.linkmart.dtos.RequestResponseWithMessageDto;
-import com.linkmart.models.Offer;
 import com.linkmart.services.OfferService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -78,4 +80,18 @@ public class OfferController {
             throw new Exception("Cannot update offer in controller");
         }
     }
+
+    @PostMapping(value = "/api/offer/accept")
+    public RequestResponseWithMessageDto acceptOffer (
+            @RequestBody AcceptOfferForm acceptOfferForm) {
+        try{
+            var userId = (String)request.getAttribute("userId");
+            offerService.acceptOffer(userId, acceptOfferForm);
+            return new RequestResponseWithMessageDto("Offer accepted successfully");
+        }catch (IllegalArgumentException e) {
+            logger.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
 }

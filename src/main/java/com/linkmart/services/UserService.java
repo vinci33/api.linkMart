@@ -3,8 +3,13 @@ package com.linkmart.services;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.linkmart.dtos.UserDetailDto;
 import com.linkmart.dtos.UserWithProviderIdDto;
+import com.linkmart.mappers.UserAddressMapper;
+import com.linkmart.mappers.UserPaymentMethodMapper;
 import com.linkmart.models.User;
+import com.linkmart.repositories.UserAddressRepository;
+import com.linkmart.repositories.UserPaymentMethodRepository;
 import com.linkmart.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,9 +32,17 @@ public class UserService {
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
 
-
+    @Autowired
+    UserAddressRepository userAddressRepository;
     @Autowired
      UserRepository userRepository;
+    @Autowired
+    UserPaymentMethodRepository userPaymentMethodRepository;
+    @Autowired
+    UserAddressMapper userAddressMapper;
+
+    @Autowired
+    UserPaymentMethodMapper userPaymentMethodMapper;
 
     @Autowired
     Environment env;
@@ -122,8 +135,26 @@ public class UserService {
         return user.getUsername();
     }
 
+    public UserDetailDto getUserDetailById(String userId){
+        validateUserId(userId);
+        var user = userRepository.findUserById(userId);
+        var userAddresses = userAddressRepository.findUserAddressByUserId(userId);
+        var userPaymentMethods = userPaymentMethodRepository.findUserPaymentMethodByUserId(userId);
+        var userDetailDto = new UserDetailDto();
+        userDetailDto.setUsername(user.getUsername());
+        userDetailDto.setUserEmail(user.getUserEmail());
+        userDetailDto.setUserAddress(userAddressMapper.toUserAddressDtos(userAddresses));
+        userDetailDto.setUserPaymentMethod(userPaymentMethodMapper.toUserPaymentMethodDtos(userPaymentMethods));
+        return userDetailDto;
+    }
+
     public List<UserWithProviderIdDto> getAllUser() {
           var userWithProviderId = userRepository.getAllUserWithProviderId();
         return (List<UserWithProviderIdDto>) userWithProviderId;
+    }
+
+    public String getUserEmailById(String userId) {
+        validateUserId(userId);
+        return userRepository.findUserEmailById(userId);
     }
 }

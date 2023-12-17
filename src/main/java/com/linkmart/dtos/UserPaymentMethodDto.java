@@ -54,4 +54,15 @@ public class UserPaymentMethodDto {
     public void setExpiry_date(String expiry_date) {
         this.expiry_date = expiry_date;
     }
+
+    @Override
+    public String toString() {
+        return "UserPaymentMethodDto{" +
+                "payment_method_id=" + payment_method_id +
+                ", payment_method='" + payment_method + '\'' +
+                ", card_no='" + card_no + '\'' +
+                ", card_holder_name='" + card_holder_name + '\'' +
+                ", expiry_date='" + expiry_date + '\'' +
+                '}';
+    }
 }

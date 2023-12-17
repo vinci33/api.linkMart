@@ -22,8 +22,11 @@ public class Provider {
     @Column(name = "location_id")
     private Integer locationId;
 
-//    @Column(name = "provider_verification_id")
-//    private Integer providerVerificationId;
+    @Column(name = "provider_verification_id")
+    private Integer providerVerificationId;
+
+    @Column(name = "number_of_reviews")
+    private Integer numberOfReviews;
 
     @Column(name = "star_of_efficiency")
     private Float starOfEfficiency;
@@ -37,8 +40,7 @@ public class Provider {
     @Column(name = "updated_at", insertable = false, updatable = false)
     private Timestamp updatedAt;
 
-    @Column(name = "provider_verification_id")
-    private Integer providerVerificationId;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", updatable = false, insertable = false)
@@ -66,6 +68,14 @@ public class Provider {
     public Provider() {
         ULID ulid = new ULID();
         this.id = ulid.nextULID();
+    }
+
+    public Integer getNumberOfReviews() {
+        return numberOfReviews;
+    }
+
+    public void setNumberOfReviews(Integer numberOfReviews) {
+        this.numberOfReviews = numberOfReviews;
     }
 
     public Float getStarOfEfficiency() {

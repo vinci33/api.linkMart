@@ -1,9 +1,11 @@
 package com.linkmart.services;
 
+import com.linkmart.dtos.*;
 import com.linkmart.dtos.GetOneOfferDto;
 import com.linkmart.dtos.OfferDto;
 import com.linkmart.models.Offer;
 import com.linkmart.models.Provider;
+import com.linkmart.models.UserPaymentMethod;
 import com.linkmart.repositories.*;
 import com.linkmart.utils.UtilMethod;
 import org.slf4j.Logger;
@@ -38,6 +40,17 @@ public class OfferService {
     @Autowired
     StatusRepository statusRepository;
 
+    @Autowired
+    UserService userService;
+    @Autowired
+    UserAddressService userAddressService;
+
+    @Autowired
+    ProviderService providerService;
+
+    @Autowired
+    UserPaymentMethodRepository userPaymentMethodRepository;
+
     //POST route: /api/offer
     @Transactional
     public void postOffer(String userId, String requestId,
@@ -47,7 +60,7 @@ public class OfferService {
         try {
             var providerId = providerRepository.getIdByUserId(userId);
             logger.info("providerId: " + providerId);
-            // check if provider exists
+//             check if provider exists
             if (providerId == null) {
                 throw new Exception("Provider not found");
             }
@@ -166,6 +179,60 @@ public class OfferService {
             offerRepository.save(thisOffer);
         } catch (Exception e) {
             throw new Exception("Cannot update offer in database");
+        }
+    }
+
+    public void validateOfferId(String offerId) {
+        var validOfferId = offerRepository.findOfferByOfferId(offerId);
+        if (validOfferId == null ) {
+            throw new IllegalArgumentException("Invalid offerId ");
+        }
+    }
+
+    public PaymentDetailDto acceptOffer(String userId, AcceptOfferForm acceptOfferForm) {
+        try {
+            validateOfferId(acceptOfferForm.getOfferId());
+            userService.validateUserId(userId);
+            userAddressService.validateUserAddressId(acceptOfferForm.getUserAddressId());
+            var offer = offerRepository.findOfferByOfferId(acceptOfferForm.getOfferId());
+            var request = requestRepository.findRequestModelByRequestId(offer.getRequestId());
+//            var user = userRepository.findUserById(userId);
+//            List<UserPaymentMethod> userPaymentMethodList = userPaymentMethodRepository.findUserPaymentMethodByUserIdOrderByCreatedAtDesc(userId);
+//            if (userPaymentMethodList.isEmpty()) throw new Exception("User has no payment method");
+//            var userPaymentMethod = userPaymentMethodList.get(0);
+            UserDetailDto userDetail = userService.getUserDetailById(userId);
+            var username = userDetail.getUsername();
+            var userEmail = userDetail.getUserEmail();
+            var userPaymentMethod = userDetail.getUserPaymentMethod().get(0);
+            var userAddress = userDetail.getUserAddress().get(0);
+            var price = offer.getPrice();
+            var providerId  =  offer.getProviderId();
+            ProviderDetailDto providerDetail = providerService.getProviderDetail(providerId);
+            var providerName = providerDetail.getProviderName();
+            var providerLocation = providerDetail.getLocationName();
+            var item = request.getItem();
+            var quantity = request.getQuantity();
+            var primaryImage = request.getPrimaryImage();
+            PaymentDetailDto paymentDetailDto = new PaymentDetailDto();
+            paymentDetailDto.setOfferId(offer.getOfferId());
+            paymentDetailDto.setUserUsername(username);
+            paymentDetailDto.setUserEmail(userEmail);
+            paymentDetailDto.setUserAddress(userAddress);
+            paymentDetailDto.setUserPaymentMethod(userPaymentMethod);
+            paymentDetailDto.setProviderUsername(providerName);
+            paymentDetailDto.setLocation(providerLocation);
+            paymentDetailDto.setItem(item);
+            paymentDetailDto.setQuantity(quantity);
+            paymentDetailDto.setPrimary_image(primaryImage);
+            paymentDetailDto.setPrice(price);
+            return paymentDetailDto;
+
+
+
+
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }

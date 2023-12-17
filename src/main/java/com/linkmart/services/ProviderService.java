@@ -1,5 +1,6 @@
 package com.linkmart.services;
 
+import com.linkmart.dtos.ProviderDetailDto;
 import com.linkmart.models.Provider;
 import com.linkmart.repositories.LocationRepository;
 import com.linkmart.repositories.ProviderRepository;
@@ -18,6 +19,7 @@ public class ProviderService {
 
     @Autowired
     ProviderRepository providerRepository;
+
 
 
     @Autowired
@@ -59,5 +61,19 @@ public class ProviderService {
         var providerByUserId = providerRepository.getIdByUserId(userId);
         logger.info("providerByUserId: " + providerByUserId);
         return providerByUserId;
+    }
+
+    public ProviderDetailDto getProviderDetail(String providerId) {
+        validateProviderId(providerId);
+        var provider = providerRepository.findProviderById(providerId);
+        logger.info("provider: " + provider);
+        ProviderDetailDto providerDetailDto = new ProviderDetailDto();
+        providerDetailDto.setProviderName(userService.getUserNameById(provider.getUserId()));
+        providerDetailDto.setLocationName(locationService.getLocationNameByLocationId(provider.getLocationId()));
+        providerDetailDto.setProviderEmail(userService.getUserEmailById(provider.getUserId()));
+        providerDetailDto.setNumberOfReviews(provider.getNumberOfReviews());
+        providerDetailDto.setStarOfEfficiency(provider.getStarOfEfficiency());
+        providerDetailDto.setStarOfAttitude(provider.getStarOfAttitude());
+        return  providerDetailDto;
     }
 }

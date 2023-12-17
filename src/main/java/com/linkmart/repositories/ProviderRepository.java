@@ -2,6 +2,7 @@ package com.linkmart.repositories;
 
 import com.linkmart.models.Offer;
 import com.linkmart.models.Provider;
+import com.linkmart.models.Provider;
 import com.linkmart.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

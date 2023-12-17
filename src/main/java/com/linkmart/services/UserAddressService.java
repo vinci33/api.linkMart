@@ -51,7 +51,7 @@ public class UserAddressService {
         }
     }
 
-    // /addressInArrayFormat
+//     /addressInArrayFormat
     public List<Map<String, List<String>>>  findUserAddressByUserId(String userId) {
         userService.validateUserId(userId);
         List<UserAddress> userAddresses = userAddressRepository.findUserAddressByUserId(userId);

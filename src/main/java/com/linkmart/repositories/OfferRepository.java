@@ -47,4 +47,7 @@ public interface OfferRepository extends JpaRepository<Offer, String> {
             WHERE offer.id = :offerId
             """, nativeQuery = true)
     Offer findOfferById(@Param("offerId") String offerId);
+
+
+    Offer findOfferByOfferId(String offerId);
 }

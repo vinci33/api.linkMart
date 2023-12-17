@@ -65,10 +65,10 @@ CREATE TABLE offer (
 CREATE TABLE orders (
     id TEXT PRIMARY KEY,
     offer_id TEXT not null REFERENCES offer(id),
+    user_address_id INTEGER not null REFERENCES user_address(id),
     order_status_id INTEGER not null REFERENCES order_status(id),
     logistic_company_id INTEGER not null REFERENCES logistic_company(id),
     shipping_order_no INTEGER not null,
-    user_address_id INTEGER not null REFERENCES user_address(id),
     created_at TIMESTAMP default NOW(),
     updated_at TIMESTAMP default NOW()
 );

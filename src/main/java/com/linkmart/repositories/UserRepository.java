@@ -31,4 +31,8 @@ public interface UserRepository extends JpaRepository<User,String> {
             GROUP BY users.id, provider.id
             """, nativeQuery = true)
     List<UserWithProviderIdDto> getAllUserWithProviderId();
+
+
+    @Query("SELECT u.username FROM User u where u.id =:userId")
+    String findUserEmailById(@Param("userId") String userId);
 }

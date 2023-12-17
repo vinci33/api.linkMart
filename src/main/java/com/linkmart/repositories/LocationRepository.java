@@ -13,5 +13,8 @@ public interface LocationRepository extends JpaRepository<Location,Integer> {
              """, nativeQuery = true)
     String findByLocationId(Integer location_id);
 
-    List<Location> findLocationById(Integer LocationId);
+    String findLocationById(Integer LocationId);
+
+    @Query("SELECT l.locationName FROM Location l WHERE l.id = :locationId")
+    String findLocationNameById(@Param("locationId") Integer locationId);
 }

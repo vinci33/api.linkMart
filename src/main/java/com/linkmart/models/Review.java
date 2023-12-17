@@ -104,13 +104,7 @@ public class Review {
 
 
 
-    public Provider getProvider() {
-        return provider;
-    }
 
-    public void setProvider(Provider provider) {
-        this.provider = provider;
-    }
 
     public Timestamp getCreatedAt() {
         return createdAt;
@@ -128,16 +122,5 @@ public class Review {
         this.updatedAt = updatedAt;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Review review = (Review) o;
-        return reviewId == review.reviewId && Objects.equals(orderID, review.orderID) && Objects.equals(providerId, review.providerId) && Objects.equals(reviewEfficiency, review.reviewEfficiency) && Objects.equals(reviewAttitude, review.reviewAttitude) && Objects.equals(reviewRemark, review.reviewRemark) && Objects.equals(orders, review.orders) && Objects.equals(provider, review.provider) && Objects.equals(createdAt, review.createdAt) && Objects.equals(updatedAt, review.updatedAt);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(reviewId, orderID, providerId, reviewEfficiency, reviewAttitude, reviewRemark, orders, provider, createdAt, updatedAt);
-    }
 }
