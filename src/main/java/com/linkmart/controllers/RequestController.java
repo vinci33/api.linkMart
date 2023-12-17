@@ -77,7 +77,7 @@ public class RequestController {
         }
     }
 
-    @PutMapping(value = "/api/request/{requestId}")
+    @DeleteMapping(value = "/api/request/{requestId}")
     public RequestResponseWithMessageDto deleteRequest (HttpServletRequest request, @PathVariable(value = "requestId") String requestId) {
         try{
             var userId = (String)request.getAttribute("userId");
@@ -88,7 +88,7 @@ public class RequestController {
         }
     }
 
-    @PutMapping(value = "/api/request/update/{requestId}")
+    @PutMapping(value = "/api/request/{requestId}")
     public RequestResponseWithMessageDto updateRequest (HttpServletRequest request,
                                                         @PathVariable(value = "requestId") String requestId,
                                                         @RequestParam(value = "itemDetail", required = false) String itemDetail,

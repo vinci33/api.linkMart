@@ -1,7 +1,9 @@
 package com.linkmart.controllers;
 
+import com.linkmart.dtos.ResponseUserSto;
 import com.linkmart.dtos.ResponseWithMessage;
 import com.linkmart.dtos.UserWithProviderIdDto;
+import com.linkmart.services.ProviderService;
 import com.linkmart.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
@@ -21,6 +23,9 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    ProviderService providerService;
     @Autowired
     HttpServletRequest request;
 
@@ -39,11 +44,15 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public ResponseWithMessage getUser() {
+    public ResponseUserSto getUser() {
       try {
           var userId = (String)request.getAttribute("userId");
             var user = userService.getUserNameById(userId);
-            return new ResponseWithMessage(true, "User name: " + user);
+            var providerId = providerService.getProviderIdByUserId(userId);
+            if (providerId == null) {
+                providerId = "null";
+            }
+            return new ResponseUserSto("username: " + user, "providerId" + providerId );
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "UNAUTHORIZED", e);

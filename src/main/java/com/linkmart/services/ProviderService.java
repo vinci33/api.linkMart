@@ -20,7 +20,6 @@ public class ProviderService {
     ProviderRepository providerRepository;
 
 
-
     @Autowired
     UserService userService;
 
@@ -54,5 +53,11 @@ public class ProviderService {
             providerRepository.saveAndFlush(provider);
             return providerId;
 
+    }
+
+    public String getProviderIdByUserId(String userId) {
+        validateProviderUserId(userId);
+        var providerByUserId = providerRepository.findProviderByUserId(userId);
+        return providerByUserId.getId();
     }
 }
