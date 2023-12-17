@@ -1,6 +1,7 @@
 package com.linkmart.services;
 
 import com.linkmart.dtos.GetOneOfferDto;
+import com.linkmart.dtos.OfferDto;
 import com.linkmart.models.Offer;
 import com.linkmart.models.Provider;
 import com.linkmart.repositories.*;
@@ -103,6 +104,22 @@ public class OfferService {
             getOneOfferDto.setOfferRemark(offer.getOfferRemark());
             getManyOfferDto.add(getOneOfferDto);
             return getManyOfferDto;
+        } catch (Exception e) {
+            throw new Exception("Cannot get offer in database");
+        }
+    }
+
+    @Transactional
+    public List<OfferDto> getMyOffer(String userId) throws Exception {
+        try {
+            var providerId = providerRepository.getIdByUserId(userId);
+            logger.info("providerId: " + providerId);
+            // check if provider exists
+            if (providerId == null) {
+                throw new Exception("Provider not found");
+            }
+            List<OfferDto> offer = offerRepository.findActiveByRequestId(providerId);
+            return offer;
         } catch (Exception e) {
             throw new Exception("Cannot get offer in database");
         }

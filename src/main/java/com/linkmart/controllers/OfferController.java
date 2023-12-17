@@ -1,6 +1,7 @@
 package com.linkmart.controllers;
 
 import com.linkmart.dtos.GetOneOfferDto;
+import com.linkmart.dtos.OfferDto;
 import com.linkmart.dtos.RequestResponseWithMessageDto;
 import com.linkmart.models.Offer;
 import com.linkmart.services.OfferService;
@@ -46,6 +47,17 @@ public class OfferController {
             var userId = (String)request.getAttribute("userId");
             logger.info("userId: " + userId);
             return offerService.getOfferByRequestId(userId, requestId);
+        } catch (Exception e) {
+            throw new Exception("Cannot get offer in controller");
+        }
+    }
+
+    @GetMapping(value = "/api/offer/myOffer")
+    public List<OfferDto> getMyOffer () throws Exception {
+        try{
+            var userId = (String)request.getAttribute("userId");
+            logger.info("userId: " + userId);
+            return offerService.getMyOffer(userId);
         } catch (Exception e) {
             throw new Exception("Cannot get offer in controller");
         }

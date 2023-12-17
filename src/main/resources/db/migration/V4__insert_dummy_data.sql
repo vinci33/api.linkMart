@@ -104,3 +104,9 @@ INSERT INTO users (id, username, user_email, password) VALUES
 --JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhZG1pbiIsInVzZXJJZCI6IjAxSEhRUkNWNTRDODFBQUVSQlI1OEUyREFOIiwiaWF0IjoxNzAyNjc4MTI5LCJleHAiOjE3MDM5OTQyNjR9.M4Fr-2Esjo3odBf5qGrwKakcaZECuwLKIaWQDFKuYoQ
  INSERT INTO provider (id, user_id, location_id, star_of_efficiency, star_of_attitude) VALUES
  ('01HHQVX80K4HAD2YMTHW6970VG', '01HHQRCV54C81AAERBR58E2DAN', '1','5','5');
+
+INSERT INTO request (id, created_by, location_id, category_id, item, item_detail, url, quantity, request_remark, offer_price, has_offer) VALUES
+('01HHV1H3RCJYR25XJWX37NPCQJ', '01HHP4GVCVN1P5FY8YYX9YXKN8', 3, 2, 'Figure', NULL, 'https://shorturl.at/jryAM', 1, 'Luffy Figure', 3000, true);
+
+INSERT INTO offer (id, request_id, provider_id, offer_status_id, estimated_process_time, price, offer_remark) VALUES
+('01HHV1JK9C6RE53WM98WWZWEYX', '01HHV1H3RCJYR25XJWX37NPCQJ', '01HHMV7DKG4Z9JNT1P8DESHW8R', 1, 20, 4000, 'Dec 17');
