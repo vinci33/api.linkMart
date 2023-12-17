@@ -41,7 +41,7 @@ public class UserAddressController {
             }
         }
 
-        @GetMapping("/addressInJsonFormat")
+        @GetMapping("/address")
         public List<UserAddressFullDto> getUserAddressInJson(HttpServletRequest request) {
             try {
                 var userId = (String)request.getAttribute("userId");

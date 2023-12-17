@@ -96,6 +96,64 @@ public class RequestService {
         }
     }
 
+    @Transactional
+    public RequestModel postRequestClone(String userId, Integer locationId, Integer categoryId,
+                                    String itemDetail, String item, String url,
+                                    Integer quantity, String requestRemark, Integer offerPrice, List<String> urlImages,
+                                    List<MultipartFile> files)
+            throws Exception {
+        try {
+            var newRequest = new RequestModel();
+            newRequest.setCreatedBy(userId);
+            newRequest.setLocationId(locationId);
+            newRequest.setCategoryId(categoryId);
+            newRequest.setItem(item);
+            newRequest.setUrl(url);
+            newRequest.setQuantity(quantity);
+
+            newRequest.setRequestRemark(requestRemark);
+            newRequest.makeRequestCase();
+            if (offerPrice != null) {
+                newRequest.setOfferPrice(offerPrice);
+            }
+
+            String firstFile = null;
+            List<ImageModel> images = new ArrayList<>();
+            for (String urlImage: urlImages) {
+                ImageModel image = new ImageModel();
+                image.setImage_path(urlImage);
+                image.setRequestId(newRequest.getRequestId());
+                images.add(image);
+                if (firstFile == null) {
+                    firstFile = urlImage;
+                    newRequest.setPrimaryImage(urlImage); // Store the first file
+                }
+            }
+            for (MultipartFile file: files) {
+                String imagePath = s3Service.uploadFile(file);
+                ImageModel image = new ImageModel();
+                image.setImage_path(imagePath);
+                image.setRequestId(newRequest.getRequestId());
+                images.add(image);
+            }
+            newRequest.setImages(images);
+
+            Gson g = new Gson();
+            ItemDetailModel itemDetailModel = g.fromJson(itemDetail, ItemDetailModel.class);
+            newRequest.setItemDetail(itemDetailModel);
+
+            var result = this.requestRepository.saveAndFlush(newRequest);
+            newRequest.setImages(result.getImages());
+            newRequest.setCreatedBy(result.getCreatedBy());
+            newRequest.setCreatedAt(result.getCreatedAt());
+            newRequest.setUpdatedAt(result.getUpdatedAt());
+
+            return newRequest;
+        } catch (Exception e) {
+            throw new Exception("Cannot create request");
+        }
+    }
+
     //route: GET: /request
     @Transactional
     public List<RequestDto> getAllRequest( ) throws Exception {

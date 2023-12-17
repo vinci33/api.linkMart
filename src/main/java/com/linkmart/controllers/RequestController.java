@@ -108,4 +108,27 @@ public class RequestController {
         }
     }
 
+    @PostMapping(value = "/api/request/clone", consumes = {"multipart/form-data"})
+    public RequestModel postRequestClone (
+            @RequestParam(value = "locationId") Integer locationId,
+            @RequestParam(value = "categoryId") Integer categoryId,
+            @RequestParam(value = "itemDetail", required = false) String itemDetail,
+            @RequestParam(value = "item") String item,
+            @RequestParam(value = "url", required = false) String url,
+            @RequestParam(value = "quantity") Integer quantity,
+            @RequestParam(value = "offerPrice", required = false) Integer offerPrice,
+            @RequestParam(value = "requestRemark", required = false) String requestRemark,
+            @RequestParam(value = "imageUrl", required = false) List<String> urlImages,
+            @RequestParam(value = "imageFile", required = false) List<MultipartFile> file) {
+        try{
+            var userId = (String)request.getAttribute("userId");
+            RequestModel request = requestService.postRequestClone(userId, locationId, categoryId, itemDetail, item, url,
+                    quantity, requestRemark,offerPrice, urlImages, file);
+            return request;
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+
 }
