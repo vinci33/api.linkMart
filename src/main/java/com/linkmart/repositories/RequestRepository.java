@@ -34,7 +34,7 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
                      JOIN location l ON r.location_id = l.id
                      JOIN users u ON r.created_by = u.id
                      WHERE r.is_active = true
-                     ORDER BY created_at DESC
+                     ORDER BY request.created_at DESC
             LIMIT 30
             """, nativeQuery = true)
     List<RequestDto> getAllRequest();
@@ -54,7 +54,7 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
                     JOIN location ON request.location_id = location.id
                     WHERE request.created_by = :userId
                     AND request.is_active = true
-                    ORDER BY updated_at DESC
+                    ORDER BY request.updated_at DESC
             LIMIT 30
             """, nativeQuery = true)
     List<RequestDto> getAllRequestByUserId(@Param("userId") String userId);
@@ -93,4 +93,25 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
                     WHERE id = :requestId
             """, nativeQuery = true)
     void updateRequestStatusIdByRequestId(@Param("requestId") String requestId);
+
+    @Modifying
+    @Query(value = """
+            SELECT
+                request.id as requestId,
+                users.username as createdBy,
+                request.item,
+                request.primary_image as primaryImage,
+                request.offer_price as offerPrice,
+                request.created_at as createdAt,
+                request.updated_at as updatedAt,
+                request.location_id as locationName
+            FROM request
+            JOIN users ON request.created_by = users.id
+            JOIN location ON request.location_id = location.id
+            WHERE request.created_by = :userId
+                AND request.is_active = false
+            ORDER BY request.updated_at DESC
+            """, nativeQuery = true)
+
+    List<RequestDto> getAllRequestHistoryByUserId(@Param("userId") String userId);
 }

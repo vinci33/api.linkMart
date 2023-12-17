@@ -130,5 +130,14 @@ public class RequestController {
         }
     }
 
-
+    @GetMapping(value = "/api/request/history")
+    public List<RequestDto> getAllMyRequestHistory (HttpServletRequest request) {
+        try{
+            var userId = (String)request.getAttribute("userId");
+            logger.info(userId);
+            return requestService.getAllMyRequestHistory(userId);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
 }

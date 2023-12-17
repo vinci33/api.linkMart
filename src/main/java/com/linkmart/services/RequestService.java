@@ -271,6 +271,17 @@ public class RequestService {
         }
     }
 
+    //route: GET: /api/request/history
+    @Transactional
+    public List<RequestDto> getAllMyRequestHistory(String userId) {
+        try {
+            var result = this.requestRepository.getAllRequestHistoryByUserId(userId);
+            return result;
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Cannot get all my request history");
+        }
+    }
+
 
 //    public Page<AnotherRequestDto> getRequestsByCategoryAndLocationV2(String category, String location, int page) {
 //        this.em.getCriteriaBuilder()
