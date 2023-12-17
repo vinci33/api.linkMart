@@ -4,6 +4,8 @@ import de.huxhorn.sulky.ulid.ULID;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.sql.Timestamp;
+
 @Entity
 @Table(name = "offer")
 public class Offer {
@@ -43,11 +45,11 @@ public class Offer {
 
     @Column(name = "created_at", insertable = false, updatable = false)
     @CreationTimestamp
-    private String createdAt;
+    private Timestamp createdAt;
 
     @Column(name = "updated_at", insertable = false)
     @CreationTimestamp
-    private String updatedAt;
+    private Timestamp updatedAt;
 
 
     public void makeOfferCase() {
@@ -111,22 +113,21 @@ public class Offer {
         this.offerRemark = offerRemark;
     }
 
-    public String getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 
-    public String getUpdatedAt() {
+    public Timestamp getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(String updatedAt) {
+    public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
     }
-
 
     public Provider getProvider() {
         return provider;

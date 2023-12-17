@@ -1,5 +1,6 @@
 package com.linkmart.utils;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
@@ -26,16 +27,10 @@ public class UtilMethod {
     }
 
 
-    public static String Now(LocalTime currentTime) {
-        // Create a LocalTime object representing the current time
-
-        // Format the LocalTime object using a DateTimeFormatter
+    public static String Now() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String timeString = currentTime.format(formatter);
-
-        // Print the time string
-        System.out.println("Current time: " + timeString);
-        return timeString;
+        String updatedTimestamp = LocalDateTime.now().format(formatter);
+        return updatedTimestamp;
     }
 
 //    public <T>Map<String, T> formDataProcessor(Map<String, T> formData, String[] keys, T defaultValue) {

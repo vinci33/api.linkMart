@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -36,7 +38,7 @@ public class OfferService {
     @Autowired
     StatusRepository statusRepository;
 
-
+    //POST route: /api/offer
     @Transactional
     public void postOffer(String userId, String requestId,
                            Integer price, Integer estimatedProcessTime,
@@ -72,6 +74,7 @@ public class OfferService {
         }
     }
 
+    //GET route: /api/offer/request/{requestId}
     @Transactional
     public List<GetOneOfferDto> getOfferByRequestId(String userId, String requestId) throws Exception {
         try {
@@ -113,6 +116,7 @@ public class OfferService {
         }
     }
 
+    //GET route : /api/offer/myOffer
     @Transactional
     public List<OfferDto> getMyOffer(String userId) throws Exception {
         try {
@@ -129,6 +133,7 @@ public class OfferService {
         }
     }
 
+    //PUT route : /api/offer/{offerId}
     public void updateOffer(String userId, String offerId,
                             Integer price, Integer estimatedProcessTime,
                             String offerRemark)
@@ -141,7 +146,7 @@ public class OfferService {
                 throw new Exception("Provider not found");
             }
             var thisOffer = offerRepository.findOfferById(offerId);
-//             check if offer exists and not created by this provider
+            //check if offer exists and not created by this provider
             if (thisOffer == null) {
                 throw new Exception("Offer not found");
             } else if (!thisOffer.getProviderId().equals(providerId)) {
@@ -156,11 +161,9 @@ public class OfferService {
             if (offerRemark != null) {
                 thisOffer.setOfferRemark(offerRemark);
             }
-            var now = UtilMethod.Now(java.time.LocalTime.now());
-//            thisOffer.setUpdatedAt(now);
-//            logger.info("now: " + now);
-            var result  = offerRepository.save(thisOffer);
-//            logger.info("result: " + result.getUpdatedAt());
+            Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+            thisOffer.setUpdatedAt(currentTimestamp);
+            offerRepository.save(thisOffer);
         } catch (Exception e) {
             throw new Exception("Cannot update offer in database");
         }
