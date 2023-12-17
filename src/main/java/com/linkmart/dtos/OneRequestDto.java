@@ -15,7 +15,7 @@ public class OneRequestDto {
     private String item;
     private ItemDetailModel itemDetail;
     private String url;
-    private int Quantity;
+    private String Quantity;
     private int offerPrice;
     private String requestRemark;
     private String createdAt;
@@ -78,11 +78,11 @@ public class OneRequestDto {
         this.url = url;
     }
 
-    public int getQuantity() {
+    public String getQuantity() {
         return Quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(String quantity) {
         Quantity = quantity;
     }
 

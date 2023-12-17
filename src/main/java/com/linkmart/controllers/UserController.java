@@ -57,7 +57,6 @@ public class UserController {
             logger.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "UNAUTHORIZED", e);
         }
-
     }
 
     @GetMapping("/user/userAndProvider")
@@ -71,10 +70,6 @@ public class UserController {
         }
 
     }
-
-
-
-
 }
 
 

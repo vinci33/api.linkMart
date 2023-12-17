@@ -43,7 +43,7 @@ public class RequestModel{
     @Column(name = "url")
     private String url;
     @Column(name = "quantity")
-    private int quantity;
+    private String quantity;
     @Column(name = "offer_price")
     private int offerPrice;
     @Column(name = "request_remark")
@@ -133,11 +133,11 @@ public class RequestModel{
         this.url = url;
     }
 
-    public int getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 

@@ -33,7 +33,7 @@ public class RequestController {
             @RequestParam(value = "itemDetail", required = false) String itemDetail,
             @RequestParam(value = "item") String item,
             @RequestParam(value = "url", required = false) String url,
-            @RequestParam(value = "quantity") Integer quantity,
+            @RequestParam(value = "quantity") String quantity,
             @RequestParam(value = "offerPrice", required = false) Integer offerPrice,
             @RequestParam(value = "requestRemark", required = false) String requestRemark,
             @RequestParam(value = "imageFile") List<MultipartFile> file) {
@@ -94,7 +94,7 @@ public class RequestController {
                                                         @RequestParam(value = "itemDetail", required = false) String itemDetail,
                                                         @RequestParam(value = "item", required = false) String item,
                                                         @RequestParam(value = "url", required = false) String url,
-                                                        @RequestParam(value = "quantity", required = false) Integer quantity,
+                                                        @RequestParam(value = "quantity", required = false) String quantity,
                                                         @RequestParam(value = "offerPrice", required = false) Integer offerPrice,
                                                         @RequestParam(value = "requestRemark", required = false) String requestRemark,
                                                         @RequestParam(value = "imageFile", required = false) List<MultipartFile> file) {
@@ -115,7 +115,7 @@ public class RequestController {
             @RequestParam(value = "itemDetail", required = false) String itemDetail,
             @RequestParam(value = "item") String item,
             @RequestParam(value = "url", required = false) String url,
-            @RequestParam(value = "quantity") Integer quantity,
+            @RequestParam(value = "quantity") String quantity,
             @RequestParam(value = "offerPrice", required = false) Integer offerPrice,
             @RequestParam(value = "requestRemark", required = false) String requestRemark,
             @RequestParam(value = "imageUrl", required = false) List<String> urlImages,

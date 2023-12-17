@@ -48,7 +48,7 @@ public class RequestService {
     @Transactional
     public RequestModel postRequest(String userId, Integer locationId, Integer categoryId,
                                     String itemDetail, String item, String url,
-                                    Integer quantity, String requestRemark, Integer offerPrice,
+                                    String quantity, String requestRemark, Integer offerPrice,
                                     List<MultipartFile> files)
             throws Exception {
         try {
@@ -99,7 +99,7 @@ public class RequestService {
     @Transactional
     public RequestModel postRequestClone(String userId, Integer locationId, Integer categoryId,
                                     String itemDetail, String item, String url,
-                                    Integer quantity, String requestRemark, Integer offerPrice, List<String> urlImages,
+                                    String quantity, String requestRemark, Integer offerPrice, List<String> urlImages,
                                     List<MultipartFile> files)
             throws Exception {
         try {
@@ -225,7 +225,7 @@ public class RequestService {
     //route: PUT: /api/request/update/{requestId}
     @Transactional
     public void updateRequest(String requestId, String userId, String itemDetail, String item, String url,
-                              Integer quantity, String requestRemark, Integer offerPrice,
+                              String quantity, String requestRemark, Integer offerPrice,
                               List<MultipartFile> files)
             throws Exception {
         try {
