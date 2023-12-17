@@ -62,4 +62,20 @@ public class OfferController {
             throw new Exception("Cannot get offer in controller");
         }
     }
+
+    @PutMapping(value = "/api/offer/{offerId}")
+    public RequestResponseWithMessageDto updateOffer (
+            @PathVariable(value = "offerId", required = false) String offerId,
+            @RequestParam(value = "price", required = false) Integer price,
+            @RequestParam(value = "estimatedProcessTime", required = false) Integer estimatedProcessTime,
+            @RequestParam(value = "offerRemark", required = false) String offerRemark) throws Exception {
+        try{
+            var userId = (String)request.getAttribute("userId");
+            logger.info("userId: " + userId);
+            offerService.updateOffer(userId, offerId, price, estimatedProcessTime, offerRemark);
+            return new RequestResponseWithMessageDto("Offer updated successfully");
+        } catch (Exception e) {
+            throw new Exception("Cannot update offer in controller");
+        }
+    }
 }

@@ -3,6 +3,7 @@ package com.linkmart.repositories;
 import com.linkmart.dtos.OfferDto;
 import com.linkmart.models.Offer;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -13,7 +14,7 @@ public interface OfferRepository extends JpaRepository<Offer, String> {
                 """
                 SELECT *
                 FROM offer
-                WHERE request_id = :requestId
+                WHERE offer.request_id = :requestId
                 ORDER BY created_at DESC
                 """, nativeQuery = true)
     Offer findByRequestId(@Param("requestId") String requestId);
@@ -37,4 +38,13 @@ public interface OfferRepository extends JpaRepository<Offer, String> {
             ORDER BY offer.updated_at DESC
             """, nativeQuery = true)
     List<OfferDto> findActiveByRequestId(@Param("providerId") String providerId);
+
+    @Query(value =
+            """
+            SELECT
+            *
+            From offer
+            WHERE offer.id = :offerId
+            """, nativeQuery = true)
+    Offer findOfferById(@Param("offerId") String offerId);
 }

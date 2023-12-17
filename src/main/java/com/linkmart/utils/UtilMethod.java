@@ -1,5 +1,7 @@
 package com.linkmart.utils;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.Random;
 
@@ -21,6 +23,19 @@ public class UtilMethod {
 
         // Get the final random string
         return stringBuilder.toString();
+    }
+
+
+    public static String Now(LocalTime currentTime) {
+        // Create a LocalTime object representing the current time
+
+        // Format the LocalTime object using a DateTimeFormatter
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String timeString = currentTime.format(formatter);
+
+        // Print the time string
+        System.out.println("Current time: " + timeString);
+        return timeString;
     }
 
 //    public <T>Map<String, T> formDataProcessor(Map<String, T> formData, String[] keys, T defaultValue) {

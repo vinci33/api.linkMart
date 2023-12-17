@@ -81,7 +81,9 @@ public class AppConfig {
                 registry.addMapping("/**")
                         .allowedMethods("*")
                         .allowedHeaders("*")
-                        .allowedOrigins("http://localhost:5173");
+                        .allowedOrigins("http://localhost:5173",
+                                "https://linkmart.yt20chill.me/",
+                                "https://lm.yt20chill.me/");
             }
         };
     }

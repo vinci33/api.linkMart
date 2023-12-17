@@ -2,6 +2,7 @@ package com.linkmart.models;
 
 import de.huxhorn.sulky.ulid.ULID;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "offer")
@@ -41,9 +42,11 @@ public class Offer {
     private String offerRemark;
 
     @Column(name = "created_at", insertable = false, updatable = false)
+    @CreationTimestamp
     private String createdAt;
 
-    @Column(name = "updated_at", insertable = false, updatable = false)
+    @Column(name = "updated_at", insertable = false)
+    @CreationTimestamp
     private String updatedAt;
 
 

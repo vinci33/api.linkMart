@@ -5,15 +5,18 @@ import com.linkmart.dtos.OfferDto;
 import com.linkmart.models.Offer;
 import com.linkmart.models.Provider;
 import com.linkmart.repositories.*;
+import com.linkmart.utils.UtilMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
 
 @Service
 public class OfferService {
@@ -32,6 +35,7 @@ public class OfferService {
 
     @Autowired
     StatusRepository statusRepository;
+
 
     @Transactional
     public void postOffer(String userId, String requestId,
@@ -122,6 +126,43 @@ public class OfferService {
             return offer;
         } catch (Exception e) {
             throw new Exception("Cannot get offer in database");
+        }
+    }
+
+    public void updateOffer(String userId, String offerId,
+                            Integer price, Integer estimatedProcessTime,
+                            String offerRemark)
+            throws Exception {
+        try {
+            var providerId = providerRepository.getIdByUserId(userId);
+            logger.info("providerId: " + providerId);
+            // check if provider exists
+            if (providerId == null) {
+                throw new Exception("Provider not found");
+            }
+            var thisOffer = offerRepository.findOfferById(offerId);
+//             check if offer exists and not created by this provider
+            if (thisOffer == null) {
+                throw new Exception("Offer not found");
+            } else if (!thisOffer.getProviderId().equals(providerId)) {
+                throw new Exception("Cannot update offer that not created by you");
+            }
+            if (price != null) {
+                thisOffer.setPrice(price);
+            }
+            if (estimatedProcessTime != null) {
+                thisOffer.setEstimatedProcessTime(estimatedProcessTime);
+            }
+            if (offerRemark != null) {
+                thisOffer.setOfferRemark(offerRemark);
+            }
+            var now = UtilMethod.Now(java.time.LocalTime.now());
+//            thisOffer.setUpdatedAt(now);
+//            logger.info("now: " + now);
+            var result  = offerRepository.save(thisOffer);
+//            logger.info("result: " + result.getUpdatedAt());
+        } catch (Exception e) {
+            throw new Exception("Cannot update offer in database");
         }
     }
 }
