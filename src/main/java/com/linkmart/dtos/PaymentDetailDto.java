@@ -12,7 +12,7 @@ public class PaymentDetailDto {
     private String location;
     private String item;
     private String primary_image;
-    private Integer quantity;
+    private String quantity;
     private Integer price; //from offer
 
     public String getUserEmail() {
@@ -83,11 +83,11 @@ public class PaymentDetailDto {
         this.primary_image = primary_image;
     }
 
-    public Integer getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 
