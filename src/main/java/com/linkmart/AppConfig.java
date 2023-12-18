@@ -41,8 +41,10 @@ public class AppConfig {
         final String securitySchemeName = "bearerAuth";
         return new OpenAPI()
                 .addServersItem(
+                        new Server().url("http://localhost:8081")
+                )
+                .addServersItem(
                         new Server().url("http://localhost:8080")
-                                .url("http://localhost:8081")
                 )
                 .addServersItem(
                         new Server().url("https://api.fight2gether.com")
