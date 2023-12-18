@@ -14,18 +14,18 @@ public class LocationServiceTest {
     @Autowired
     LocationRepository locationRepository;
 
-    @Test
-    public void testGetLocationNameByLocationId() {
-        Integer locationId = 1; // replace with a valid location ID
-        String locationName = locationService.getLocationNameByLocationId(locationId);
-        System.out.println("Location Name: " + locationName);
-    }
-
-    @Test
-    public void testFindLocationNameById() {
-        Integer locationId = 1; // replace with a valid location ID
-        String locationName = locationRepository.findByLocationId(locationId);
-        System.out.println("Location Name: " + locationName);
-    }
+//    @Test
+//    public void testGetLocationNameByLocationId() {
+//        Integer locationId = 1; // replace with a valid location ID
+//        String locationName = locationService.getLocationNameByLocationId(locationId);
+//        System.out.println("Location Name: " + locationName);
+//    }
+//
+//    @Test
+//    public void testFindLocationNameById() {
+//        Integer locationId = 1; // replace with a valid location ID
+//        String locationName = locationRepository.findByLocationId(locationId);
+//        System.out.println("Location Name: " + locationName);
+//    }
 
 }

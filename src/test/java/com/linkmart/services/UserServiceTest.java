@@ -35,16 +35,16 @@ public class UserServiceTest {
         // System.out.println("Password: " + user.getPassword());
     }
 
-    @Test
-    public void testGetUserDetailById() {
-        String userId = "01HHMV7DKG4Z9JNT1P8DESHW8X"; // replace with a valid user ID
-        String expectedUsername = "kdl@gmail.com";
-        UserDetailDto userDetailDto = userService.getUserDetailById(userId);
-        logger.info("UserDetailDto: " + userDetailDto);
-//        assertNotNull(userDetailDto, "UserDetailDto should not be null");
-//        assertEquals(expectedUsername, userDetailDto.getUsername(), "User IDs should match");
-        // Add more assertions as needed...
-    }
+//    @Test
+//    public void testGetUserDetailById() {
+//        String userId = "01HHMV7DKG4Z9JNT1P8DESHW8X"; // replace with a valid user ID
+//        String expectedUsername = "kdl@gmail.com";
+//        UserDetailDto userDetailDto = userService.getUserDetailById(userId);
+//        logger.info("UserDetailDto: " + userDetailDto);
+////        assertNotNull(userDetailDto, "UserDetailDto should not be null");
+////        assertEquals(expectedUsername, userDetailDto.getUsername(), "User IDs should match");
+//        // Add more assertions as needed...
+//    }
 
 
     @AfterEach

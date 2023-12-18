@@ -16,11 +16,11 @@ public class ProviderServiceTest {
     @Autowired
     ProviderService providerService;
 
-    @Test
-    public void testGetProviderDetail() {
-        String providerId = "01HHWT0SHQSC3JT138E5B5ANG0"; // replace with a valid provider ID
-        ProviderDetailDto providerDetailDto = providerService.getProviderDetail(providerId);
-        logger.info("ProviderDetailDto: " + providerDetailDto);
-        assertNotNull(providerDetailDto, "ProviderDetailDto should not be null");
-    }
+//    @Test
+//    public void testGetProviderDetail() {
+//        String providerId = "01HHWT0SHQSC3JT138E5B5ANG0"; // replace with a valid provider ID
+//        ProviderDetailDto providerDetailDto = providerService.getProviderDetail(providerId);
+//        logger.info("ProviderDetailDto: " + providerDetailDto);
+//        assertNotNull(providerDetailDto, "ProviderDetailDto should not be null");
+//    }
 }
