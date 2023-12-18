@@ -1,6 +1,7 @@
 package com.linkmart.controllers;
 
-import com.linkmart.dtos.AcceptOfferForm;
+import com.linkmart.dtos.PaymentDetailDto;
+import com.linkmart.forms.AcceptOfferForm;
 import com.linkmart.dtos.GetOneOfferDto;
 import com.linkmart.dtos.OfferDto;
 import com.linkmart.dtos.RequestResponseWithMessageDto;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
@@ -81,13 +83,30 @@ public class OfferController {
         }
     }
 
+    @GetMapping(value = "/api/offer/paymentInfo/{offerId}/{addressId}")
+    public PaymentDetailDto acceptOffer (
+            @PathVariable("offerId") String offerId,
+            @PathVariable("addressId") Integer addressId) {
+        try{
+            var userId = (String)request.getAttribute("userId");
+            PaymentDetailDto paymentDetail = offerService.acceptOffer(userId, offerId, addressId);
+            return paymentDetail;
+        }catch (IllegalArgumentException e) {
+            logger.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
     @PostMapping(value = "/api/offer/accept")
-    public RequestResponseWithMessageDto acceptOffer (
+    public RedirectView redirectOffer (
             @RequestBody AcceptOfferForm acceptOfferForm) {
         try{
             var userId = (String)request.getAttribute("userId");
-            offerService.acceptOffer(userId, acceptOfferForm);
-            return new RequestResponseWithMessageDto("Offer accepted successfully");
+//            PaymentDetailDto paymentDetail = offerService.acceptOffer(userId, acceptOfferForm);
+            String offerId = acceptOfferForm.getOfferId();
+            Integer addressId = acceptOfferForm.getUserAddressId();
+            String redirectUrl = "https://api.fight2gether.com/api/offer/paymentInfo/" + offerId + "/" + addressId;
+            return new RedirectView(redirectUrl);
         }catch (IllegalArgumentException e) {
             logger.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());

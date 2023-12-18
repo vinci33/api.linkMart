@@ -98,10 +98,24 @@ public class PaymentDetailDto {
     public void setOfferId(String offerId) {
         this.offerId = offerId;
     }
-
-
-
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "PaymentDetailDto{" +
+                "offerId='" + offerId + '\'' +
+                ", userUsername='" + userUsername + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", userAddress=" + userAddress +
+                ", UserPaymentMethod=" + UserPaymentMethod +
+                ", providerUsername='" + providerUsername + '\'' +
+                ", location='" + location + '\'' +
+                ", item='" + item + '\'' +
+                ", primary_image='" + primary_image + '\'' +
+                ", quantity='" + quantity + '\'' +
+                ", price=" + price +
+                '}';
     }
 }

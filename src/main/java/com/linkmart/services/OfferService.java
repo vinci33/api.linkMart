@@ -3,6 +3,7 @@ package com.linkmart.services;
 import com.linkmart.dtos.*;
 import com.linkmart.dtos.GetOneOfferDto;
 import com.linkmart.dtos.OfferDto;
+import com.linkmart.forms.AcceptOfferForm;
 import com.linkmart.models.Offer;
 import com.linkmart.models.Provider;
 import com.linkmart.repositories.*;
@@ -186,17 +187,13 @@ public class OfferService {
         }
     }
 
-    public PaymentDetailDto acceptOffer(String userId, AcceptOfferForm acceptOfferForm) {
+    public PaymentDetailDto acceptOffer(String userId, String offerId,Integer addressId) {
         try {
-            validateOfferId(acceptOfferForm.getOfferId());
+            validateOfferId(offerId);
             userService.validateUserId(userId);
-            userAddressService.validateUserAddressId(acceptOfferForm.getUserAddressId());
-            var offer = offerRepository.findOfferByOfferId(acceptOfferForm.getOfferId());
+            userAddressService.validateUserAddressId(addressId);
+            var offer = offerRepository.findOfferByOfferId(offerId);
             var request = requestRepository.findRequestModelByRequestId(offer.getRequestId());
-//            var user = userRepository.findUserById(userId);
-//            List<UserPaymentMethod> userPaymentMethodList = userPaymentMethodRepository.findUserPaymentMethodByUserIdOrderByCreatedAtDesc(userId);
-//            if (userPaymentMethodList.isEmpty()) throw new Exception("User has no payment method");
-//            var userPaymentMethod = userPaymentMethodList.get(0);
             UserDetailDto userDetail = userService.getUserDetailById(userId);
             var username = userDetail.getUsername();
             var userEmail = userDetail.getUserEmail();

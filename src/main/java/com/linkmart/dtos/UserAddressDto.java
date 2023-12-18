@@ -5,6 +5,8 @@ import java.util.List;
 public class UserAddressDto {
     private String address;
 
+    public UserAddressDto() {
+    }
     public UserAddressDto(String address) {
         this.address = address;
     }

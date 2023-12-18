@@ -7,6 +7,9 @@ public class UserPaymentMethodDto {
     private String card_holder_name;
     private String expiry_date;
 
+
+    public UserPaymentMethodDto() {
+    }
     public UserPaymentMethodDto(Integer payment_method_id, String payment_method, String card_no, String card_holder_name, String expiry_date) {
         this.payment_method_id = payment_method_id;
         this.payment_method = payment_method;

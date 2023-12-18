@@ -1,4 +1,4 @@
-package com.linkmart.dtos;
+package com.linkmart.forms;
 
 public class AcceptOfferForm {
     private String offerId;
