@@ -42,6 +42,7 @@ public class AppConfig {
         return new OpenAPI()
                 .addServersItem(
                         new Server().url("http://localhost:8080")
+                                .url("http://localhost:8081")
                 )
                 .addServersItem(
                         new Server().url("https://api.fight2gether.com")
@@ -83,7 +84,8 @@ public class AppConfig {
                         .allowedHeaders("*")
                         .allowedOrigins("http://localhost:5173",
                                 "https://linkmart.yt20chill.me/",
-                                "https://lm.yt20chill.me/","https://localhost:8081");
+                                "https://lm.yt20chill.me/",
+                                "http://localhost:8081", "http://localhost:8080");
             }
         };
     }
