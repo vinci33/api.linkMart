@@ -38,7 +38,7 @@ public class OfferController {
             offerService.postOffer(userId, requestId, price, estimatedProcessTime, offerRemark);
             return new RequestResponseWithMessageDto("Offer created successfully");
         } catch (Exception e) {
-            throw new Exception("Cannot create offer in controller");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
