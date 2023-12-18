@@ -2,6 +2,7 @@ package com.linkmart.controllers;
 
 
 import com.linkmart.dtos.OrdersDto;
+import com.linkmart.dtos.OrdersDtoWithDays;
 import com.linkmart.dtos.ResponseWithMessage;
 import com.linkmart.forms.OrdersForm;
 import com.linkmart.services.OrdersService;
@@ -57,16 +58,34 @@ public class OrdersController {
         }
     }
 
-//    @GetMapping(value = "/user/order")
-//    public List<OrdersDto> getOrdersByUserId(){
-//        try{
-//            var userId = (String)request.getAttribute("userId");
-//            return ordersService.getOrdersByUserId(userId);
-//        } catch (Exception e) {
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-//        }
-//
-//    }
+    @GetMapping(value = "/user/order")
+    public List<OrdersDtoWithDays> getOrdersByUserId() {
+        try {
+            var userId = (String) request.getAttribute("userId");
+            return ordersService.getOrdersByUserId(userId);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+    @GetMapping(value = "/user/order/{orderStatus}")
+    public List<OrdersDtoWithDays> getOrdersByUserId( @PathVariable String orderStatus){
+        try{
+            if (orderStatus == null) {
+                throw new IllegalArgumentException("OrderStatus not found");
+            }
+            if (!"create".equalsIgnoreCase(orderStatus) &&
+                !"in-progress".equalsIgnoreCase(orderStatus) &&
+                !"shipped".equalsIgnoreCase(orderStatus) &&
+                !"completed".equalsIgnoreCase(orderStatus)) {
+                throw new IllegalArgumentException("Invalid orderStatus: " + orderStatus);
+            }
+            var userId = (String)request.getAttribute("userId");
+            return ordersService.getOrdersByUserIdAndStatus(userId, orderStatus);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+
+    }
 
 
 }
