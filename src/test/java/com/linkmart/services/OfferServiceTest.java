@@ -51,13 +51,9 @@
 //        userDetail.setUserEmail("testEmail");
 //        UserPaymentMethodDto paymentMethodDto = new UserPaymentMethodDto();
 //        paymentMethodDto.setPayment_method("testPaymentMethod");
-//
 //        List<UserPaymentMethodDto> paymentMethods = new ArrayList<>();
 //        paymentMethods.add(paymentMethodDto);
-//
 //        userDetail.setUserPaymentMethod(paymentMethods);
-//
-////        userDetail.setUserPaymentMethod(List.of("testPaymentMethod"));
 //        UserAddressDto userAddressDto = new UserAddressDto();
 //        userAddressDto.setAddress("testAddress");
 //        List<UserAddressDto> userAddressDtos = new ArrayList<>();

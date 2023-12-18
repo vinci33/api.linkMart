@@ -1,5 +1,6 @@
 package com.linkmart.models;
 
+import de.huxhorn.sulky.ulid.ULID;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -8,9 +9,9 @@ import java.util.List;
 @Table(name = "orders")
 public class Orders {
     @Id
-    private int id;
+    private String id;
 
-    @Column(name = "order_id")
+    @Column(name = "offer_id")
     private String offerId;
 
     @Column(name = "user_address_id")
@@ -25,20 +26,29 @@ public class Orders {
     @Column(name = "shipping_order_no")
     private int shippingOrderNo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="logistic_company_id", updatable = false, insertable = false)
-    private LogisticCompany logisticCompany;
+    public int getLogisticCompanyId() {
+        return logisticCompanyId;
+    }
+
+    public void setLogisticCompanyId(int logisticCompanyId) {
+        this.logisticCompanyId = logisticCompanyId;
+    }
 
     @OneToMany(mappedBy = "orders")
     private List<ReportCase> reportCaseList;
 
     //TODO: Add relation to ReportCase table
 
-    public int getId() {
+    public Orders() {
+        ULID ulid = new ULID();
+        this.id = ulid.nextULID();
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -58,21 +68,8 @@ public class Orders {
         this.userAddressId = userAddressId;
     }
 
-    public int getLogisticCompanyId() {
-        return logisticCompanyId;
-    }
 
-    public void setLogisticCompanyId(int logisticCompanyId) {
-        this.logisticCompanyId = logisticCompanyId;
-    }
 
-    public int getShippingOrderNo() {
-        return shippingOrderNo;
-    }
-
-    public void setShippingOrderNo(int shippingOrderNo) {
-        this.shippingOrderNo = shippingOrderNo;
-    }
 
     public int getOrderStatusId() {
         return orderStatusId;
@@ -82,15 +79,11 @@ public class Orders {
         this.orderStatusId = orderStatusId;
     }
 
-    @Override
-    public String toString() {
-        return "Orders{" +
-                "id=" + id +
-                ", offerId='" + offerId + '\'' +
-                ", logisticCompanyId=" + logisticCompanyId +
-                ", shippingOrderNo=" + shippingOrderNo +
-//                ", logisticCompany=" + logisticCompany +
-                ", reportCaseList=" + reportCaseList +
-                '}';
+    public int getShippingOrderNo() {
+        return shippingOrderNo;
+    }
+
+    public void setShippingOrderNo(int shippingOrderNo) {
+        this.shippingOrderNo = shippingOrderNo;
     }
 }

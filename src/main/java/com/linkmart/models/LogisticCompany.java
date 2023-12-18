@@ -26,10 +26,7 @@ public class LogisticCompany {
     @Column(name = "updated_at", insertable = false, updatable = false)
     private Timestamp updatedAt;
 
-    @OneToMany(fetch = FetchType.LAZY,
-            mappedBy = "logisticCompany",
-            cascade={CascadeType.REMOVE, CascadeType.MERGE})
-    private List<Orders> orders;
+
 
     public int getLogisticCompanyId() {
         return logisticCompanyId;
@@ -79,7 +76,7 @@ public class LogisticCompany {
                 ", companyUrl='" + companyUrl + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
-                ", orders=" + orders +
+//                ", orders=" + orders +
                 '}';
     }
 }

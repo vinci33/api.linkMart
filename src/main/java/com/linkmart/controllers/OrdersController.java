@@ -1,19 +1,20 @@
 package com.linkmart.controllers;
 
 
+import com.linkmart.dtos.OrdersDto;
+import com.linkmart.dtos.ResponseWithMessage;
 import com.linkmart.forms.OrdersForm;
 import com.linkmart.services.OrdersService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.jaxb.SpringDataJaxb;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -27,18 +28,45 @@ public class OrdersController {
 
     final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-//    @PostMapping("/orders")
-//    public Map<String> createOrder(HttpServletRequest request,
-//                                   @RequestBody OrdersForm ordersForm)
-//    {
-//        try {
+    @GetMapping("/order")
+    public ResponseWithMessage createOrder(
+            @RequestParam(value = "success", required = false) Boolean success,
+            @RequestParam(value = "cancelled", required = false) Boolean cancelled,
+            @RequestParam(value = "offerId") String offerId,
+            @RequestParam(value = "userAddressId") Integer userAddressId
+    ) {
+        try {
+            if ((success == null && cancelled == null) || (success != null && cancelled != null)) {
+                throw new IllegalArgumentException("Invalid status");
+            }
+            if ((cancelled != null && cancelled)){
+                throw new IllegalArgumentException("payment cancelled");
+            }
+            if (offerId == null || userAddressId == null) {
+                throw new IllegalArgumentException("OfferId or userAddressId not found");
+            }
+            var userId = (String)request.getAttribute("userId");
+            if (userId == null) {
+                throw new IllegalArgumentException("UserId not found");
+            }
+            var orderId = ordersService.createOrder(success ,userId, offerId, userAddressId);
+            return new ResponseWithMessage(true,"Order created successfully OrderID :"+ orderId);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+//    @GetMapping(value = "/user/order")
+//    public List<OrdersDto> getOrdersByUserId(){
+//        try{
 //            var userId = (String)request.getAttribute("userId");
-//            System.out.println("controller"+ userId);
-//            var orderId = ordersService.createOrder(userId, ordersForm);
-//            return Map.of("orderId", orderId);
+//            return ordersService.getOrdersByUserId(userId);
 //        } catch (Exception e) {
-//            logger.error(e.getMessage());
 //            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
 //        }
+//
 //    }
+
+
 }

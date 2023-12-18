@@ -3,7 +3,8 @@ INSERT INTO users(id,username,user_email,password) VALUES('01HHAWPJ6068YT0685RZ5
 INSERT INTO users(id,username,user_email,password) VALUES('01HHQ61P480SRGXG5130R22B53','testing','testingforuser@gmail.com','$2a$10$TuQH2OXFRTrxTvFBK3E5x.NSRGe1IZNPGU/2Ij7kCJH6xJj5Zp10e');
 
 
-INSERT INTO status(status_name) VALUES ('pending'),('in-progress'),('aborted'),('rejected'),('completed');
+INSERT INTO status(status_name) VALUES ('pending'),('in-progress'),('aborted'),('rejected'),('completed'),('open'),('closed');
+--added open and closed
 
 INSERT INTO order_status(order_status) VALUES ('created'),('in-progress'),('shipped'),('completed');
 
@@ -110,3 +111,4 @@ INSERT INTO request (id, created_by, location_id, category_id, item, item_detail
 
 INSERT INTO offer (id, request_id, provider_id, offer_status_id, estimated_process_time, price, offer_remark) VALUES
 ('01HHV1JK9C6RE53WM98WWZWEYX', '01HHV1H3RCJYR25XJWX37NPCQJ', '01HHMV7DKG4Z9JNT1P8DESHW8R', 1, 20, 4000, 'Dec 17');
+--pls give me the JWT token for this user to test

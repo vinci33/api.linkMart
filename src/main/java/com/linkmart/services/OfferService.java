@@ -71,7 +71,7 @@ public class OfferService {
             Offer offer = new Offer();
             offer.makeOfferCase();
             offer.setProviderId(providerId);
-            offer.setOfferStatusId(1);
+            offer.setOfferStatusId(6);
             offer.setRequestId(requestId);
             offer.setPrice(price);
             offer.setEstimatedProcessTime(estimatedProcessTime);
@@ -221,7 +221,54 @@ public class OfferService {
             paymentDetailDto.setPrice(price);
             return paymentDetailDto;
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new IllegalArgumentException("Invalid ID: " + e.getMessage(), e);
         }
+    }
+
+    public List<Offer> getOfferByRequestIdAndOfferStatusId(String requestId, Integer offerStatusId){
+        return offerRepository.findOfferByRequestIdAndOfferStatusId(requestId, offerStatusId);
+    }
+    public void setStatusPending(Offer offer){
+        offer.setOfferStatusId(1);
+    }
+    public String getStatusPending(){
+        return "Pending";
+    }
+
+    public void setStatusInprogress(Offer offer){
+        offer.setOfferStatusId(2);
+    }
+    public String getStatusInprogress(){
+        return "In Progress";
+    }
+    public void setStatusAborted(Offer offer){
+        offer.setOfferStatusId(3);
+    }
+    public String getStatusAborted(){
+        return "Aborted";
+    }
+    public void setStatusRejected(Offer offer){
+        offer.setOfferStatusId(4);
+    }
+    public String getStatusRejected(){
+        return "Rejected";
+    }
+    public void setStatusCompleted(Offer offer){
+        offer.setOfferStatusId(5);
+    }
+    public String getStatusCompleted(){
+        return "Completed";
+    }
+    public void setStatusOpen(Offer offer){
+        offer.setOfferStatusId(6);
+    }
+    public String getStatusOpen(){
+        return "Open";
+    }
+    public void setStatusClosed(Offer offer){
+        offer.setOfferStatusId(7);
+    }
+    public String getStatusClosed(){
+        return "Closed";
     }
 }

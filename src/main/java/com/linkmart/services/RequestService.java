@@ -289,6 +289,28 @@ public class RequestService {
         }
     }
 
+    @Transactional
+    public void validateRequestId(String requestId) {
+        var request = requestRepository.findRequestModelByRequestId(requestId);
+        if (request == null) {
+            throw new IllegalArgumentException("Invalid requestId");
+        }
+    }
+
+    @Transactional
+    public void updateRequestStatus(String requestId, Boolean hasOffer, Boolean isActive) {
+        try {
+            var request = requestRepository.findRequestModelByRequestId(requestId);
+            if (request == null){
+                throw new IllegalArgumentException("Request not found with id: " + requestId);
+            }
+            request.setHasOffer(hasOffer);
+            request.setActive(isActive);
+            requestRepository.saveAndFlush(request);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Cannot update request status"+ e.getMessage(), e);
+        }
+    }
 
 //    public Page<AnotherRequestDto> getRequestsByCategoryAndLocationV2(String category, String location, int page) {
 //        this.em.getCriteriaBuilder()
