@@ -50,7 +50,7 @@ public class OfferController {
             logger.info("userId: " + userId);
             return offerService.getOfferByRequestId(userId, requestId);
         } catch (Exception e) {
-            throw new Exception("Cannot get offer in controller");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 

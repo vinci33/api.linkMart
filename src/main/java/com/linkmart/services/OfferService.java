@@ -98,18 +98,16 @@ public class OfferService {
                 throw new Exception("Provider not found");
             }
             var thisRequest = requestRepository.findCreatedByByRequestId(requestId);
-            logger.info("thisRequest: " + thisRequest);
+            logger.info("thisRequest: " + requestId);
             // check if request exists and not created by this provider
-            if (thisRequest == null) {
-                throw new Exception("Request not found");
-            } else if (thisRequest.equals(userId)) {
-                throw new Exception("Cannot offer to your own request");
-            }
             Offer offer = offerRepository.findByRequestId(requestId);
+            ArrayList <GetOneOfferDto> offerList = new ArrayList<>();
+            if (offer == null) {
+                return offerList;
+            }
             Provider provider = providerRepository.findProviderById(offer.getProviderId());
             String userName = userRepository.findByUserId(provider.getUserId());
             String status = statusRepository.findStatusName(offer.getOfferStatusId());
-
             List<GetOneOfferDto> getManyOfferDto = new ArrayList<>();
             GetOneOfferDto getOneOfferDto = new GetOneOfferDto();
             getOneOfferDto.setOfferId(offer.getOfferId());

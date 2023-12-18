@@ -9,6 +9,7 @@ import com.linkmart.models.RequestModel;
 import com.linkmart.repositories.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,8 +61,11 @@ public class RequestService {
             newRequest.setUrl(url);
             newRequest.setQuantity(quantity);
 
-            newRequest.setRequestRemark(requestRemark);
-            newRequest.makeRequestCase();
+            if (requestRemark != null) {
+                newRequest.setRequestRemark(requestRemark);
+            }
+
+            newRequest.makeRequestCase();//ulid
             if (offerPrice != null) {
                 newRequest.setOfferPrice(offerPrice);
             }

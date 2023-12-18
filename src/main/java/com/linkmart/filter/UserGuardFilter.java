@@ -54,7 +54,7 @@ public class UserGuardFilter extends OncePerRequestFilter {
                 throw new Exception("No UserId In Token");
             }
             request.setAttribute("userId", userId);
-
+            logger.info("UserGuardUserId: " + userId);
             filterChain.doFilter(request, response);
         } catch (Exception e) {
             logger.error(e.getMessage());
