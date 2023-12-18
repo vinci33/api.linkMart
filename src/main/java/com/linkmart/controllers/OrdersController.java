@@ -27,18 +27,18 @@ public class OrdersController {
 
     final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @PostMapping("/orders")
-    public Map<String> createOrder(HttpServletRequest request,
-                                   @RequestBody OrdersForm ordersForm)
-    {
-        try {
-            var userId = (String)request.getAttribute("userId");
-            System.out.println("controller"+ userId);
-            var orderId = ordersService.createOrder(userId, ordersForm);
-            return Map.of("orderId", orderId);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-        }
-    }
+//    @PostMapping("/orders")
+//    public Map<String> createOrder(HttpServletRequest request,
+//                                   @RequestBody OrdersForm ordersForm)
+//    {
+//        try {
+//            var userId = (String)request.getAttribute("userId");
+//            System.out.println("controller"+ userId);
+//            var orderId = ordersService.createOrder(userId, ordersForm);
+//            return Map.of("orderId", orderId);
+//        } catch (Exception e) {
+//            logger.error(e.getMessage());
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+//        }
+//    }
 }
