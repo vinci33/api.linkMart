@@ -133,12 +133,15 @@ public class RequestService {
                     newRequest.setPrimaryImage(urlImage); // Store the first file
                 }
             }
-            for (MultipartFile file: files) {
-                String imagePath = s3Service.uploadFile(file);
-                ImageModel image = new ImageModel();
-                image.setImagePath(imagePath);
-                image.setRequestId(newRequest.getRequestId());
-                images.add(image);
+            if (files != null)
+            {
+                for (MultipartFile file : files) {
+                    String imagePath = s3Service.uploadFile(file);
+                    ImageModel image = new ImageModel();
+                    image.setImagePath(imagePath);
+                    image.setRequestId(newRequest.getRequestId());
+                    images.add(image);
+                }
             }
             newRequest.setImages(images);
 
