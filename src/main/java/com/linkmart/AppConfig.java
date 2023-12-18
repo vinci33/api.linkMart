@@ -87,7 +87,8 @@ public class AppConfig {
                         .allowedOrigins("http://localhost:5173",
                                 "https://linkmart.yt20chill.me/",
                                 "https://lm.yt20chill.me/",
-                                "http://localhost:8081", "http://localhost:8080");
+                                "http://localhost:8081",
+                                "http://localhost:8080");
             }
         };
     }

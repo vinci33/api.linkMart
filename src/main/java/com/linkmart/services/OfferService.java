@@ -5,9 +5,7 @@ import com.linkmart.dtos.GetOneOfferDto;
 import com.linkmart.dtos.OfferDto;
 import com.linkmart.models.Offer;
 import com.linkmart.models.Provider;
-import com.linkmart.models.UserPaymentMethod;
 import com.linkmart.repositories.*;
-import com.linkmart.utils.UtilMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -228,11 +223,6 @@ public class OfferService {
             paymentDetailDto.setPrimary_image(primaryImage);
             paymentDetailDto.setPrice(price);
             return paymentDetailDto;
-
-
-
-
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

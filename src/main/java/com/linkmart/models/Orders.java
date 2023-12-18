@@ -13,8 +13,14 @@ public class Orders {
     @Column(name = "order_id")
     private String offerId;
 
+    @Column(name = "user_address_id")
+    private int userAddressId;
+
     @Column(name = "logistic_company_id")
     private int logisticCompanyId;
+
+    @Column(name = "order_status_id")
+    private int orderStatusId;
 
     @Column(name = "shipping_order_no")
     private int shippingOrderNo;
@@ -44,6 +50,14 @@ public class Orders {
         this.offerId = offerId;
     }
 
+    public int getUserAddressId() {
+        return userAddressId;
+    }
+
+    public void setUserAddressId(int userAddressId) {
+        this.userAddressId = userAddressId;
+    }
+
     public int getLogisticCompanyId() {
         return logisticCompanyId;
     }
@@ -58,6 +72,14 @@ public class Orders {
 
     public void setShippingOrderNo(int shippingOrderNo) {
         this.shippingOrderNo = shippingOrderNo;
+    }
+
+    public int getOrderStatusId() {
+        return orderStatusId;
+    }
+
+    public void setOrderStatusId(int orderStatusId) {
+        this.orderStatusId = orderStatusId;
     }
 
     @Override

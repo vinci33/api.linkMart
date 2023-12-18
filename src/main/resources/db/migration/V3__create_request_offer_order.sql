@@ -67,8 +67,8 @@ CREATE TABLE orders (
     offer_id TEXT not null REFERENCES offer(id),
     user_address_id INTEGER not null REFERENCES user_address(id),
     order_status_id INTEGER not null REFERENCES order_status(id),
-    logistic_company_id INTEGER not null REFERENCES logistic_company(id),
-    shipping_order_no INTEGER not null,
+    logistic_company_id INTEGER REFERENCES logistic_company(id),
+    shipping_order_no INTEGER,
     created_at TIMESTAMP default NOW(),
     updated_at TIMESTAMP default NOW()
 );
