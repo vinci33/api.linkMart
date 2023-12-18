@@ -68,9 +68,9 @@ public class OfferService {
             logger.info("thisRequest: " + thisRequest);
             // check if request exists and not created by this provider
             if (thisRequest == null) {
-                throw new Exception("Request not found");
+                throw new RuntimeException("Request not found");
             } else if (thisRequest.equals(userId)) {
-                throw new Exception("Cannot offer to your own request");
+                throw new RuntimeException("Cannot offer to your own request");
             }
             Offer offer = new Offer();
             offer.makeOfferCase();
@@ -83,7 +83,7 @@ public class OfferService {
             requestRepository.updateRequestStatusIdByRequestId(requestId);
             offerRepository.saveAndFlush(offer);
         } catch (Exception e) {
-            throw new Exception("Cannot create offer in database");
+            throw new Exception(e);
         }
     }
 
@@ -138,6 +138,10 @@ public class OfferService {
                 throw new Exception("Provider not found");
             }
             List<OfferDto> offer = offerRepository.findActiveByRequestId(providerId);
+            ArrayList <OfferDto> offerList = new ArrayList<>();
+            if (offer == null) {
+                return offerList;
+            }
             return offer;
         } catch (Exception e) {
             throw new Exception("Cannot get offer in database");
