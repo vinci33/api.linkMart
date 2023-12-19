@@ -97,8 +97,8 @@ INSERT INTO user_address(id, user_id, address, is_primary) VALUES
 --INSERT INTO provider_verification (user_id, status_id,provider_id, id_document, address_document) VALUES
 -- ('01HHMV7DKG4Z9JNT1P8DESHW8X', '4','1', 'A654321', '321 HAHA Street');
 
-INSERT INTO provider (id, user_id, location_id) VALUES
-('01HHMV7DKG4Z9JNT1P8DESHW8R', '01HHMV7DKG4Z9JNT1P8DESHW8X', '1');
+INSERT INTO provider (id, user_id, location_id, star_of_efficiency, star_of_attitude) VALUES
+('01HHMV7DKG4Z9JNT1P8DESHW8R', '01HHMV7DKG4Z9JNT1P8DESHW8X', '1', '5','5');
 
 
  INSERT INTO user_payment_method (id, user_id, payment_method, card_no, card_holder_name, expiry_date) VALUES
