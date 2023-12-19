@@ -1,4 +1,4 @@
 package com.linkmart.dtos;
 
-public record ResponseWithMessage (boolean success, String userId){
+public record ResponseWithMessage (boolean success, String message){
 }
