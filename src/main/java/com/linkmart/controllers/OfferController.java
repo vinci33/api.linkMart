@@ -89,6 +89,9 @@ public class OfferController {
             @PathVariable("addressId") Integer addressId) {
         try{
             var userId = (String)request.getAttribute("userId");
+            if (userId == null) {
+                throw new IllegalArgumentException("UserId not found");
+            }
             PaymentDetailDto paymentDetail = offerService.acceptOffer(userId, offerId, addressId);
             return paymentDetail;
         }catch (IllegalArgumentException e) {
@@ -97,13 +100,15 @@ public class OfferController {
         }
     }
 
-    @PostMapping(value = "/api/offer/accept")
+    @PostMapping(value = "/api/offer/{offerId}")
     public RedirectView redirectOffer (
-            @RequestBody AcceptOfferForm acceptOfferForm) {
+            @RequestBody AcceptOfferForm acceptOfferForm,
+            @PathVariable("offerId") String offerId) {
         try{
             var userId = (String)request.getAttribute("userId");
-//            PaymentDetailDto paymentDetail = offerService.acceptOffer(userId, acceptOfferForm);
-            String offerId = acceptOfferForm.getOfferId();
+            if (userId == null) {
+                throw new IllegalArgumentException("UserId not found");
+            }
             Integer addressId = acceptOfferForm.getUserAddressId();
             String redirectUrl = "https://api.fight2gether.com/api/offer/paymentInfo/" + offerId + "/" + addressId;
             return new RedirectView(redirectUrl);

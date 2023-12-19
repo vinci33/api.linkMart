@@ -3,7 +3,8 @@ BEGIN;
 CREATE TABLE order_status (
     id SERIAL PRIMARY KEY,
     order_status VARCHAR(16) not null,
-    created_at TIMESTAMP default NOW()
+    created_at TIMESTAMP default NOW(),
+    updated_at TIMESTAMP default NOW()
 );
 
 CREATE TABLE logistic_company (

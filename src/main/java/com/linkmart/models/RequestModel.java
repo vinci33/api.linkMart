@@ -48,6 +48,14 @@ public class RequestModel{
     private int offerPrice;
     @Column(name = "request_remark")
     private String requestRemark;
+
+    @Column(name = "has_offer")
+    private boolean hasOffer;
+
+
+    @Column (name = "is_active")
+    private boolean isActive;
+
     @Column(name = "created_at", insertable = false, updatable = false)
     @CreationTimestamp
     private String createdAt;
@@ -202,5 +210,20 @@ public class RequestModel{
                 ", updatedAt='" + updatedAt + '\'' +
                 ", images=" + images +
                 '}';
+    }
+    public boolean isHasOffer() {
+        return hasOffer;
+    }
+
+    public void setHasOffer(boolean hasOffer) {
+        this.hasOffer = hasOffer;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }

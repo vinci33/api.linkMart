@@ -50,4 +50,6 @@ public interface OfferRepository extends JpaRepository<Offer, String> {
 
 
     Offer findOfferByOfferId(String offerId);
+
+    List<Offer> findOfferByRequestIdAndOfferStatusId(String requestId, Integer offerStatusId);
 }
