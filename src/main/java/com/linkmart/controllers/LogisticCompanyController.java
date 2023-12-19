@@ -1,15 +1,18 @@
 package com.linkmart.controllers;
 
 import com.linkmart.dtos.LogisticCompanyDto;
+import com.linkmart.forms.LogisticCompanyForm;
 import com.linkmart.mappers.LogisticCompanyMapper;
 import com.linkmart.models.LogisticCompany;
 import com.linkmart.repositories.LogisticCompanyRepository;
+import com.linkmart.services.LogisticCompanyService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -22,9 +25,24 @@ public class LogisticCompanyController {
     @Autowired
     LogisticCompanyRepository logisticCompanyRepository;
 
+    @Autowired
+    LogisticCompanyService logisticCompanyService;
+
     @GetMapping(value = "/logisticCompany")
-    public List<LogisticCompanyDto> getAllLocation (){
+    public List<LogisticCompanyDto> getAllLogisticCompany (){
         List<LogisticCompany> result = logisticCompanyRepository.findAll();
         return LogisticCompanyMapper.INSTANCE.getAllLogisticCompany(result);
+    }
+
+    @PutMapping(value = "/api/logisticCompany")
+    public void uploadLogisticCompany (@RequestBody LogisticCompanyForm companyForm,
+                                       HttpServletRequest request)
+            throws Exception {
+        try {
+            var userId = (String)request.getAttribute("userId");
+            logisticCompanyService.uploadLogisticCompany(companyForm, userId);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
     }
 }

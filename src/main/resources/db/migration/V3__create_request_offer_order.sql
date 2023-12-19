@@ -11,6 +11,7 @@ CREATE TABLE logistic_company (
     id SERIAL PRIMARY KEY,
     company_name VARCHAR(255) not null,
     company_url VARCHAR(255) not null,
+    provider_id TEXT REFERENCES provider(id),
     created_at TIMESTAMP default NOW(),
     updated_at TIMESTAMP default NOW()
 );

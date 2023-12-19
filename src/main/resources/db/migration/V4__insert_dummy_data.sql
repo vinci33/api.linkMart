@@ -43,11 +43,11 @@ INSERT INTO location(location_name) VALUES   ('🇺🇸 United States'),
 
 --INSERT INTO provider(id,user_id,location_id,star_of_efficiency,star_of_attitude ) VALUES ('1', '1', '1', '5','5');
 
-INSERT INTO logistic_company(company_name, company_url) VALUES ('DHL', 'https://www.dhl.com'),
-                                                        ('FedEx', 'https://www.fedex.com'),
-                                                        ('UPS', 'https://www.ups.com'),
-                                                        ('TNT Express', 'https://www.tnt.com'),
-                                                        ('SF Express', 'https://www.sf-express.com');
+INSERT INTO logistic_company(company_name, company_url, provider_id) VALUES ('DHL', 'https://www.dhl.com', NULL),
+                                                        ('FedEx', 'https://www.fedex.com', NULL),
+                                                        ('UPS', 'https://www.ups.com', NULL),
+                                                        ('TNT Express', 'https://www.tnt.com', NULL),
+                                                        ('SF Express', 'https://www.sf-express.com', NULL);
 
 INSERT INTO category(category_name) VALUES ('Clothes'),('Figure');
 
@@ -78,14 +78,15 @@ INSERT INTO category_field_option(category_field_id, category_field_option_name)
                                                                                  ('4','White'),
                                                                                  ('4','Gray');
 
-INSERT INTO request(id, created_by, location_id, category_id, item, item_detail, url, quantity, request_remark, offer_price, has_offer, is_active, created_at, updated_at, primary_image)
-VALUES
-  ('01HHKFYXSSTKGTSGJ4TPMC096E','01HHQ61P480SRGXG5130R22B53', 1, 1, 'clothes', '{"size": "M", "color": "Black", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.uniqlo.com.hk/zh_HK/product-detail.html?productCode=u0000000028366', 1, 'MEN 2WAY SINGLE BREASTED COAT', 900, FALSE, true, '2023-12-12 20:20:17.367665', '2023-12-12 20:20:17.367665', 'https://www.uniqlo.com.hk/hmall/test/u0000000028366/main/first/561/1.jpg'),
-  ('01HHKFYXST6C48MQ886K9EARM5','01HHQ61P480SRGXG5130R22B53', 1, 1, 'clothes', '{"size": "L", "color": "blue", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.uniqlo.com.hk/zh_HK/product-detail.html?productCode=u0000000027647', 1, '男裝 孖襟大衣', 3000, FALSE, true, '2023-12-12 20:21:05.972918', '2023-12-12 20:21:05.972918','https://www.uniqlo.com.hk/hmall/test/u0000000027647/main/first/561/1.jpg'),
-  ('01HHKFYXSTSBKPZX0HYDZ85KDE','01HHP4GVCVN1P5FY8YYX9YXKN8', 1, 1, 'clothes', '{"size": "S", "color": "blue", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.uniqlo.com.hk/zh_HK/product-detail.html?productCode=u0000000027999', 1, '男女通用 PEANUTS You Can Be Anything!', 300, FALSE, true, '2023-12-12 20:21:59.936233', '2023-12-12 20:21:59.936233','https://www.uniqlo.com.hk/hmall/test/u0000000027999/main/first/561/1.jpg'),
-  ('01HHKFYXSVSNSZ8BJ14YSCR16H', '01HHP4GVCVN1P5FY8YYX9YXKN8',1, 1, 'clothes', '{"size": "S", "color": "blue", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.uniqlo.com.hk/zh_HK/product-detail.html?productCode=u0000000028005', 1, '男女通用 PEANUTS You Can Be Anything!', 1900, FALSE, true, '2023-12-12 20:22:39.631992', '2023-12-12 20:22:39.631992', 'https://www.uniqlo.com.hk/hmall/test/u0000000028005/main/first/561/1.jpg'),
-  ('01HHKFYXSV27CNWMTV5QDDFWCB', '01HHQ61P480SRGXG5130R22B53',1, 2, 'Figure', null, 'https://www.amazon.com/YOUNAI-Action-Figure-Decoration-Figurine/dp/B0BR9YDRPS/ref=sr_1_1_sspa?keywords=luffy+figure&qid=1702895497&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1', 1, 'YOUNAI Anime Action Figure, LX Luffy Figure Decoration Statue Figurine Model Toy Gift', 1900, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71xSJoU941L._AC_SL1500_.jpg'),
-  ('01HHV1H3RCJYR25XJWX37NPCQJ', '01HHZYNJ8DRPKVRT1YY0Z9TRHN',1, 2, 'Figure', null, 'https://www.amazon.com/ANIME-HEROES-Monkey-Renewal-Version/dp/B0CCXQ9H1W/ref=sr_1_2?keywords=luffy%2Bfigure&qid=1702895497&sr=8-2&th=1', 1, 'ANIME HEROES - One Piece - Monkey D. Luffy Renewal Version Action Figure', 1900, true, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71LRuKUEGRL._AC_SL1500_.jpg');
+INSERT INTO request(id, created_by, location_id, category_id, item, item_detail, url, quantity, request_remark, offer_price, has_offer, is_active, created_at, updated_at, primary_image)VALUES
+ ('01HHKFYXSSTKGTSGJ4TPMC096E','01HHQ61P480SRGXG5130R22B53', 1, 1, 'clothes', '{"size": "M", "color": "Black", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.uniqlo.com.hk/zh_HK/product-detail.html?productCode=u0000000028366', 1, 'MEN 2WAY SINGLE BREASTED COAT', 900, FALSE, true, '2023-12-12 20:20:17.367665', '2023-12-12 20:20:17.367665', 'https://www.uniqlo.com.hk/hmall/test/u0000000028366/main/first/561/1.jpg'),
+ ('01HHKFYXST6C48MQ886K9EARM5','01HHQ61P480SRGXG5130R22B53', 1, 1, 'clothes', '{"size": "L", "color": "blue", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.uniqlo.com.hk/zh_HK/product-detail.html?productCode=u0000000027647', 1, '男裝 孖襟大衣', 3000, FALSE, true, '2023-12-12 20:21:05.972918', '2023-12-12 20:21:05.972918','https://www.uniqlo.com.hk/hmall/test/u0000000027647/main/first/561/1.jpg'),
+ ('01HHKFYXSTSBKPZX0HYDZ85KDE','01HHP4GVCVN1P5FY8YYX9YXKN8', 1, 1, 'clothes', '{"size": "S", "color": "blue", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.uniqlo.com.hk/zh_HK/product-detail.html?productCode=u0000000027999', 1, '男女通用 PEANUTS You Can Be Anything!', 300, FALSE, true, '2023-12-12 20:21:59.936233', '2023-12-12 20:21:59.936233','https://www.uniqlo.com.hk/hmall/test/u0000000027999/main/first/561/1.jpg'),
+ ('01HHKFYXSVSNSZ8BJ14YSCR16H', '01HHP4GVCVN1P5FY8YYX9YXKN8',1, 1, 'clothes', '{"size": "S", "color": "blue", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.uniqlo.com.hk/zh_HK/product-detail.html?productCode=u0000000028005', 1, '男女通用 PEANUTS You Can Be Anything!', 1900, FALSE, true, '2023-12-12 20:22:39.631992', '2023-12-12 20:22:39.631992', 'https://www.uniqlo.com.hk/hmall/test/u0000000028005/main/first/561/1.jpg'),
+ ('01HHKFYXSV27CNWMTV5QDDFWCB', '01HHQ61P480SRGXG5130R22B53',1, 2, 'Figure', null, 'https://www.amazon.com/YOUNAI-Action-Figure-Decoration-Figurine/dp/B0BR9YDRPS/ref=sr_1_1_sspa?keywords=luffy+figure&qid=1702895497&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1', 1, 'YOUNAI Anime Action Figure, LX Luffy Figure Decoration Statue Figurine Model Toy Gift', 1900, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71xSJoU941L._AC_SL1500_.jpg'),
+ ('01HJ0BWPRWKP8PKNRXMYVP0ZPG', '01HHZYNJ8DRPKVRT1YY0Z9TRHN',1, 2, 'Figure', null, 'https://www.amazon.com/Asoucou-Thousand-Sculpture-Realistic-Character/dp/B0BKLB55YP/ref=sr_1_1?crid=2HREX2JJSITXC&keywords=zoro%2Bfigure&qid=1702965006&sprefix=solo%2Bfigu%2Caps%2C379&sr=8-1&th=1', 1, 'Asoucou Zoro Figure, Anime Action Figure', 1900, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/61nVkA8p7VL._AC_SL1002_.jpg'),
+ ('01HJ0A6HM4RKRA69S9DHJKC5AY', '01HHZYZTY556HJ3C8YD8GHHP1Y',1, 2, 'clothes', '{"size": "S", "color": "Black", "gender": "Women", "apparelType": "Dress"}', 'https://hk.louisvuitton.com/zht-hk/products/eyelet-tab-dress-nvprod4940317v/1AFGEC', 1, '穿孔飾片連身裙', 16500, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://hk.louisvuitton.com/images/is/image/lv/1/PP_VP_L/%E8%B7%AF%E6%98%93%E5%A8%81%E7%99%BB-%E7%A9%BF%E5%AD%94%E9%A3%BE%E7%89%87%E9%80%A3%E8%BA%AB%E8%A3%99-%E6%99%82%E8%A3%9D%E7%B3%BB%E5%88%97--FQJD12GXW900_PM2_Front%20view.png?wid=1440&hei=1440'),
+ ('01HHV1H3RCJYR25XJWX37NPCQJ', '01HHZYNJ8DRPKVRT1YY0Z9TRHN',1, 2, 'Figure', null, 'https://www.amazon.com/ANIME-HEROES-Monkey-Renewal-Version/dp/B0CCXQ9H1W/ref=sr_1_2?keywords=luffy%2Bfigure&qid=1702895497&sr=8-2&th=1', 1, 'ANIME HEROES - One Piece - Monkey D. Luffy Renewal Version Action Figure', 1900, true, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71LRuKUEGRL._AC_SL1500_.jpg');
 -- 01HHV1H3RCJYR25XJWX37NPCQJ has offer
 
 INSERT INTO user_address(id, user_id, address, is_primary) VALUES
@@ -117,8 +118,14 @@ INSERT INTO user_address(id, user_id, address, is_primary) VALUES
  ('01HHKFYXSV27CNWMTV5QDDFWCB','https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71gKOUQyrDL._AC_SL1500_.jpg',true),
  ('01HHKFYXSV27CNWMTV5QDDFWCB','https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71delv70wyL._AC_SL1500_.jpg',true),
  ('01HHKFYXSV27CNWMTV5QDDFWCB','https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/81DzUtbKrYL._AC_SL1500_.jpg',true),
+ ('01HJ0BWPRWKP8PKNRXMYVP0ZPG','https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/51qmBCdwSQL._AC_.jpg',true),
+ ('01HJ0BWPRWKP8PKNRXMYVP0ZPG','https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/51gTVwCcsrL._AC_.jpg',true),
+ ('01HJ0BWPRWKP8PKNRXMYVP0ZPG','https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/61ZZjpXcPDL._AC_.jpg',true),
+ ('01HJ0BWPRWKP8PKNRXMYVP0ZPG','https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/51wQJ8sinjL._AC_.jpg',true),
+ ('01HJ0A6HM4RKRA69S9DHJKC5AY','https://hk.louisvuitton.com/images/is/image/lv/1/PP_VP_L/%E8%B7%AF%E6%98%93%E5%A8%81%E7%99%BB-%E7%A9%BF%E5%AD%94%E9%A3%BE%E7%89%87%E9%80%A3%E8%BA%AB%E8%A3%99-%E6%99%82%E8%A3%9D%E7%B3%BB%E5%88%97--FQJD12GXW900_PM1_Cropped%20worn%20view.png?wid=1440&hei=1440',true),
  ('01HHV1H3RCJYR25XJWX37NPCQJ','https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71Hf77Rs3DL._AC_SL1500_.jpg',true),
  ('01HHV1H3RCJYR25XJWX37NPCQJ','https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71TkSqQa2FL._AC_SL1500_.jpg',true);
+
 
 --INSERT INTO provider_verification (user_id, status_id,provider_id, id_document, address_document) VALUES
 -- ('01HHMV7DKG4Z9JNT1P8DESHW8X', '4','1', 'A654321', '321 HAHA Street');
@@ -155,14 +162,6 @@ INSERT INTO provider (id, user_id, location_id, star_of_efficiency, star_of_atti
 --ElaineP
 ('01HJ017JH7A2J9XYPTY64YG5EK', '01HHZYZY2PSD07ZQS50FC2D33E', '1','5','5');
 
-
-
---Fredy
-INSERT INTO provider (id, user_id, location_id, star_of_efficiency, star_of_attitude) VALUES
-('01HHZZ37FZAVTMGZ6AYFV5RPP7', '01HHZYZJMQT1F9SF92P0WCHDNJ', '1','5','5');
---Elaine
-INSERT INTO provider (id, user_id, location_id, star_of_efficiency, star_of_attitude) VALUES
-('01HHQVX80K4HAD2YMTHW6970VG', '01HHQRCV54C81AAERBR58E2DAN', '1','5','5');
 
 
 

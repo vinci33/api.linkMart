@@ -9,7 +9,7 @@ VALUES
 
 --All completed orders
 INSERT INTO offer (id, request_id, provider_id, offer_status_id, estimated_process_time, price, offer_remark) VALUES
-('01HHZXTEBHEH1H55WTEZX7YTKV', '01HHKFYXSVSNSZ8BJ14YSCR16H', '01HHZZ37FZAVTMGZ6AYFV5RPP7', 5, 14, 4000, 'Can do it in 14 days');
+('01HHZXTEBHEH1H55WTEZX7YTKV', '01HHKFYXSVSNSZ8BJ14YSCR16H', '01HJ017JH7A2J9XYPTY64YG5EK', 5, 14, 4000, 'Can do it in 14 days');
 --requestId: 01HHKFYXSVSNSZ8BJ14YSCR16H, user: testingForUser2   ,  pw: "123"
 --providerId: 01HHZZ37FZAVTMGZ6AYFV5RPP7, user : FredyP    ,    pw: "123"
 

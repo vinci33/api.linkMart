@@ -20,6 +20,9 @@ public class LogisticCompany {
     @Column(name = "company_url")
     private String companyUrl;
 
+    @Column(name = "provider_id")
+    private String providerId;
+
     @Column(name = "created_at", insertable = false, updatable = false)
     private Timestamp createdAt;
 
@@ -66,6 +69,14 @@ public class LogisticCompany {
 
     public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getProviderId() {
+        return providerId;
+    }
+
+    public void setProviderId(String providerId) {
+        this.providerId = providerId;
     }
 
     @Override
