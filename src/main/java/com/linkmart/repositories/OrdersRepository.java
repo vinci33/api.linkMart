@@ -70,7 +70,7 @@ public interface OrdersRepository extends JpaRepository<Orders, String> {
                     order_status os ON o.order_status_id = os.id
                 WHERE
                      u.id = :userId AND
-                    os.order_status IN :orderStatus
+                    os.order_status IN :orderStatuses
                     ORDER BY o.created_at DESC
                     """, nativeQuery = true)
     List<OrdersDto> findOrdersByUserIdAndStatus(String userId, List<String> orderStatuses);

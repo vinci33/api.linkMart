@@ -76,12 +76,9 @@ public class OrdersService {
         logger.info("All open offers: " +allOpenOffers );
         requestService.updateRequestStatus(requestId,
                 true , false);
-//        offer.setOfferStatusId(1);
         Orders order = new Orders();
         order.setOfferId(offerId);
         order.setUserAddressId(userAddressId);
-        // Nic solve this
-//        order.setLogisticCompanyId(1);
         setStatusCreate(order);
         logger.info("Order status: " + order.getOrderStatusId());
         ordersRepository.saveAndFlush(order);
