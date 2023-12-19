@@ -121,3 +121,6 @@ INSERT INTO users (id, username, user_email, password) VALUES
 INSERT INTO offer (id, request_id, provider_id, offer_status_id, estimated_process_time, price, offer_remark) VALUES
 ('01HHV1JK9C6RE53WM98WWZWEYX', '01HHV1H3RCJYR25XJWX37NPCQJ', '01HHMV7DKG4Z9JNT1P8DESHW8R', 1, 20, 4000, 'Dec 17');
 --pls give me the JWT token for this user to test
+--user_id:01HHMV7DKG4Z9JNT1P8DESHW8X
+--password: "1234"
+--JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhZG1pbiIsInVzZXJJZCI6IjAxSEhNVjdES0c0WjlKTlQxUDhERVNIVzhYIiwiaWF0IjoxNzAyODcxOTEwLCJleHAiOjE3MDQxODgwNDR9.dvPhuAdwAusAvSQ6V9s87l6ZX1sYPLec2hrqyQcox4k
