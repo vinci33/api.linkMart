@@ -194,11 +194,14 @@ public class OfferService {
     public PaymentDetailDto acceptOffer(String userId, String offerId,Integer addressId) {
         try {
             validateOfferId(offerId);
+            logger.info("userId: " + userId);
             userService.validateUserId(userId);
             userAddressService.validateUserAddressId(addressId);
+            logger.info("offerId: " + offerId);
             var offer = offerRepository.findOfferByOfferId(offerId);
             var request = requestRepository.findRequestModelByRequestId(offer.getRequestId());
             UserDetailDto userDetail = userService.getUserDetailById(userId);
+            logger.info("userDetail: " + userDetail);
             var username = userDetail.getUsername();
             var userEmail = userDetail.getUserEmail();
             var userPaymentMethod = userDetail.getUserPaymentMethod().get(0);

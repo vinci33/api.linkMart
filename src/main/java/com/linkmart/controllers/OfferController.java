@@ -86,9 +86,12 @@ public class OfferController {
     @GetMapping(value = "/api/offer/paymentInfo/{offerId}/{addressId}")
     public PaymentDetailDto acceptOffer (
             @PathVariable("offerId") String offerId,
-            @PathVariable("addressId") Integer addressId) {
+            @PathVariable("addressId") Integer addressId,
+            HttpServletRequest request) {
         try{
+            logger.info((String)request.getAttribute("userId"));
             var userId = (String)request.getAttribute("userId");
+            logger.info("userId: " + userId);
             if (userId == null) {
                 throw new IllegalArgumentException("UserId not found");
             }
