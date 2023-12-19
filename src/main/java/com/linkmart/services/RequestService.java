@@ -89,6 +89,8 @@ public class RequestService {
             ItemDetailModel itemDetailModel = g.fromJson(itemDetail, ItemDetailModel.class);
             newRequest.setItemDetail(itemDetailModel);
 
+            newRequest.setActive(true);
+
             var result = this.requestRepository.saveAndFlush(newRequest);
             newRequest.setImages(result.getImages());
             newRequest.setCreatedBy(result.getCreatedBy());

@@ -5,7 +5,6 @@ public class AcceptOfferForm {
 
     private Integer userAddressId;
 
-
     public Integer getUserAddressId() {
         return userAddressId;
     }

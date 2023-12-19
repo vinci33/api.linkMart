@@ -89,15 +89,13 @@ public class OfferController {
             @PathVariable("addressId") Integer addressId,
             HttpServletRequest request) {
         try{
-            logger.info((String)request.getAttribute("userId"));
             var userId = (String)request.getAttribute("userId");
-            logger.info("userId: " + userId);
             if (userId == null) {
                 throw new IllegalArgumentException("UserId not found");
             }
             PaymentDetailDto paymentDetail = offerService.acceptOffer(userId, offerId, addressId);
             return paymentDetail;
-        }catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             logger.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
@@ -120,5 +118,4 @@ public class OfferController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
-
 }
