@@ -59,13 +59,14 @@ INSERT INTO category_field_option(category_field_id, category_field_option_name)
 
 INSERT INTO request(id, created_by, location_id, category_id, item, item_detail, url, quantity, request_remark, offer_price, has_offer, is_active, created_at, updated_at, primary_image)
 VALUES
-  ('01HHKFYXSSTKGTSGJ4TPMC096E','01HHQ61P480SRGXG5130R22B53', 1, 1, 'clothes', '{"size": "S", "color": "blue", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.uniqlo.com.hk/zh_HK/index.html', 1, '男裝 無縫羽絨連帽外套', 900, FALSE, true, '2023-12-12 20:20:17.367665', '2023-12-12 20:20:17.367665', 'http://dummyimage.com/225x100.png/5fa2dd/ffffff'),
-  ('01HHKFYXST6C48MQ886K9EARM5','01HHQ61P480SRGXG5130R22B53', 1, 1, 'clothes', '{"size": "S", "color": "blue", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.dior.com/zh_hk/fashion/products', 1, '無縫羽絨連帽外套', 1900, FALSE, true, '2023-12-12 20:21:05.972918', '2023-12-12 20:21:05.972918','http://dummyimage.com/210x100.png/cc0000/ffffff'),
-  ('01HHKFYXSTSBKPZX0HYDZ85KDE','01HHP4GVCVN1P5FY8YYX9YXKN8', 1, 1, 'clothes', '{"size": "S", "color": "blue", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.ssense.com/en-hk/men/product/wooyoungmi/off-white-crewneck-sweater', 1, '無縫羽絨連帽外套', 1900, FALSE, true, '2023-12-12 20:21:59.936233', '2023-12-12 20:21:59.936233','http://dummyimage.com/165x100.png/dddddd/000000'),
-  ('01HHKFYXSVSNSZ8BJ14YSCR16H', '01HHP4GVCVN1P5FY8YYX9YXKN8',1, 1, 'clothes', '{"size": "S", "color": "blue", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.lululemon.com.hk/en-hk/c/sale/specials', 1, '無縫羽絨連帽外套', 1900, FALSE, true, '2023-12-12 20:22:39.631992', '2023-12-12 20:22:39.631992', 'http://dummyimage.com/135x100.png/cc0000/ffffff'),
-  ('01HHKFYXSV27CNWMTV5QDDFWCB', '01HHQ61P480SRGXG5130R22B53',1, 2, 'Figure', null, 'https://tamashiiweb.com/item/13885/?wovn=en#', 1, NULL, 1900, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://tamashiiweb.com/images/item/item_0000013885_IclqbkLn_01.jpg');
+  ('01HHKFYXSSTKGTSGJ4TPMC096E','01HHQ61P480SRGXG5130R22B53', 1, 1, 'clothes', '{"size": "M", "color": "Black", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.uniqlo.com.hk/zh_HK/product-detail.html?productCode=u0000000028366', 1, 'MEN 2WAY SINGLE BREASTED COAT', 900, FALSE, true, '2023-12-12 20:20:17.367665', '2023-12-12 20:20:17.367665', 'https://www.uniqlo.com.hk/hmall/test/u0000000028366/main/first/561/1.jpg'),
+  ('01HHKFYXST6C48MQ886K9EARM5','01HHQ61P480SRGXG5130R22B53', 1, 1, 'clothes', '{"size": "L", "color": "blue", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.uniqlo.com.hk/zh_HK/product-detail.html?productCode=u0000000027647', 1, '男裝 孖襟大衣', 3000, FALSE, true, '2023-12-12 20:21:05.972918', '2023-12-12 20:21:05.972918','https://www.uniqlo.com.hk/hmall/test/u0000000027647/main/first/561/1.jpg'),
+  ('01HHKFYXSTSBKPZX0HYDZ85KDE','01HHP4GVCVN1P5FY8YYX9YXKN8', 1, 1, 'clothes', '{"size": "S", "color": "blue", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.uniqlo.com.hk/zh_HK/product-detail.html?productCode=u0000000027999', 1, '男女通用 PEANUTS You Can Be Anything!', 300, FALSE, true, '2023-12-12 20:21:59.936233', '2023-12-12 20:21:59.936233','https://www.uniqlo.com.hk/hmall/test/u0000000027999/main/first/561/1.jpg'),
+  ('01HHKFYXSVSNSZ8BJ14YSCR16H', '01HHP4GVCVN1P5FY8YYX9YXKN8',1, 1, 'clothes', '{"size": "S", "color": "blue", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.uniqlo.com.hk/zh_HK/product-detail.html?productCode=u0000000028005', 1, '男女通用 PEANUTS You Can Be Anything!', 1900, FALSE, true, '2023-12-12 20:22:39.631992', '2023-12-12 20:22:39.631992', 'https://www.uniqlo.com.hk/hmall/test/u0000000028005/main/first/561/1.jpg'),
+  ('01HHKFYXSV27CNWMTV5QDDFWCB', '01HHQ61P480SRGXG5130R22B53',1, 2, 'Figure', null, 'https://www.amazon.com/YOUNAI-Action-Figure-Decoration-Figurine/dp/B0BR9YDRPS/ref=sr_1_1_sspa?keywords=luffy+figure&qid=1702895497&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1', 1, NULL, 1900, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71xSJoU941L._AC_SL1500_.jpg'),
+  ('01HHV1H3RCJYR25XJWX37NPCQJ', '01HHQ61P480SRGXG5130R22B53',1, 2, 'Figure', null, 'https://www.amazon.com/ANIME-HEROES-Monkey-Renewal-Version/dp/B0CCXQ9H1W/ref=sr_1_2?keywords=luffy%2Bfigure&qid=1702895497&sr=8-2&th=1', 1, NULL, 1900, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71LRuKUEGRL._AC_SL1500_.jpg');
 
- INSERT INTO user_address(id, user_id, address, is_primary) VALUES
+INSERT INTO user_address(id, user_id, address, is_primary) VALUES
  ('1','01HHMV7DKG4Z9JNT1P8DESHW8X','13/f, 11 kennedy Road',false),
  ('2','01HHP4GVCVN1P5FY8YYX9YXKN8','flat a,19/f, 8 Star Street',true),
  ('3','01HHMV7DKG4Z9JNT1P8DESHW8X','Rm B, house A, 17 Bowen Rd',false),
@@ -73,13 +74,24 @@ VALUES
  ('6','01HHMV7DKG4Z9JNT1P8DESHW8X','Rm C, Manly Mansion, Robinson Rd',false);
 
  INSERT INTO image (request_id, image_path, is_active) VALUES
- ('01HHKFYXSSTKGTSGJ4TPMC096E','http://dummyimage.com/225x100.png/5fa2dd/ffffff',true),
- ('01HHKFYXST6C48MQ886K9EARM5','http://dummyimage.com/210x100.png/cc0000/ffffff',true),
- ('01HHKFYXSTSBKPZX0HYDZ85KDE','http://dummyimage.com/165x100.png/dddddd/000000',true),
- ('01HHKFYXSVSNSZ8BJ14YSCR16H','http://dummyimage.com/135x100.png/cc0000/ffffff',true),
- ('01HHKFYXSV27CNWMTV5QDDFWCB','https://tamashiiweb.com/images/item/item_0000013885_IclqbkLn_01.jpg',true),
- ('01HHKFYXSV27CNWMTV5QDDFWCB','https://tamashiiweb.com/images/item/item_0000013885_22mSOSGZ_04.jpg',true),
- ('01HHKFYXSV27CNWMTV5QDDFWCB','https://tamashiiweb.com/images/item/item_0000013885_22mSOSGZ_03.jpg',true);
+ ('01HHKFYXSSTKGTSGJ4TPMC096E','https://www.uniqlo.com.hk/hmall/test/u0000000028366/main/other2/480/3.jpg',true),
+ ('01HHKFYXSSTKGTSGJ4TPMC096E','https://www.uniqlo.com.hk/hmall/test/u0000000028366/main/other2/480/4.jpg',true),
+ ('01HHKFYXSSTKGTSGJ4TPMC096E','https://www.uniqlo.com.hk/hmall/test/u0000000028366/main/other2/480/5.jpg',true),
+ ('01HHKFYXST6C48MQ886K9EARM5','https://www.uniqlo.com.hk/hmall/test/u0000000027647/main/first/561/2.jpg',true),
+ ('01HHKFYXST6C48MQ886K9EARM5','https://www.uniqlo.com.hk/hmall/test/u0000000027647/main/first/561/3.jpg',true),
+ ('01HHKFYXST6C48MQ886K9EARM5','https://www.uniqlo.com.hk/hmall/test/u0000000027647/main/first/561/4.jpg',true),
+ ('01HHKFYXSTSBKPZX0HYDZ85KDE','https://www.uniqlo.com.hk/hmall/test/u0000000027999/main/first/561/2.jpg',true),
+ ('01HHKFYXSTSBKPZX0HYDZ85KDE','https://www.uniqlo.com.hk/hmall/test/u0000000027999/main/first/561/3.jpg',true),
+ ('01HHKFYXSTSBKPZX0HYDZ85KDE','https://www.uniqlo.com.hk/hmall/test/u0000000027999/main/first/561/4.jpg',true),
+ ('01HHKFYXSVSNSZ8BJ14YSCR16H','https://www.uniqlo.com.hk/hmall/test/u0000000028005/main/first/561/2.jpg',true),
+ ('01HHKFYXSVSNSZ8BJ14YSCR16H','https://www.uniqlo.com.hk/hmall/test/u0000000028005/main/first/561/3.jpg',true),
+ ('01HHKFYXSVSNSZ8BJ14YSCR16H','https://www.uniqlo.com.hk/hmall/test/u0000000028005/main/first/561/4.jpg',true),
+ ('01HHKFYXSV27CNWMTV5QDDFWCB','https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71CWSymDYJL._AC_SL1500_.jpg',true),
+ ('01HHKFYXSV27CNWMTV5QDDFWCB','https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71gKOUQyrDL._AC_SL1500_.jpg',true),
+ ('01HHKFYXSV27CNWMTV5QDDFWCB','https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71delv70wyL._AC_SL1500_.jpg',true),
+ ('01HHKFYXSV27CNWMTV5QDDFWCB','https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/81DzUtbKrYL._AC_SL1500_.jpg',true),
+ ('01HHV1H3RCJYR25XJWX37NPCQJ','https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71Hf77Rs3DL._AC_SL1500_.jpg',true),
+ ('01HHV1H3RCJYR25XJWX37NPCQJ','https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71TkSqQa2FL._AC_SL1500_.jpg',true);
 
 --INSERT INTO provider_verification (user_id, status_id,provider_id, id_document, address_document) VALUES
 -- ('01HHMV7DKG4Z9JNT1P8DESHW8X', '4','1', 'A654321', '321 HAHA Street');
@@ -104,9 +116,6 @@ INSERT INTO users (id, username, user_email, password) VALUES
 --JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhZG1pbiIsInVzZXJJZCI6IjAxSEhRUkNWNTRDODFBQUVSQlI1OEUyREFOIiwiaWF0IjoxNzAyNjc4MTI5LCJleHAiOjE3MDM5OTQyNjR9.M4Fr-2Esjo3odBf5qGrwKakcaZECuwLKIaWQDFKuYoQ
  INSERT INTO provider (id, user_id, location_id, star_of_efficiency, star_of_attitude) VALUES
  ('01HHQVX80K4HAD2YMTHW6970VG', '01HHQRCV54C81AAERBR58E2DAN', '1','5','5');
-
-INSERT INTO request (id, created_by, location_id, category_id, item, item_detail, url, primary_image, quantity, request_remark, offer_price, has_offer) VALUES
-('01HHV1H3RCJYR25XJWX37NPCQJ', '01HHP4GVCVN1P5FY8YYX9YXKN8', 3, 2, 'Figure', NULL, 'https://shorturl.at/jryAM','https://shorturl.at/jryAM', 1, 'Luffy Figure', 3000, true);
 
 INSERT INTO offer (id, request_id, provider_id, offer_status_id, estimated_process_time, price, offer_remark) VALUES
 ('01HHV1JK9C6RE53WM98WWZWEYX', '01HHV1H3RCJYR25XJWX37NPCQJ', '01HHMV7DKG4Z9JNT1P8DESHW8R', 1, 20, 4000, 'Dec 17');

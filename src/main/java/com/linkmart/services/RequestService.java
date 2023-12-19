@@ -7,6 +7,7 @@ import com.linkmart.models.ImageModel;
 import com.linkmart.models.ItemDetailModel;
 import com.linkmart.models.RequestModel;
 import com.linkmart.repositories.*;
+import com.linkmart.utils.UtilMethod;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.apache.commons.lang3.ObjectUtils;
@@ -272,6 +273,8 @@ public class RequestService {
                 }
                 result.setImages(images);
             }
+            result.setUpdatedAt(UtilMethod.Now());
+            logger.info(UtilMethod.Now().toString());
             requestRepository.saveAndFlush(result);
         } catch (Exception e) {
             throw new Exception("Cannot update request");

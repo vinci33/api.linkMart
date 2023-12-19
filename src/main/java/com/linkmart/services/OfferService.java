@@ -87,15 +87,19 @@ public class OfferService {
     @Transactional
     public List<GetOneOfferDto> getOfferByRequestId(String userId, String requestId) throws Exception {
         try {
-            var providerId = providerRepository.getIdByUserId(userId);
-            logger.info("providerId: " + providerId);
-            // check if provider exists
-            if (providerId == null) {
-                throw new Exception("Provider not found");
-            }
-            var thisRequest = requestRepository.findCreatedByByRequestId(requestId);
-            logger.info("thisRequest: " + requestId);
+//            var providerId = providerRepository.getIdByUserId(userId);
+//            logger.info("providerId: " + providerId);
+//            // check if provider exists
+//            if (providerId == null) {
+//                throw new Exception("Provider not found");
+//            }
+//            var thisRequest = requestRepository.findCreatedByByRequestId(requestId);
+//            logger.info("thisRequest: " + requestId);
             // check if request exists and not created by this provider
+            var request = requestRepository.findRequestModelByRequestId(requestId);
+            if (request == null) {
+                throw new Exception("Request not found");
+            }
             Offer offer = offerRepository.findByRequestId(requestId);
             ArrayList <GetOneOfferDto> offerList = new ArrayList<>();
             if (offer == null) {
@@ -119,7 +123,7 @@ public class OfferService {
             getManyOfferDto.add(getOneOfferDto);
             return getManyOfferDto;
         } catch (Exception e) {
-            throw new Exception("Cannot get offer in database");
+            throw new Exception("Cannot getOfferByRequestId");
         }
     }
 
