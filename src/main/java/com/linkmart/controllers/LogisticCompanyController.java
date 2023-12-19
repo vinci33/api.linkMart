@@ -22,7 +22,7 @@ public class LogisticCompanyController {
     @Autowired
     LogisticCompanyRepository logisticCompanyRepository;
 
-    @GetMapping(value = "/logistic_company")
+    @GetMapping(value = "/logisticCompany")
     public List<LogisticCompanyDto> getAllLocation (){
         List<LogisticCompany> result = logisticCompanyRepository.findAll();
         return LogisticCompanyMapper.INSTANCE.getAllLogisticCompany(result);
