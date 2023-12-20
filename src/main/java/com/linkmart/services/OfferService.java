@@ -7,6 +7,7 @@ import com.linkmart.forms.AcceptOfferForm;
 import com.linkmart.models.Offer;
 import com.linkmart.models.Provider;
 import com.linkmart.repositories.*;
+import org.antlr.v4.runtime.ListTokenSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,19 +95,19 @@ public class OfferService {
     public List<GetOneOfferDto> getOfferByRequestId(String userId, String requestId) throws Exception {
         try {
             // check if request exists and not created by this provider
-            List<String> requests = requestRepository.findRequestByRequestId(requestId);
-            logger.info("requests: " + requests);
-            List<String> requestIds = requestRepository.findRequestByRequestId(requestId);
+            logger.info("ServiceRequestId: " + requestId);
+            String createdBy = requestRepository.findCreatedByByRequestId(requestId);
+            logger.info("requests: " + createdBy);
             ArrayList <GetOneOfferDto> offerList = new ArrayList<>();
-            for (String request : requests) {
-                var offer  = offerRepository.findByRequestId(request);
-                if (offer == null) {
+            //check if offer is exist
+            var offers  = offerRepository.findByRequestId(requestId);
+                if (offers == null) {
                     return offerList;
                 }
+            for (Offer offer : offers) {
                 Provider provider = providerRepository.findProviderById(offer.getProviderId());
                 String userName = userRepository.findByUserId(provider.getUserId());
                 String status = statusRepository.findStatusName(offer.getOfferStatusId());
-                List<GetOneOfferDto> getManyOfferDto = new ArrayList<>();
                 GetOneOfferDto getOneOfferDto = new GetOneOfferDto();
                 getOneOfferDto.setOfferId(offer.getOfferId());
                 getOneOfferDto.setRequestId(offer.getRequestId());
@@ -293,6 +294,22 @@ public class OfferService {
         } catch (Exception e) {
             throw new IllegalArgumentException("Invalid ID: " + e.getMessage(), e);
         }
+    }
+
+    public Boolean checkIfHasOffer(String requestId, String userId) {
+        logger.info("requestId: " + requestId);
+        logger.info("userId: " + userId);
+        var offers = offerRepository.findByRequestId(requestId);
+        var providerId = providerRepository.getIdByUserId(userId);
+        logger.info("offer: " + offers);
+        for (Offer offer : offers) {
+            if (offer.getProviderId().equals(providerId)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return null;
     }
 
     public List<Offer> getOfferByRequestIdAndOfferStatusId(String requestId, Integer offerStatusId){

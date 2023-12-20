@@ -1,9 +1,11 @@
 package com.linkmart.controllers;
 
+import com.linkmart.dtos.HasOfferDto;
 import com.linkmart.dtos.OneRequestDto;
 import com.linkmart.dtos.RequestDto;
 import com.linkmart.dtos.RequestResponseWithMessageDto;
 import com.linkmart.models.RequestModel;
+import com.linkmart.services.OfferService;
 import com.linkmart.services.RequestService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
@@ -24,6 +26,9 @@ public class RequestController {
 
     @Autowired
     HttpServletRequest request;
+
+    @Autowired
+    OfferService offerService;
 
     @PostMapping(value = "/api/request", consumes = {"multipart/form-data"})
     public RequestModel postRequest (
@@ -146,6 +151,17 @@ public class RequestController {
             var userId = (String)request.getAttribute("userId");
             logger.info(userId);
             return requestService.getAllMyRequestHistory(userId);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    @GetMapping(value = "/api/request/provider/{requestId}")
+    public HasOfferDto checkIfHasOffer (@PathVariable(value = "requestId") String requestId) {
+        try{
+            var userId = (String)request.getAttribute("userId");
+            var result = offerService.checkIfHasOffer(requestId, userId);
+            return new HasOfferDto(result);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

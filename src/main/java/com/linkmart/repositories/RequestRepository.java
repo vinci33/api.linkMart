@@ -16,12 +16,6 @@ import java.util.List;
 
 @Transactional
 public interface RequestRepository extends JpaRepository<RequestModel, Integer> {
-    @Query(value = """
-            Select * from request where created_by = :userId
-             """, nativeQuery = true)
-    List<RequestModel> findRequestByUserId(@Param("userId") String userId);
-
-    List<String> findRequestByRequestId(String requestId);
 
     @Query(value = """
                     SELECT r.id as requestId,

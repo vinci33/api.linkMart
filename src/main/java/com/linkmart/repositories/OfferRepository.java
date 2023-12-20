@@ -17,7 +17,7 @@ public interface OfferRepository extends JpaRepository<Offer, String> {
                 WHERE offer.request_id = :requestId
                 ORDER BY created_at DESC
                 """, nativeQuery = true)
-    Offer findByRequestId(@Param("requestId") String requestId);
+    List<Offer> findByRequestId(@Param("requestId") String requestId);
 
     @Query(value =
             """
