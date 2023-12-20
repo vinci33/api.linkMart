@@ -74,15 +74,14 @@ public class RequestService {
             List<ImageModel> images = new ArrayList<>();
             for (MultipartFile file: files) {
                 String imagePath = s3Service.uploadFile(file);
-                if (firstFile == null) {
-                    firstFile = file;
-                    newRequest.setPrimaryImage(imagePath); // Store the first file
-                    continue;
-                }
                 ImageModel image = new ImageModel();
                 image.setImagePath(imagePath);
                 image.setRequestId(newRequest.getRequestId());
                 images.add(image);
+                if (firstFile == null) {
+                    firstFile = file;
+                    newRequest.setPrimaryImage(imagePath); // Store the first file
+                }
             }
             newRequest.setImages(images);
 
