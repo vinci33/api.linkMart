@@ -73,7 +73,7 @@ public class OrdersService {
         offerService.setStatusPending(offer);
         logger.info("Offer status: " + offer.getOfferStatusId());
         offerRepository.saveAndFlush(offer);
-        logger.info("All open offers: " +allOpenOffers );
+        logger.info("All open offers: " + allOpenOffers );
         requestService.updateRequestStatus(requestId,
                 true , false);
 //        offer.setOfferStatusId(1);

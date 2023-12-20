@@ -6,8 +6,6 @@ public class PaymentDetailDto {
     private String userEmail;
     private UserAddressDto userAddress;
     private UserPaymentMethodDto UserPaymentMethod;
-
-
     private String  providerUsername; //provider username
     private String location;
     private String item;
