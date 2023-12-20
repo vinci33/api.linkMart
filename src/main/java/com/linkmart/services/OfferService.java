@@ -232,6 +232,24 @@ public class OfferService {
         }
     }
 
+    public void deleteOffer(String userId, String offerId) {
+        try {
+            validateOfferId(offerId);
+            logger.info("userId: " + userId);
+            userService.validateUserId(userId);
+            logger.info("offerId: " + offerId);
+            var offer = offerRepository.findOfferByOfferId(offerId);
+            var providerId  =  offer.getProviderId();
+            if (!providerId.equals(userId)) {
+                throw new IllegalArgumentException("Invalid userId");
+            }
+            //change to aborted status
+            offerRepository.updateOfferStatus(offerId , 3);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Invalid ID: " + e.getMessage(), e);
+        }
+    }
+
     public List<Offer> getOfferByRequestIdAndOfferStatusId(String requestId, Integer offerStatusId){
         return offerRepository.findOfferByRequestIdAndOfferStatusId(requestId, offerStatusId);
     }

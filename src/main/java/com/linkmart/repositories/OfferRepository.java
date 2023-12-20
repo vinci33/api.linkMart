@@ -48,6 +48,14 @@ public interface OfferRepository extends JpaRepository<Offer, String> {
             """, nativeQuery = true)
     Offer findOfferById(@Param("offerId") String offerId);
 
+    @Modifying
+    @Query(value =
+            """
+            UPDATE offer
+            SET offer_status_id = :offerStatusId
+            WHERE offer.id = :offerId
+            """, nativeQuery = true)
+    void updateOfferStatus(@Param("offerId") String offerId, @Param("offerStatusId") Integer offerStatusId);
 
     Offer findOfferByOfferId(String offerId);
 

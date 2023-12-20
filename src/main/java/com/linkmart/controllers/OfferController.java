@@ -118,4 +118,19 @@ public class OfferController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
+
+    @DeleteMapping(value = "/api/offer/{offerId}")
+    public void deleteOffer (
+            @PathVariable("offerId") String offerId) {
+        try{
+            var userId = (String)request.getAttribute("userId");
+            if (userId == null) {
+                throw new IllegalArgumentException("UserId not found");
+            }
+            offerService.deleteOffer(userId, offerId);
+        }catch (IllegalArgumentException e) {
+            logger.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
 }
