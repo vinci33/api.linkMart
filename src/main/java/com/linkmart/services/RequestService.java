@@ -209,7 +209,6 @@ public class RequestService {
             oneRequest.setCreatedAt(result.getCreatedAt());
             oneRequest.setUpdatedAt(result.getUpdatedAt());
             oneRequest.setImages(result.getImages());
-            logger.info("oneRequest: " + oneRequest.getImages());
             oneRequest.setCreatedBy(userRepository.findByUserId(result.getCreatedBy()));
             return oneRequest;
         } catch (Exception e) {
