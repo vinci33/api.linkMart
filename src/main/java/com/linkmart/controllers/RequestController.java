@@ -57,11 +57,22 @@ public class RequestController {
     }
 
     @GetMapping(value = "/api/request")
-    public List<RequestDto> getAllMyRequest (HttpServletRequest request) {
+    public List<RequestDto> getAllActiveMyRequest (HttpServletRequest request) {
         try{
             var userId = (String)request.getAttribute("userId");
             logger.info(userId);
-            return requestService.getAllMyRequest(userId);
+            return requestService.getAllMyRequest(userId, true);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    @GetMapping(value = "/api/request/inActive")
+    public List<RequestDto> getAllInActiveMyRequest (HttpServletRequest request) {
+        try{
+            var userId = (String)request.getAttribute("userId");
+            logger.info(userId);
+            return requestService.getAllMyRequest(userId, false);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

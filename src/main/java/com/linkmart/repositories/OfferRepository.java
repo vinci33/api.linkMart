@@ -38,7 +38,7 @@ public interface OfferRepository extends JpaRepository<Offer, String> {
                AND offer.offer_status_id = 1
             ORDER BY offer.updated_at DESC
             """, nativeQuery = true)
-    List<OfferDto> findActiveByRequestId(@Param("providerId") String providerId);
+    List<OfferDto> findActiveByProviderId(@Param("providerId") String providerId);
 
     @Query(value =
             """

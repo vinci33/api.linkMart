@@ -178,9 +178,9 @@ public class RequestService {
 
     //route: GET: /api/request (with is_active = true)
     @Transactional
-    public List<RequestDto> getAllMyRequest(String userId) {
+    public List<RequestDto> getAllMyRequest(String userId, Boolean isActive) {
         try {
-            var result = this.requestRepository.getAllRequestByUserId(userId);
+            var result = this.requestRepository.getAllRequestByUserId(userId, isActive);
             return result;
         } catch (Exception e) {
             throw new IllegalArgumentException("Cannot get all my request");

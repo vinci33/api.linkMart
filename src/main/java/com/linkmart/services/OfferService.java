@@ -87,14 +87,6 @@ public class OfferService {
     @Transactional
     public List<GetOneOfferDto> getOfferByRequestId(String userId, String requestId) throws Exception {
         try {
-//            var providerId = providerRepository.getIdByUserId(userId);
-//            logger.info("providerId: " + providerId);
-//            // check if provider exists
-//            if (providerId == null) {
-//                throw new Exception("Provider not found");
-//            }
-//            var thisRequest = requestRepository.findCreatedByByRequestId(requestId);
-//            logger.info("thisRequest: " + requestId);
             // check if request exists and not created by this provider
             var request = requestRepository.findRequestModelByRequestId(requestId);
             if (request == null) {
@@ -137,7 +129,7 @@ public class OfferService {
             if (providerId == null) {
                 throw new Exception("Provider not found");
             }
-            List<OfferDto> offer = offerRepository.findActiveByRequestId(providerId);
+            List<OfferDto> offer = offerRepository.findActiveByProviderId(providerId);
             ArrayList <OfferDto> offerList = new ArrayList<>();
             if (offer == null) {
                 return offerList;

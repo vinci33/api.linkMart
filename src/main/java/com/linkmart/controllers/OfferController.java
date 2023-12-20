@@ -44,6 +44,7 @@ public class OfferController {
         }
     }
 
+    //for requester
     @GetMapping(value = "/api/offer/request/{requestId}")
     public List<GetOneOfferDto> getOfferByRequestId (
             @PathVariable(value = "requestId") String requestId) throws Exception {
@@ -56,6 +57,7 @@ public class OfferController {
         }
     }
 
+    //for provider
     @GetMapping(value = "/api/offer/myOffer")
     public List<OfferDto> getMyOffer () throws Exception {
         try{
@@ -63,7 +65,7 @@ public class OfferController {
             logger.info("userId: " + userId);
             return offerService.getMyOffer(userId);
         } catch (Exception e) {
-            throw new Exception("Cannot get offer in controller");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot get offer in controller");
         }
     }
 

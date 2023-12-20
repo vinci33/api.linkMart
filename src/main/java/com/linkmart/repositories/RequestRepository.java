@@ -52,11 +52,11 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
                     JOIN users ON request.created_by = users.id
                     JOIN location ON request.location_id = location.id
                     WHERE request.created_by = :userId
-                    AND request.is_active = true
+                    AND request.is_active = :isActive
                     ORDER BY request.updated_at DESC
             LIMIT 30
             """, nativeQuery = true)
-    List<RequestDto> getAllRequestByUserId(@Param("userId") String userId);
+    List<RequestDto> getAllRequestByUserId(@Param("userId") String userId, @Param("isActive") Boolean isActive);
 
     @Query(value = """
                     SELECT
