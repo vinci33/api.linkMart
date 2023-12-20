@@ -123,7 +123,7 @@ public class OfferService {
             getManyOfferDto.add(getOneOfferDto);
             return getManyOfferDto;
         } catch (Exception e) {
-            throw new Exception("Cannot getOfferByRequestId");
+            throw new Exception("Cannot get offer by requestId");
         }
     }
 
