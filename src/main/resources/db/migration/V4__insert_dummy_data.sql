@@ -81,9 +81,6 @@ INSERT INTO category_field_option(category_field_id, category_field_option_name)
 
 INSERT INTO request(id, created_by, location_id, category_id, item, item_detail, url, quantity, request_remark, offer_price, has_offer, is_active, created_at, updated_at, primary_image)VALUES
  ('01HHKFYXSSTKGTSGJ4TPMC096E','01HHQ61P480SRGXG5130R22B53', 1, 1, 'MEN 2WAY SINGLE BREASTED COAT', '{"size": "M", "color": "Black", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.uniqlo.com.hk/zh_HK/product-detail.html?productCode=u0000000028366', 1, 'MEN 2WAY SINGLE BREASTED COAT', 900, FALSE, true, '2023-12-12 20:20:17.367665', '2023-12-12 20:20:17.367665', 'https://www.uniqlo.com.hk/hmall/test/u0000000028366/main/other2/480/3.jpg'),
- ('01HHKFYXST6C48MQ886K9EARM5','01HHQ61P480SRGXG5130R22B53', 2, 1, '孖襟大衣', '{"size": "L", "color": "blue", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.uniqlo.com.hk/zh_HK/product-detail.html?productCode=u0000000027647', 1, '男裝 孖襟大衣', 3000, FALSE, true, '2023-12-12 20:21:05.972918', '2023-12-12 20:21:05.972918','https://www.uniqlo.com.hk/hmall/test/u0000000027647/main/first/561/2.jpg'),
- ('01HHKFYXSTSBKPZX0HYDZ85KDE','01HHP4GVCVN1P5FY8YYX9YXKN8', 3, 1, 'PEANUTS You Can Be Anything', '{"size": "S", "color": "blue", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.uniqlo.com.hk/zh_HK/product-detail.html?productCode=u0000000027999', 1, '男女通用 PEANUTS You Can Be Anything!', 300, FALSE, true, '2023-12-12 20:21:59.936233', '2023-12-12 20:21:59.936233','https://www.uniqlo.com.hk/hmall/test/u0000000027999/main/first/561/2.jpg'),
- ('01HHKFYXSVSNSZ8BJ14YSCR16H', '01HHP4GVCVN1P5FY8YYX9YXKN8',4, 1, 'PEANUTS You Can Be Anything', '{"size": "S", "color": "blue", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.uniqlo.com.hk/zh_HK/product-detail.html?productCode=u0000000028005', 1, '男女通用 PEANUTS You Can Be Anything!', 1900, FALSE, true, '2023-12-12 20:22:39.631992', '2023-12-12 20:22:39.631992', 'https://www.uniqlo.com.hk/hmall/test/u0000000028005/main/first/561/2.jpg'),
  ('01HHKFYXSV27CNWMTV5QDDFWCB', '01HHQ61P480SRGXG5130R22B53',5, 2, 'LX Luffy Figure Decoration Statue Figurine Model Toy Gift', null, 'https://www.amazon.com/YOUNAI-Action-Figure-Decoration-Figurine/dp/B0BR9YDRPS/ref=sr_1_1_sspa?keywords=luffy+figure&qid=1702895497&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1', 1, 'YOUNAI Anime Action Figure, LX Luffy Figure Decoration Statue Figurine Model Toy Gift', 1900, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71CWSymDYJL._AC_SL1500_.jpg'),
  ('01HJ0BWPRWKP8PKNRXMYVP0ZPG', '01HHZYNJ8DRPKVRT1YY0Z9TRHN',6, 2, 'Asoucou Zoro Figure', null, 'https://www.amazon.com/Asoucou-Thousand-Sculpture-Realistic-Character/dp/B0BKLB55YP/ref=sr_1_1?crid=2HREX2JJSITXC&keywords=zoro%2Bfigure&qid=1702965006&sprefix=solo%2Bfigu%2Caps%2C379&sr=8-1&th=1', 1, 'Asoucou Zoro Figure, Anime Action Figure', 1900, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/51qmBCdwSQL._AC_.jpg'),
  ('01HJ0A6HM4RKRA69S9DHJKC5AY', '01HHZYZTY556HJ3C8YD8GHHP1Y',1, 1, '穿孔飾片連身裙', '{"size": "S", "color": "Black", "gender": "Women", "apparelType": "Dress"}', 'https://hk.louisvuitton.com/zht-hk/products/eyelet-tab-dress-nvprod4940317v/1AFGEC', 1, '主要面料：95%棉質，5%彈性纖維\n黑色標準版型\n意大利製造', 16500, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://hk.louisvuitton.com/images/is/image/lv/1/PP_VP_L/%E8%B7%AF%E6%98%93%E5%A8%81%E7%99%BB-%E7%A9%BF%E5%AD%94%E9%A3%BE%E7%89%87%E9%80%A3%E8%BA%AB%E8%A3%99-%E6%99%82%E8%A3%9D%E7%B3%BB%E5%88%97--FQJD12GXW900_PM1_Cropped%20worn%20view.png?wid=1440&hei=1440'),
@@ -108,6 +105,12 @@ INSERT INTO request(id, created_by, location_id, category_id, item, item_detail,
  ('01HJ2TARW22ADWYXT7M3HDZYE8', '01HHZYZTY556HJ3C8YD8GHHP1Y',2, 3, 'NIKE ZOOM VOMERO 5', null, 'https://www.nike.com.hk/product/BV1358-001/detail.htm?pdpRecommend=false&preSkuCode=', 1, 'Nike Zoom Vomero 5\n 男子運動鞋將 2000 年代初的風格煥新成時尚鞋款。\n 採用透氣耐穿物料，足以承受艱苦的訓練，而 Zoom Air 緩震效能亦帶來順暢步履。', 899, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://static.nike.com.hk/resources/product/BV1358-001/BV1358-001_BL2.png'),
  ('01HJ2TEJZ276WCSCEYT61H7MN5', '01HHZYZTY556HJ3C8YD8GHHP1Y',3, 2, '女子幼肩帶輕度承托胸墊內衣', '{"size": "S", "color": "Black", "gender": "Women", "apparelType": "Dress"}', 'https://www.nike.com.hk/product/DM0527-100/detail.htm?pdpRecommend=false&preSkuCode=', 1, '專為只背上必需品輕裝探索世界的冒險家而設計。\n 適合了解自己風格，無意轉換穿搭的人士穿著。\n 穿上 Nike Alate Minimalist 女子幼肩帶輕度承托胸墊內衣，享受獨特襯墊體驗、可調式肩帶和輕薄百搭設計，全日提供舒適承托感。\n 順滑柔軟的導濕速乾物料，呵護包覆身體，讓你全日保持乾爽。 此產品含有再生聚酯纖維。', 899, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://static.nike.com.hk/resources/product/DM0527-100/DM0527-100_BL2.png'),
  ('01HJ2TJ3TQ92ARVXF32HTTYAK0', '01HHZYNJ8DRPKVRT1YY0Z9TRHN',4, 2, '女子中度承托高腰連口袋單車短褲', '{"size": "S", "color": "Black", "gender": "Women", "apparelType": "Dress"}', 'https://www.nike.com.hk/product/DQ5995-493/detail.htm?pdpRecommend=false&preSkuCode=', 1, 'Nike Universa 啟程系列女子中度承托高腰連口袋單車短褲順滑舒適，富有彈性。\n 中磅物料 InfinaSmooth 物料適合深蹲，提供無可比擬的舒適度及俐落舒爽造型，能駕馭任何訓練。\n 同時具備高度耐穿性，可隨動作盡情伸展，經得起反覆穿著及清洗。 適合跑步、訓練或日常穿著。', 899, true, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://static.nike.com.hk/resources/product/DQ5995-493/DQ5995-493_BL2.png'),
+ ('01HJ3HK0SBBW80KTCAV2JKPPG0', '01HHZYZY2PSD07ZQS50FC2D33E',4, 2, '男子毛絨運動衫', '{"size": "S", "color": "Black", "gender": "Men", "apparelType": "Jeans"}', 'https://www.nike.com.hk/product/FB7204-010/detail.htm?pdpRecommend=false&preSkuCode=', 1, 'Nike Universa 啟程系列女子中度承托高腰連口袋單車短褲順滑舒適，富有彈性。\n 中磅物料 InfinaSmooth 物料適合深蹲，提供無可比擬的舒適度及俐落舒爽造型，能駕馭任何訓練。\n 同時具備高度耐穿性，可隨動作盡情伸展，經得起反覆穿著及清洗。 適合跑步、訓練或日常穿著。', 899, true, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://static.nike.com.hk/resources/product/FB7204-010/FB7204-010_BL1.png'),
+ ('01HJ3HRJ9NXE12RHDB7EKXSRG9', '01HHZYZY2PSD07ZQS50FC2D33E',4, 2, '男子全拉鍊式連帽衫', '{"size": "S", "color": "Black", "gender": "Men", "apparelType": "Jeans"}', 'https://www.nike.com.hk/product/DR0404-437/detail.htm?pdpRecommend=false&preSkuCode=', 1, 'Nike Universa 啟程系列女子中度承托高腰連口袋單車短褲順滑舒適，富有彈性。\n 中磅物料 InfinaSmooth 物料適合深蹲，提供無可比擬的舒適度及俐落舒爽造型，能駕馭任何訓練。\n 同時具備高度耐穿性，可隨動作盡情伸展，經得起反覆穿著及清洗。 適合跑步、訓練或日常穿著。', 899, true, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://static.nike.com.hk/resources/product/DR0404-437/DR0404-437_BL1.png'),
+ ('01HJ3HV2GZPRR35HGC3HQ2469J', '01HHZYZY2PSD07ZQS50FC2D33E',4, 2, '男子套穿式連帽衫', '{"size": "S", "color": "Black", "gender": "Men", "apparelType": "Jeans"}', 'https://www.nike.com.hk/product/BV2655-657/detail.htm?pdpRecommend=false&preSkuCode=', 1, 'Nike Universa 啟程系列女子中度承托高腰連口袋單車短褲順滑舒適，富有彈性。\n 中磅物料 InfinaSmooth 物料適合深蹲，提供無可比擬的舒適度及俐落舒爽造型，能駕馭任何訓練。\n 同時具備高度耐穿性，可隨動作盡情伸展，經得起反覆穿著及清洗。 適合跑步、訓練或日常穿著。', 899, true, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://static.nike.com.hk/resources/product/BV2655-657/BV2655-657_BL1.png'),
+ ('01HJ3HXYT1VVF5WV6FJ07V5C7R', '01HHZYZY2PSD07ZQS50FC2D33E',4, 2, 'Dri-FIT 男子套穿式籃球連帽衫', '{"size": "S", "color": "Black", "gender": "Men", "apparelType": "Jeans"}', 'https://www.nike.com.hk/product/FN2988-386/detail.htm?pdpRecommend=false&preSkuCode=', 1, 'Ja Morant 憑自己努力成為超級巨星。 在鎂光燈以外的 Ja，長大時在南卡羅來納州的自家後院球場孜孜不倦地練習。\n Nike 以其簽名版服裝系列，彰顯由默默無名走到全明星的歷程。\n Nike Dri-FIT 技術有助保持乾爽舒適。\n Ja Dri-FIT 男子套穿式籃球連帽衫採用寬鬆剪裁，印有 Ja 簽名標誌。', 899, true, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://static.nike.com.hk/resources/product/FN2988-386/FN2988-386_BL1.png'),
+ ('01HJ3J1AERETM84PD78FQPMGZM', '01HHZYZY2PSD07ZQS50FC2D33E',4, 2, '男子籃球連帽衫', '{"size": "S", "color": "Black", "gender": "Men", "apparelType": "Jeans"}', 'https://www.nike.com.hk/product/DQ5819-027/detail.htm?pdpRecommend=false&preSkuCode=', 1, 'Nike Dri-FIT Standard Issue \n 男子籃球連帽衫結合經典造型與現代機能，不但導濕速乾，更打造出場外風尚。 \n 這款連帽衫重磅柔軟，並帶來包覆效果，是你健身的必備之選。', 899, true, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://static.nike.com.hk/resources/product/DQ5819-027/DQ5819-027_BL1.png'),
+
  ('01HHV1H3RCJYR25XJWX37NPCQJ', '01HHZYNJ8DRPKVRT1YY0Z9TRHN',5, 2, 'ANIME HEROES - One Piece - Monkey D. Luffy Renewal Version Action Figure',
  null, 'https://www.amazon.com/ANIME-HEROES-Monkey-Renewal-Version/dp/B0CCXQ9H1W/ref=sr_1_2?keywords=luffy%2Bfigure&qid=1702895497&sr=8-2&th=1', 1,
  'Set Sail with your favorite pirates - Luffy is renewed! \n Luffy, Captain of the Straw Hat pirates, has set out to be the King of the Pirates and find the One Piece. Luffy goes on adventures aiding those in need and collecting more friends and members for his crew along the way. \n Luffy has increased his bounty with every adventure, saved cities, eaten lots of food, and encountered endless foes who never seem to be able to beat Captain Luffy and his crew Manga Inspired Packaging - Each Anime Heroes line has manga inspired packaging and beautiful artwork on the front featuring the characters you know and love Endless Play \n - Each figure come with 2 sets of interchangeable hands, character specific accessories, and 20+ points of articulation to pose and play in endless ways Collect them all - Bandai Namco Toys & Collectibles America has a full line-up of One Piece action figures for you to show off your fandom and collect your favorite characters Impressive Likeness - Each figure comes with detailed sculpt and true to show features that Anime Heroes action figures are known for',
@@ -127,6 +130,26 @@ INSERT INTO user_address(user_id, address, is_primary) VALUES
  ('01HHZYNJ8DRPKVRT1YY0Z9TRHN','Rm C, Manly Mansion, Robinson Rd',false);
 
  INSERT INTO image (request_id, image_path, is_active) VALUES
+  ('01HJ3J1AERETM84PD78FQPMGZM','https://static.nike.com.hk/resources/product/DQ5819-027/DQ5819-027_BL1.png',true),
+  ('01HJ3J1AERETM84PD78FQPMGZM','https://static.nike.com.hk/resources/product/DQ5819-027/DQ5819-027_BL2.png',true),
+  ('01HJ3J1AERETM84PD78FQPMGZM','https://static.nike.com.hk/resources/product/DQ5819-027/DQ5819-027_BL3.png',true),
+  ('01HJ3J1AERETM84PD78FQPMGZM','https://static.nike.com.hk/resources/product/DQ5819-027/DQ5819-027_BL4.png',true),
+  ('01HJ3J1AERETM84PD78FQPMGZM','https://static.nike.com.hk/resources/product/DQ5819-027/DQ5819-027_BL5.png',true),
+ ('01HJ3HXYT1VVF5WV6FJ07V5C7R','https://static.nike.com.hk/resources/product/FN2988-386/FN2988-386_BL1.png',true),
+ ('01HJ3HXYT1VVF5WV6FJ07V5C7R','https://static.nike.com.hk/resources/product/FN2988-386/FN2988-386_BL2.png',true),
+ ('01HJ3HXYT1VVF5WV6FJ07V5C7R','https://static.nike.com.hk/resources/product/FN2988-386/FN2988-386_BL3.png',true),
+ ('01HJ3HXYT1VVF5WV6FJ07V5C7R','https://static.nike.com.hk/resources/product/FN2988-386/FN2988-386_BL4.png',true),
+ ('01HJ3HV2GZPRR35HGC3HQ2469J','https://static.nike.com.hk/resources/product/BV2655-657/BV2655-657_BL1.png',true),
+ ('01HJ3HV2GZPRR35HGC3HQ2469J','https://static.nike.com.hk/resources/product/BV2655-657/BV2655-657_BL2.png',true),
+ ('01HJ3HV2GZPRR35HGC3HQ2469J','https://static.nike.com.hk/resources/product/BV2655-657/BV2655-657_BL3.png',true),
+ ('01HJ3HV2GZPRR35HGC3HQ2469J','https://static.nike.com.hk/resources/product/BV2655-657/BV2655-657_BL4.png',true),
+ ('01HJ3HRJ9NXE12RHDB7EKXSRG9','https://static.nike.com.hk/resources/product/DR0404-437/DR0404-437_BL1.png',true),
+ ('01HJ3HRJ9NXE12RHDB7EKXSRG9','https://static.nike.com.hk/resources/product/DR0404-437/DR0404-437_BL2.png',true),
+ ('01HJ3HRJ9NXE12RHDB7EKXSRG9','https://static.nike.com.hk/resources/product/DR0404-437/DR0404-437_BL3.png',true),
+ ('01HJ3HRJ9NXE12RHDB7EKXSRG9','https://static.nike.com.hk/resources/product/DR0404-437/DR0404-437_BL4.png',true),
+ ('01HJ3HK0SBBW80KTCAV2JKPPG0','https://static.nike.com.hk/resources/product/FB7204-010/FB7204-010_BL1.png',true),
+ ('01HJ3HK0SBBW80KTCAV2JKPPG0','https://static.nike.com.hk/resources/product/FB7204-010/FB7204-010_BL3.png',true),
+ ('01HJ3HK0SBBW80KTCAV2JKPPG0','https://static.nike.com.hk/resources/product/FB7204-010/FB7204-010_BL4.png',true),
  ('01HJ2SXGBV90YFE5EG25RXXD6G','https://cdn-mms.hktvmall.com/hktv/mms/uploadProductImage/9c1e/29c6/f793/avZuUXsEbf20220610162608_1200.jpg',true),
  ('01HJ2TJ3TQ92ARVXF32HTTYAK0','https://static.nike.com.hk/resources/product/DQ5995-493/DQ5995-493_BL2.png',true),
  ('01HJ2TJ3TQ92ARVXF32HTTYAK0','https://static.nike.com.hk/resources/product/DQ5995-493/DQ5995-493_BL3.png',true),
@@ -175,18 +198,6 @@ INSERT INTO user_address(user_id, address, is_primary) VALUES
  ('01HJ2FTEGZPJ5MH7ZQNXHHAHY5','https://publishbypb.com/cdn/shop/files/L1060592_71b2e5ef-24b9-463b-aa85-000a86a99eae.jpg?v=1690803059&width=1600',true),
  ('01HJ2FTEGZPJ5MH7ZQNXHHAHY5','https://publishbypb.com/cdn/shop/files/L1060624_7dcf0d60-aba4-4191-8d2d-7066d9e980db.jpg?v=1690803059&width=1600',true),
  ('01HJ2FTEGZPJ5MH7ZQNXHHAHY5','https://publishbypb.com/cdn/shop/files/L1060695_f749cb59-315b-445a-baf9-75daf045144a.jpg?v=1690803059&width=1600',true),
- ('01HHKFYXSSTKGTSGJ4TPMC096E','https://www.uniqlo.com.hk/hmall/test/u0000000028366/main/other2/480/3.jpg',true),
- ('01HHKFYXSSTKGTSGJ4TPMC096E','https://www.uniqlo.com.hk/hmall/test/u0000000028366/main/other2/480/4.jpg',true),
- ('01HHKFYXSSTKGTSGJ4TPMC096E','https://www.uniqlo.com.hk/hmall/test/u0000000028366/main/other2/480/5.jpg',true),
- ('01HHKFYXST6C48MQ886K9EARM5','https://www.uniqlo.com.hk/hmall/test/u0000000027647/main/first/561/2.jpg',true),
- ('01HHKFYXST6C48MQ886K9EARM5','https://www.uniqlo.com.hk/hmall/test/u0000000027647/main/first/561/3.jpg',true),
- ('01HHKFYXST6C48MQ886K9EARM5','https://www.uniqlo.com.hk/hmall/test/u0000000027647/main/first/561/4.jpg',true),
- ('01HHKFYXSTSBKPZX0HYDZ85KDE','https://www.uniqlo.com.hk/hmall/test/u0000000027999/main/first/561/2.jpg',true),
- ('01HHKFYXSTSBKPZX0HYDZ85KDE','https://www.uniqlo.com.hk/hmall/test/u0000000027999/main/first/561/3.jpg',true),
- ('01HHKFYXSTSBKPZX0HYDZ85KDE','https://www.uniqlo.com.hk/hmall/test/u0000000027999/main/first/561/4.jpg',true),
- ('01HHKFYXSVSNSZ8BJ14YSCR16H','https://www.uniqlo.com.hk/hmall/test/u0000000028005/main/first/561/2.jpg',true),
- ('01HHKFYXSVSNSZ8BJ14YSCR16H','https://www.uniqlo.com.hk/hmall/test/u0000000028005/main/first/561/3.jpg',true),
- ('01HHKFYXSVSNSZ8BJ14YSCR16H','https://www.uniqlo.com.hk/hmall/test/u0000000028005/main/first/561/4.jpg',true),
  ('01HHKFYXSV27CNWMTV5QDDFWCB','https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71CWSymDYJL._AC_SL1500_.jpg',true),
  ('01HHKFYXSV27CNWMTV5QDDFWCB','https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71gKOUQyrDL._AC_SL1500_.jpg',true),
  ('01HHKFYXSV27CNWMTV5QDDFWCB','https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71delv70wyL._AC_SL1500_.jpg',true),
@@ -243,11 +254,11 @@ INSERT INTO users (id, username, user_email, password) VALUES
 --password: "1234"
 --JWT: eyJhbGciOiJIUzI
 
-INSERT INTO provider (id, user_id, location_id, star_of_efficiency, star_of_attitude) VALUES
+INSERT INTO provider (id, user_id, location_id, star_of_efficiency, star_of_attitude, number_of_reviews) VALUES
 --FredyP
-('01HJ016MJHEPFWWTA19JQ7Q2Q8', '01HHZYZJMQT1F9SF92P0WCHDNJ', '1','5','5'),
+('01HJ016MJHEPFWWTA19JQ7Q2Q8', '01HHZYZJMQT1F9SF92P0WCHDNJ', '1','5','5', 0),
 --ElaineP
-('01HJ017JH7A2J9XYPTY64YG5EK', '01HHZYZY2PSD07ZQS50FC2D33E', '1','5','5');
+('01HJ017JH7A2J9XYPTY64YG5EK', '01HHZYZY2PSD07ZQS50FC2D33E', '1','5','5', 0);
 
 
 

@@ -11,6 +11,15 @@ public class GetOneOfferDto {
     private int price;
     private int estimatedProcessTime;
     private String offerRemark;
+    private Integer reviewCount;
+
+    public Integer getReviewCount() {
+        return reviewCount;
+    }
+
+    public void setReviewCount(Integer reviewCount) {
+        this.reviewCount = reviewCount;
+    }
 
     public String getOfferId() {
         return offerId;

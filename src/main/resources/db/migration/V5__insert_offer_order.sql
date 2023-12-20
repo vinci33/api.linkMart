@@ -6,6 +6,13 @@ VALUES
 --user: fredy@user.com
 --JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhZG1pbiIsInVzZXJJZCI6IjAxSEhaWU5KOERSUEtWUlQxWVkwWjlUUkhOIiwiaWF0IjoxNzAyOTU1NjYyLCJleHAiOjE3MDQyNzE3OTZ9.vaWwQnGff24gRZNuhRGfVkLenk3P8VTa8GUQkSaAFw4
 
+INSERT INTO offer
+(id, request_id, provider_id, offer_status_id, estimated_process_time, price, offer_remark)
+VALUES
+('01HJ3KPBMGYR4E6M5Z4JHR4ZFS', '01HJ0PV70HPFMH9F6ZVJK3FNVW', '01HJ016MJHEPFWWTA19JQ7Q2Q8', 1, 20, 1500, 'Dec 17'),
+('01HJ3KQG1E1RMQYY94TJMXMQPW', '01HJ0PV70HPFMH9F6ZVJK3FNVW', '01HJ016MJHEPFWWTA19JQ7Q2Q8', 1, 20, 4000, 'Dec 17');
+
+
 --All completed orders
 INSERT INTO offer (id, request_id, provider_id, offer_status_id, estimated_process_time, price, offer_remark) VALUES
 ('01HHZXTEBHEH1H55WTEZX7YTKV', '01HHV1H3RCJYR25XJWX37NPCQJ', '01HJ017JH7A2J9XYPTY64YG5EK', 8, 14, 4000, 'Can do it in 14 days');

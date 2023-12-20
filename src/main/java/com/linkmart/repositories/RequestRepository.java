@@ -21,6 +21,8 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
              """, nativeQuery = true)
     List<RequestModel> findRequestByUserId(@Param("userId") String userId);
 
+    List<String> findRequestByRequestId(String requestId);
+
     @Query(value = """
                     SELECT r.id as requestId,
                      u.username as createdBy,

@@ -94,32 +94,34 @@ public class OfferService {
     public List<GetOneOfferDto> getOfferByRequestId(String userId, String requestId) throws Exception {
         try {
             // check if request exists and not created by this provider
-            var request = requestRepository.findRequestModelByRequestId(requestId);
-            if (request == null) {
-                throw new Exception("Request not found");
-            }
-            Offer offer = offerRepository.findByRequestId(requestId);
+            List<String> requests = requestRepository.findRequestByRequestId(requestId);
+            logger.info("requests: " + requests);
+            List<String> requestIds = requestRepository.findRequestByRequestId(requestId);
             ArrayList <GetOneOfferDto> offerList = new ArrayList<>();
-            if (offer == null) {
-                return offerList;
+            for (String request : requests) {
+                var offer  = offerRepository.findByRequestId(request);
+                if (offer == null) {
+                    return offerList;
+                }
+                Provider provider = providerRepository.findProviderById(offer.getProviderId());
+                String userName = userRepository.findByUserId(provider.getUserId());
+                String status = statusRepository.findStatusName(offer.getOfferStatusId());
+                List<GetOneOfferDto> getManyOfferDto = new ArrayList<>();
+                GetOneOfferDto getOneOfferDto = new GetOneOfferDto();
+                getOneOfferDto.setOfferId(offer.getOfferId());
+                getOneOfferDto.setRequestId(offer.getRequestId());
+                getOneOfferDto.setProviderId(offer.getProviderId());
+                getOneOfferDto.setProviderName(userName);
+                getOneOfferDto.setEfficiency(provider.getStarOfAttitude());
+                getOneOfferDto.setAttitude(provider.getStarOfEfficiency());
+                getOneOfferDto.setStatusName(status);
+                getOneOfferDto.setPrice(offer.getPrice());
+                getOneOfferDto.setEstimatedProcessTime(offer.getEstimatedProcessTime());
+                getOneOfferDto.setOfferRemark(offer.getOfferRemark());
+                getOneOfferDto.setReviewCount(provider.getNumberOfReviews());
+                offerList.add(getOneOfferDto);
             }
-            Provider provider = providerRepository.findProviderById(offer.getProviderId());
-            String userName = userRepository.findByUserId(provider.getUserId());
-            String status = statusRepository.findStatusName(offer.getOfferStatusId());
-            List<GetOneOfferDto> getManyOfferDto = new ArrayList<>();
-            GetOneOfferDto getOneOfferDto = new GetOneOfferDto();
-            getOneOfferDto.setOfferId(offer.getOfferId());
-            getOneOfferDto.setRequestId(offer.getRequestId());
-            getOneOfferDto.setProviderId(offer.getProviderId());
-            getOneOfferDto.setProviderName(userName);
-            getOneOfferDto.setEfficiency(provider.getStarOfAttitude());
-            getOneOfferDto.setAttitude(provider.getStarOfEfficiency());
-            getOneOfferDto.setStatusName(status);
-            getOneOfferDto.setPrice(offer.getPrice());
-            getOneOfferDto.setEstimatedProcessTime(offer.getEstimatedProcessTime());
-            getOneOfferDto.setOfferRemark(offer.getOfferRemark());
-            getManyOfferDto.add(getOneOfferDto);
-            return getManyOfferDto;
+            return offerList;
         } catch (Exception e) {
             throw new Exception("Cannot get offer by requestId");
         }

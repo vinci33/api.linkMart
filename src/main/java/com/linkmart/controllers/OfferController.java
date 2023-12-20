@@ -2,6 +2,7 @@ package com.linkmart.controllers;
 
 import com.linkmart.dtos.*;
 import com.linkmart.forms.AcceptOfferForm;
+import com.linkmart.forms.OfferForm;
 import com.linkmart.services.OfferService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
@@ -26,14 +27,26 @@ public class OfferController {
     HttpServletRequest request;
 
     @PostMapping(value = "/api/offer")
-    public RequestResponseWithMessageDto postOffer (
-            @RequestParam(value = "requestId") String requestId,
-            @RequestParam(value = "price") Integer price,
-            @RequestParam(value = "estimatedProcessTime") Integer estimatedProcessTime,
-            @RequestParam(value = "offerRemark", required = false) String offerRemark) throws Exception {
+    public RequestResponseWithMessageDto postOffer (@RequestBody OfferForm offerForm)
+            throws Exception {
         try{
             var userId = (String)request.getAttribute("userId");
-            logger.info("userId: " + userId);
+            var requestId = offerForm.getRequestId();
+            if (requestId == null) {
+                throw new Exception("Request id is null");
+            }
+            var price = offerForm.getPrice();
+            if (price == null) {
+                throw new Exception("Price is null");
+            }
+            var estimatedProcessTime = offerForm.getEstimatedProcessTime();
+            if (estimatedProcessTime == null) {
+                throw new Exception("Estimated process time is null");
+            }
+            var offerRemark = offerForm.getOfferRemark();
+            if (offerRemark == null) {
+                throw new Exception("Offer remark is null");
+            }
             offerService.postOffer(userId, requestId, price, estimatedProcessTime, offerRemark);
             return new RequestResponseWithMessageDto("Offer created successfully");
         } catch (Exception e) {
