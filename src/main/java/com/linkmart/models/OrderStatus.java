@@ -10,7 +10,7 @@ public class OrderStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int OrderStatusId;
+    private Integer OrderStatusId;
 
     @Column(name = "order_status")
     private String orderStatus;
@@ -21,11 +21,11 @@ public class OrderStatus {
     @Column(name = "updated_at", insertable = false)
     private Timestamp updatedAt;
 
-    public int getOrderStatusId() {
+    public Integer getOrderStatusId() {
         return OrderStatusId;
     }
 
-    public void setOrderStatusId(int orderStatusId) {
+    public void setOrderStatusId(Integer orderStatusId) {
         OrderStatusId = orderStatusId;
     }
 

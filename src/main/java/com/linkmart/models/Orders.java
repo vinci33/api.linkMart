@@ -15,22 +15,22 @@ public class Orders {
     private String offerId;
 
     @Column(name = "user_address_id")
-    private int userAddressId;
+    private Integer userAddressId;
 
     @Column(name = "logistic_company_id")
     private Integer logisticCompanyId;
 
     @Column(name = "order_status_id")
-    private int orderStatusId;
+    private Integer orderStatusId;
 
     @Column(name = "shipping_order_no")
-    private int shippingOrderNo;
+    private String shippingOrderNo;
 
     public Integer getLogisticCompanyId() {
         return logisticCompanyId;
     }
 
-    public void setLogisticCompanyId(int logisticCompanyId) {
+    public void setLogisticCompanyId(Integer logisticCompanyId) {
         this.logisticCompanyId = logisticCompanyId;
     }
 
@@ -60,30 +60,30 @@ public class Orders {
         this.offerId = offerId;
     }
 
-    public int getUserAddressId() {
+    public Integer getUserAddressId() {
         return userAddressId;
     }
 
-    public void setUserAddressId(int userAddressId) {
+    public void setUserAddressId(Integer userAddressId) {
         this.userAddressId = userAddressId;
     }
 
 
 
 
-    public int getOrderStatusId() {
+    public Integer getOrderStatusId() {
         return orderStatusId;
     }
 
-    public void setOrderStatusId(int orderStatusId) {
+    public void setOrderStatusId(Integer orderStatusId) {
         this.orderStatusId = orderStatusId;
     }
 
-    public int getShippingOrderNo() {
+    public String getShippingOrderNo() {
         return shippingOrderNo;
     }
 
-    public void setShippingOrderNo(int shippingOrderNo) {
+    public void setShippingOrderNo(String shippingOrderNo) {
         this.shippingOrderNo = shippingOrderNo;
     }
 }
