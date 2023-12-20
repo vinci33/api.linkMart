@@ -244,7 +244,6 @@ INSERT INTO users (id, username, user_email, password) VALUES
 --JWT: eyJhbGciOiJIUzI
 
 INSERT INTO provider (id, user_id, location_id, star_of_efficiency, star_of_attitude) VALUES
-('01HHZZ3JA9T4DAR2BWYK6VNYH0', '01HHZYZY2PSD07ZQS50FC2D33E', '1','5','5'),
 --FredyP
 ('01HJ016MJHEPFWWTA19JQ7Q2Q8', '01HHZYZJMQT1F9SF92P0WCHDNJ', '1','5','5'),
 --ElaineP
