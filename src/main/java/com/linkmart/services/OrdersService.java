@@ -76,11 +76,9 @@ public class OrdersService {
         logger.info("All open offers: " + allOpenOffers );
         requestService.updateRequestStatus(requestId,
                 true , false);
-//        offer.setOfferStatusId(1);
         Orders order = new Orders();
         order.setOfferId(offerId);
         order.setUserAddressId(userAddressId);
-        order.setLogisticCompanyId(1);
         setStatusCreate(order);
         logger.info("Order status: " + order.getOrderStatusId());
         ordersRepository.saveAndFlush(order);
@@ -107,8 +105,8 @@ public class OrdersService {
                 .collect(Collectors.toList());
     }
 
-    public List<OrdersDtoWithDays> getOrdersByUserIdAndStatus(String userId, String orderStatus){
-        List<OrdersDto> orders = ordersRepository.findOrdersByUserIdAndStatus(userId, orderStatus);
+    public List<OrdersDtoWithDays> getOrdersByUserIdAndStatus(String userId, List<String> orderStatuses){
+        List<OrdersDto> orders = ordersRepository.findOrdersByUserIdAndStatus(userId, orderStatuses);
         return orders.stream()
                 .map(order -> {
                     OrdersDtoWithDays orderWithDays = new OrdersDtoWithDays();

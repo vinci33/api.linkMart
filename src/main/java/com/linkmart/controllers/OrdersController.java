@@ -15,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -73,14 +75,16 @@ public class OrdersController {
             if (orderStatus == null) {
                 throw new IllegalArgumentException("OrderStatus not found");
             }
-            if (!"create".equalsIgnoreCase(orderStatus) &&
-                !"in-progress".equalsIgnoreCase(orderStatus) &&
-                !"shipped".equalsIgnoreCase(orderStatus) &&
-                !"completed".equalsIgnoreCase(orderStatus)) {
+            List<String> statuses = new ArrayList<>();
+            if ("inprogress".equalsIgnoreCase(orderStatus)) {
+                statuses = Arrays.asList("in-progress", "shipped");
+            } else if ("complete".equalsIgnoreCase(orderStatus)) {
+                statuses = Arrays.asList("completed", "cancelled");
+            } else {
                 throw new IllegalArgumentException("Invalid orderStatus: " + orderStatus);
             }
             var userId = (String)request.getAttribute("userId");
-            return ordersService.getOrdersByUserIdAndStatus(userId, orderStatus);
+            return ordersService.getOrdersByUserIdAndStatus(userId, statuses);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

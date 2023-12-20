@@ -18,7 +18,7 @@ public class Orders {
     private int userAddressId;
 
     @Column(name = "logistic_company_id")
-    private int logisticCompanyId;
+    private Integer logisticCompanyId;
 
     @Column(name = "order_status_id")
     private int orderStatusId;
@@ -26,7 +26,7 @@ public class Orders {
     @Column(name = "shipping_order_no")
     private int shippingOrderNo;
 
-    public int getLogisticCompanyId() {
+    public Integer getLogisticCompanyId() {
         return logisticCompanyId;
     }
 
