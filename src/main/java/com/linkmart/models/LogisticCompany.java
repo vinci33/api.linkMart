@@ -12,7 +12,7 @@ public class LogisticCompany {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int logisticCompanyId;
+    private Integer logisticCompanyId;
 
     @Column(name = "company_name")
     private String companyName;
@@ -31,11 +31,11 @@ public class LogisticCompany {
 
 
 
-    public int getLogisticCompanyId() {
+    public Integer getLogisticCompanyId() {
         return logisticCompanyId;
     }
 
-    public void setLogisticCompanyId(int logisticCompanyId) {
+    public void setLogisticCompanyId(Integer logisticCompanyId) {
         this.logisticCompanyId = logisticCompanyId;
     }
 

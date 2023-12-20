@@ -126,4 +126,17 @@ public class OrdersService {
                 })
                 .collect(Collectors.toList());
     }
+
+    public void updateOrderShippingOrderId(String userId, String orderId, Integer logisticCompanyId, String shippingOrderNo) {
+        Orders order = (Orders)ordersRepository.findOrdersById(orderId);
+        if (order == null) {
+            throw new IllegalArgumentException("Order not found");
+        }
+        order.setOrderStatusId(3);
+        order.setLogisticCompanyId(logisticCompanyId);
+        order.setShippingOrderNo(shippingOrderNo);
+//        setStatusShipped(order);
+
+        ordersRepository.saveAndFlush(order);
+    }
 }
