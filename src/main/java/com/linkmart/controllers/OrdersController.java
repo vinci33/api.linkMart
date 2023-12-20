@@ -65,6 +65,7 @@ public class OrdersController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
+
     @GetMapping(value = "/user/order/{orderStatus}")
     public List<OrdersDtoWithDays> getOrdersByUserId( @PathVariable String orderStatus){
         try{

@@ -47,7 +47,7 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
                         request.offer_price as offerPrice,
                         request.created_at as createdAt,
                         request.updated_at as updatedAt,
-                        request.location_id as locationName
+                        location.location_name as locationName
                     FROM request
                     JOIN users ON request.created_by = users.id
                     JOIN location ON request.location_id = location.id

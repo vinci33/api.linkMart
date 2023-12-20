@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface CategoryFieldOptionRepository extends JpaRepository<CategoryFieldOptionModel, Integer> {
     List<CategoryFieldOptionModel> findCategoryFieldOptionByCategoryFieldId (Integer categoryFieldId);
+
+    String findCategoryFieldOptionNameByCategoryFieldId (Integer categoryFieldId);
 }

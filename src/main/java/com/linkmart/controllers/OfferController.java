@@ -1,10 +1,7 @@
 package com.linkmart.controllers;
 
-import com.linkmart.dtos.PaymentDetailDto;
+import com.linkmart.dtos.*;
 import com.linkmart.forms.AcceptOfferForm;
-import com.linkmart.dtos.GetOneOfferDto;
-import com.linkmart.dtos.OfferDto;
-import com.linkmart.dtos.RequestResponseWithMessageDto;
 import com.linkmart.services.OfferService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
@@ -97,6 +94,23 @@ public class OfferController {
             }
             PaymentDetailDto paymentDetail = offerService.acceptOffer(userId, offerId, addressId);
             return paymentDetail;
+        } catch (IllegalArgumentException e) {
+            logger.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    //6.1.3 get offer detail
+    @GetMapping(value = "/api/offer/{offerId}")
+    public OfferDetailDto getOneOffer (
+            @PathVariable("offerId") String offerId) {
+        try{
+            var userId = (String)request.getAttribute("userId");
+            if (userId == null) {
+                throw new IllegalArgumentException("UserId not found");
+            }
+            OfferDetailDto offer = offerService.getOfferByOfferId(userId, offerId);
+            return offer;
         } catch (IllegalArgumentException e) {
             logger.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());

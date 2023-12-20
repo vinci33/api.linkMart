@@ -3,7 +3,6 @@ package com.linkmart.controllers;
 import com.linkmart.dtos.OneRequestDto;
 import com.linkmart.dtos.RequestDto;
 import com.linkmart.dtos.RequestResponseWithMessageDto;
-import com.linkmart.dtos.ResponseWithMessage;
 import com.linkmart.models.RequestModel;
 import com.linkmart.services.RequestService;
 import jakarta.servlet.http.HttpServletRequest;

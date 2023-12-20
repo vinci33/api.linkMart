@@ -45,6 +45,12 @@ public class OfferService {
     ProviderService providerService;
 
     @Autowired
+    LocationService locationService;
+
+    @Autowired
+    CategoryRepository categoryRepository;
+
+    @Autowired
     UserPaymentMethodRepository userPaymentMethodRepository;
 
     //POST route: /api/offer
@@ -237,6 +243,51 @@ public class OfferService {
             }
             //change to aborted status
             offerRepository.updateOfferStatus(offerId , 3);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Invalid ID: " + e.getMessage(), e);
+        }
+    }
+
+    public OfferDetailDto getOfferByOfferId (String userId, String offerId) {
+        try {
+            validateOfferId(offerId);
+            userService.validateUserId(userId);
+            var offer = offerRepository.findOfferByOfferId(offerId);
+            if (offer == null) {
+                throw new IllegalArgumentException("No Offer found");
+            }
+            if (!offer.getProviderId().equals(userId)) {
+                throw new IllegalArgumentException("this offer is not created by this user");
+            }
+            //find request
+            var requestId = offer.getRequestId();
+            var request = requestRepository.findRequestModelByRequestId(requestId);
+            //find who create the request (userID)
+            String createdBy = request.getCreatedBy();
+            var user = userService.getUserNameById(createdBy);
+            OfferDetailDto offerDetailDto = new OfferDetailDto();
+            offerDetailDto.setRequestId(offer.getRequestId());
+            offerDetailDto.setLocationId(request.getLocationId());
+            offerDetailDto.setLocationName(locationService.getLocationNameByLocationId(request.getLocationId()));
+            offerDetailDto.setCategoryId(request.getCategoryId());
+            offerDetailDto.setCategoryName(categoryRepository.findCategoryNameByCategoryId(request.getCategoryId()));
+            offerDetailDto.setPrimaryImage(request.getPrimaryImage());
+            offerDetailDto.setItem(request.getItem());
+            offerDetailDto.setItem(request.getItem());
+            offerDetailDto.setItemDetail(request.getItemDetail());
+            offerDetailDto.setUrl(request.getUrl());
+            offerDetailDto.setQuantity(request.getQuantity());
+            offerDetailDto.setRequestRemark(request.getRequestRemark());
+            offerDetailDto.setOfferPrice(request.getOfferPrice());
+            offerDetailDto.setCreatedBy(user);
+            offerDetailDto.setCreatedAt(request.getCreatedAt());
+            offerDetailDto.setUpdatedAt(request.getUpdatedAt());
+            offerDetailDto.setImages(request.getImages());
+            offerDetailDto.setOfferStatus(statusRepository.findStatusName(offer.getOfferStatusId()));
+            offerDetailDto.setEstimatedProcessTime(offer.getEstimatedProcessTime());
+            offerDetailDto.setPrice(offer.getPrice());
+            offerDetailDto.setOfferRemark(offer.getOfferRemark());
+            return offerDetailDto;
         } catch (Exception e) {
             throw new IllegalArgumentException("Invalid ID: " + e.getMessage(), e);
         }
