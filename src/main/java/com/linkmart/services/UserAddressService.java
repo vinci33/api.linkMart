@@ -6,6 +6,8 @@ import com.linkmart.mappers.UserAddressMapper;
 import com.linkmart.models.UserAddress;
 import com.linkmart.repositories.UserAddressRepository;
 import com.linkmart.repositories.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,8 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class UserAddressService {
+
+    final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private UserAddressRepository userAddressRepository;
 
@@ -93,13 +97,15 @@ public class UserAddressService {
         validateUserAddressIsPrimary(userId);
     }
 
-    public void createUserAddress(UserAddressForm userAddressForm, String userId) {
+    public UserAddress createUserAddress(UserAddressForm userAddressForm, String userId) {
           userService.validateUserId(userId);
           UserAddress userAddress = new UserAddress();
           userAddress.setUserId(userId);
           userAddress.setAddress(userAddressForm.getAddress());
           userAddress.setPrimary(true);
+          logger.info("userAddress"+ userAddress);
           userAddressRepository.saveAndFlush(userAddress);
+          return userAddress;
     }
 }
 

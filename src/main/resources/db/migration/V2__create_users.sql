@@ -74,8 +74,8 @@ CREATE TABLE status (
  --JWT:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhZG1pbiIsInVzZXJJZCI6IjAxSEhNVjdES0c0WjlKTlQxUDhERVNIVzhYIiwiaWF0IjoxNzAyNTgwNDM0LCJleHAiOjE3MDM4OTY1Njl9.SE18mZxOknD7QUn6SAiAQYUmO6Ctspzyo2eOwcWoJRM
 
 
-INSERT INTO user_address(id, user_id, address, is_primary) VALUES
- ('4','01HHMV7DKG4Z9JNT1P8DESHW8X','21/f A, Wealth Height,35 Macdonnell Road',false);
+INSERT INTO user_address(user_id, address, is_primary) VALUES
+ ('01HHMV7DKG4Z9JNT1P8DESHW8X','21/f A, Wealth Height,35 Macdonnell Road',false);
 
 
 COMMIT;

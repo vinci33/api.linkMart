@@ -19,8 +19,6 @@ public class UserAddressForm {
         this.address = address;
     }
 
-
-
     @Override
     public String toString() {
         return "UserAddressForm{" +

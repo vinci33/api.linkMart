@@ -89,9 +89,6 @@ public class UserAddress {
     }
 
 
-
-
-
     public Timestamp getCreatedAt() {
         return createdAt;
     }

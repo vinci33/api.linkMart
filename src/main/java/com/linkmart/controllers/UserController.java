@@ -1,6 +1,6 @@
 package com.linkmart.controllers;
 
-import com.linkmart.dtos.ResponseUserSto;
+import com.linkmart.dtos.ResponseUserDto;
 import com.linkmart.dtos.ResponseWithMessage;
 import com.linkmart.dtos.UserWithProviderIdDto;
 import com.linkmart.services.ProviderService;
@@ -44,7 +44,7 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public ResponseUserSto getUser() {
+    public ResponseUserDto getUser() {
       try {
           var userId = (String)request.getAttribute("userId");
           logger.info("userId: " + userId);
@@ -52,7 +52,7 @@ public class UserController {
             logger.info("user: " + user);
             var providerId = providerService.checkIfProvider(userId);
             logger.info("providerId: " + providerId);
-            return new ResponseUserSto(user, providerId );
+            return new ResponseUserDto(user, providerId );
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "UNAUTHORIZED", e);

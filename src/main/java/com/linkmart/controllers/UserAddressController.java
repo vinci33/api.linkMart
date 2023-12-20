@@ -2,6 +2,7 @@ package com.linkmart.controllers;
 
 import com.linkmart.dtos.ResponseWithMessage;
 import com.linkmart.dtos.UserAddressFullDto;
+import com.linkmart.dtos.UserAddressIdDto;
 import com.linkmart.forms.UserAddressForm;
 import com.linkmart.mappers.UserAddressFullMapper;
 import com.linkmart.models.UserAddress;
@@ -52,7 +53,6 @@ public class UserAddressController {
                 logger.error(e.getMessage());
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
             }
-
         }
 
         @PutMapping("/address/{addressId}")
@@ -65,7 +65,6 @@ public class UserAddressController {
                 logger.error(e.getMessage());
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
             }
-
         }
         @DeleteMapping("/address/{addressId}")
         public ResponseWithMessage deleteUserAddressById(@PathVariable Integer addressId, HttpServletRequest request) {
@@ -82,15 +81,15 @@ public class UserAddressController {
         }
 
         @RequestMapping(value = "/address", method = RequestMethod.POST)
-        public ResponseWithMessage createUserAddress(HttpServletRequest request ,@RequestBody UserAddressForm userAddressForm){
+        public UserAddressIdDto createUserAddress(HttpServletRequest request , @RequestBody UserAddressForm userAddressForm){
             if (userAddressForm == null || userAddressForm.getAddress() == null || userAddressForm.getAddress().isEmpty()) {
-                return new ResponseWithMessage(false, "UserAddressForm cannot be null or empty");
+                return new UserAddressIdDto("UserAddressForm cannot be null or empty", null);
             }
             try {
                 var userId = (String)request.getAttribute("userId");
                 System.out.println(userId);
-                userAddressService.createUserAddress(userAddressForm, userId);
-                return new ResponseWithMessage(true, "User address had been created");
+                var result = userAddressService.createUserAddress(userAddressForm, userId);
+                return new UserAddressIdDto("User address had been created", result.getId());
             } catch (IllegalArgumentException e) {
                 logger.error(e.getMessage());
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());

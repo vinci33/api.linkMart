@@ -63,12 +63,14 @@ public class OrdersService {
 
     @Transactional
     public String createOrder(Boolean success, String userId, String offerId, Integer userAddressId) {
+        //find accepted offer
         var offer = offerRepository.findOfferByOfferId(offerId);
         if (offer == null) {
             throw new IllegalArgumentException("OfferId not found");
         }
         var requestId = offer.getRequestId();
         var allOpenOffers = offerService.getOfferByRequestIdAndOfferStatusId(requestId, 6);
+        //all Offer status aborted
         allOpenOffers.forEach(offerService::setStatusAborted);
         offerService.setStatusPending(offer);
         logger.info("Offer status: " + offer.getOfferStatusId());
