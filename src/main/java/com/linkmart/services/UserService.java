@@ -5,6 +5,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.linkmart.dtos.UserDetailDto;
 import com.linkmart.dtos.UserWithProviderIdDto;
+import com.linkmart.forms.UserInfoForm;
 import com.linkmart.mappers.UserAddressMapper;
 import com.linkmart.mappers.UserPaymentMethodMapper;
 import com.linkmart.models.User;
@@ -157,4 +158,24 @@ public class UserService {
         validateUserId(userId);
         return userRepository.findUserEmailById(userId);
     }
+
+    public void updateUseInfo(String userId, UserInfoForm userInfoForm) throws Exception {
+        try {
+            var user = userRepository.findUserById(userId);
+            if (userInfoForm.getPassword() != null) {
+                user.setPassword(BCrypt.withDefaults().hashToString(10, userInfoForm.getPassword().toCharArray()));
+            } else {
+                user.setPassword(user.getPassword());
+            }
+            if (userInfoForm.getUsername() != null) {
+                user.setUsername(userInfoForm.getUsername());
+            } else {
+                user.setUsername(user.getUsername());
+            }
+            userRepository.saveAndFlush(user);
+        } catch (IllegalArgumentException e) {
+            throw new Exception("Cannot update user info via service");
+        }
+    }
+
 }
