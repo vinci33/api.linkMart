@@ -2,6 +2,7 @@ package com.linkmart.models;
 
 import de.huxhorn.sulky.ulid.ULID;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.List;
 
@@ -30,9 +31,11 @@ public class Orders {
     private String shipmentProof;
 
     @Column(name = "created_at")
+    @CreationTimestamp
     private String createdAt;
 
     @Column(name = "updated_at")
+    @CreationTimestamp
     private String updatedAt;
 
     public Integer getLogisticCompanyId() {

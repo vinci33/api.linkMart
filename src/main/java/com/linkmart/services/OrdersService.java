@@ -92,6 +92,7 @@ public class OrdersService {
         Orders order = new Orders();
         order.setOfferId(offerId);
         order.setUserAddressId(userAddressId);
+        order.setOrderStatusId(2);
         setStatusCreate(order);
         logger.info("Order status: " + order.getOrderStatusId());
         ordersRepository.saveAndFlush(order);
