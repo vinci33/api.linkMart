@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 public interface OrdersDto {
     String getOrderId();
    String getOrderStatus();
-   Integer getProviderId();
+   String getProviderId();
      String getProviderName();
      String getItem();
      String getPrimaryImage();

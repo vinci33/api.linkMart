@@ -3,11 +3,10 @@ package com.linkmart.controllers;
 
 import com.linkmart.dtos.OrderPaymentDto;
 import com.linkmart.dtos.OrdersByOrderIdDto;
-import com.linkmart.dtos.OrdersDtoWithDays;
+import com.linkmart.dtos.OrdersByOrderIdAndStatusDto;
 import com.linkmart.dtos.ResponseWithMessage;
-import com.linkmart.forms.OrdersForm;
 import com.linkmart.forms.ReviewForm;
-import com.linkmart.forms.UpdateOrderForm;
+import com.linkmart.mappers.OrdersByOrderIdAndStatusMapper;
 import com.linkmart.services.OrdersService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
@@ -62,19 +61,19 @@ public class OrdersController {
         }
     }
 
-    @GetMapping(value = "/user/order")
-    public List<OrdersDtoWithDays> getOrdersByUserId() {
-        try {
-            var userId = (String) request.getAttribute("userId");
-            return ordersService.getOrdersByUserId(userId);
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-        }
-    }
+//    @GetMapping(value = "/user/order")
+//    public List<OrdersByOrderIdAndStatusDto> getOrdersByUserId() {
+//        try {
+//            var userId = (String) request.getAttribute("userId");
+//            return ordersService.getOrdersByUserId(userId);
+//        } catch (Exception e) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+//        }
+//    }
 
     //for provider find order by order status
     @GetMapping(value = "/provider/order/{orderStatus}")
-    public List<OrdersDtoWithDays> providerGetOrdersByUserId( @PathVariable String orderStatus){
+    public List<OrdersByOrderIdAndStatusDto> providerGetOrdersByUserId(@PathVariable String orderStatus){
         try{
             if (orderStatus == null) {
                 throw new IllegalArgumentException("OrderStatus not found");
@@ -88,7 +87,8 @@ public class OrdersController {
                 throw new IllegalArgumentException("Invalid orderStatus: " + orderStatus);
             }
             var userId = (String)request.getAttribute("userId");
-            return ordersService.getOrdersByUserIdAndStatus(userId, statuses);
+            var ordersDtos = ordersService.getOrdersByUserIdAndStatus(userId, statuses);
+            return OrdersByOrderIdAndStatusMapper.INSTANCE.toOrdersByOrderIdAndStatusDtos(ordersDtos);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
@@ -96,7 +96,7 @@ public class OrdersController {
 
     //for user find order by order status
     @GetMapping(value = "/user/order/{orderStatus}")
-    public List<OrdersDtoWithDays> userGetOrdersByUserId( @PathVariable String orderStatus){
+    public List<OrdersByOrderIdAndStatusDto> userGetOrdersByUserId(@PathVariable String orderStatus){
         try{
             if (orderStatus == null) {
                 throw new IllegalArgumentException("OrderStatus not found");
@@ -110,7 +110,8 @@ public class OrdersController {
                 throw new IllegalArgumentException("Invalid orderStatus: " + orderStatus);
             }
             var userId = (String)request.getAttribute("userId");
-            return ordersService.userGetOrdersByUserIdAndStatus(userId, statuses);
+            var ordersDtos = ordersService.userGetOrdersByUserIdAndStatusFromUser(userId, statuses);
+            return OrdersByOrderIdAndStatusMapper.INSTANCE.toOrdersByOrderIdAndStatusDtos(ordersDtos);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

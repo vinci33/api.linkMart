@@ -1,6 +1,5 @@
 package com.linkmart.services;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.linkmart.dtos.*;
@@ -10,7 +9,6 @@ import com.linkmart.repositories.LocationRepository;
 import com.linkmart.repositories.OfferRepository;
 import com.linkmart.repositories.OrdersRepository;
 import com.linkmart.repositories.RequestRepository;
-import io.swagger.v3.core.util.Json;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,64 +100,19 @@ public class OrdersService {
         return order.getId();
     }
 
-    public List<OrdersDtoWithDays> getOrdersByUserId(String userId) {
-        List<OrdersDto> orders = ordersRepository.findOrdersByUserId(userId);
-        return orders.stream()
-                .map(order -> {
-                    OrdersDtoWithDays orderWithDays = new OrdersDtoWithDays();
-                    orderWithDays.setOrderId(order.getOrderId());
-                    orderWithDays.setOrderStatus(order.getOrderStatus());
-                    orderWithDays.setProviderId(order.getProviderId());
-                    orderWithDays.setProviderName(order.getProviderName());
-                    orderWithDays.setItem(order.getItem());
-                    orderWithDays.setPrimaryImage(order.getPrimaryImage());
-                    orderWithDays.setQuantity(order.getQuantity());
-                    orderWithDays.setPrice(order.getPrice());
-                    orderWithDays.setEstimatedProcessTime(order.getEstimatedProcessTime() + "(days)");  // Add "days" suffix
-                    orderWithDays.setCreatedAt(order.getCreatedAt());
-                    return orderWithDays;
-                })
-                .collect(Collectors.toList());
+//    public List<OrdersByOrderIdAndStatusDto> getOrdersByUserId(String userId) {
+//        return ordersRepository.findOrdersByUserId(userId);
+//
+//    }
+
+    public List<OrdersDto> getOrdersByUserIdAndStatus(String userId, List<String> orderStatuses){
+        return  ordersRepository.findOrdersByUserIdAndStatus(userId, orderStatuses);
+
     }
 
-    public List<OrdersDtoWithDays> getOrdersByUserIdAndStatus(String userId, List<String> orderStatuses){
-        List<OrdersDto> orders = ordersRepository.findOrdersByUserIdAndStatus(userId, orderStatuses);
-        return orders.stream()
-                .map(order -> {
-                    OrdersDtoWithDays orderWithDays = new OrdersDtoWithDays();
-                    orderWithDays.setOrderId(order.getOrderId());
-                    orderWithDays.setOrderStatus(order.getOrderStatus());
-                    orderWithDays.setProviderId(order.getProviderId());
-                    orderWithDays.setProviderName(order.getProviderName());
-                    orderWithDays.setItem(order.getItem());
-                    orderWithDays.setPrimaryImage(order.getPrimaryImage());
-                    orderWithDays.setQuantity(order.getQuantity());
-                    orderWithDays.setPrice(order.getPrice());
-                    orderWithDays.setEstimatedProcessTime(order.getEstimatedProcessTime() + " (days)");  // Add "days" suffix
-                    orderWithDays.setCreatedAt(order.getCreatedAt());
-                    return orderWithDays;
-                })
-                .collect(Collectors.toList());
-    }
+    public List<OrdersDto> userGetOrdersByUserIdAndStatusFromUser(String userId, List<String> orderStatuses){
+        return  ordersRepository.findOrdersByUserIdAndStatusFromUser(userId, orderStatuses);
 
-    public List<OrdersDtoWithDays> userGetOrdersByUserIdAndStatus(String userId, List<String> orderStatuses){
-        List<OrdersDto> orders = ordersRepository.findOrdersByUserIdAndStatus(userId, orderStatuses);
-        return orders.stream()
-                .map(order -> {
-                    OrdersDtoWithDays orderWithDays = new OrdersDtoWithDays();
-                    orderWithDays.setOrderId(order.getOrderId());
-                    orderWithDays.setOrderStatus(order.getOrderStatus());
-                    orderWithDays.setProviderId(order.getProviderId());
-                    orderWithDays.setProviderName(order.getProviderName());
-                    orderWithDays.setItem(order.getItem());
-                    orderWithDays.setPrimaryImage(order.getPrimaryImage());
-                    orderWithDays.setQuantity(order.getQuantity());
-                    orderWithDays.setPrice(order.getPrice());
-                    orderWithDays.setEstimatedProcessTime(order.getEstimatedProcessTime() + " (days)");  // Add "days" suffix
-                    orderWithDays.setCreatedAt(order.getCreatedAt());
-                    return orderWithDays;
-                })
-                .collect(Collectors.toList());
     }
 
     public void updateOrderShippingOrderId( String orderId, Integer logisticCompanyId, String shippingOrderNo, MultipartFile file) {
@@ -185,7 +138,7 @@ public class OrdersService {
         orders.setImages(images);
         String itemDetailJson = ordersRepository.findItemDetailByOrderId(orderId);
         Gson gson = new Gson();
-        Map<String, Object> itemDetailMap = gson.fromJson(itemDetailJson, new TypeToken<Map<String, Object>>(){}.getType());
+        ItemDetailModel itemDetailMap = gson.fromJson(itemDetailJson, ItemDetailModel.class);
         orders.setItemDetail(itemDetailMap);
         String Address = locationRepository.findByLocationId(orderDetail.getUserAddressId());
         orders.setAddress(Address);

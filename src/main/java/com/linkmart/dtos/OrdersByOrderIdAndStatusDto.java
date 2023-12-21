@@ -2,16 +2,16 @@ package com.linkmart.dtos;
 
 import java.sql.Timestamp;
 
-public class OrdersDtoWithDays {
+public class OrdersByOrderIdAndStatusDto {
     private String orderId;
     private String orderStatus;
-    private Integer providerId;
+    private String providerId;
     private String providerName;
     private String item;
     private String primaryImage;
     private String quantity;
     private float price;
-    private String estimatedProcessTime;
+    private Integer estimatedProcessTime;
     private Timestamp createdAt;
 
     public String getOrderId() {
@@ -30,11 +30,11 @@ public class OrdersDtoWithDays {
         this.orderStatus = orderStatus;
     }
 
-    public Integer getProviderId() {
+    public String getProviderId() {
         return providerId;
     }
 
-    public void setProviderId(Integer providerId) {
+    public void setProviderId(String providerId) {
         this.providerId = providerId;
     }
 
@@ -78,11 +78,11 @@ public class OrdersDtoWithDays {
         this.price = price;
     }
 
-    public String getEstimatedProcessTime() {
+    public Integer getEstimatedProcessTime() {
         return estimatedProcessTime;
     }
 
-    public void setEstimatedProcessTime(String estimatedProcessTime) {
+    public void setEstimatedProcessTime(Integer estimatedProcessTime) {
         this.estimatedProcessTime = estimatedProcessTime;
     }
 
