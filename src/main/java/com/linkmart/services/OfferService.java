@@ -54,6 +54,19 @@ public class OfferService {
     @Autowired
     UserPaymentMethodRepository userPaymentMethodRepository;
 
+    @Transactional
+    public Integer getOfferPriceByOfferId(String offerId) {
+        try {
+            var offer = offerRepository.findOfferByOfferId(offerId);
+            if (offer == null) {
+                throw new IllegalArgumentException("Offer not found");
+            }
+            return offer.getPrice();
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Invalid ID: " + e.getMessage(), e);
+        }
+    }
+
     //POST route: /api/offer
     @Transactional
     public void postOffer(String userId, String requestId,

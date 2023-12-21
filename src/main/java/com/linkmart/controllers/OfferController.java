@@ -113,6 +113,26 @@ public class OfferController {
         }
     }
 
+    @PostMapping(value = "/api/offer/{offerId}")
+    public PaymentDto redirectOffer (
+            @RequestBody AcceptOfferForm acceptOfferForm,
+            @PathVariable("offerId") String offerId) {
+        try{
+            var userId = (String)request.getAttribute("userId");
+            if (userId == null) {
+                throw new IllegalArgumentException("UserId not found");
+            }
+            Integer addressId = acceptOfferForm.getUserAddressId();
+            Integer price = offerService.getOfferPriceByOfferId(offerId);
+//            String redirectUrl = "https://api.fight2gether.com/api/offer/paymentInfo/" + offerId + "/" + addressId;
+            String redirectUrl = "/user/payment/" + offerId +"?addressId=" + addressId + "&price=" + price;
+            return new PaymentDto(redirectUrl, offerId, addressId, price);
+        }catch (IllegalArgumentException e) {
+            logger.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
     //6.1.3 get offer detail
     @GetMapping(value = "/api/offer/{offerId}")
     public OfferDetailDto getOneOffer (
@@ -125,24 +145,6 @@ public class OfferController {
             OfferDetailDto offer = offerService.getOfferByOfferId(userId, offerId);
             return offer;
         } catch (IllegalArgumentException e) {
-            logger.error(e.getMessage());
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-        }
-    }
-
-    @PostMapping(value = "/api/offer/{offerId}")
-    public RedirectView redirectOffer (
-            @RequestBody AcceptOfferForm acceptOfferForm,
-            @PathVariable("offerId") String offerId) {
-        try{
-            var userId = (String)request.getAttribute("userId");
-            if (userId == null) {
-                throw new IllegalArgumentException("UserId not found");
-            }
-            Integer addressId = acceptOfferForm.getUserAddressId();
-            String redirectUrl = "https://api.fight2gether.com/api/offer/paymentInfo/" + offerId + "/" + addressId;
-            return new RedirectView(redirectUrl);
-        }catch (IllegalArgumentException e) {
             logger.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

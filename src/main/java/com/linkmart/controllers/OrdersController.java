@@ -1,6 +1,7 @@
 package com.linkmart.controllers;
 
 
+import com.linkmart.dtos.OrderPaymentDto;
 import com.linkmart.dtos.OrdersDtoWithDays;
 import com.linkmart.dtos.ResponseWithMessage;
 import com.linkmart.forms.OrdersForm;
@@ -30,7 +31,7 @@ public class OrdersController {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping("/order")
-    public ResponseWithMessage createOrder(
+    public OrderPaymentDto createOrder(
             @RequestParam(value = "success", required = false) Boolean success,
             @RequestParam(value = "cancelled", required = false) Boolean cancelled,
             @RequestParam(value = "offerId") String offerId,
@@ -51,12 +52,14 @@ public class OrdersController {
                 throw new IllegalArgumentException("UserId not found");
             }
             var orderId = ordersService.createOrder(success ,userId, offerId, userAddressId);
-            return new ResponseWithMessage(true,"Order created successfully OrderID :"+ orderId);
+            return new OrderPaymentDto(orderId);
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
+
+
 
     @GetMapping(value = "/user/order")
     public List<OrdersDtoWithDays> getOrdersByUserId() {
@@ -68,6 +71,7 @@ public class OrdersController {
         }
     }
 
+    //for provider find order by order status
     @GetMapping(value = "/user/order/{orderStatus}")
     public List<OrdersDtoWithDays> getOrdersByUserId( @PathVariable String orderStatus){
         try{
@@ -108,6 +112,4 @@ public class OrdersController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
-
-
 }
