@@ -322,15 +322,15 @@ public class RequestService {
         }
     }
 
-    public Page<AnotherRequestDto> getRequestsByCategoryAndLocation(String category, String location, int page) {
-        if (page < 0) {
-            throw new IllegalArgumentException("Page number cannot be less than zero.");
-        }
-        Pageable pageable15 = PageRequest.of(page, 15, Sort.by("createdAt").descending());
-        var requestPage =  requestRepository.findRequestByCategoryAndLocation(category, location,pageable15);
-        if (page > 0 && !requestPage.hasContent()) {
-            throw new IllegalArgumentException("Page number is greater than the total number of pages.");
-        }
-        return requestPage;
-    }
+//    public Page<AnotherRequestDto> getRequestsByCategoryAndLocation(String category, String location, int page) {
+//        if (page < 0) {
+//            throw new IllegalArgumentException("Page number cannot be less than zero.");
+//        }
+//        Pageable pageable15 = PageRequest.of(page, 15, Sort.by("createdAt").descending());
+//        var requestPage =  requestRepository.findRequestByCategoryAndLocation(category, location,pageable15);
+//        if (page > 0 && !requestPage.hasContent()) {
+//            throw new IllegalArgumentException("Page number is greater than the total number of pages.");
+//        }
+//        return requestPage;
+//    }
     }
