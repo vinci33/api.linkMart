@@ -1,10 +1,15 @@
 package com.linkmart.services;
 
-import com.linkmart.dtos.OrdersDto;
-import com.linkmart.dtos.OrdersDtoWithDays;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.linkmart.dtos.*;
+import com.linkmart.mappers.OrdersMapper;
+import com.linkmart.models.ItemDetailModel;
 import com.linkmart.models.Orders;
 import com.linkmart.repositories.OfferRepository;
 import com.linkmart.repositories.OrdersRepository;
+import io.swagger.v3.core.util.Json;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -127,7 +133,7 @@ public class OrdersService {
                 .collect(Collectors.toList());
     }
 
-    public void updateOrderShippingOrderId(String userId, String orderId, Integer logisticCompanyId, String shippingOrderNo) {
+    public void updateOrderShippingOrderId( String orderId, Integer logisticCompanyId, String shippingOrderNo) {
         Orders order = (Orders)ordersRepository.findOrdersById(orderId);
         if (order == null) {
             throw new IllegalArgumentException("Order not found");
@@ -138,5 +144,20 @@ public class OrdersService {
 //        setStatusShipped(order);
 
         ordersRepository.saveAndFlush(order);
+    }
+
+    public OrdersByOrderIdDto getOrdersDetailByOrderId (String orderId){
+        OrdersByOrderIdWithoutImageDto orderDetail = ordersRepository.findOrdersDetailByOrderId(orderId);
+        if (orderDetail == null) {
+            throw new IllegalArgumentException("Order not found");
+        }
+        List<String> images = ordersRepository.findImagesByOrderId(orderId);
+        OrdersByOrderIdDto orders =  OrdersMapper.INSTANCE.toOrdersByOrderIdDto(orderDetail);
+        orders.setImages(images);
+        String itemDetailJson = ordersRepository.findItemDetailByOrderId(orderId);
+        Gson gson = new Gson();
+        Map<String, Object> itemDetailMap = gson.fromJson(itemDetailJson, new TypeToken<Map<String, Object>>(){}.getType());
+        orders.setItemDetail(itemDetailMap);
+        return orders;
     }
 }
