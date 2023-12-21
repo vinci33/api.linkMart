@@ -167,11 +167,7 @@ public class OrdersController {
         return emitter;
     }
 
-//    const eventSource = new EventSource('/sse');
-//
-//eventSource.onmessage = function(event) {
-//    console.log('Order completed: ' + event.data);
-//};
+
 
 
 
