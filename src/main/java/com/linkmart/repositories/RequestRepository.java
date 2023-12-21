@@ -2,8 +2,6 @@ package com.linkmart.repositories;
 import com.linkmart.dtos.AnotherRequestDto;
 import com.linkmart.dtos.RequestDto;
 import com.linkmart.models.RequestModel;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -116,10 +114,8 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
     JOIN category c ON r.category_id = c.id
     JOIN location l ON r.location_id = l.id
     JOIN users u ON r.created_by = u.id
-    WHERE (:categoryName IS NULL OR c.category_name = :categoryName)
-    AND (:locationName IS NULL OR l.location_name = :locationName)
+    WHERE category_name = IF(:categoryName IS NULL, '', :categoryName)
+    WHERE (COALESCE(:categoryName, '') = '' OR c.category_name IN :categoryName)
     """, nativeQuery =true)
-    Page<AnotherRequestDto> findRequestByCategoryAndLocation(@Param("category") String category, @Param("location") String location, Pageable pageable);
-
-
+    List<AnotherRequestDto> findRequestByCategoryAndLocation(@Param("categoryName") List<String> category);
 }

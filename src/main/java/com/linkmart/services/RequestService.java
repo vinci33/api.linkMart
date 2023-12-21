@@ -46,7 +46,7 @@ public class RequestService {
     CategoryRepository categoryRepository;
 
     @Autowired
-    ImageRepository imageRepository;
+    CustomRequestRepository customRequestRepository;
 
     @Autowired
     S3Service s3Service;
@@ -322,15 +322,20 @@ public class RequestService {
         }
     }
 
-    public Page<AnotherRequestDto> getRequestsByCategoryAndLocation(String category, String location, int page) {
-        if (page < 0) {
-            throw new IllegalArgumentException("Page number cannot be less than zero.");
-        }
-        Pageable pageable15 = PageRequest.of(page, 15, Sort.by("createdAt").descending());
-        var requestPage =  requestRepository.findRequestByCategoryAndLocation(category, location, pageable15);
-        if (page > 0 && !requestPage.hasContent()) {
-            throw new IllegalArgumentException("Page number is greater than the total number of pages.");
-        }
-        return requestPage;
+    public List<AnotherRequestDto> getRequestsByCategoryAndLocation(List<String> categories, List<String> locations, int page) {
+        logger.info("category1: " + categories);
+        logger.info("location: " + locations);
+        logger.info("page: " + page);
+       try {
+           if (page < 0) {
+               throw new IllegalArgumentException("Page number cannot be less than zero.");
+           }
+           var requestPage =  customRequestRepository.searchRequest(categories, locations);
+           logger.info("requestPage: " + requestPage);
+           return requestPage;
+       } catch (Exception e) {
+           logger.error(e.getMessage());
+           return null;
+       }
     }
 }

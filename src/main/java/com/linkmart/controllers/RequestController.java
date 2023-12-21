@@ -49,14 +49,14 @@ public class RequestController {
         }
     }
 
-    @GetMapping(value = "/request")
-    public List<RequestDto> getAllRequest () {
-        try{
-            return requestService.getAllRequest();
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-        }
-    }
+//    @GetMapping(value = "/request")
+//    public List<RequestDto> getAllRequest () {
+//        try{
+//            return requestService.getAllRequest();
+//        } catch (Exception e) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+//        }
+//    }
 
     //5.2.2 Get All - by userId (ACTIVE)
     @GetMapping(value = "/api/request")
@@ -165,15 +165,14 @@ public class RequestController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
-
-    @GetMapping(value = "/api/request?p={page}&category={category}&location={location}")
-    public Page<AnotherRequestDto> getAllRequestByCategoryAndLocation (
+//Page<AnotherRequestDto>
+    @GetMapping(value = "/request")
+    public List<AnotherRequestDto> getAllRequestByCategoryAndLocation (
             @RequestParam(name = "page", defaultValue = "0") Integer page,
-            @RequestParam(name = "category", required = false) String category,
-            @RequestParam(name = "location", required = false) String location) {
+            @RequestParam(name = "category", required = false) List<String> categories,
+            @RequestParam(name = "location", required = false) List<String> locations) {
         try {
-            var resultOfRequests = requestService.getRequestsByCategoryAndLocation(category, location, page);
-            return resultOfRequests;
+            return requestService.getRequestsByCategoryAndLocation(categories, locations, page);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
