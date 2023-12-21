@@ -94,6 +94,7 @@ public class OrdersController {
         }
     }
 
+    //for user find order by order status
     @GetMapping(value = "/user/order/{orderStatus}")
     public List<OrdersDtoWithDays> userGetOrdersByUserId( @PathVariable String orderStatus){
         try{
