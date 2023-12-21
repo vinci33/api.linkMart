@@ -30,6 +30,15 @@ public class OrdersByOrderIdDto {
     private String shipmentProof;
     private String shippingOrderNo;
     private String logisticCompanyName;
+    private String Address;
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String address) {
+        Address = address;
+    }
 
     public String getShipmentProof() {
         return shipmentProof;

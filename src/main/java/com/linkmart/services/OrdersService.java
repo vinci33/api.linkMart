@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import com.linkmart.dtos.*;
 import com.linkmart.mappers.OrdersMapper;
 import com.linkmart.models.*;
+import com.linkmart.repositories.LocationRepository;
 import com.linkmart.repositories.OfferRepository;
 import com.linkmart.repositories.OrdersRepository;
 import com.linkmart.repositories.RequestRepository;
@@ -37,6 +38,8 @@ public class OrdersService {
     OfferService offerService;
     @Autowired
     ReviewService reviewService;
+    @Autowired
+    LocationRepository locationRepository;
     @Autowired
     S3Service s3Service;
 
@@ -184,6 +187,8 @@ public class OrdersService {
         Gson gson = new Gson();
         Map<String, Object> itemDetailMap = gson.fromJson(itemDetailJson, new TypeToken<Map<String, Object>>(){}.getType());
         orders.setItemDetail(itemDetailMap);
+        String Address = locationRepository.findByLocationId(orderDetail.getUserAddressId());
+        orders.setAddress(Address);
         return orders;
     }
 

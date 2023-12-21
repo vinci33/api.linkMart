@@ -92,6 +92,7 @@ public interface OrdersRepository extends JpaRepository<Orders, String> {
                      o.id AS orderId,
                      o.created_at AS createdAt,
                      o.updated_at AS updatedAt,
+                     o.user_address_id AS userAddressId,
                      os.order_status AS orderStatus,
                      of.provider_id AS providerId,
                      of.request_id AS requestId,
