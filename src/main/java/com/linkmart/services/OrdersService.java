@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -34,6 +35,9 @@ public class OrdersService {
     OrdersRepository ordersRepository;
     @Autowired
     OfferService offerService;
+
+    @Autowired
+    S3Service s3Service;
 
     public OrdersService(RequestService requestService, OfferRepository offerRepository, OrdersRepository ordersRepository, OfferService offerService) {
         this.requestService = requestService;
@@ -133,7 +137,7 @@ public class OrdersService {
                 .collect(Collectors.toList());
     }
 
-    public void updateOrderShippingOrderId( String orderId, Integer logisticCompanyId, String shippingOrderNo) {
+    public void updateOrderShippingOrderId( String orderId, Integer logisticCompanyId, String shippingOrderNo, MultipartFile file) {
         Orders order = (Orders)ordersRepository.findOrdersById(orderId);
         if (order == null) {
             throw new IllegalArgumentException("Order not found");
@@ -141,8 +145,8 @@ public class OrdersService {
         order.setOrderStatusId(3);
         order.setLogisticCompanyId(logisticCompanyId);
         order.setShippingOrderNo(shippingOrderNo);
-//        setStatusShipped(order);
-
+        String orderProof = s3Service.uploadFile(file);
+        order.setShipmentProof(orderProof);
         ordersRepository.saveAndFlush(order);
     }
 

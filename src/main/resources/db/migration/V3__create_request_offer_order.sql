@@ -71,6 +71,7 @@ CREATE TABLE orders (
     order_status_id INTEGER not null REFERENCES order_status(id),
     logistic_company_id INTEGER REFERENCES logistic_company(id),
     shipping_order_no TEXT,
+    shipment_proof TEXT,
     created_at TIMESTAMP default NOW(),
     updated_at TIMESTAMP default NOW()
 );

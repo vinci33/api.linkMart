@@ -26,6 +26,9 @@ public class Orders {
     @Column(name = "shipping_order_no")
     private String shippingOrderNo;
 
+    @Column(name = "shipment_proof")
+    private String shipmentProof;
+
     public Integer getLogisticCompanyId() {
         return logisticCompanyId;
     }
@@ -68,8 +71,13 @@ public class Orders {
         this.userAddressId = userAddressId;
     }
 
+    public String getShipmentProof() {
+        return shipmentProof;
+    }
 
-
+    public void setShipmentProof(String shipmentProof) {
+        this.shipmentProof = shipmentProof;
+    }
 
     public Integer getOrderStatusId() {
         return orderStatusId;

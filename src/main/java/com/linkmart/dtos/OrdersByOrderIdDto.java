@@ -27,6 +27,33 @@ public class OrdersByOrderIdDto {
     private Map<String,Object> itemDetail;
     private String url;
     private String requestRemark;
+    private String shipmentProof;
+    private String shippingOrderNo;
+    private String logisticCompanyName;
+
+    public String getShipmentProof() {
+        return shipmentProof;
+    }
+
+    public void setShipmentProof(String shipmentProof) {
+        this.shipmentProof = shipmentProof;
+    }
+
+    public String getShippingOrderNo() {
+        return shippingOrderNo;
+    }
+
+    public void setShippingOrderNo(String shippingOrderNo) {
+        this.shippingOrderNo = shippingOrderNo;
+    }
+
+    public String getLogisticCompanyName() {
+        return logisticCompanyName;
+    }
+
+    public void setLogisticCompanyName(String logisticCompanyName) {
+        this.logisticCompanyName = logisticCompanyName;
+    }
 
     public String getOrderId() {
         return orderId;

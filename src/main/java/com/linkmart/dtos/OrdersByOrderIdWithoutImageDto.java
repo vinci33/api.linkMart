@@ -23,6 +23,9 @@ public interface OrdersByOrderIdWithoutImageDto {
 //    JsonNode getItemDetail();
     String getUrl();
     String getRequestRemark();
+    String getShipmentProof();
+    String getShippingOrderNo();
+    String getLogisticCompanyName();
 
 
 }

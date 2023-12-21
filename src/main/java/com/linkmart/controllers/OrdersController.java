@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
@@ -107,15 +108,18 @@ public class OrdersController {
     }
 
     @PutMapping(value = "/order/{orderId}")
-    public void updateOrderShippingOrderId(@PathVariable String orderId, @RequestBody UpdateOrderForm updateOrderForm) {
+    public void updateOrderShippingOrderId(@PathVariable String orderId,
+                                           @RequestParam(value = "shipmentProof")MultipartFile file,
+                                           @RequestParam(value = "shippingOrderNo")String shippingOrderNo,
+                                           @RequestParam(value = "logisticCompanyId")Integer logisticCompanyId) {
         try {
             if (orderId == null ) {
                 throw new IllegalArgumentException("Order Id or shipping order Id not found");
             }
-            if (updateOrderForm == null || updateOrderForm.getLogisticCompanyId() == null || updateOrderForm.getShippingOrderNo() == null) {
+            if (shippingOrderNo == null || logisticCompanyId == null || file == null) {
                 throw new IllegalArgumentException("Shipping order Id or logistic company Id not found");
             }
-            ordersService.updateOrderShippingOrderId(orderId, updateOrderForm.getLogisticCompanyId(),updateOrderForm.getShippingOrderNo());
+            ordersService.updateOrderShippingOrderId(orderId, logisticCompanyId, shippingOrderNo,file);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

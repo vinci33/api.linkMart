@@ -100,7 +100,10 @@ public interface OrdersRepository extends JpaRepository<Orders, String> {
                      r.quantity AS quantity,
                      r.url AS url,
                      r.request_remark AS requestRemark,
-                     l.location_name AS locationName
+                     l.location_name AS locationName,
+                     o.shipment_proof AS shipmentProof,
+                     o.shipping_order_no AS shippingOrderNo,
+                        lc.company_name AS logisticCompanyName
                  FROM
                      orders o
                  JOIN
@@ -113,9 +116,10 @@ public interface OrdersRepository extends JpaRepository<Orders, String> {
                      users u ON p.user_id = u.id
                  JOIN
                      request r ON of.request_id = r.id
-                 
                  JOIN
                      location l ON r.location_id = l.id
+                 JOIN
+                     logistic_company lc ON o.logistic_company_id = lc.id
                  WHERE
                      o.id = :orderId
                     """, nativeQuery = true)
