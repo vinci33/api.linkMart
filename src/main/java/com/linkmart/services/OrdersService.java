@@ -12,10 +12,14 @@ import com.linkmart.repositories.RequestRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -40,6 +44,9 @@ public class OrdersService {
     LocationRepository locationRepository;
     @Autowired
     S3Service s3Service;
+
+    @Autowired
+    private ApplicationEventPublisher eventPublisher;
 
     public OrdersService(RequestService requestService, OfferRepository offerRepository, OrdersRepository ordersRepository, OfferService offerService) {
         this.requestService = requestService;
@@ -128,6 +135,21 @@ public class OrdersService {
         ordersRepository.saveAndFlush(order);
     }
 
+    @Transactional
+    @Scheduled(cron = "0 0 0 * * *")
+    public void updateOrderStatus() {
+        List<Orders> shippedOrders = ordersRepository.findOrdersByOrderStatusId(3);
+        for (Orders order : shippedOrders) {
+            Timestamp timestamp = order.getUpdatedAt();
+            LocalDateTime dateTime = timestamp.toLocalDateTime();
+            if (dateTime.plusMinutes(1).isBefore(LocalDateTime.now())) {
+                order.setOrderStatusId(4);
+                ordersRepository.save(order);
+                eventPublisher.publishEvent(order.getId());
+            }
+        }
+    }
+
     public OrdersByOrderIdDto getOrdersDetailByOrderId (String orderId){
         OrdersByOrderIdWithoutImageDto orderDetail = ordersRepository.findOrdersDetailByOrderId(orderId);
         if (orderDetail == null) {
@@ -135,7 +157,8 @@ public class OrdersService {
         }
         List<String> images = ordersRepository.findImagesByOrderId(orderId);
         OrdersByOrderIdDto orders =  OrdersMapper.INSTANCE.toOrdersByOrderIdDto(orderDetail);
-        orders.setImages(images);
+
+
         String itemDetailJson = ordersRepository.findItemDetailByOrderId(orderId);
         Gson gson = new Gson();
         ItemDetailModel itemDetailMap = gson.fromJson(itemDetailJson, ItemDetailModel.class);
@@ -168,6 +191,12 @@ public class OrdersService {
         review.setReviewEfficiency(efficiency);
         review.setReviewAttitude(attitude);
         review.setReviewRemark(reviewRemark);
+//        review suppose is finish the order and got the product already,
+//        that's y is suitable to set status to completed
+//        order.setOrderStatusId(4);
+//        ordersRepository.saveAndFlush(order);
         reviewService.saveReview(review);
+
+
     }
 }

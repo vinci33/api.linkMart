@@ -197,5 +197,6 @@ public interface OrdersRepository extends JpaRepository<Orders, String> {
                     """, nativeQuery = true)
     List<OrdersDto> findOrdersByUserIdAndStatusFromUser(String userId, List<String> orderStatuses);
 
+    List<Orders> findOrdersByOrderStatusId(Integer orderStatusId);
 }
 

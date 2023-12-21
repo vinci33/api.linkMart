@@ -27,14 +27,14 @@ public class CustomRequestRepository {
                   SELECT
                       r.*
                 FROM
-                    request r  
+                    request r
                 JOIN
-                    category c    
-                        ON r.category_id = c.id    
+                    category c
+                        ON r.category_id = c.id
                 JOIN
                     location l
-                        ON r.location_id = l.id    
-                WHERE c.category_name IN :categories and 
+                        ON r.location_id = l.id
+                WHERE c.category_name IN :categories and
                 l.location_name IN :locations
                   """;
         var typedQuery =

@@ -12,14 +12,18 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.EventListener;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -31,6 +35,7 @@ public class OrdersController {
     HttpServletRequest request;
 
     final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 
     @GetMapping("/order")
     public OrderPaymentDto createOrder(
@@ -147,6 +152,29 @@ public class OrdersController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
+
+    private final SseEmitter emitter = new SseEmitter();
+    @EventListener
+    public void orderCompleteEventhandeler(String orderId){
+        try {
+            emitter.send(Map.of("OrderId " , orderId));
+        }catch (IOException e){
+            emitter.completeWithError(e);
+        }
+    }
+    @GetMapping(value = "/order/sse")
+    public SseEmitter sseEmitter(){
+        return emitter;
+    }
+
+//    const eventSource = new EventSource('/sse');
+//
+//eventSource.onmessage = function(event) {
+//    console.log('Order completed: ' + event.data);
+//};
+
+
+
 
     //For requester to review order
     @PostMapping(value = "/order/{orderId}/review")
