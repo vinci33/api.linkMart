@@ -60,8 +60,6 @@ public class OrdersController {
         }
     }
 
-
-
     @GetMapping(value = "/user/order")
     public List<OrdersDtoWithDays> getOrdersByUserId() {
         try {
