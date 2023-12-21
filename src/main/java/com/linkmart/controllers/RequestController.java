@@ -1,9 +1,6 @@
 package com.linkmart.controllers;
 
-import com.linkmart.dtos.HasOfferDto;
-import com.linkmart.dtos.OneRequestDto;
-import com.linkmart.dtos.RequestDto;
-import com.linkmart.dtos.RequestResponseWithMessageDto;
+import com.linkmart.dtos.*;
 import com.linkmart.models.RequestModel;
 import com.linkmart.services.OfferService;
 import com.linkmart.services.RequestService;
@@ -11,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -163,6 +161,19 @@ public class RequestController {
             var userId = (String)request.getAttribute("userId");
             var result = offerService.checkIfHasOffer(requestId, userId);
             return new HasOfferDto(result);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    @GetMapping(value = "/api/request?p={page}&category={category}&location={location}")
+    public Page<AnotherRequestDto> getAllRequestByCategoryAndLocation (
+            @RequestParam(name = "page", defaultValue = "0") Integer page,
+            @RequestParam(name = "category", required = false) String category,
+            @RequestParam(name = "location", required = false) String location) {
+        try {
+            var resultOfRequests = requestService.getRequestsByCategoryAndLocation(category, location, page);
+            return resultOfRequests;
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

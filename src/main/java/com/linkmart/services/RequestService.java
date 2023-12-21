@@ -1,6 +1,7 @@
 package com.linkmart.services;
 
 import com.google.gson.Gson;
+import com.linkmart.dtos.AnotherRequestDto;
 import com.linkmart.dtos.OneRequestDto;
 import com.linkmart.dtos.RequestDto;
 import com.linkmart.models.ImageModel;
@@ -14,6 +15,10 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -317,7 +322,15 @@ public class RequestService {
         }
     }
 
-//    public Page<AnotherRequestDto> getRequestsByCategoryAndLocationV2(String category, String location, int page) {
-//        this.em.getCriteriaBuilder()
-//    }
+    public Page<AnotherRequestDto> getRequestsByCategoryAndLocation(String category, String location, int page) {
+        if (page < 0) {
+            throw new IllegalArgumentException("Page number cannot be less than zero.");
+        }
+        Pageable pageable15 = PageRequest.of(page, 15, Sort.by("createdAt").descending());
+        var requestPage =  requestRepository.findRequestByCategoryAndLocation(category, location,pageable15);
+        if (page > 0 && !requestPage.hasContent()) {
+            throw new IllegalArgumentException("Page number is greater than the total number of pages.");
+        }
+        return requestPage;
+    }
     }
