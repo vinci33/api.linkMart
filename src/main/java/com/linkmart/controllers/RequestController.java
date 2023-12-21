@@ -60,6 +60,7 @@ public class RequestController {
         }
     }
 
+    //5.2.2 Get All - by userId (ACTIVE)
     @GetMapping(value = "/api/request")
     public List<RequestDto> getAllActiveMyRequest (HttpServletRequest request) {
         try{

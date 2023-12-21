@@ -24,7 +24,7 @@ INSERT INTO offer (id, request_id, provider_id, offer_status_id, estimated_proce
 
 --Order Done
 INSERT INTO Orders (id, offer_id, user_address_id, order_status_id, logistic_company_id, shipping_order_no) VALUES
-('01HJ5JTHWJVYAS651YNCGNE4ZJ', '01HJ5JTWYB7T88R4408446WA1C', 4, 2, 1, '1234567890');
+('01HJ5JTHWJVYAS651YNCGNE4ZJ', '01HJ5JTWYB7T88R4408446WA1C', 4, 2, 1, '1234567890'),
 ('01HHZY2AREHH036SRJNY23N3QX', '01HHZXTEBHEH1H55WTEZX7YTKV', 4, 4, 1, '1234567890');
 --user: fredy@user.com  ,  pw: "123"
 --provider : elaine@provider.com    ,    pw: "123"
