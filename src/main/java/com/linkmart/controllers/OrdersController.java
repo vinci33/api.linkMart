@@ -6,6 +6,7 @@ import com.linkmart.dtos.OrdersByOrderIdDto;
 import com.linkmart.dtos.OrdersDtoWithDays;
 import com.linkmart.dtos.ResponseWithMessage;
 import com.linkmart.forms.OrdersForm;
+import com.linkmart.forms.ReviewForm;
 import com.linkmart.forms.UpdateOrderForm;
 import com.linkmart.services.OrdersService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -72,8 +73,8 @@ public class OrdersController {
     }
 
     //for provider find order by order status
-    @GetMapping(value = "/user/order/{orderStatus}")
-    public List<OrdersDtoWithDays> getOrdersByUserId( @PathVariable String orderStatus){
+    @GetMapping(value = "/provider/order/{orderStatus}")
+    public List<OrdersDtoWithDays> providerGetOrdersByUserId( @PathVariable String orderStatus){
         try{
             if (orderStatus == null) {
                 throw new IllegalArgumentException("OrderStatus not found");
@@ -91,7 +92,27 @@ public class OrdersController {
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
+    }
 
+    @GetMapping(value = "/user/order/{orderStatus}")
+    public List<OrdersDtoWithDays> userGetOrdersByUserId( @PathVariable String orderStatus){
+        try{
+            if (orderStatus == null) {
+                throw new IllegalArgumentException("OrderStatus not found");
+            }
+            List<String> statuses = new ArrayList<>();
+            if ("inprogress".equalsIgnoreCase(orderStatus)) {
+                statuses = Arrays.asList("in-progress", "shipped");
+            } else if ("complete".equalsIgnoreCase(orderStatus)) {
+                statuses = Arrays.asList("completed", "cancelled");
+            } else {
+                throw new IllegalArgumentException("Invalid orderStatus: " + orderStatus);
+            }
+            var userId = (String)request.getAttribute("userId");
+            return ordersService.userGetOrdersByUserIdAndStatus(userId, statuses);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
     }
 
     @GetMapping(value = "/order/{orderId}")
@@ -120,6 +141,30 @@ public class OrdersController {
                 throw new IllegalArgumentException("Shipping order Id or logistic company Id not found");
             }
             ordersService.updateOrderShippingOrderId(orderId, logisticCompanyId, shippingOrderNo,file);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    //For requester to review order
+    @PostMapping(value = "/order/{orderId}/review")
+    public ResponseWithMessage reviewOrder(@PathVariable String orderId, @RequestBody ReviewForm reviewForm) {
+        try {
+            var efficiency = reviewForm.getEfficiency();
+            var attitude = reviewForm.getAttitude();
+            var reviewRemark = reviewForm.getComments();
+            if (orderId == null || efficiency == null || attitude == null) {
+                throw new IllegalArgumentException("Order Id or rating or review not found");
+            }
+            var userId = (String)request.getAttribute("userId");
+            if (userId == null) {
+                throw new IllegalArgumentException("UserId not found");
+            }
+            if (reviewRemark == null) {
+                reviewRemark = null;
+            }
+            ordersService.reviewOrder(orderId, userId, efficiency, attitude, reviewRemark);
+            return new ResponseWithMessage(true, "Review success");
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

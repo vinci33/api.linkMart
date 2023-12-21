@@ -9,7 +9,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "review")
 public class Review {
-
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)
     @Column (name = "id")
@@ -22,10 +21,10 @@ public class Review {
     private String providerId; //ULID
 
     @Column(name = "review_efficiency")
-    private Integer reviewEfficiency;
+    private Float reviewEfficiency;
 
     @Column(name = "review_attitude")
-    private Integer reviewAttitude;
+    private Float reviewAttitude;
 
     @Column(name = "review_remark")
     private String reviewRemark;
@@ -44,20 +43,21 @@ public class Review {
     @Column(name = "updated_at", insertable = false, updatable = false)
     private Timestamp updatedAt;
 
-    @Override
-    public String toString() {
-        return "Review{" +
-                "reviewId=" + reviewId +
-                ", orderID='" + orderID + '\'' +
-                ", providerId='" + providerId + '\'' +
-                ", reviewEfficiency=" + reviewEfficiency +
-                ", reviewAttitude=" + reviewAttitude +
-                ", reviewRemark='" + reviewRemark + '\'' +
-                ", orders=" + orders +
-                ", provider=" + provider +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
+
+    public Float getReviewEfficiency() {
+        return reviewEfficiency;
+    }
+
+    public void setReviewEfficiency(Float reviewEfficiency) {
+        this.reviewEfficiency = reviewEfficiency;
+    }
+
+    public Float getReviewAttitude() {
+        return reviewAttitude;
+    }
+
+    public void setReviewAttitude(Float reviewAttitude) {
+        this.reviewAttitude = reviewAttitude;
     }
 
     public int getReviewId() {
@@ -76,22 +76,12 @@ public class Review {
         this.orderID = orderID;
     }
 
-
-
-    public Integer getReviewEfficiency() {
-        return reviewEfficiency;
+    public String getProviderId() {
+        return providerId;
     }
 
-    public void setReviewEfficiency(Integer reviewEfficiency) {
-        this.reviewEfficiency = reviewEfficiency;
-    }
-
-    public Integer getReviewAttitude() {
-        return reviewAttitude;
-    }
-
-    public void setReviewAttitude(Integer reviewAttitude) {
-        this.reviewAttitude = reviewAttitude;
+    public void setProviderId(String providerId) {
+        this.providerId = providerId;
     }
 
     public String getReviewRemark() {
@@ -102,9 +92,21 @@ public class Review {
         this.reviewRemark = reviewRemark;
     }
 
+    public Orders getOrders() {
+        return orders;
+    }
 
+    public void setOrders(Orders orders) {
+        this.orders = orders;
+    }
 
+    public Provider getProvider() {
+        return provider;
+    }
 
+    public void setProvider(Provider provider) {
+        this.provider = provider;
+    }
 
     public Timestamp getCreatedAt() {
         return createdAt;
@@ -122,5 +124,19 @@ public class Review {
         this.updatedAt = updatedAt;
     }
 
-
+    @Override
+    public String toString() {
+        return "Review{" +
+                "reviewId=" + reviewId +
+                ", orderID='" + orderID + '\'' +
+                ", providerId='" + providerId + '\'' +
+                ", reviewEfficiency=" + reviewEfficiency +
+                ", reviewAttitude=" + reviewAttitude +
+                ", reviewRemark='" + reviewRemark + '\'' +
+                ", orders=" + orders +
+                ", provider=" + provider +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
 }

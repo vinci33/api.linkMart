@@ -17,6 +17,11 @@ import java.util.Map;
 public interface OrdersRepository extends JpaRepository<Orders, String> {
     Orders findOrdersById(String orderId);
 
+    @Query(value = """
+            SELECT * FROM orders
+            WHERE orders.id = :orderId
+            """, nativeQuery = true)
+    Orders getOneByOfferId(@Param("orderId") String orderId);
 
     @Query(value =
             """

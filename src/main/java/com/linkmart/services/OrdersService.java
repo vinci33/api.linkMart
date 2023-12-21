@@ -5,10 +5,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.linkmart.dtos.*;
 import com.linkmart.mappers.OrdersMapper;
-import com.linkmart.models.ItemDetailModel;
-import com.linkmart.models.Orders;
+import com.linkmart.models.*;
 import com.linkmart.repositories.OfferRepository;
 import com.linkmart.repositories.OrdersRepository;
+import com.linkmart.repositories.RequestRepository;
 import io.swagger.v3.core.util.Json;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,15 +27,16 @@ public class OrdersService {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     RequestService requestService;
-
+    @Autowired
+    RequestRepository requestRepository;
     @Autowired
     OfferRepository offerRepository;
-
     @Autowired
     OrdersRepository ordersRepository;
     @Autowired
     OfferService offerService;
-
+    @Autowired
+    ReviewService reviewService;
     @Autowired
     S3Service s3Service;
 
@@ -137,6 +138,26 @@ public class OrdersService {
                 .collect(Collectors.toList());
     }
 
+    public List<OrdersDtoWithDays> userGetOrdersByUserIdAndStatus(String userId, List<String> orderStatuses){
+        List<OrdersDto> orders = ordersRepository.findOrdersByUserIdAndStatus(userId, orderStatuses);
+        return orders.stream()
+                .map(order -> {
+                    OrdersDtoWithDays orderWithDays = new OrdersDtoWithDays();
+                    orderWithDays.setOrderId(order.getOrderId());
+                    orderWithDays.setOrderStatus(order.getOrderStatus());
+                    orderWithDays.setProviderId(order.getProviderId());
+                    orderWithDays.setProviderName(order.getProviderName());
+                    orderWithDays.setItem(order.getItem());
+                    orderWithDays.setPrimaryImage(order.getPrimaryImage());
+                    orderWithDays.setQuantity(order.getQuantity());
+                    orderWithDays.setPrice(order.getPrice());
+                    orderWithDays.setEstimatedProcessTime(order.getEstimatedProcessTime() + " (days)");  // Add "days" suffix
+                    orderWithDays.setCreatedAt(order.getCreatedAt());
+                    return orderWithDays;
+                })
+                .collect(Collectors.toList());
+    }
+
     public void updateOrderShippingOrderId( String orderId, Integer logisticCompanyId, String shippingOrderNo, MultipartFile file) {
         Orders order = (Orders)ordersRepository.findOrdersById(orderId);
         if (order == null) {
@@ -163,5 +184,31 @@ public class OrdersService {
         Map<String, Object> itemDetailMap = gson.fromJson(itemDetailJson, new TypeToken<Map<String, Object>>(){}.getType());
         orders.setItemDetail(itemDetailMap);
         return orders;
+    }
+
+    public void reviewOrder(String orderId, String userId, Float efficiency, Float attitude, String reviewRemark) {
+        logger.info("Review order: " + orderId);
+        var order = ordersRepository.getOneByOfferId(orderId);
+        logger.info("After SQL Review Order: " + order);
+        if (order == null) {
+            throw new IllegalArgumentException("Order not found");
+        }
+        Offer offer = offerRepository.findOfferByOfferId(order.getOfferId());
+        if (offer == null) {
+            throw new IllegalArgumentException("Offer not found");
+        }
+        RequestModel request = requestRepository.getRequestByRequestId(offer.getRequestId());
+        if (request == null) {
+            throw new IllegalArgumentException("Request not found");
+        } else if (!request.getCreatedBy().equals(userId)) {
+            throw new IllegalArgumentException("User not authorized");
+        }
+        Review review = new Review();
+        review.setOrderID(orderId);
+        review.setProviderId(offer.getProviderId());
+        review.setReviewEfficiency(efficiency);
+        review.setReviewAttitude(attitude);
+        review.setReviewRemark(reviewRemark);
+        reviewService.saveReview(review);
     }
 }

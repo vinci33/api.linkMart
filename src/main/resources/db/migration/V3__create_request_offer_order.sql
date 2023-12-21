@@ -70,7 +70,7 @@ CREATE TABLE orders (
     user_address_id INTEGER not null REFERENCES user_address(id),
     order_status_id INTEGER not null REFERENCES order_status(id),
     logistic_company_id INTEGER REFERENCES logistic_company(id),
-    shipping_order_no TEXT,
+    shipping_order_no VARCHAR(255),
     shipment_proof TEXT,
     created_at TIMESTAMP default NOW(),
     updated_at TIMESTAMP default NOW()
@@ -80,8 +80,8 @@ CREATE TABLE review (
     id SERIAL PRIMARY KEY,
     orders_id TEXT not null REFERENCES orders(id),
     provider_id TEXT not null REFERENCES provider(id),
-    review_efficiency integer,
-    review_attitude integer,
+    review_efficiency FLOAT,
+    review_attitude FLOAT,
     review_remark TEXT,
     created_at TIMESTAMP default NOW(),
     updated_at TIMESTAMP default NOW()

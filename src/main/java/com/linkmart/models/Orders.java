@@ -29,6 +29,12 @@ public class Orders {
     @Column(name = "shipment_proof")
     private String shipmentProof;
 
+    @Column(name = "created_at")
+    private String createdAt;
+
+    @Column(name = "updated_at")
+    private String updatedAt;
+
     public Integer getLogisticCompanyId() {
         return logisticCompanyId;
     }
@@ -93,5 +99,21 @@ public class Orders {
 
     public void setShippingOrderNo(String shippingOrderNo) {
         this.shippingOrderNo = shippingOrderNo;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

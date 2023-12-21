@@ -318,11 +318,9 @@ public class OfferService {
         for (Offer offer : offers) {
             if (offer.getProviderId().equals(providerId)) {
                 return true;
-            } else {
-                return false;
             }
         }
-        return null;
+        return false;
     }
 
     public List<Offer> getOfferByRequestIdAndOfferStatusId(String requestId, Integer offerStatusId){
