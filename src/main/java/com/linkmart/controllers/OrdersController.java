@@ -1,7 +1,7 @@
 package com.linkmart.controllers;
 
 
-import com.linkmart.dtos.OrderPaymentDto;
+import com.linkmart.dtos.OrdersByOrderIdDto;
 import com.linkmart.dtos.OrdersDtoWithDays;
 import com.linkmart.dtos.ResponseWithMessage;
 import com.linkmart.forms.OrdersForm;
@@ -94,7 +94,20 @@ public class OrdersController {
 
     }
 
-    @PutMapping(value = "/user/order/{orderId}")
+    @GetMapping(value = "/order/{orderId}")
+    public OrdersByOrderIdDto getOrdersDetailByOrderId (@PathVariable String orderId) {
+        try {
+            if (orderId == null) {
+                throw new IllegalArgumentException("OrderId not found");
+            }
+            var result = ordersService.getOrdersDetailByOrderId(orderId);
+            return result;
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    @PutMapping(value = "/order/{orderId}")
     public void updateOrderShippingOrderId(@PathVariable String orderId, @RequestBody UpdateOrderForm updateOrderForm) {
         try {
             if (orderId == null ) {
@@ -103,11 +116,7 @@ public class OrdersController {
             if (updateOrderForm == null || updateOrderForm.getLogisticCompanyId() == null || updateOrderForm.getShippingOrderNo() == null) {
                 throw new IllegalArgumentException("Shipping order Id or logistic company Id not found");
             }
-            var userId = (String)request.getAttribute("userId");
-            if (userId == null) {
-                throw new IllegalArgumentException("UserId not found");
-            }
-            ordersService.updateOrderShippingOrderId(userId, orderId, updateOrderForm.getLogisticCompanyId(),updateOrderForm.getShippingOrderNo());
+            ordersService.updateOrderShippingOrderId(orderId, updateOrderForm.getLogisticCompanyId(),updateOrderForm.getShippingOrderNo());
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

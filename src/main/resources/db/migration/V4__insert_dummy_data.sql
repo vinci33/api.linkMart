@@ -112,7 +112,7 @@ INSERT INTO request(id, created_by, location_id, category_id, item, item_detail,
  ('01HJ3J1AERETM84PD78FQPMGZM', '01HHZYZY2PSD07ZQS50FC2D33E',4, 2, '男子籃球連帽衫', '{"size": "S", "color": "Black", "gender": "Men", "apparelType": "Jeans"}', 'https://www.nike.com.hk/product/DQ5819-027/detail.htm?pdpRecommend=false&preSkuCode=', 1, 'Nike Dri-FIT Standard Issue \n 男子籃球連帽衫結合經典造型與現代機能，不但導濕速乾，更打造出場外風尚。 \n 這款連帽衫重磅柔軟，並帶來包覆效果，是你健身的必備之選。', 899, true, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://static.nike.com.hk/resources/product/DQ5819-027/DQ5819-027_BL1.png'),
 
  ('01HHV1H3RCJYR25XJWX37NPCQJ', '01HHZYNJ8DRPKVRT1YY0Z9TRHN',5, 2, 'ANIME HEROES - One Piece - Monkey D. Luffy Renewal Version Action Figure',
- null, 'https://www.amazon.com/ANIME-HEROES-Monkey-Renewal-Version/dp/B0CCXQ9H1W/ref=sr_1_2?keywords=luffy%2Bfigure&qid=1702895497&sr=8-2&th=1', 1,
+ '{"size": "S", "color": "blue", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.amazon.com/ANIME-HEROES-Monkey-Renewal-Version/dp/B0CCXQ9H1W/ref=sr_1_2?keywords=luffy%2Bfigure&qid=1702895497&sr=8-2&th=1', 1,
  'Set Sail with your favorite pirates - Luffy is renewed! \n Luffy, Captain of the Straw Hat pirates, has set out to be the King of the Pirates and find the One Piece. Luffy goes on adventures aiding those in need and collecting more friends and members for his crew along the way. \n Luffy has increased his bounty with every adventure, saved cities, eaten lots of food, and encountered endless foes who never seem to be able to beat Captain Luffy and his crew Manga Inspired Packaging - Each Anime Heroes line has manga inspired packaging and beautiful artwork on the front featuring the characters you know and love Endless Play \n - Each figure come with 2 sets of interchangeable hands, character specific accessories, and 20+ points of articulation to pose and play in endless ways Collect them all - Bandai Namco Toys & Collectibles America has a full line-up of One Piece action figures for you to show off your fandom and collect your favorite characters Impressive Likeness - Each figure comes with detailed sculpt and true to show features that Anime Heroes action figures are known for',
  1900, true, false, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71Hf77Rs3DL._AC_SL1500_.jpg');
 -- 01HHV1H3RCJYR25XJWX37NPCQJ has offer
@@ -252,7 +252,7 @@ INSERT INTO users (id, username, user_email, password) VALUES
  ('01HHQRCV54C81AAERBR58E2DAN', 'kdl@gmail.com', 'kdl@gmail.com', '$2a$10$JScQcGKhFIvXLkPzLdE5/.NXPstdQnmj/csKoMrDuTmoRskfTx3V6');
 --user_id:01HHQRCV54C81AAERBR58E2DAN
 --password: "1234"
---JWT: eyJhbGciOiJIUzI
+--JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhZG1pbiIsInVzZXJJZCI6IjAxSEhRUkNWNTRDODFBQUVSQlI1OEUyREFOIiwiaWF0IjoxNzAzMTEyNjYxLCJleHAiOjE3MDQ0Mjg3OTZ9.a1N5K8NWHXFX5aBQ2O0Q7nBpf43Sqo4wZaWlmk6kc24
 
 INSERT INTO provider (id, user_id, location_id, star_of_efficiency, star_of_attitude, number_of_reviews) VALUES
 --FredyP
