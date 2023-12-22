@@ -44,11 +44,12 @@ CREATE TABLE status (
 
 
  CREATE TABLE provider_verification (
-    id SERIAL PRIMARY KEY,
+    id TEXT PRIMARY KEY,
     user_id TEXT not null REFERENCES users(id),
     status_id INTEGER not null REFERENCES status(id),
-    id_document VARCHAR(255) not null,
-    address_document VARCHAR(255) not null,
+    id_document VARCHAR(1000) not null,
+    address_document VARCHAR(1000) not null,
+    bank_document VARCHAR(1000) not null,
     created_at TIMESTAMP default NOW(),
     updated_at TIMESTAMP default NOW()
  );
@@ -57,7 +58,7 @@ CREATE TABLE status (
      id TEXT PRIMARY KEY,
      user_id TEXT not null REFERENCES users(id),
      location_id INTEGER not null REFERENCES location(id),
-     provider_verification_id INTEGER  REFERENCES provider_verification(id),
+     provider_verification_id TEXT REFERENCES provider_verification(id),
      number_of_reviews INTEGER,
      star_of_efficiency float,
      star_of_attitude float,

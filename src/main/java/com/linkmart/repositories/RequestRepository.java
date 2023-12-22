@@ -118,7 +118,8 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
     JOIN location l ON r.location_id = l.id
     JOIN users u ON r.created_by = u.id
     WHERE category_name = IF(:categoryName IS NULL, '', :categoryName)
-    WHERE (COALESCE(:categoryName, '') = '' OR c.category_name IN :categoryName)
+    OR location_name = IF(:locationName IS NULL, '', :locationName)
     """, nativeQuery =true)
     List<AnotherRequestDto> findRequestByCategoryAndLocation(@Param("categoryName") List<String> category);
+
 }

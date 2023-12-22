@@ -157,8 +157,7 @@ public class OrdersService {
         }
         List<String> images = ordersRepository.findImagesByOrderId(orderId);
         OrdersByOrderIdDto orders =  OrdersMapper.INSTANCE.toOrdersByOrderIdDto(orderDetail);
-
-
+        orders.setImages(images);
         String itemDetailJson = ordersRepository.findItemDetailByOrderId(orderId);
         Gson gson = new Gson();
         ItemDetailModel itemDetailMap = gson.fromJson(itemDetailJson, ItemDetailModel.class);

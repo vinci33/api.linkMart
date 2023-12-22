@@ -28,10 +28,18 @@ public class OrdersByOrderIdDto {
     private ItemDetailModel itemDetail;
     private String url;
     private String requestRemark;
-    private String shipmentProof;
     private String shippingOrderNo;
     private String logisticCompanyName;
     private String Address;
+    private String logisticCompanyUrl;
+
+    public String getLogisticCompanyUrl() {
+        return logisticCompanyUrl;
+    }
+
+    public void setLogisticCompanyUrl(String logisticCompanyUrl) {
+        this.logisticCompanyUrl = logisticCompanyUrl;
+    }
 
     public String getAddress() {
         return Address;
@@ -41,13 +49,6 @@ public class OrdersByOrderIdDto {
         Address = address;
     }
 
-    public String getShipmentProof() {
-        return shipmentProof;
-    }
-
-    public void setShipmentProof(String shipmentProof) {
-        this.shipmentProof = shipmentProof;
-    }
 
     public String getShippingOrderNo() {
         return shippingOrderNo;

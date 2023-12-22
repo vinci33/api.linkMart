@@ -1,5 +1,6 @@
 package com.linkmart.models;
 
+import de.huxhorn.sulky.ulid.ULID;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
@@ -8,8 +9,7 @@ import java.sql.Timestamp;
 @Table(name = "provider_verification")
 public class ProviderVerification {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private String id;
 
     @Column(name = "user_id")
     private String userId; //ULID
@@ -44,9 +44,6 @@ public class ProviderVerification {
     @JoinColumn(name = "status_id", updatable = false, insertable = false)
     private Status status;
 
-    public int getId() {
-        return id;
-    }
 
     @Override
     public String toString() {
@@ -62,12 +59,9 @@ public class ProviderVerification {
                 '}';
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUserId() {
-        return userId;
+    public ProviderVerification() {
+        ULID ulid = new ULID();
+        this.id = ulid.nextULID();
     }
 
     public void setUserId(String userId) {

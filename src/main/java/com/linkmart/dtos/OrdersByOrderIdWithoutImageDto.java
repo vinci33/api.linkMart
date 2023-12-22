@@ -27,5 +27,6 @@ public interface OrdersByOrderIdWithoutImageDto {
     String getShippingOrderNo();
     String getLogisticCompanyName();
     Integer getUserAddressId();
+    String getLogisticCompanyUrl();
 
 }

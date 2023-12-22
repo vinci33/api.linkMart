@@ -326,7 +326,7 @@ public class RequestService {
         }
     }
 
-    public List<AnotherRequestDto> getRequestsByCategoryAndLocation(List<String> categories, List<String> locations, int page) {
+    public List<AnotherRequestDto> getRequestsByCategoryAndLocation(Integer page, List<String> categories, List<String> locations ) {
         logger.info("category1: " + categories);
         logger.info("location: " + locations);
         logger.info("page: " + page);
@@ -334,7 +334,10 @@ public class RequestService {
            if (page < 0) {
                throw new IllegalArgumentException("Page number cannot be less than zero.");
            }
-           var requestPage =  customRequestRepository.searchRequest(categories, locations);
+           var requestPage =  customRequestRepository.searchRequest(categories,locations);
+           for (AnotherRequestDto request: requestPage) {
+               request.setCreatedBy(userRepository.findByUserId(request.getCreatedBy()));
+           }
            logger.info("requestPage: " + requestPage);
            return requestPage;
        } catch (Exception e) {
@@ -342,4 +345,6 @@ public class RequestService {
            return null;
        }
     }
+
+
 }

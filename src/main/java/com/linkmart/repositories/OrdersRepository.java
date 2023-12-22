@@ -107,9 +107,9 @@ public interface OrdersRepository extends JpaRepository<Orders, String> {
                      r.url AS url,
                      r.request_remark AS requestRemark,
                      l.location_name AS locationName,
-                     o.shipment_proof AS shipmentProof,
                      o.shipping_order_no AS shippingOrderNo,
-                        lc.company_name AS logisticCompanyName
+                        lc.company_name AS logisticCompanyName,
+                        lc.company_url AS logisticCompanyUrl
                  FROM
                      orders o
                  JOIN

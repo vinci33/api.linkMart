@@ -52,7 +52,6 @@ public class RequestModel{
     @Column(name = "has_offer")
     private boolean hasOffer;
 
-
     @Column (name = "is_active")
     private boolean isActive;
 
@@ -225,5 +224,30 @@ public class RequestModel{
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    //Testing
+    public CategoryModel getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryModel category) {
+        this.category = category;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public User getUsers() {
+        return users;
+    }
+
+    public void setUsers(User users) {
+        this.users = users;
     }
 }

@@ -1,48 +1,58 @@
 package com.linkmart.repositories;
 
+
 import com.linkmart.dtos.AnotherRequestDto;
-import com.linkmart.dtos.RequestDto;
 import com.linkmart.mappers.RequestMapper;
 import com.linkmart.models.RequestModel;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Types;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class CustomRequestRepository {
+    final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @PersistenceContext
-    private final EntityManager entityManager;
-
-    public CustomRequestRepository(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
+    private EntityManager entityManager;
 
     public List<AnotherRequestDto> searchRequest(List<String> categories, List<String> locations) {
-        String query = """
-                  SELECT
-                      r.*
-                FROM
-                    request r
-                JOIN
-                    category c
-                        ON r.category_id = c.id
-                JOIN
-                    location l
-                        ON r.location_id = l.id
-                WHERE c.category_name IN :categories and
-                l.location_name IN :locations
-                  """;
+
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("SELECT r.* ");
+        queryBuilder.append("FROM request r ");
+        queryBuilder.append("JOIN category c ON r.category_id = c.id ");
+        queryBuilder.append("JOIN location l ON r.location_id = l.id ");
+        queryBuilder.append("WHERE 1=1 ");
+
+        if (categories != null && !categories.isEmpty()) {
+            String categoriesClause = categories.stream()
+                    .map(category -> "c.category_name = '" + category + "'")
+                    .collect(Collectors.joining(" OR "));
+            queryBuilder.append("AND (").append(categoriesClause).append(") ");
+        }
+        if (locations != null && !locations.isEmpty()) {
+            String locationsClause = locations.stream()
+                    .map(location -> "l.location_name = '" + location + "'")
+                    .collect(Collectors.joining(" OR "));
+            queryBuilder.append("AND (").append(locationsClause).append(") ");
+        }
+
+        String query = queryBuilder.toString();
         var typedQuery =
                 entityManager.createNativeQuery(query,
-                RequestModel.class)
-                .setParameter("categories",categories)
-                .setParameter("locations",locations);
+                                RequestModel.class);
+
         var result = RequestMapper.INSTANCE.toAnotherRequestDto(typedQuery.getResultList());
         return result;
     }
 }
+
+
+
+
