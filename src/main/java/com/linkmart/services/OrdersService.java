@@ -151,6 +151,7 @@ public class OrdersService {
     }
 
     public OrdersByOrderIdDto getOrdersDetailByOrderId (String orderId){
+        logger.info("Get order detail: " + orderId);
         OrdersByOrderIdWithoutImageDto orderDetail = ordersRepository.findOrdersDetailByOrderId(orderId);
         if (orderDetail == null) {
             throw new IllegalArgumentException("Order not found");

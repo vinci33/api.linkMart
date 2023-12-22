@@ -28,7 +28,7 @@ public class CustomRequestRepository {
         queryBuilder.append("FROM request r ");
         queryBuilder.append("JOIN category c ON r.category_id = c.id ");
         queryBuilder.append("JOIN location l ON r.location_id = l.id ");
-        queryBuilder.append("WHERE 1=1 ");
+        queryBuilder.append("WHERE is_active = true ");
 
         if (categories != null && !categories.isEmpty()) {
             String categoriesClause = categories.stream()

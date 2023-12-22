@@ -39,9 +39,9 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
                         request.created_at as createdAt,
                         request.updated_at as updatedAt,
                         location.location_name as locationName,
-                        COUNT(offer.request_id) as orderCount
+                        COUNT(offer.request_id) as offerCount
                     FROM request
-                    JOIN offer on request.id = offer.request_id
+                    LEFT JOIN offer on request.id = offer.request_id
                     JOIN users ON request.created_by = users.id
                     JOIN location ON request.location_id = location.id
                     WHERE request.created_by = :userId

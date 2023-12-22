@@ -15,6 +15,6 @@ public interface RequestDto {
     int getOfferPrice();
     String getCreatedAt();
     String getUpdatedAt();
-    Integer getOrderCount();
+    Integer getOfferCount();
 
 }
