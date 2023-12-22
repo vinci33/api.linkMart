@@ -1,2 +1,4 @@
-package com.linkmart.dtos;public class RequestIdDto {
+package com.linkmart.dtos;
+
+public record RequestIdDto (String requestId) {
 }

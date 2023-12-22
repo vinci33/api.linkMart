@@ -80,7 +80,7 @@ public class OrdersController {
                 throw new IllegalArgumentException("OrderStatus not found");
             }
             List<String> statuses = new ArrayList<>();
-            if ("inprogress".equalsIgnoreCase(orderStatus)) {
+            if ("inProgress".equalsIgnoreCase(orderStatus)) {
                 statuses = Arrays.asList("in-progress", "shipped");
             } else if ("complete".equalsIgnoreCase(orderStatus)) {
                 statuses = Arrays.asList("completed", "cancelled");
@@ -102,7 +102,7 @@ public class OrdersController {
                 throw new IllegalArgumentException("OrderStatus not found");
             }
             List<String> statuses = new ArrayList<>();
-            if ("inprogress".equalsIgnoreCase(orderStatus)) {
+            if ("inProgress".equalsIgnoreCase(orderStatus)) {
                 statuses = Arrays.asList("in-progress", "shipped");
             } else if ("complete".equalsIgnoreCase(orderStatus)) {
                 statuses = Arrays.asList("completed", "cancelled");

@@ -156,12 +156,14 @@ public class RequestService {
             Gson g = new Gson();
             ItemDetailModel itemDetailModel = g.fromJson(itemDetail, ItemDetailModel.class);
             newRequest.setItemDetail(itemDetailModel);
+            newRequest.setActive(true);
 
             var result = this.requestRepository.saveAndFlush(newRequest);
             newRequest.setImages(result.getImages());
             newRequest.setCreatedBy(result.getCreatedBy());
             newRequest.setCreatedAt(result.getCreatedAt());
             newRequest.setUpdatedAt(result.getUpdatedAt());
+
 
             return newRequest;
         } catch (Exception e) {
@@ -239,7 +241,7 @@ public class RequestService {
 
     //route: PUT: /api/request/update/{requestId}
     @Transactional
-    public void updateRequest(String requestId, String userId, String itemDetail, String item, String url,
+    public String updateRequest(String requestId, String userId, String itemDetail, String item, String url,
                               String quantity, String requestRemark, Integer offerPrice,
                               List<MultipartFile> files)
             throws Exception {
@@ -283,6 +285,7 @@ public class RequestService {
             result.setUpdatedAt(UtilMethod.Now());
             logger.info(UtilMethod.Now().toString());
             requestRepository.saveAndFlush(result);
+            return result.getRequestId();
         } catch (Exception e) {
             throw new Exception("Cannot update request");
         }

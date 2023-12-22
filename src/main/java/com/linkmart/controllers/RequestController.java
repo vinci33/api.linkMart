@@ -49,14 +49,14 @@ public class RequestController {
         }
     }
 
-//    @GetMapping(value = "/request")
-//    public List<RequestDto> getAllRequest () {
-//        try{
-//            return requestService.getAllRequest();
-//        } catch (Exception e) {
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-//        }
-//    }
+    @GetMapping(value = "/request")
+    public List<RequestDto> getAllRequest () {
+        try{
+            return requestService.getAllRequest();
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
 
     //5.2.2 Get All - by userId (ACTIVE)
     @GetMapping(value = "/api/request")
@@ -103,7 +103,7 @@ public class RequestController {
     }
 
     @PutMapping(value = "/api/request/{requestId}")
-    public RequestResponseWithMessageDto updateRequest (HttpServletRequest request,
+    public RequestIdDto updateRequest (HttpServletRequest request,
                                                         @PathVariable(value = "requestId") String requestId,
                                                         @RequestParam(value = "itemDetail", required = false) String itemDetail,
                                                         @RequestParam(value = "item", required = false) String item,
@@ -114,9 +114,9 @@ public class RequestController {
                                                         @RequestParam(value = "imageFile", required = false) List<MultipartFile> file) {
         try{
             var userId = (String)request.getAttribute("userId");
-            requestService.updateRequest(requestId, userId, itemDetail, item, url,
+            String requestID = requestService.updateRequest(requestId, userId, itemDetail, item, url,
                     quantity, requestRemark, offerPrice, file);
-            return new RequestResponseWithMessageDto("Update request success");
+            return new RequestIdDto(requestID);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
@@ -166,15 +166,15 @@ public class RequestController {
         }
     }
 //Page<AnotherRequestDto>
-    @GetMapping(value = "/request")
-    public List<AnotherRequestDto> getAllRequestByCategoryAndLocation (
-            @RequestParam(name = "page", defaultValue = "0") Integer page,
-            @RequestParam(name = "category", required = false) List<String> categories,
-            @RequestParam(name = "location", required = false) List<String> locations) {
-        try {
-            return requestService.getRequestsByCategoryAndLocation(categories, locations, page);
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-        }
-    }
+//    @GetMapping(value = "/request")
+//    public List<AnotherRequestDto> getAllRequestByCategoryAndLocation (
+//            @RequestParam(name = "page", defaultValue = "0") Integer page,
+//            @RequestParam(name = "category", required = false) List<String> categories,
+//            @RequestParam(name = "location", required = false) List<String> locations) {
+//        try {
+//            return requestService.getRequestsByCategoryAndLocation(categories, locations, page);
+//        } catch (Exception e) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+//        }
+//    }
 }
