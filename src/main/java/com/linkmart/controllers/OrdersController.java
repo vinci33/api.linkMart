@@ -3,24 +3,27 @@ package com.linkmart.controllers;
 
 import com.linkmart.dtos.OrderPaymentDto;
 import com.linkmart.dtos.OrdersByOrderIdDto;
-import com.linkmart.dtos.OrdersDtoWithDays;
+import com.linkmart.dtos.OrdersByOrderIdAndStatusDto;
 import com.linkmart.dtos.ResponseWithMessage;
-import com.linkmart.forms.OrdersForm;
 import com.linkmart.forms.ReviewForm;
-import com.linkmart.forms.UpdateOrderForm;
+import com.linkmart.mappers.OrdersByOrderIdAndStatusMapper;
 import com.linkmart.services.OrdersService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.EventListener;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -32,6 +35,7 @@ public class OrdersController {
     HttpServletRequest request;
 
     final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 
     @GetMapping("/order")
     public OrderPaymentDto createOrder(
@@ -62,19 +66,19 @@ public class OrdersController {
         }
     }
 
-    @GetMapping(value = "/user/order")
-    public List<OrdersDtoWithDays> getOrdersByUserId() {
-        try {
-            var userId = (String) request.getAttribute("userId");
-            return ordersService.getOrdersByUserId(userId);
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-        }
-    }
+//    @GetMapping(value = "/user/order")
+//    public List<OrdersByOrderIdAndStatusDto> getOrdersByUserId() {
+//        try {
+//            var userId = (String) request.getAttribute("userId");
+//            return ordersService.getOrdersByUserId(userId);
+//        } catch (Exception e) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+//        }
+//    }
 
     //for provider find order by order status
     @GetMapping(value = "/provider/order/{orderStatus}")
-    public List<OrdersDtoWithDays> providerGetOrdersByUserId( @PathVariable String orderStatus){
+    public List<OrdersByOrderIdAndStatusDto> providerGetOrdersByUserId(@PathVariable String orderStatus){
         try{
             if (orderStatus == null) {
                 throw new IllegalArgumentException("OrderStatus not found");
@@ -88,7 +92,8 @@ public class OrdersController {
                 throw new IllegalArgumentException("Invalid orderStatus: " + orderStatus);
             }
             var userId = (String)request.getAttribute("userId");
-            return ordersService.getOrdersByUserIdAndStatus(userId, statuses);
+            var ordersDtos = ordersService.getOrdersByUserIdAndStatus(userId, statuses);
+            return OrdersByOrderIdAndStatusMapper.INSTANCE.toOrdersByOrderIdAndStatusDtos(ordersDtos);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
@@ -96,7 +101,7 @@ public class OrdersController {
 
     //for user find order by order status
     @GetMapping(value = "/user/order/{orderStatus}")
-    public List<OrdersDtoWithDays> userGetOrdersByUserId( @PathVariable String orderStatus){
+    public List<OrdersByOrderIdAndStatusDto> userGetOrdersByUserId(@PathVariable String orderStatus){
         try{
             if (orderStatus == null) {
                 throw new IllegalArgumentException("OrderStatus not found");
@@ -110,7 +115,8 @@ public class OrdersController {
                 throw new IllegalArgumentException("Invalid orderStatus: " + orderStatus);
             }
             var userId = (String)request.getAttribute("userId");
-            return ordersService.userGetOrdersByUserIdAndStatus(userId, statuses);
+            var ordersDtos = ordersService.userGetOrdersByUserIdAndStatusFromUser(userId, statuses);
+            return OrdersByOrderIdAndStatusMapper.INSTANCE.toOrdersByOrderIdAndStatusDtos(ordersDtos);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
@@ -146,6 +152,25 @@ public class OrdersController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
+
+    private final SseEmitter emitter = new SseEmitter();
+    @EventListener
+    public void orderCompleteEventhandeler(String orderId){
+        try {
+            emitter.send(Map.of("OrderId " , orderId));
+        }catch (IOException e){
+            emitter.completeWithError(e);
+        }
+    }
+    @GetMapping(value = "/order/sse")
+    public SseEmitter sseEmitter(){
+        return emitter;
+    }
+
+
+
+
+
 
     //For requester to review order
     @PostMapping(value = "/order/{orderId}/review")

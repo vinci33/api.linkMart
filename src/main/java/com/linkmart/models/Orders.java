@@ -3,7 +3,9 @@ package com.linkmart.models;
 import de.huxhorn.sulky.ulid.ULID;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
@@ -30,13 +32,12 @@ public class Orders {
     @Column(name = "shipment_proof")
     private String shipmentProof;
 
-    @Column(name = "created_at")
-    @CreationTimestamp
-    private String createdAt;
+    @Column(name = "created_at", insertable = false, updatable = false)
+    private Timestamp createdAt;
 
-    @Column(name = "updated_at")
-    @CreationTimestamp
-    private String updatedAt;
+    @Column(name = "updated_at",insertable = false)
+    @UpdateTimestamp
+    private Timestamp updatedAt;
 
     public Integer getLogisticCompanyId() {
         return logisticCompanyId;
@@ -104,19 +105,19 @@ public class Orders {
         this.shippingOrderNo = shippingOrderNo;
     }
 
-    public String getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 
-    public String getUpdatedAt() {
+    public Timestamp getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(String updatedAt) {
+    public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
     }
 }

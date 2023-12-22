@@ -187,6 +187,7 @@ public class RequestService {
     public List<RequestDto> getAllMyRequest(String userId, Boolean isActive) {
         try {
             var result = this.requestRepository.getAllRequestByUserId(userId, isActive);
+            logger.info(result.toString());
             return result;
         } catch (Exception e) {
             throw new IllegalArgumentException("Cannot get all my request");

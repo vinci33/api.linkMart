@@ -2,6 +2,7 @@ package com.linkmart.dtos;
 
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.linkmart.models.ItemDetailModel;
 import io.swagger.v3.core.util.Json;
 
 import java.sql.Timestamp;
@@ -24,7 +25,7 @@ public class OrdersByOrderIdDto {
     private String locationName;
     private String createdBy;
     private List<String> images;
-    private Map<String,Object> itemDetail;
+    private ItemDetailModel itemDetail;
     private String url;
     private String requestRemark;
     private String shipmentProof;
@@ -184,11 +185,11 @@ public class OrdersByOrderIdDto {
         this.images = images;
     }
 
-    public Map<String,Object> getItemDetail() {
+    public ItemDetailModel getItemDetail() {
         return itemDetail;
     }
 
-    public void setItemDetail(Map<String,Object> itemDetail) {
+    public void setItemDetail(ItemDetailModel itemDetail) {
         this.itemDetail = itemDetail;
     }
 

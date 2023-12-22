@@ -38,12 +38,15 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
                         request.offer_price as offerPrice,
                         request.created_at as createdAt,
                         request.updated_at as updatedAt,
-                        location.location_name as locationName
+                        location.location_name as locationName,
+                        COUNT(offer.request_id) as orderCount
                     FROM request
+                    JOIN offer on request.id = offer.request_id
                     JOIN users ON request.created_by = users.id
                     JOIN location ON request.location_id = location.id
                     WHERE request.created_by = :userId
                     AND request.is_active = :isActive
+                    GROUP BY request.id, users.username, request.item, request.primary_image, request.offer_price, request.created_at, request.updated_at, location.location_name
                     ORDER BY request.updated_at DESC
             LIMIT 30
             """, nativeQuery = true)

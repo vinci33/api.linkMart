@@ -48,5 +48,6 @@ application.properties
 flyway.conf
 config/env.properties
 
+.idea
 ```
 
