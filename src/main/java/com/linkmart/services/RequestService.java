@@ -331,10 +331,18 @@ public class RequestService {
         logger.info("location: " + locations);
         logger.info("page: " + page);
        try {
-           if (page < 0) {
-               throw new IllegalArgumentException("Page number cannot be less than zero.");
+           Integer limit = 5;
+           Integer offSet = 5;
+           if ( page == 1 ) {
+               limit = 5;
+                offSet = 0;
+           } else if (page > 1) {
+                limit = 5;
+                offSet = (page - 1) * 5;
            }
-           var requestPage =  customRequestRepository.searchRequest(categories,locations);
+           logger.info("limit: " + limit);
+           logger.info("offSet: " + offSet);
+           var requestPage =  customRequestRepository.searchRequest(categories,locations, limit, offSet);
            for (AnotherRequestDto request: requestPage) {
                request.setCreatedBy(userRepository.findByUserId(request.getCreatedBy()));
            }

@@ -9,8 +9,6 @@ import jakarta.persistence.PersistenceContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
-
-import java.sql.Types;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,7 +19,7 @@ public class CustomRequestRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<AnotherRequestDto> searchRequest(List<String> categories, List<String> locations) {
+    public List<AnotherRequestDto> searchRequest(List<String> categories, List<String> locations, Integer limit, Integer offset) {
 
         StringBuilder queryBuilder = new StringBuilder();
         queryBuilder.append("SELECT r.* ");
@@ -41,6 +39,13 @@ public class CustomRequestRepository {
                     .map(location -> "l.location_name = '" + location + "'")
                     .collect(Collectors.joining(" OR "));
             queryBuilder.append("AND (").append(locationsClause).append(") ");
+        }
+        queryBuilder.append("ORDER BY r.updated_at DESC");
+        if (limit != null) {
+            queryBuilder.append(" LIMIT ").append(limit);
+        }
+        if (offset != null) {
+            queryBuilder.append(" OFFSET ").append(offset);
         }
 
         String query = queryBuilder.toString();
