@@ -116,5 +116,4 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
             WHERE is_active = true
             """, nativeQuery =true)
     Integer getTotalRecords();
-
 }

@@ -169,8 +169,8 @@ public class RequestController {
             @RequestParam(name = "location", required = false) List<String> locations) {
         try {
             var request = requestService.getRequestsByCategoryAndLocation(page, categories, locations);
-            var totalRecords = requestService.getTotalRecords();
-            var totalPages = requestService.getTotalPages();
+            var totalRecords = requestService.getTotalRecords(page, categories, locations);
+            var totalPages = requestService.getTotalPages(page, categories, locations);
             return new RequestFilterDto(totalRecords, totalPages, request);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());

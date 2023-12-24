@@ -71,6 +71,7 @@ public class RequestModel{
             mappedBy="requestModel", cascade={CascadeType.ALL})
     private List<Offer> offers;
 
+
     public String getRequestId() {
         return requestId;
     }

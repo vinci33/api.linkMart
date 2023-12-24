@@ -56,6 +56,36 @@ public class CustomRequestRepository {
         var result = RequestMapper.INSTANCE.toAnotherRequestDto(typedQuery.getResultList());
         return result;
     }
+
+    public Integer requestCount(List<String> categories, List<String> locations, Integer limit, Integer offset) {
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("SELECT COUNT(r.id) ");
+        queryBuilder.append("FROM request r ");
+        queryBuilder.append("JOIN category c ON r.category_id = c.id ");
+        queryBuilder.append("JOIN location l ON r.location_id = l.id ");
+        queryBuilder.append("WHERE is_active = true ");
+
+        if (categories != null && !categories.isEmpty()) {
+            String categoriesClause = categories.stream()
+                    .map(category -> "c.category_name = '" + category + "'")
+                    .collect(Collectors.joining(" OR "));
+            queryBuilder.append("AND (").append(categoriesClause).append(") ");
+        }
+        if (locations != null && !locations.isEmpty()) {
+            String locationsClause = locations.stream()
+                    .map(location -> "l.location_name = '" + location + "'")
+                    .collect(Collectors.joining(" OR "));
+            queryBuilder.append("AND (").append(locationsClause).append(") ");
+        }
+
+        String query = queryBuilder.toString();
+        var typedQuery =
+                entityManager.createNativeQuery(query);
+
+        var result = typedQuery.getSingleResult();
+        logger.info("result: {}", result);
+        return Integer.parseInt(result.toString());
+    }
 }
 
 
