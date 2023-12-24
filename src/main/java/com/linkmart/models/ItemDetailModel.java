@@ -5,6 +5,7 @@ public class ItemDetailModel {
     private String color;
     private String size;
     private String gender;
+    private String brand;
 
     public String getApparelType() {
         return apparelType;
@@ -36,5 +37,13 @@ public class ItemDetailModel {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 }
