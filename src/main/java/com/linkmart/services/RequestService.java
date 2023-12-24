@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Math.ceil;
+import static java.lang.Math.log;
 
 @Service
 public class RequestService {
@@ -374,9 +375,13 @@ public class RequestService {
         Integer limit = 5;
         var totalRecords = getTotalRecords(page ,categories, locations);
         var totalPages = totalRecords / limit;
+        logger.info("getTotalPages totalRecords: " + totalRecords);
+        logger.info("getTotalPages limit: " + limit);
+        logger.info("getTotalPages totalPages1: " + totalPages);
         if (totalRecords % limit != 0) {
-            ceil(totalPages);
+            totalPages = (totalRecords / limit) + 1;
         }
+        logger.info("getTotalPages totalPages2: " + totalPages);
         return totalPages;
     }
 }
