@@ -25,6 +25,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Math.ceil;
+
 @Service
 public class RequestService {
 
@@ -349,10 +351,22 @@ public class RequestService {
            logger.info("requestPage: " + requestPage);
            return requestPage;
        } catch (Exception e) {
-           logger.error(e.getMessage());
-           return null;
+              throw new IllegalArgumentException("Cannot get request by category and location");
        }
     }
 
+    public Integer getTotalRecords() {
+        return requestRepository.getTotalRecords();
+    }
+
+    public Integer getTotalPages() {
+        var totalRecords = getTotalRecords();
+        Integer limit = 5;
+        var totalPages = totalRecords / limit;
+        if (totalRecords % limit != 0) {
+            ceil(totalPages);
+        }
+        return totalPages;
+    }
 
 }

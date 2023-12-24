@@ -16,6 +16,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+import static java.lang.Math.ceil;
+
 @RestController
 public class RequestController {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -159,23 +161,17 @@ public class RequestController {
         }
     }
 
-//    @GetMapping(value = "/request")
-//    public List<RequestDto> getAllRequest () {
-//        try{
-//            return requestService.getAllRequest();
-//        } catch (Exception e) {
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-//        }
-//    }
-
     //Page<AnotherRequestDto>
     @GetMapping(value = "/request")
-    public List<AnotherRequestDto> getAllRequestByCategoryAndLocation (
+    public RequestFilterDto getAllRequestByCategoryAndLocation (
             @RequestParam(name = "page", defaultValue = "0") Integer page,
             @RequestParam(name = "category", required = false) List<String> categories,
             @RequestParam(name = "location", required = false) List<String> locations) {
         try {
-            return requestService.getRequestsByCategoryAndLocation(page, categories, locations);
+            var request = requestService.getRequestsByCategoryAndLocation(page, categories, locations);
+            var totalRecords = requestService.getTotalRecords();
+            var totalPages = requestService.getTotalPages();
+            return new RequestFilterDto(totalRecords, totalPages, request);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

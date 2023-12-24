@@ -110,16 +110,11 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
     List<RequestDto> getAllRequestHistoryByUserId(@Param("userId") String userId);
 
     @Query(value ="""
-    SELECT r.id as requestId, c.category_name as categoryName, l.location_name as locationName,
-           u.username as createdBy, r.item, r.primary_image as primaryImage, r.offer_price as offerPrice,
-           r.created_at as createdAt, r.updated_at as updatedAt
-    FROM request r
-    JOIN category c ON r.category_id = c.id
-    JOIN location l ON r.location_id = l.id
-    JOIN users u ON r.created_by = u.id
-    WHERE category_name = IF(:categoryName IS NULL, '', :categoryName)
-    OR location_name = IF(:locationName IS NULL, '', :locationName)
-    """, nativeQuery =true)
-    List<AnotherRequestDto> findRequestByCategoryAndLocation(@Param("categoryName") List<String> category);
+            SELECT
+                COUNT(*) as totalRecords
+            FROM request
+            WHERE is_active = true
+            """, nativeQuery =true)
+    Integer getTotalRecords();
 
 }
