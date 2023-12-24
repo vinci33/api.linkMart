@@ -64,7 +64,6 @@ public class Provider {
     @OneToMany(mappedBy="provider" , cascade={CascadeType.REMOVE, CascadeType.MERGE})
     private List<Review> reviewList;
 
-
     public Provider() {
         ULID ulid = new ULID();
         this.id = ulid.nextULID();
@@ -134,4 +133,11 @@ public class Provider {
         this.updatedAt = updatedAt;
     }
 
+    public List<Review> getReviewList() {
+        return reviewList;
+    }
+
+    public void setReviewList(List<Review> reviewList) {
+        this.reviewList = reviewList;
+    }
 }

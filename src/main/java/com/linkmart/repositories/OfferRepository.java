@@ -61,4 +61,26 @@ public interface OfferRepository extends JpaRepository<Offer, String> {
     Offer findOfferByOfferId(String offerId);
 
     List<Offer> findOfferByRequestIdAndOfferStatusId(String requestId, Integer offerStatusId);
+
+    //TODO
+    @Query(value =
+            """
+            SELECT
+               offer.id as offerId,
+               request.id as requestId,
+               users.username as createdBy,
+               request.item,
+               request.primary_image as primaryImage,
+               offer.price,
+               offer.estimated_process_time as estimatedProcessTime,
+               status.status_name as offerStatus
+               FROM offer
+               JOIN request ON offer.request_id = request.id
+               JOIN users ON request.created_by = users.id
+               JOIN status ON offer.offer_status_id = status.id
+               WHERE offer.provider_id = :providerId
+               AND offer.offer_status_id = :offerStatusId
+            ORDER BY offer.updated_at DESC
+            """, nativeQuery = true)
+    List<OfferDto> findOfferAndRequestByProviderIdAndStatus(@Param("providerId") String providerId, @Param("offerStatusId") Integer offerStatusId);
 }

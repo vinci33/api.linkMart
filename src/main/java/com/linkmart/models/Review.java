@@ -4,7 +4,6 @@ package com.linkmart.models;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
-import java.util.Objects;
 
 @Entity
 @Table(name = "review")
@@ -29,9 +28,9 @@ public class Review {
     @Column(name = "review_remark")
     private String reviewRemark;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "orders_id", updatable = false, insertable = false)
-    private Orders orders;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "orders_id", updatable = false, insertable = false)
+//    private Orders orders;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "provider_id", updatable = false, insertable = false)
@@ -92,17 +91,6 @@ public class Review {
         this.reviewRemark = reviewRemark;
     }
 
-    public Orders getOrders() {
-        return orders;
-    }
-
-    public void setOrders(Orders orders) {
-        this.orders = orders;
-    }
-
-    public Provider getProvider() {
-        return provider;
-    }
 
     public void setProvider(Provider provider) {
         this.provider = provider;
@@ -133,7 +121,6 @@ public class Review {
                 ", reviewEfficiency=" + reviewEfficiency +
                 ", reviewAttitude=" + reviewAttitude +
                 ", reviewRemark='" + reviewRemark + '\'' +
-                ", orders=" + orders +
                 ", provider=" + provider +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +

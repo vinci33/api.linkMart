@@ -30,3 +30,7 @@ INSERT INTO Orders (id, offer_id, user_address_id, order_status_id, logistic_com
 ('01HHZY2AREHH036SRJNY23N3QX', '01HHZXTEBHEH1H55WTEZX7YTKV', 4, 4, 1, '1234567890');
 --user: fredy@user.com  ,  pw: "123"
 --provider : elaine@provider.com    ,    pw: "123"
+
+--Review
+INSERT INTO Review (orders_id, provider_id, review_efficiency, review_attitude, review_remark) VALUES
+('01HHZY2AREHH036SRJNY23N3QX', '01HJ017JH7A2J9XYPTY64YG5EK', 4, 5, 'Good');

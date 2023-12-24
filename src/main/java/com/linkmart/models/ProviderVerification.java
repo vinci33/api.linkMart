@@ -2,6 +2,7 @@ package com.linkmart.models;
 
 import de.huxhorn.sulky.ulid.ULID;
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Timestamp;
 
@@ -25,6 +26,9 @@ public class ProviderVerification {
 
     @Column(name = "address_document")
     private String addressDocument;
+
+    @Column(name = "bank_document")
+    private String bankDocument;
 
     @Column(name = "created_at", insertable = false, updatable = false)
     private Timestamp createdAt;
@@ -98,6 +102,14 @@ public class ProviderVerification {
 
     public void setAddressDocument(String addressDocument) {
         this.addressDocument = addressDocument;
+    }
+
+    public String getBankDocument() {
+        return bankDocument;
+    }
+
+    public void setBankDocument(String bankDocument) {
+        this.bankDocument = bankDocument;
     }
 
     public Timestamp getCreatedAt() {

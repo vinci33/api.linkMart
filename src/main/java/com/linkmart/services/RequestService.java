@@ -243,7 +243,7 @@ public class RequestService {
         }
     }
 
-    //route: PUT: /api/request/update/{requestId}
+    //route: PUT: /api/request/{requestId}
     @Transactional
     public String updateRequest(String requestId, String userId, String itemDetail, String item, String url,
                               String quantity, String requestRemark, Integer offerPrice,
@@ -287,7 +287,6 @@ public class RequestService {
                 result.setImages(images);
             }
             result.setUpdatedAt(UtilMethod.Now());
-            logger.info(UtilMethod.Now().toString());
             requestRepository.saveAndFlush(result);
             return result.getRequestId();
         } catch (Exception e) {

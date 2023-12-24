@@ -2,14 +2,16 @@ package com.linkmart.dtos;
 
 import com.linkmart.models.Location;
 
+import java.util.List;
+
 public class ProviderDetailDto {
     private String providerName;
     private String locationName;
     private String providerEmail;
-
     private Integer numberOfReviews;
     private Float starOfEfficiency;
     private Float starOfAttitude;
+    private List<ReviewsDto> reviews;
 
     public String getProviderName() {
         return providerName;
@@ -57,6 +59,10 @@ public class ProviderDetailDto {
 
     public void setStarOfAttitude(Float starOfAttitude) {
         this.starOfAttitude = starOfAttitude;
+    }
+
+    public void setReviews(List<ReviewsDto> reviews) {
+        this.reviews = reviews;
     }
 
     @Override

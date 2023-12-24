@@ -1,25 +1,31 @@
 package com.linkmart.services;
 
+import com.linkmart.dtos.OfferDto;
 import com.linkmart.dtos.ProviderDetailDto;
+import com.linkmart.dtos.ReviewsDto;
+import com.linkmart.dtos.VerificationDto;
 import com.linkmart.models.Provider;
-import com.linkmart.repositories.LocationRepository;
-import com.linkmart.repositories.ProviderRepository;
-import com.linkmart.repositories.UserRepository;
+import com.linkmart.models.ProviderVerification;
+import com.linkmart.repositories.*;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
-@Transactional
 public class ProviderService {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     ProviderRepository providerRepository;
 
+    @Autowired
+    ProviderVerificationRepository providerVerificationRepository;
 
 
     @Autowired
@@ -27,6 +33,9 @@ public class ProviderService {
 
     @Autowired
     LocationService locationService;
+
+    @Autowired
+    S3Service s3Service;
 
 
     public void validateProviderUserId(String userId) {
@@ -43,8 +52,6 @@ public class ProviderService {
         }
     }
 
-
-
     public String enrollProvider(String userId, Integer locationId) {
             userService.validateUserId((userId));
             locationService.validateLocationId(locationId);
@@ -54,7 +61,6 @@ public class ProviderService {
             var providerId = provider.getId();
             providerRepository.saveAndFlush(provider);
             return providerId;
-
     }
 
     public String checkIfProvider(String userId) {
@@ -76,4 +82,68 @@ public class ProviderService {
         providerDetailDto.setStarOfAttitude(provider.getStarOfAttitude());
         return  providerDetailDto;
     }
+
+    public void providerApplication(String userId, MultipartFile addressDocument, MultipartFile idDocument, MultipartFile bankDocument, Integer locationId) {
+        try{
+            userService.validateUserId((userId));
+            ProviderVerification provider = new ProviderVerification();
+            provider.setUserId(userId);
+            String addressFile = s3Service.uploadFile(addressDocument);
+            String idFile = s3Service.uploadFile(idDocument);
+            String bankFile = s3Service.uploadFile(bankDocument);
+            provider.setAddressDocument(addressFile);
+            provider.setIdDocument(idFile);
+            provider.setBankDocument(bankFile);
+            //Status: pending
+            provider.setStatusId(1);
+            var providerVerificationId = providerVerificationRepository.saveAndFlush(provider);
+            logger.info("providerVerificationId: " + providerVerificationId);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Cannot create provider application");
+        }
+    }
+
+    public VerificationDto getProviderVerificationDetail(String userId) {
+        try{
+            var verificationDetail = providerVerificationRepository.findProviderVerificationByUserId(userId);
+            logger.info("verificationDetail: " + verificationDetail);
+            return verificationDetail;
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Cannot get provider verification detail");
+        }
+    }
+
+    //TODO: get provider detail by userId
+//    public ProviderDetailDto getProviderDetailByUserId(String userId) {
+//        try{
+//            var providerDetail = providerRepository.findProviderByUserId(userId);
+//            logger.info("providerDetail: " + providerDetail);
+//            var providerId = providerDetail.getId();
+//            logger.info("providerId: " + providerId);
+//            //Completed and Done
+//            List<OfferDto> orderDetail = offerRepository.findOfferAndRequestByProviderIdAndStatus(providerId, 8);
+//
+//            ProviderDetailDto providerDetailDto = new ProviderDetailDto();
+//            providerDetailDto.setProviderName(userService.getUserNameById(providerDetail.getUserId()));
+//            providerDetailDto.setStarOfAttitude(providerDetail.getStarOfAttitude());
+//            providerDetailDto.setStarOfEfficiency(providerDetail.getStarOfEfficiency());
+//            providerDetailDto.setNumberOfReviews(providerDetail.getNumberOfReviews());
+//
+//            List<ReviewsDto> reviews  = new ArrayList<>();
+//            for (OfferDto offer : orderDetail) {
+//                ReviewsDto reviewsDto = new ReviewsDto();
+//                reviewsDto.setUsername(offer.getCreatedBy());
+//                reviewsDto.setPrimaryImage(offer.getPrimaryImage());
+//                reviewsDto.setItem(offer.getItem());
+//                reviewsDto.setEfficiency((reviewRepository.findReviewByOrderId(offer.getOfferId())).getReviewEfficiency());
+//                reviewsDto.setAttitude(reviewRepository.findReviewByOrderId(offer.getOfferId()).getReviewAttitude());
+//                reviewsDto.setComments(reviewRepository.findReviewByOrderId(offer.getOfferId()).getReviewRemark());
+//                reviews.add(reviewsDto);
+//            }
+//            providerDetailDto.setReviews(reviews);
+//            return providerDetailDto;
+//        } catch (Exception e) {
+//            throw new IllegalArgumentException("Cannot get provider detail");
+//        }
+//    }
 }
