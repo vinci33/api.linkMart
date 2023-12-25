@@ -45,7 +45,7 @@ public class RequestController {
         try{
             var userId = (String)request.getAttribute("userId");
             RequestModel request = requestService.postRequest(userId, locationId, categoryId, itemDetail, item, url,
-                    quantity, requestRemark,offerPrice, file);
+                    quantity, requestRemark, offerPrice, file);
             return request;
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
@@ -166,10 +166,13 @@ public class RequestController {
     //Page<AnotherRequestDto>
     @GetMapping(value = "/request")
     public RequestFilterDto getAllRequestByCategoryAndLocation (
-            @RequestParam(name = "page", defaultValue = "0") Integer page,
+            @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
             @RequestParam(name = "category", required = false) List<String> categories,
             @RequestParam(name = "location", required = false) List<String> locations) {
         try {
+            logger.info("page: " + page);
+            logger.info("categories: " + categories);
+            logger.info("locations: " + locations);
             var request = requestService.getRequestsByCategoryAndLocation(page, categories, locations);
             var totalRecords = requestService.getTotalRecords(page, categories, locations);
             var totalPages = requestService.getTotalPages(page, categories, locations);

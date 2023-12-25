@@ -109,8 +109,11 @@ public class ProviderService {
     public VerificationDto getProviderVerificationDetail(String userId) {
         try{
             var verificationDetail = providerVerificationRepository.findProviderVerificationByUserId(userId);
-            logger.info("verificationDetail: " + verificationDetail);
-            return verificationDetail;
+            if (verificationDetail == null) {
+                return null;
+            } else {
+                return verificationDetail;
+            }
         } catch (Exception e) {
             throw new IllegalArgumentException("Cannot get provider verification detail");
         }

@@ -346,6 +346,7 @@ public class RequestService {
        try {
               var limit = 5;
               var offSet = 0;
+              System.out.println("locations: " + locations);
            if ( page <= 0 || page == null) {
                limit = 5;
                 offSet = 0;
@@ -353,15 +354,16 @@ public class RequestService {
                 limit = 5;
                 offSet = (page - 1) * 5;
            }
-           logger.info("limit: " + limit);
-           logger.info("offSet: " + offSet);
-           var requestPage =  customRequestRepository.searchRequest(categories,locations, limit, offSet);
+           System.out.println("limit: " + limit);
+              System.out.println("offSet: " + offSet);
+           var requestPage =  customRequestRepository.searchRequest(categories, locations, limit, offSet);
            for (AnotherRequestDto request: requestPage) {
                request.setCreatedBy(userRepository.findByUserId(request.getCreatedBy()));
            }
            logger.info("requestPage: " + requestPage);
            return requestPage;
        } catch (Exception e) {
+           logger.info(e.getMessage());
               throw new IllegalArgumentException("Cannot get request by category and location");
        }
     }

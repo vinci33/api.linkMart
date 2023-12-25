@@ -4,19 +4,21 @@ import com.linkmart.dtos.VerificationDto;
 import com.linkmart.models.ProviderVerification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface ProviderVerificationRepository extends JpaRepository<ProviderVerification, String> {
 
+    @Transactional
     @Query(value = """
             SELECT
                 pv.id as verificationId,
-                s.name as statusName,
+                s.status_name as statusName,
                 pv.id_document as idDocument,
                 pv.address_document as addressDocument,
                 pv.bank_document as bankDocument
-            FROM ProviderVerification pv
-            JOIN Status s ON pv.status_id = s.id
-            WHERE pv.userId = :UserId
+            FROM provider_verification pv
+            LEFT JOIN Status s ON pv.status_id = s.id
+            WHERE pv.user_id = :UserId
             """, nativeQuery = true)
     VerificationDto findProviderVerificationByUserId(String UserId);
 }
