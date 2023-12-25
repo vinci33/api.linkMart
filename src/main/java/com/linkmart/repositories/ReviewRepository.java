@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 public interface ReviewRepository extends JpaRepository<Review, Integer> {
 
     @Query(value = """
-            SELECT * FROM review WHERE order_id = :orderId"""
+            SELECT * FROM review WHERE review.orders_id = :orderId"""
             , nativeQuery = true)
     Review findReviewByOrderId(String orderId);
 }

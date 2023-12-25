@@ -146,6 +146,7 @@ public class ProviderService {
                     logger.info("username: " + offer.getCreatedBy());
                     reviewsDto.setPrimaryImage(offer.getPrimaryImage());
                     reviewsDto.setItem(offer.getItem());
+                    logger.info("item: " + offer.getItem());
                     reviewsDto.setEfficiency((reviewRepository.findReviewByOrderId(orderId).getReviewEfficiency()));
                     reviewsDto.setAttitude(reviewRepository.findReviewByOrderId(orderId).getReviewAttitude());
                     reviewsDto.setComments(reviewRepository.findReviewByOrderId(orderId).getReviewRemark());
