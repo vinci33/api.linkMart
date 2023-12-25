@@ -1,5 +1,6 @@
 package com.linkmart.controllers;
 
+import com.linkmart.dtos.OfferDto;
 import com.linkmart.dtos.ProviderDetailDto;
 import com.linkmart.dtos.ResponseWithMessage;
 import com.linkmart.dtos.VerificationResponseDto;
@@ -13,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 @RestController
 public class ProviderController {
@@ -85,18 +88,17 @@ public class ProviderController {
       }
     }
 
-//    @GetMapping("/api/provider/profile")
-//    public ProviderDetailDto getProviderProfile(HttpServletRequest request) {
-//      try {
-//          var userId = (String)request.getAttribute("userId");
-//          if (userId == null) {
-//              throw new IllegalArgumentException("Invalid UserId");
-//          }
-//          var providerProfile = providerService.getProviderDetailByUserId(userId);
-//          return providerProfile;
-//        }catch (IllegalArgumentException e) {
-//          logger.error(e.getMessage());
-//          throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-//      }
-//    }
+    @GetMapping("/api/provider/profile")
+    public ProviderDetailDto getProviderProfile(HttpServletRequest request) {
+      try {
+          var userId = (String)request.getAttribute("userId");
+          if (userId == null) {
+              throw new IllegalArgumentException("Invalid UserId");
+          }
+          return providerService.showProviderDetailByUserId(userId);
+        }catch (IllegalArgumentException e) {
+          logger.error(e.getMessage());
+          throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+      }
+    }
 }

@@ -1,7 +1,6 @@
 package com.linkmart.services;
 
 import com.linkmart.models.Review;
-import com.linkmart.repositories.RequestRepository;
 import com.linkmart.repositories.ReviewRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

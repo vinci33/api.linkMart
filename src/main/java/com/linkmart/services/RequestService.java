@@ -118,6 +118,8 @@ public class RequestService {
                                     List<MultipartFile> files)
             throws Exception {
         try {
+            logger.info("userId: " + userId);
+            logger.info("locationId: " + locationId);
             var newRequest = new RequestModel();
             newRequest.setCreatedBy(userId);
             newRequest.setLocationId(locationId);
@@ -125,12 +127,15 @@ public class RequestService {
             newRequest.setItem(item);
             newRequest.setUrl(url);
             newRequest.setQuantity(quantity);
+            logger.info("requestRemark: " + requestRemark);
 
             newRequest.setRequestRemark(requestRemark);
             newRequest.makeRequestCase();
             if (offerPrice != null) {
                 newRequest.setOfferPrice(offerPrice);
             }
+
+            logger.info("urlImages: " + urlImages);
 
             String firstFile = null;
             List<ImageModel> images = new ArrayList<>();
@@ -156,17 +161,19 @@ public class RequestService {
             }
             newRequest.setImages(images);
 
+            logger.info("itemDetail: " + itemDetail);
+
             Gson g = new Gson();
             ItemDetailModel itemDetailModel = g.fromJson(itemDetail, ItemDetailModel.class);
             newRequest.setItemDetail(itemDetailModel);
             newRequest.setActive(true);
+            logger.info("newRequest: " + newRequest);
 
             var result = this.requestRepository.saveAndFlush(newRequest);
             newRequest.setImages(result.getImages());
             newRequest.setCreatedBy(result.getCreatedBy());
             newRequest.setCreatedAt(result.getCreatedAt());
             newRequest.setUpdatedAt(result.getUpdatedAt());
-
 
             return newRequest;
         } catch (Exception e) {

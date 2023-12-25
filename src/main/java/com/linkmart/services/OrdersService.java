@@ -101,7 +101,6 @@ public class OrdersService {
         order.setOfferId(offerId);
         order.setUserAddressId(userAddressId);
         order.setOrderStatusId(2);
-        setStatusCreate(order);
         logger.info("Order status: " + order.getOrderStatusId());
         ordersRepository.saveAndFlush(order);
         return order.getId();
@@ -187,7 +186,7 @@ public class OrdersService {
             throw new IllegalArgumentException("User not authorized");
         }
         Review review = new Review();
-        review.setOrderID(orderId);
+        review.setOrderId(orderId);
         review.setProviderId(offer.getProviderId());
         review.setReviewEfficiency(efficiency);
         review.setReviewAttitude(attitude);

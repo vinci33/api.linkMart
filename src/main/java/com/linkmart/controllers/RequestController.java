@@ -17,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 import static java.lang.Math.ceil;
+import static java.lang.Math.log;
 
 @RestController
 public class RequestController {
@@ -131,6 +132,7 @@ public class RequestController {
             @RequestParam(value = "imageFile", required = false) List<MultipartFile> file) {
         try{
             var userId = (String)request.getAttribute("userId");
+            logger.info("userId: " + userId);
             RequestModel request = requestService.postRequestClone(userId, locationId, categoryId, itemDetail, item, url,
                     quantity, requestRemark,offerPrice, urlImages, file);
             return request;

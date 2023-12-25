@@ -65,6 +65,10 @@ public class ProviderDetailDto {
         this.reviews = reviews;
     }
 
+    public List<ReviewsDto> getReviews() {
+        return reviews;
+    }
+
     @Override
     public String toString() {
         return "ProviderDetailDto{" +

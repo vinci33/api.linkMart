@@ -14,7 +14,7 @@ public class Review {
     private int reviewId;
 
     @Column(name = "orders_id")
-    private String orderID; //ULID
+    private String orderId; //ULID
 
     @Column(name = "provider_id")
     private String providerId; //ULID
@@ -28,9 +28,9 @@ public class Review {
     @Column(name = "review_remark")
     private String reviewRemark;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "orders_id", updatable = false, insertable = false)
-//    private Orders orders;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "orders_id", updatable = false, insertable = false)
+    private Orders orders;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "provider_id", updatable = false, insertable = false)
@@ -67,12 +67,12 @@ public class Review {
         this.reviewId = reviewId;
     }
 
-    public String getOrderID() {
-        return orderID;
+    public String getOrderId() {
+        return orderId;
     }
 
-    public void setOrderID(String orderID) {
-        this.orderID = orderID;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
     public String getProviderId() {
@@ -116,7 +116,7 @@ public class Review {
     public String toString() {
         return "Review{" +
                 "reviewId=" + reviewId +
-                ", orderID='" + orderID + '\'' +
+                ", orderID='" + orderId + '\'' +
                 ", providerId='" + providerId + '\'' +
                 ", reviewEfficiency=" + reviewEfficiency +
                 ", reviewAttitude=" + reviewAttitude +

@@ -27,13 +27,16 @@ public class ProviderService {
     @Autowired
     ProviderVerificationRepository providerVerificationRepository;
 
-
     @Autowired
     UserService userService;
-
     @Autowired
     LocationService locationService;
-
+    @Autowired
+    OfferRepository offerRepository;
+    @Autowired
+    ReviewRepository reviewRepository;
+    @Autowired
+    OrdersRepository orderRepository;
     @Autowired
     S3Service s3Service;
 
@@ -69,8 +72,8 @@ public class ProviderService {
         return providerByUserId;
     }
 
-    public ProviderDetailDto getProviderDetail(String providerId) {
-        validateProviderId(providerId);
+    public ProviderDetailDto getProviderDetail(String userId) {
+        var providerId = providerRepository.getIdByUserId(userId);
         var provider = providerRepository.findProviderById(providerId);
         logger.info("provider: " + provider);
         ProviderDetailDto providerDetailDto = new ProviderDetailDto();
@@ -114,36 +117,45 @@ public class ProviderService {
     }
 
     //TODO: get provider detail by userId
-//    public ProviderDetailDto getProviderDetailByUserId(String userId) {
-//        try{
-//            var providerDetail = providerRepository.findProviderByUserId(userId);
-//            logger.info("providerDetail: " + providerDetail);
-//            var providerId = providerDetail.getId();
-//            logger.info("providerId: " + providerId);
-//            //Completed and Done
-//            List<OfferDto> orderDetail = offerRepository.findOfferAndRequestByProviderIdAndStatus(providerId, 8);
-//
-//            ProviderDetailDto providerDetailDto = new ProviderDetailDto();
-//            providerDetailDto.setProviderName(userService.getUserNameById(providerDetail.getUserId()));
-//            providerDetailDto.setStarOfAttitude(providerDetail.getStarOfAttitude());
-//            providerDetailDto.setStarOfEfficiency(providerDetail.getStarOfEfficiency());
-//            providerDetailDto.setNumberOfReviews(providerDetail.getNumberOfReviews());
-//
-//            List<ReviewsDto> reviews  = new ArrayList<>();
-//            for (OfferDto offer : orderDetail) {
-//                ReviewsDto reviewsDto = new ReviewsDto();
-//                reviewsDto.setUsername(offer.getCreatedBy());
-//                reviewsDto.setPrimaryImage(offer.getPrimaryImage());
-//                reviewsDto.setItem(offer.getItem());
-//                reviewsDto.setEfficiency((reviewRepository.findReviewByOrderId(offer.getOfferId())).getReviewEfficiency());
-//                reviewsDto.setAttitude(reviewRepository.findReviewByOrderId(offer.getOfferId()).getReviewAttitude());
-//                reviewsDto.setComments(reviewRepository.findReviewByOrderId(offer.getOfferId()).getReviewRemark());
-//                reviews.add(reviewsDto);
-//            }
-//            providerDetailDto.setReviews(reviews);
-//            return providerDetailDto;
-//        } catch (Exception e) {
-//            throw new IllegalArgumentException("Cannot get provider detail");
-//        }
-//    }
+    public ProviderDetailDto showProviderDetailByUserId(String userId) {
+        try{
+            logger.info("userId: " + userId);
+            Provider providerDetail = providerRepository.findProviderByUserId(userId);
+            var providerId = providerDetail.getId();
+            logger.info("providerId: " + providerId);
+            //Completed and Done
+            List<OfferDto> orderDetail = offerRepository.findOfferAndRequestByProviderIdAndStatus(providerId, 8);
+
+            ProviderDetailDto providerDetailDto = new ProviderDetailDto();
+            providerDetailDto.setProviderName(userService.getUserNameById(providerDetail.getUserId()));
+            providerDetailDto.setStarOfAttitude(providerDetail.getStarOfAttitude());
+            providerDetailDto.setStarOfEfficiency(providerDetail.getStarOfEfficiency());
+            providerDetailDto.setNumberOfReviews(providerDetail.getNumberOfReviews());
+            System.out.println("orderDetail: " + orderDetail.toString());
+
+             List<ReviewsDto> reviewsDtos = new ArrayList<>();
+            if (orderDetail == null) {
+                providerDetailDto.setReviews(reviewsDtos);
+            } else {
+                for (OfferDto offer : orderDetail) {
+                    logger.info("offer1: " + offer.getOfferId());
+                    String orderId = orderRepository.findOrderIdByOfferId(offer.getOfferId());
+                    logger.info("orderId: " + orderId);
+                    ReviewsDto reviewsDto = new ReviewsDto();
+                    reviewsDto.setUsername(offer.getCreatedBy());
+                    logger.info("username: " + offer.getCreatedBy());
+                    reviewsDto.setPrimaryImage(offer.getPrimaryImage());
+                    reviewsDto.setItem(offer.getItem());
+                    reviewsDto.setEfficiency((reviewRepository.findReviewByOrderId(orderId).getReviewEfficiency()));
+                    reviewsDto.setAttitude(reviewRepository.findReviewByOrderId(orderId).getReviewAttitude());
+                    reviewsDto.setComments(reviewRepository.findReviewByOrderId(orderId).getReviewRemark());
+                    reviewsDtos.add(reviewsDto);
+                }
+            }
+            providerDetailDto.setReviews(reviewsDtos);
+            return providerDetailDto;
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Cannot get provider detail");
+        }
+    }
 }

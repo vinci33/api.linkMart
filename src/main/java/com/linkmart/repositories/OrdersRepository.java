@@ -23,6 +23,12 @@ public interface OrdersRepository extends JpaRepository<Orders, String> {
             """, nativeQuery = true)
     Orders getOneByOfferId(@Param("orderId") String orderId);
 
+    @Query(value = """
+            SELECT id FROM orders
+            WHERE orders.offer_id = :offerId
+            """, nativeQuery = true)
+    String findOrderIdByOfferId(@Param("offerId") String offerId);
+
 //    @Query(value =
 //            """
 //                SELECT
