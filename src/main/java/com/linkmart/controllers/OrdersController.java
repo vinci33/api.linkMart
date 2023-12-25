@@ -153,6 +153,8 @@ public class OrdersController {
         }
     }
 
+//    @PutMapping(value = "/order/{orderId}/received")
+
     private final SseEmitter emitter = new SseEmitter();
     @EventListener
     public void orderCompleteEventhandeler(String orderId){

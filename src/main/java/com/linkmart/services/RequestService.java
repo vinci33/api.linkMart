@@ -46,6 +46,9 @@ public class RequestService {
     LocationRepository locationRepository;
 
     @Autowired
+    OfferRepository offerRepository;
+
+    @Autowired
     CategoryRepository categoryRepository;
 
     @Autowired
@@ -244,6 +247,7 @@ public class RequestService {
                 throw new Exception("You are not the owner of this request");
             }
             requestRepository.updateRequestIsActiveByRequestId(requestId);
+            offerRepository.updateOfferStatusAfterRequestDeleted(requestId);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             throw new Exception("Cannot delete request");

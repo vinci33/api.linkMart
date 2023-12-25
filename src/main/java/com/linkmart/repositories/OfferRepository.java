@@ -83,4 +83,13 @@ public interface OfferRepository extends JpaRepository<Offer, String> {
             ORDER BY offer.updated_at DESC
             """, nativeQuery = true)
     List<OfferDto> findOfferAndRequestByProviderIdAndStatus(@Param("providerId") String providerId, @Param("offerStatusId") Integer offerStatusId);
+
+    @Modifying
+    @Query(value =
+            """
+            Update offer
+            SET offer_status_id = 4
+            WHERE offer.request_id = :requestId
+            """, nativeQuery = true)
+    void updateOfferStatusAfterRequestDeleted(@Param("requestId") String requestId);
 }

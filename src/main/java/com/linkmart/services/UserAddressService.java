@@ -5,7 +5,6 @@ import com.linkmart.forms.UserAddressForm;
 import com.linkmart.mappers.UserAddressMapper;
 import com.linkmart.models.UserAddress;
 import com.linkmart.repositories.UserAddressRepository;
-import com.linkmart.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-@Transactional
 public class UserAddressService {
 
     final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -27,10 +25,12 @@ public class UserAddressService {
 
     @Autowired
     UserService userService;
+
     public UserAddressService(UserAddressRepository userAddressRepository) {
         this.userAddressRepository = userAddressRepository;
     }
 
+    @Transactional
     public void validateUserAddressId(Integer addressId) {
         var userAddressByAddressId = userAddressRepository.findUserAddressById(addressId);
         System.out.println("userAddressByAddressId"+userAddressByAddressId);
@@ -40,7 +40,7 @@ public class UserAddressService {
     }
 
 
-
+    @Transactional
     public void validateUserAddressIsPrimary(String userId){
         userService.validateUserId(userId);
         var userAddresses = userAddressRepository.findUserAddressByUserId(userId);
@@ -56,6 +56,7 @@ public class UserAddressService {
     }
 
 //     /addressInArrayFormat
+    @Transactional
     public List<Map<String, List<String>>>  findUserAddressByUserId(String userId) {
         userService.validateUserId(userId);
         List<UserAddress> userAddresses = userAddressRepository.findUserAddressByUserId(userId);
@@ -70,11 +71,13 @@ public class UserAddressService {
 
 
     //    /addressInJsonFormat
+    @Transactional
     public List<UserAddress>  findUserAddressByUserIdInJson(String userId) {
         userService.validateUserId(userId);
         return userAddressRepository.findUserAddressByUserId(userId);
     }
 
+    @Transactional
     public void putUserAddressByAddressId(Integer addressId, String userId) {
         validateUserAddressId(addressId);
         userService.validateUserId(userId);
@@ -90,9 +93,12 @@ public class UserAddressService {
         }
     }
 
+    @Transactional
     public void deleteUserAddressByAddressId(Integer addressId, String userId) {
         validateUserAddressId(addressId);
+        logger.info("addressId: "+addressId);
         userService.validateUserId(userId);
+        logger.info("userId: "+userId);
         userAddressRepository.deleteUserAddressByIdAndUserId(addressId,userId);
         validateUserAddressIsPrimary(userId);
     }

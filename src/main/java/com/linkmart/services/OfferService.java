@@ -265,6 +265,24 @@ public class OfferService {
         }
     }
 
+    public void requestRejectedByUser (String userId, String offerId) {
+        try {
+            validateOfferId(offerId);
+            logger.info("userId: " + userId);
+            userService.validateUserId(userId);
+            logger.info("offerId: " + offerId);
+            var offer = offerRepository.findOfferByOfferId(offerId);
+            var providerId  =  offer.getProviderId();
+            if (!providerId.equals(userId)) {
+                throw new IllegalArgumentException("Invalid userId");
+            }
+            //change to rejected status
+            offerRepository.updateOfferStatus(offerId , 4);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Invalid ID: " + e.getMessage(), e);
+        }
+    }
+
     public OfferDetailDto getOfferByOfferId (String userId, String offerId) {
         try {
             validateOfferId(offerId);

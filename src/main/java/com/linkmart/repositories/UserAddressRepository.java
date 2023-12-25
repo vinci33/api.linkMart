@@ -3,6 +3,7 @@ package com.linkmart.repositories;
 import com.linkmart.models.UserAddress;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -24,10 +25,14 @@ public interface UserAddressRepository extends JpaRepository<UserAddress,Integer
             ,nativeQuery = true)
     String findAddressById(@Param("addressId") Integer Id);
 
-    @Transactional
-    void deleteUserAddressByIdAndUserId(Integer id, String userId);
-
-
-
+    @Modifying
+    @Query(value =
+            """
+            DELETE FROM user_address
+            WHERE id = :addressId
+            AND user_id = :userId
+            """
+            , nativeQuery = true)
+    void deleteUserAddressByIdAndUserId(Integer addressId, String userId);
 }
 
