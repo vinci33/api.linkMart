@@ -11,10 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -72,7 +69,7 @@ public class UserController {
     }
 
     @PutMapping("/user/info")
-    public ResponseWithMessage updateUser(UserInfoForm userInfoForm) {
+    public ResponseWithMessage updateUser(@RequestBody UserInfoForm userInfoForm) {
       try {
           var userId = (String)request.getAttribute("userId");
           logger.info("userId: " + userId);
@@ -82,7 +79,6 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
     }
-
 }
 
 

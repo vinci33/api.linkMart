@@ -35,7 +35,7 @@ public interface OfferRepository extends JpaRepository<Offer, String> {
                JOIN users ON request.created_by = users.id
                JOIN status ON offer.offer_status_id = status.id
                WHERE offer.provider_id = :providerId
-               AND offer.offer_status_id = 1
+               AND offer.offer_status_id = 1 OR offer.offer_status_id = 6
             ORDER BY offer.updated_at DESC
             """, nativeQuery = true)
     List<OfferDto> findActiveByProviderId(@Param("providerId") String providerId);

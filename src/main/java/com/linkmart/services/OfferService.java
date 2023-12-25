@@ -91,7 +91,8 @@ public class OfferService {
             Offer offer = new Offer();
             offer.makeOfferCase();
             offer.setProviderId(providerId);
-            offer.setOfferStatusId(6);
+            //status: pending
+            offer.setOfferStatusId(1);
             offer.setRequestId(requestId);
             offer.setPrice(price);
             offer.setEstimatedProcessTime(estimatedProcessTime);

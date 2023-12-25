@@ -126,7 +126,7 @@ public class OrdersController {
     public OrdersByOrderIdDto getOrdersDetailByOrderId (@PathVariable String orderId) {
         try {
             if (orderId == null) {
-                throw new IllegalArgumentException("OrderId not found");
+                throw new IllegalArgumentException("OrderId not found 1");
             }
             var result = ordersService.getOrdersDetailByOrderId(orderId);
             return result;

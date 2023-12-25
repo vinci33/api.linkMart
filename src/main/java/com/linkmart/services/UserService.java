@@ -161,6 +161,9 @@ public class UserService {
 
     public void updateUseInfo(String userId, UserInfoForm userInfoForm) throws Exception {
         try {
+            logger.info("userId: " + userId);
+            logger.info("userInfoForm: " + userInfoForm.getPassword());
+            logger.info("userInfoForm: " + userInfoForm.getUsername());
             var user = userRepository.findUserById(userId);
             if (userInfoForm.getPassword() != null) {
                 user.setPassword(BCrypt.withDefaults().hashToString(10, userInfoForm.getPassword().toCharArray()));

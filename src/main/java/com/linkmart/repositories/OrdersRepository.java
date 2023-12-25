@@ -108,8 +108,8 @@ public interface OrdersRepository extends JpaRepository<Orders, String> {
                      r.request_remark AS requestRemark,
                      l.location_name AS locationName,
                      o.shipping_order_no AS shippingOrderNo,
-                        lc.company_name AS logisticCompanyName,
-                        lc.company_url AS logisticCompanyUrl
+                     lc.company_name AS logisticCompanyName,
+                     lc.company_url AS logisticCompanyUrl
                  FROM
                      orders o
                  JOIN
@@ -124,7 +124,7 @@ public interface OrdersRepository extends JpaRepository<Orders, String> {
                      request r ON of.request_id = r.id
                  JOIN
                      location l ON r.location_id = l.id
-                 JOIN
+                 LEFT JOIN
                      logistic_company lc ON o.logistic_company_id = lc.id
                  WHERE
                      o.id = :orderId

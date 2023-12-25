@@ -5,10 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.linkmart.dtos.*;
 import com.linkmart.mappers.OrdersMapper;
 import com.linkmart.models.*;
-import com.linkmart.repositories.LocationRepository;
-import com.linkmart.repositories.OfferRepository;
-import com.linkmart.repositories.OrdersRepository;
-import com.linkmart.repositories.RequestRepository;
+import com.linkmart.repositories.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +39,9 @@ public class OrdersService {
     ReviewService reviewService;
     @Autowired
     LocationRepository locationRepository;
+
+    @Autowired
+    UserAddressRepository userAddressRepository;
     @Autowired
     S3Service s3Service;
 
@@ -153,8 +153,9 @@ public class OrdersService {
     public OrdersByOrderIdDto getOrdersDetailByOrderId (String orderId){
         logger.info("Get order detail: " + orderId);
         OrdersByOrderIdWithoutImageDto orderDetail = ordersRepository.findOrdersDetailByOrderId(orderId);
+        logger.info("After SQL Get order detail: " + orderDetail);
         if (orderDetail == null) {
-            throw new IllegalArgumentException("Order not found");
+            throw new IllegalArgumentException("Order not found 2");
         }
         List<String> images = ordersRepository.findImagesByOrderId(orderId);
         OrdersByOrderIdDto orders =  OrdersMapper.INSTANCE.toOrdersByOrderIdDto(orderDetail);
@@ -163,7 +164,7 @@ public class OrdersService {
         Gson gson = new Gson();
         ItemDetailModel itemDetailMap = gson.fromJson(itemDetailJson, ItemDetailModel.class);
         orders.setItemDetail(itemDetailMap);
-        String Address = locationRepository.findByLocationId(orderDetail.getUserAddressId());
+        String Address = userAddressRepository.findAddressById(orderDetail.getUserAddressId());
         orders.setAddress(Address);
         return orders;
     }
