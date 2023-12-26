@@ -1,11 +1,9 @@
 package com.linkmart.services;
 
-import com.linkmart.dtos.OfferDto;
-import com.linkmart.dtos.ProviderDetailDto;
-import com.linkmart.dtos.ReviewsDto;
-import com.linkmart.dtos.VerificationDto;
+import com.linkmart.dtos.*;
 import com.linkmart.models.Provider;
 import com.linkmart.models.ProviderVerification;
+import com.linkmart.models.Review;
 import com.linkmart.repositories.*;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
@@ -131,39 +129,49 @@ public class ProviderService {
             logger.info("userId: " + userId);
             Provider providerDetail = providerRepository.findProviderByUserId(userId);
             var providerId = providerDetail.getId();
-            logger.info("providerId: " + providerId);
+            logger.info("This is provider: " + providerId);
             //Completed and Done
             List<OfferDto> orderDetail = offerRepository.findOfferAndRequestByProviderIdAndStatus(providerId, 8);
 
             ProviderDetailDto providerDetailDto = new ProviderDetailDto();
             providerDetailDto.setProviderName(userService.getUserNameById(providerDetail.getUserId()));
+            providerDetailDto.setLocationName(locationService.getLocationNameByLocationId(providerDetail.getLocationId()));
             providerDetailDto.setStarOfAttitude(providerDetail.getStarOfAttitude());
             providerDetailDto.setStarOfEfficiency(providerDetail.getStarOfEfficiency());
             providerDetailDto.setNumberOfReviews(providerDetail.getNumberOfReviews());
-            System.out.println("orderDetail: " + orderDetail.toString());
 
              List<ReviewsDto> reviewsDtos = new ArrayList<>();
-            if (orderDetail == null) {
-                providerDetailDto.setReviews(reviewsDtos);
-            } else {
-                for (OfferDto offer : orderDetail) {
-                    logger.info("offer1: " + offer.getOfferId());
-                    String orderId = orderRepository.findOrderIdByOfferId(offer.getOfferId());
-                    logger.info("orderId: " + orderId);
-                    ReviewsDto reviewsDto = new ReviewsDto();
-                    reviewsDto.setUsername(offer.getCreatedBy());
-                    logger.info("username: " + offer.getCreatedBy());
-                    reviewsDto.setPrimaryImage(offer.getPrimaryImage());
-                    reviewsDto.setItem(offer.getItem());
-                    logger.info("item: " + offer.getItem());
-                    reviewsDto.setEfficiency((reviewRepository.findReviewByOrderId(orderId).getReviewEfficiency()));
-                    reviewsDto.setAttitude(reviewRepository.findReviewByOrderId(orderId).getReviewAttitude());
-                    reviewsDto.setComments(reviewRepository.findReviewByOrderId(orderId).getReviewRemark());
-                    reviewsDtos.add(reviewsDto);
-                }
-            }
-            providerDetailDto.setReviews(reviewsDtos);
-            return providerDetailDto;
+             try{
+                 if (orderDetail == null) {
+                     providerDetailDto.setReviews(reviewsDtos);
+                 } else {
+                     for (OfferDto offer : orderDetail) {
+                         ReviewsDto reviewsDto = new ReviewsDto();
+                         String orderId = orderRepository.findOrderIdByOfferId(offer.getOfferId());
+                         logger.info("orderId: " + orderId);
+                         logger.info("offer1: " + offer.getOfferId());
+                         Review review = reviewRepository.findReviewByOrderId(orderId);
+                         logger.info("review: " + review);
+                         if (review == null) {
+                             logger.info("review is null");
+                             continue;
+                         }
+                         reviewsDto.setUsername(offer.getCreatedBy());
+                         logger.info("username: " + offer.getCreatedBy());
+                         reviewsDto.setPrimaryImage(offer.getPrimaryImage());
+                         reviewsDto.setItem(offer.getItem());
+                         logger.info("item: " + offer.getItem());
+                         reviewsDto.setEfficiency((reviewRepository.findReviewByOrderId(orderId).getReviewEfficiency()));
+                         reviewsDto.setAttitude(reviewRepository.findReviewByOrderId(orderId).getReviewAttitude());
+                         reviewsDto.setComments(reviewRepository.findReviewByOrderId(orderId).getReviewRemark());
+                         reviewsDtos.add(reviewsDto);
+                     }
+                 }
+                 providerDetailDto.setReviews(reviewsDtos);
+                 return providerDetailDto;
+             } finally {
+                 providerDetailDto.setReviews(reviewsDtos);
+             }
         } catch (Exception e) {
             throw new IllegalArgumentException("Cannot get provider detail");
         }
@@ -174,41 +182,70 @@ public class ProviderService {
         try{
             logger.info("providerId1: " + providerId);
             Provider providerDetail = providerRepository.findProviderById(providerId);
-            logger.info("providerId2: " + providerId);
+            logger.info("this is public: " + providerId);
             //Completed and Done
             List<OfferDto> orderDetail = offerRepository.findOfferAndRequestByProviderIdAndStatus(providerId, 8);
 
             ProviderDetailDto providerDetailDto = new ProviderDetailDto();
             providerDetailDto.setProviderName(userService.getUserNameById(providerDetail.getUserId()));
+            providerDetailDto.setLocationName(locationService.getLocationNameByLocationId(providerDetail.getLocationId()));
             providerDetailDto.setStarOfAttitude(providerDetail.getStarOfAttitude());
             providerDetailDto.setStarOfEfficiency(providerDetail.getStarOfEfficiency());
             providerDetailDto.setNumberOfReviews(providerDetail.getNumberOfReviews());
-            System.out.println("orderDetail: " + orderDetail.toString());
 
             List<ReviewsDto> reviewsDtos = new ArrayList<>();
-            if (orderDetail == null) {
-                providerDetailDto.setReviews(reviewsDtos);
-            } else {
-                for (OfferDto offer : orderDetail) {
-                    logger.info("offer1: " + offer.getOfferId());
-                    String orderId = orderRepository.findOrderIdByOfferId(offer.getOfferId());
-                    logger.info("orderId: " + orderId);
-                    ReviewsDto reviewsDto = new ReviewsDto();
-                    reviewsDto.setUsername(offer.getCreatedBy());
-                    logger.info("username: " + offer.getCreatedBy());
-                    reviewsDto.setPrimaryImage(offer.getPrimaryImage());
-                    reviewsDto.setItem(offer.getItem());
-                    logger.info("item: " + offer.getItem());
-                    reviewsDto.setEfficiency((reviewRepository.findReviewByOrderId(orderId).getReviewEfficiency()));
-                    reviewsDto.setAttitude(reviewRepository.findReviewByOrderId(orderId).getReviewAttitude());
-                    reviewsDto.setComments(reviewRepository.findReviewByOrderId(orderId).getReviewRemark());
-                    reviewsDtos.add(reviewsDto);
+
+                if (orderDetail == null) {
+                    providerDetailDto.setReviews(reviewsDtos);
+                } else {
+                    for (OfferDto offer : orderDetail) {
+                        ReviewsDto reviewsDto = new ReviewsDto();
+                        String orderId = orderRepository.findOrderIdByOfferId(offer.getOfferId());
+                        Review review = reviewRepository.findReviewByOrderId(orderId);
+                        if (review == null) {
+                            logger.info("review is null");
+                            continue;
+                        }
+                        reviewsDto.setUsername(offer.getCreatedBy());
+                        logger.info("username: " + offer.getCreatedBy());
+                        reviewsDto.setPrimaryImage(offer.getPrimaryImage());
+                        reviewsDto.setItem(offer.getItem());
+                        logger.info("item: " + offer.getItem());
+                        reviewsDto.setEfficiency((reviewRepository.findReviewByOrderId(orderId).getReviewEfficiency()));
+                        reviewsDto.setAttitude(reviewRepository.findReviewByOrderId(orderId).getReviewAttitude());
+                        reviewsDto.setComments(reviewRepository.findReviewByOrderId(orderId).getReviewRemark());
+                        reviewsDtos.add(reviewsDto);
+                    }
                 }
-            }
-            providerDetailDto.setReviews(reviewsDtos);
-            return providerDetailDto;
+                providerDetailDto.setReviews(reviewsDtos);
+                return providerDetailDto;
         } catch (Exception e) {
             throw new IllegalArgumentException("Cannot get provider detail");
+        }
+    }
+
+    //GET : /api/provider/dashboard
+    public ProviderDashboardDto getProviderDashboard(String userId) {
+        try{
+            var providerId = providerRepository.getIdByUserId(userId);
+            logger.info("providerId: " + providerId);
+            Provider provider = providerRepository.findProviderById(providerId);
+            logger.info("provider: " + provider);
+            Integer numberOfOffer = offerRepository.getPendingOfferByProviderId(providerId);
+            logger.info("numberOfOffer: " + numberOfOffer);
+            Integer numberOfTaskCompleted = orderRepository.getCompletedOrderByProviderId(providerId);
+            logger.info("numberOfTaskCompleted: " + numberOfTaskCompleted);
+            Float balance = orderRepository.calculateBalanceByProviderId(providerId);
+            ProviderDashboardDto DashBoard = new ProviderDashboardDto();
+            DashBoard.setAverageAttitude(provider.getStarOfAttitude());
+            DashBoard.setAverageEfficiency(provider.getStarOfEfficiency());
+            DashBoard.setReviewCount(provider.getNumberOfReviews());
+            DashBoard.setOfferCount(numberOfOffer);
+            DashBoard.setTaskCount(numberOfTaskCompleted);
+            DashBoard.setBalance(balance);
+            return DashBoard;
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Cannot get provider dashboard");
         }
     }
 }

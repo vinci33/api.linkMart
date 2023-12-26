@@ -329,7 +329,8 @@ public class OfferService {
     }
 
     public List<OfferCheckDto> checkIfHasOffer(String requestId, String userId) {
-        logger.info("requestId: " + requestId);
+        try
+        {logger.info("requestId: " + requestId);
         logger.info("userId: " + userId);
         var offers = offerRepository.findByRequestId(requestId);
         var providerId = providerRepository.getIdByUserId(userId);
@@ -347,6 +348,9 @@ public class OfferService {
             return offerCheckDtoList;
         }
         return null;
+        } catch (Exception e) {
+            throw new IllegalArgumentException(e.getMessage());
+        }
     }
 
     public List<Offer> getOfferByRequestIdAndOfferStatusId(String requestId, Integer offerStatusId){

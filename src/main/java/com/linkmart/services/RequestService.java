@@ -88,6 +88,11 @@ public class RequestService {
                 ImageModel image = new ImageModel();
                 image.setImagePath(imagePath);
                 image.setRequestId(newRequest.getRequestId());
+                if (firstFile == null){
+                    image.setPrimary(true);
+                } else {
+                    image.setPrimary(false);
+                }
                 images.add(image);
                 if (firstFile == null) {
                     firstFile = file;
@@ -146,6 +151,11 @@ public class RequestService {
                 ImageModel image = new ImageModel();
                 image.setImagePath(urlImage);
                 image.setRequestId(newRequest.getRequestId());
+                if (firstFile == null){
+                    image.setPrimary(true);
+                } else {
+                    image.setPrimary(false);
+                }
                 images.add(image);
                 if (firstFile == null) {
                     firstFile = urlImage;
@@ -395,5 +405,18 @@ public class RequestService {
         }
         logger.info("getTotalPages totalPages2: " + totalPages);
         return totalPages;
+    }
+
+    public void updateRequestPrimaryImage(String requestId, String primaryImagePath) {
+        try {
+            var request = requestRepository.findRequestModelByRequestId(requestId);
+            if (request == null){
+                throw new IllegalArgumentException("Request not found with id: " + requestId);
+            }
+            request.setPrimaryImage(primaryImagePath);
+            requestRepository.saveAndFlush(request);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Cannot update request primary image"+ e.getMessage(), e);
+        }
     }
 }

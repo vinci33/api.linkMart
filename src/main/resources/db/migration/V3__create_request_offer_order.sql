@@ -102,6 +102,7 @@ CREATE TABLE image (
     request_id TEXT not null REFERENCES request(id),
     image_path TEXT not null,
     is_active Boolean not null default TRUE,
+    is_primary Boolean not null,
     created_at TIMESTAMP default NOW(),
     updated_at TIMESTAMP default NOW()
 );

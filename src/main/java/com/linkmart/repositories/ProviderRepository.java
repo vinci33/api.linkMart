@@ -1,5 +1,6 @@
 package com.linkmart.repositories;
 
+import com.linkmart.dtos.ProviderDashboardDto;
 import com.linkmart.models.Offer;
 import com.linkmart.models.Provider;
 import com.linkmart.models.Provider;
@@ -22,4 +23,14 @@ public interface ProviderRepository extends JpaRepository<Provider,String> {
 
     Provider findProviderByUserId(String userId);
     Provider findProviderById(String id);
+
+    @Query(value = """
+                    SELECT
+                        provider.star_of_efficiency AS AverageEfficiency,
+                        provider.star_of_attitude AS AverageAttitude,
+                        provider.number_of_reviews AS ReviewCount
+                    FROM provider
+                    WHERE provider.id = :providerId
+            """, nativeQuery = true)
+    ProviderDashboardDto findDashBoardByProviderId(@Param("providerId")String providerId);
 }

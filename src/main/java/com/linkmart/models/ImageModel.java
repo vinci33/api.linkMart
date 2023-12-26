@@ -25,6 +25,12 @@ public class ImageModel {
     @Column(name = "image_path")
     private String imagePath;
 
+    @Column(name = "is_active")
+    private boolean isActive;
+
+    @Column(name = "is_primary")
+    private boolean isPrimary;
+
     @Column(name = "created_at", insertable = false, updatable = false)
     @CreationTimestamp
     private Timestamp createdAt;
@@ -71,6 +77,26 @@ public class ImageModel {
 
     public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public boolean isPrimary() {
+        return isPrimary;
+    }
+
+    public void setPrimary(boolean primary) {
+        isPrimary = primary;
     }
 
     @Override

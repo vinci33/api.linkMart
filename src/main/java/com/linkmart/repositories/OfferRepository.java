@@ -62,7 +62,6 @@ public interface OfferRepository extends JpaRepository<Offer, String> {
 
     List<Offer> findOfferByRequestIdAndOfferStatusId(String requestId, Integer offerStatusId);
 
-    //TODO
     @Query(value =
             """
             SELECT
@@ -92,4 +91,13 @@ public interface OfferRepository extends JpaRepository<Offer, String> {
             WHERE offer.request_id = :requestId
             """, nativeQuery = true)
     void updateOfferStatusAfterRequestDeleted(@Param("requestId") String requestId);
+
+    @Query(value =
+            """
+            SELECT COUNT(offer.id) as offerCount
+            FROM offer
+            WHERE offer.provider_id = :providerId
+            AND offer.offer_status_id = 1
+            """, nativeQuery = true)
+    Integer getPendingOfferByProviderId(@Param("providerId") String providerId);
 }

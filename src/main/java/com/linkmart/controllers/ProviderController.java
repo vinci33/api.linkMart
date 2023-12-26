@@ -1,9 +1,6 @@
 package com.linkmart.controllers;
 
-import com.linkmart.dtos.OfferDto;
-import com.linkmart.dtos.ProviderDetailDto;
-import com.linkmart.dtos.ResponseWithMessage;
-import com.linkmart.dtos.VerificationResponseDto;
+import com.linkmart.dtos.*;
 import com.linkmart.models.Provider;
 import com.linkmart.services.ProviderService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -112,6 +109,21 @@ public class ProviderController {
                 throw new IllegalArgumentException("Invalid UserId");
             }
             return providerService.publicShowProviderDetailByUserId(providerId);
+        }catch (IllegalArgumentException e) {
+            logger.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    //10.5 Get Provider Dashboard
+    @GetMapping("/api/provider/dashboard")
+    public ProviderDashboardDto getProviderDashboard(HttpServletRequest request) {
+        try {
+            var userId = (String)request.getAttribute("userId");
+            if (userId == null) {
+                throw new IllegalArgumentException("Invalid UserId");
+            }
+            return providerService.getProviderDashboard(userId);
         }catch (IllegalArgumentException e) {
             logger.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());

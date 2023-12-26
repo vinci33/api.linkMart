@@ -89,7 +89,6 @@ public class UserAddressService {
                 userAddress.setUpdatedAt(Timestamp.from(Instant.now()));
                 userAddressRepository.saveAndFlush(userAddress);
             }
-
         }
     }
 
