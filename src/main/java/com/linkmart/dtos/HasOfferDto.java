@@ -1,4 +1,6 @@
 package com.linkmart.dtos;
 
-public record HasOfferDto (Boolean hasOffer) {
+import java.util.List;
+
+public record HasOfferDto (Boolean hasOffer, List<OfferCheckDto> offer) {
 }

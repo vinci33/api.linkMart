@@ -115,6 +115,7 @@ public class OrdersController {
                 throw new IllegalArgumentException("Invalid orderStatus: " + orderStatus);
             }
             var userId = (String)request.getAttribute("userId");
+            logger.info(statuses.toString());
             var ordersDtos = ordersService.userGetOrdersByUserIdAndStatusFromUser(userId, statuses);
             return OrdersByOrderIdAndStatusMapper.INSTANCE.toOrdersByOrderIdAndStatusDtos(ordersDtos);
         } catch (Exception e) {

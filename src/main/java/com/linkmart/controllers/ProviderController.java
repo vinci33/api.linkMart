@@ -88,6 +88,7 @@ public class ProviderController {
       }
     }
 
+    //10.4.1
     @GetMapping("/api/provider/profile")
     public ProviderDetailDto getProviderProfile(HttpServletRequest request) {
       try {
@@ -100,5 +101,20 @@ public class ProviderController {
           logger.error(e.getMessage());
           throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
       }
+    }
+
+    //10.4.2
+    @GetMapping("/provider/profile/{providerId}")
+    public ProviderDetailDto publicGetProviderProfile(HttpServletRequest request,@PathVariable String providerId) {
+        try {
+            var userId = (String)request.getAttribute("userId");
+            if (userId == null) {
+                throw new IllegalArgumentException("Invalid UserId");
+            }
+            return providerService.publicShowProviderDetailByUserId(providerId);
+        }catch (IllegalArgumentException e) {
+            logger.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
     }
 }

@@ -72,6 +72,8 @@ public class ProviderService {
         return providerByUserId;
     }
 
+
+    //GET : /api/provider/{providerId}
     public ProviderDetailDto getProviderDetail(String userId) {
         var providerId = providerRepository.getIdByUserId(userId);
         var provider = providerRepository.findProviderById(providerId);
@@ -86,6 +88,8 @@ public class ProviderService {
         return  providerDetailDto;
     }
 
+
+    //POST : /api/provider
     public void providerApplication(String userId, MultipartFile addressDocument, MultipartFile idDocument, MultipartFile bankDocument, Integer locationId) {
         try{
             userService.validateUserId((userId));
@@ -106,6 +110,7 @@ public class ProviderService {
         }
     }
 
+    //GET : /api/provider
     public VerificationDto getProviderVerificationDetail(String userId) {
         try{
             var verificationDetail = providerVerificationRepository.findProviderVerificationByUserId(userId);
@@ -119,7 +124,8 @@ public class ProviderService {
         }
     }
 
-    //TODO: get provider detail by userId
+
+    //GET : /api/provider/profile
     public ProviderDetailDto showProviderDetailByUserId(String userId) {
         try{
             logger.info("userId: " + userId);
@@ -137,6 +143,49 @@ public class ProviderService {
             System.out.println("orderDetail: " + orderDetail.toString());
 
              List<ReviewsDto> reviewsDtos = new ArrayList<>();
+            if (orderDetail == null) {
+                providerDetailDto.setReviews(reviewsDtos);
+            } else {
+                for (OfferDto offer : orderDetail) {
+                    logger.info("offer1: " + offer.getOfferId());
+                    String orderId = orderRepository.findOrderIdByOfferId(offer.getOfferId());
+                    logger.info("orderId: " + orderId);
+                    ReviewsDto reviewsDto = new ReviewsDto();
+                    reviewsDto.setUsername(offer.getCreatedBy());
+                    logger.info("username: " + offer.getCreatedBy());
+                    reviewsDto.setPrimaryImage(offer.getPrimaryImage());
+                    reviewsDto.setItem(offer.getItem());
+                    logger.info("item: " + offer.getItem());
+                    reviewsDto.setEfficiency((reviewRepository.findReviewByOrderId(orderId).getReviewEfficiency()));
+                    reviewsDto.setAttitude(reviewRepository.findReviewByOrderId(orderId).getReviewAttitude());
+                    reviewsDto.setComments(reviewRepository.findReviewByOrderId(orderId).getReviewRemark());
+                    reviewsDtos.add(reviewsDto);
+                }
+            }
+            providerDetailDto.setReviews(reviewsDtos);
+            return providerDetailDto;
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Cannot get provider detail");
+        }
+    }
+
+    //Get: /provider/profile/{providerId}
+    public ProviderDetailDto publicShowProviderDetailByUserId(String providerId) {
+        try{
+            logger.info("providerId1: " + providerId);
+            Provider providerDetail = providerRepository.findProviderById(providerId);
+            logger.info("providerId2: " + providerId);
+            //Completed and Done
+            List<OfferDto> orderDetail = offerRepository.findOfferAndRequestByProviderIdAndStatus(providerId, 8);
+
+            ProviderDetailDto providerDetailDto = new ProviderDetailDto();
+            providerDetailDto.setProviderName(userService.getUserNameById(providerDetail.getUserId()));
+            providerDetailDto.setStarOfAttitude(providerDetail.getStarOfAttitude());
+            providerDetailDto.setStarOfEfficiency(providerDetail.getStarOfEfficiency());
+            providerDetailDto.setNumberOfReviews(providerDetail.getNumberOfReviews());
+            System.out.println("orderDetail: " + orderDetail.toString());
+
+            List<ReviewsDto> reviewsDtos = new ArrayList<>();
             if (orderDetail == null) {
                 providerDetailDto.setReviews(reviewsDtos);
             } else {

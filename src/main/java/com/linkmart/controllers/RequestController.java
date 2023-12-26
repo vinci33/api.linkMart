@@ -155,7 +155,11 @@ public class RequestController {
         try{
             var userId = (String)request.getAttribute("userId");
             var result = offerService.checkIfHasOffer(requestId, userId);
-            return new HasOfferDto(result);
+            if (result.isEmpty()) {
+                return new HasOfferDto(false, null);
+            } else {
+                return new HasOfferDto(true, result);
+            }
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

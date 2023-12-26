@@ -328,18 +328,25 @@ public class OfferService {
         }
     }
 
-    public Boolean checkIfHasOffer(String requestId, String userId) {
+    public List<OfferCheckDto> checkIfHasOffer(String requestId, String userId) {
         logger.info("requestId: " + requestId);
         logger.info("userId: " + userId);
         var offers = offerRepository.findByRequestId(requestId);
         var providerId = providerRepository.getIdByUserId(userId);
         logger.info("offer: " + offers);
+        List<OfferCheckDto> offerCheckDtoList = new ArrayList<>();
         for (Offer offer : offers) {
             if (offer.getProviderId().equals(providerId)) {
-                return true;
+                OfferCheckDto offerCheckDto = new OfferCheckDto();
+                offerCheckDto.setOfferId(offer.getOfferId());
+                offerCheckDto.setEstimatedProcessTime(offer.getEstimatedProcessTime());
+                offerCheckDto.setPrice(offer.getPrice());
+                offerCheckDto.setOfferRemark(offer.getOfferRemark());
+                offerCheckDtoList.add(offerCheckDto);
             }
+            return offerCheckDtoList;
         }
-        return false;
+        return null;
     }
 
     public List<Offer> getOfferByRequestIdAndOfferStatusId(String requestId, Integer offerStatusId){
