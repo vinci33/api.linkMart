@@ -117,6 +117,7 @@ public class OrdersService {
     }
 
     public List<OrdersDto> userGetOrdersByUserIdAndStatusFromUser(String userId, List<String> orderStatuses){
+        logger.info(orderStatuses.toString());
         return  ordersRepository.findOrdersByUserIdAndStatusFromUser(userId, orderStatuses);
 
     }
@@ -193,10 +194,32 @@ public class OrdersService {
         review.setReviewRemark(reviewRemark);
 //        review suppose is finish the order and got the product already,
 //        that's y is suitable to set status to completed
-//        order.setOrderStatusId(4);
-//        ordersRepository.saveAndFlush(order);
+        //reviewed Status
+        order.setOrderStatusId(6);
+        ordersRepository.saveAndFlush(order);
         reviewService.saveReview(review);
+    }
 
-
+    public void updateOrderReceived(String orderId, String userId) {
+        logger.info("Update order received: " + orderId);
+        var order = ordersRepository.getOneByOfferId(orderId);
+        logger.info("After SQL Update order received: " + order);
+        if (order == null) {
+            throw new IllegalArgumentException("Order not found");
+        }
+        Offer offer = offerRepository.findOfferByOfferId(order.getOfferId());
+        if (offer == null) {
+            throw new IllegalArgumentException("Offer not found");
+        }
+        RequestModel request = requestRepository.getRequestByRequestId(offer.getRequestId());
+        if (request == null) {
+            throw new IllegalArgumentException("Request not found");
+        }
+        if (!request.getCreatedBy().equals(userId)) {
+            throw new IllegalArgumentException("User not authorized");
+        }
+        //Status completed
+        order.setOrderStatusId(4);
+        ordersRepository.saveAndFlush(order);
     }
 }

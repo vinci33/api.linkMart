@@ -17,7 +17,7 @@ public class LogisticCompanyService {
     @Autowired
     ProviderService providerService;
 
-    public void uploadLogisticCompany (LogisticCompanyForm companyForm, String userId) throws Exception {
+    public Integer uploadLogisticCompany (LogisticCompanyForm companyForm, String userId) throws Exception {
         try {
             String providerId = providerService.checkIfProvider(userId);
             logger.info("providerId: " + providerId);
@@ -26,7 +26,8 @@ public class LogisticCompanyService {
             logisticCompany.setProviderId(providerId);
             logisticCompany.setCompanyName(companyForm.getCompanyName());
             logisticCompany.setCompanyUrl(companyForm.getCompanyUrl());
-            logisticCompanyRepository.saveAndFlush(logisticCompany);
+            var result = logisticCompanyRepository.saveAndFlush(logisticCompany);
+            return result.getLogisticCompanyId();
         } catch (Exception e) {
             throw new Exception("Cannot upload logistic company via service");
         }

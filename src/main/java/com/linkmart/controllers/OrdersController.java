@@ -110,7 +110,7 @@ public class OrdersController {
             if ("inProgress".equalsIgnoreCase(orderStatus)) {
                 statuses = Arrays.asList("in-progress", "shipped");
             } else if ("complete".equalsIgnoreCase(orderStatus)) {
-                statuses = Arrays.asList("completed", "cancelled");
+                statuses = Arrays.asList("completed", "cancelled", "reviewed");
             } else {
                 throw new IllegalArgumentException("Invalid orderStatus: " + orderStatus);
             }
@@ -153,7 +153,18 @@ public class OrdersController {
         }
     }
 
-//    @PutMapping(value = "/order/{orderId}/received")
+    @PutMapping(value = "/order/{orderId}/received")
+    public void updateOrderReceived(@PathVariable String orderId) {
+        try {
+            if (orderId == null ) {
+                throw new IllegalArgumentException("Order Id not found");
+            }
+            var userId = (String)request.getAttribute("userId");
+            ordersService.updateOrderReceived(orderId, userId);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
 
     private final SseEmitter emitter = new SseEmitter();
     @EventListener

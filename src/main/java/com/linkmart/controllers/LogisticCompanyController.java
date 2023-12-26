@@ -1,6 +1,7 @@
 package com.linkmart.controllers;
 
 import com.linkmart.dtos.LogisticCompanyDto;
+import com.linkmart.dtos.LogisticCompanyIdDto;
 import com.linkmart.forms.LogisticCompanyForm;
 import com.linkmart.mappers.LogisticCompanyMapper;
 import com.linkmart.models.LogisticCompany;
@@ -34,13 +35,14 @@ public class LogisticCompanyController {
         return LogisticCompanyMapper.INSTANCE.getAllLogisticCompany(result);
     }
 
-    @PutMapping(value = "/api/logisticCompany")
-    public void uploadLogisticCompany (@RequestBody LogisticCompanyForm companyForm,
-                                       HttpServletRequest request)
+    @PostMapping(value = "/api/logisticCompany")
+    public LogisticCompanyIdDto uploadLogisticCompany (@RequestBody LogisticCompanyForm companyForm,
+                                                       HttpServletRequest request)
             throws Exception {
         try {
             var userId = (String)request.getAttribute("userId");
-            logisticCompanyService.uploadLogisticCompany(companyForm, userId);
+            var logisticId = logisticCompanyService.uploadLogisticCompany(companyForm, userId);
+            return new LogisticCompanyIdDto(logisticId);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

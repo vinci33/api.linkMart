@@ -52,8 +52,6 @@ public class RequestController {
         }
     }
 
-
-
     //5.2.2 Get All - by userId (ACTIVE)
     @GetMapping(value = "/api/request")
     public List<RequestDto> getAllActiveMyRequest (HttpServletRequest request) {
@@ -166,7 +164,7 @@ public class RequestController {
     //Page<AnotherRequestDto>
     @GetMapping(value = "/request")
     public RequestFilterDto getAllRequestByCategoryAndLocation (
-            @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
+            @RequestParam(name = "p", required = false, defaultValue = "0") Integer page,
             @RequestParam(name = "category", required = false) List<String> categories,
             @RequestParam(name = "location", required = false) List<String> locations) {
         try {

@@ -25,7 +25,7 @@ INSERT INTO users(id,username,user_email,password) VALUES('01HHZZ015SVZVDH4XTZCY
 INSERT INTO status(status_name) VALUES ('pending'),('in-progress'),('aborted'),('rejected'),('completed'),('open'),('closed'),('accepted');
 --added open and closed
 
-INSERT INTO order_status(order_status) VALUES ('created'),('in-progress'),('shipped'),('completed'),('cancelled');
+INSERT INTO order_status(order_status) VALUES ('created'),('in-progress'),('shipped'),('completed'),('cancelled'),('reviewed');
 
 INSERT INTO location(location_name) VALUES   ('🇺🇸 United States'),
                                              ('🇨🇳 China'),
