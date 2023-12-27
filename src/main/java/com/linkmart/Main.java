@@ -21,18 +21,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
                         Our platform isn't just about transactions; it's about building a global community where distances fade and accessibility reigns. Get ready for an unparalleled shopping adventure that brings the world’s treasures directly to your doorstep!
                         
                         Our Frontend Members:
-                        - Elaine Chiu  \n ytelainechiu@gmail.com
+                        - **Elaine Chiu**  \n ***ytelainechiu@gmail.com***
                         
-                        - Fredy Cheung  \n e.kuquer@gmail.com
+                        - **Fredy Cheung**  \n ***e.kuquer@gmail.com***
                         
                         Our Backend Members:
-                        - Nicolas Lo  \n nicolaloht@gmail.com
+                        - **Nicolas Lo**  \n ***nicolaloht@gmail.com***
                         
-                        - Kenneth D Lai  \n kennethdouglasslai@gmail.com
+                        - **Kenneth D Lai**  \n ***kennethdouglasslai@gmail.com***
                         
-                        Please check out our site: 
+                        Please check out our site:
                         
-                        \n https://linkmart.yt20chill.me
+                        \n ***https://linkmart.yt20chill.me***
                         
                         Documentation Linkmart API v1.0
                         
