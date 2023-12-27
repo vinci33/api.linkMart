@@ -29,7 +29,7 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
     Float getAverageAttitude(String providerId);
 
     @Query(value = """
-            SELECT COUNT(review_id)
+            SELECT COUNT(id)
             FROM review
             WHERE provider_id = :providerId
             """

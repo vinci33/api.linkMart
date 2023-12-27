@@ -104,7 +104,7 @@ public class ProviderController {
     }
 
     @PutMapping("/api/provider/profile")
-    public void changeProviderBio(HttpServletRequest request, ProviderBioForm providerBioForm) {
+    public void changeProviderBio(HttpServletRequest request,@RequestBody ProviderBioForm providerBioForm) {
         try {
             var userId = (String)request.getAttribute("userId");
             if (userId == null) {

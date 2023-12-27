@@ -138,9 +138,13 @@ public class ProviderService {
             providerDetailDto.setLocationName(locationService.getLocationNameByLocationId(providerDetail.getLocationId()));
             providerDetailDto.setStarOfAttitude(providerDetail.getStarOfAttitude());
             providerDetailDto.setStarOfEfficiency(providerDetail.getStarOfEfficiency());
-            providerDetailDto.setNumberOfReviews(providerDetail.getNumberOfReviews());
+            if (providerDetail.getNumberOfReviews() == null) {
+                providerDetailDto.setNumberOfReviews(0);
+            } else {
+                providerDetailDto.setNumberOfReviews(providerDetail.getNumberOfReviews());
+            }
             if (providerDetail.getBiography() == null) {
-                providerDetailDto.setBiography("");
+                providerDetailDto.setBiography(null);
             } else {
                 providerDetailDto.setBiography(providerDetail.getBiography());
             }
@@ -252,7 +256,7 @@ public class ProviderService {
             DashBoard.setCompletedTaskCount(numberOfTaskCompleted);
             DashBoard.setBalance(balance);
             if (provider.getBiography() == null) {
-                DashBoard.setBiography("");
+                DashBoard.setBiography(null);
             } else {
                 DashBoard.setBiography(provider.getBiography());
             }

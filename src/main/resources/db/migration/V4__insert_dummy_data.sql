@@ -267,8 +267,8 @@ INSERT INTO user_address(user_id, address, is_primary) VALUES
  ('01HHV1H3RCJYR25XJWX37NPCQJ','https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71Hf77Rs3DL._AC_SL1500_.jpg',true, true),
  ('01HHV1H3RCJYR25XJWX37NPCQJ','https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71TkSqQa2FL._AC_SL1500_.jpg',true, false);
 
-INSERT INTO provider (id, user_id, location_id, star_of_efficiency, star_of_attitude) VALUES
-('01HHMV7DKG4Z9JNT1P8DESHW8R', '01HHMV7DKG4Z9JNT1P8DESHW8X', '1', '5','5');
+INSERT INTO provider (id, user_id, location_id, star_of_efficiency, star_of_attitude,number_of_reviews) VALUES
+('01HHMV7DKG4Z9JNT1P8DESHW8R', '01HHMV7DKG4Z9JNT1P8DESHW8X', '1', '5','5', 0);
 
 
  INSERT INTO user_payment_method (user_id, payment_method, card_no, card_holder_name, expiry_date) VALUES

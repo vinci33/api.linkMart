@@ -88,6 +88,7 @@ public class AppConfig {
                         .allowedHeaders("*")
                         .allowedOrigins("http://localhost:5173",
                                 "http://192.168.59.136:5173",
+                                "http://192.168.59.157:5173",
                                 "https://linkmart.yt20chill.me/",
                                 "https://lm.yt20chill.me/",
                                 "http://localhost:8081",
