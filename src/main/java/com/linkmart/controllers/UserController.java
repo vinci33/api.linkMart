@@ -19,20 +19,33 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 
-@Tag(name = "User", description = "User info APIs")
+@Tag(name = "User", description = """
+        **User info APIs**
+
+        - Represents the UserController, UserAddressController, UserPaymentMethodController class, which is responsible for handling various API endpoints related to users Info.
+
+        - It interacts with the UserService, UserAddressService, UserPaymentMethodService and ProviderService classes to perform operations
+        such as counting users, retrieving user information, updating user information, and getting a list of all users with their provider IDs.
+                 
+        """)
 @RestController
 @RequestMapping(value = "/api")
 public class UserController {
-
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    ProviderService providerService;
-    @Autowired
-    HttpServletRequest request;
-
     final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    private final UserService userService;
+
+    private final ProviderService providerService;
+
+    private final HttpServletRequest request;
+
+    public UserController (UserService userService, ProviderService providerService, HttpServletRequest request){
+        this.userService = userService;
+        this.providerService = providerService;
+        this.request = request;
+    };
+
+
 
     @Operation(summary = "Get all user count",
             description = "Get the count of users",
@@ -55,11 +68,8 @@ public class UserController {
     public ResponseUserDto getUser() {
       try {
           var userId = (String)request.getAttribute("userId");
-          logger.info("userId: " + userId);
             var user = userService.getUserNameById(userId);
-            logger.info("user: " + user);
             var providerId = providerService.checkIfProvider(userId);
-            logger.info("providerId: " + providerId);
             return new ResponseUserDto(user, providerId );
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -88,7 +98,6 @@ public class UserController {
     public ResponseWithMessage updateUser(@RequestBody UserInfoForm userInfoForm) {
       try {
           var userId = (String)request.getAttribute("userId");
-          logger.info("userId: " + userId);
           userService.updateUseInfo(userId, userInfoForm);
           return new ResponseWithMessage(true, "User updated");
         } catch (Exception e) {

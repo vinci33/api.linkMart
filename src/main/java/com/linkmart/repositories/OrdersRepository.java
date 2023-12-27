@@ -6,6 +6,7 @@ import com.linkmart.dtos.OrdersByOrderIdWithoutImageDto;
 import com.linkmart.dtos.OrdersDto;
 import com.linkmart.models.ItemDetailModel;
 import com.linkmart.models.Orders;
+import com.linkmart.models.User;
 import io.swagger.v3.core.util.Json;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -173,6 +174,22 @@ public interface OrdersRepository extends JpaRepository<Orders, String> {
     List<OrdersDto> findOrdersByUserIdAndStatusFromUser(String userId, List<String> orderStatuses);
 
     List<Orders> findOrdersByOrderStatusId(Integer orderStatusId);
+
+    @Query(value =
+            """
+                SELECT
+                    r.created_by AS userId
+                FROM
+                    orders o
+                JOIN
+                    offer of ON o.offer_id = of.id
+                JOIN
+                    request r ON of.request_id = r.id
+                WHERE
+                     o.id = :orderId
+                    """, nativeQuery = true)
+    String findUserIdByOrderId(String orderId);
+                     
 
     @Query(value = """
             SELECT Count(Offer.id)

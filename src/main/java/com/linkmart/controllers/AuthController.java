@@ -18,7 +18,13 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Random;
 
 
-@Tag(name = "Authenticate" , description = "Auth APIs")
+@Tag(name = "Authenticate" , description = """
+        **Auth APIs**
+        
+        - Represents the AuthController class, which handles authentication and signup requests.
+        
+        - It uses the UserService class to perform user-authenticated operations for authenticating a user and creating a new user.
+        """)
 @RestController
 public class AuthController {
     final Logger logger = LoggerFactory.getLogger(this.getClass());

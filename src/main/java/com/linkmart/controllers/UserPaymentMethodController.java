@@ -22,21 +22,27 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/user")
 public class UserPaymentMethodController {
-    @Autowired
-    UserPaymentMethodService userPaymentMethodService;
-    @Autowired
-    HttpServletRequest request;
 
     final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    private final UserPaymentMethodService userPaymentMethodService;
+
+    private final HttpServletRequest request;
+
+    public UserPaymentMethodController (UserPaymentMethodService userPaymentMethodService, HttpServletRequest request){
+        this.userPaymentMethodService = userPaymentMethodService;
+        this.request = request;
+    };
+
+
 
     @Operation(summary = "Get all user payment method",
             description = "Retrieve user payment methods by user id (JWT)",
             tags ={"User","Get"})
     @GetMapping ("/payment")
-    public List<UserPaymentMethodDto> getUserPaymentMethod(HttpServletRequest request) {
+    public List<UserPaymentMethodDto> getUserPaymentMethod() {
         try {
             var userId = (String)request.getAttribute("userId");
-            System.out.println("controller"+userId);
             List<UserPaymentMethod> userPaymentMethod = userPaymentMethodService.findUserPaymentMethodByUserId(userId);
             return UserPaymentMethodMapper.INSTANCE.toUserPaymentMethodDtos(userPaymentMethod);
         }catch (IllegalArgumentException e) {
@@ -49,13 +55,12 @@ public class UserPaymentMethodController {
             description = "Create user payment method by user id (JWT)",
             tags ={"User","Post"})
     @PostMapping("/payment")
-    public ResponseWithMessage createUserPaymentMethod(HttpServletRequest request, @RequestBody UserPaymentMethodForm userPaymentMethodForm) {
+    public ResponseWithMessage createUserPaymentMethod(@RequestBody UserPaymentMethodForm userPaymentMethodForm) {
         if (userPaymentMethodForm == null || userPaymentMethodForm.getPayment_method() == null || userPaymentMethodForm.getPayment_method().isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid request body");
         }
         try {
             var userId = (String) request.getAttribute("userId");
-            System.out.println("controller/post/payment" + userId);
             userPaymentMethodService.createUserPaymentMethod(userId, userPaymentMethodForm);
             return new ResponseWithMessage(true, "User Payment Method had been created");
 

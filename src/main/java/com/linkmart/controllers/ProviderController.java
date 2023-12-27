@@ -4,6 +4,8 @@ import com.linkmart.dtos.*;
 import com.linkmart.forms.ProviderBioForm;
 import com.linkmart.models.Provider;
 import com.linkmart.services.ProviderService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,16 +19,31 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.Map;
 
+@Tag(name = "Provider", description = """
+**Provider APIs**
+
+- Represents the ProviderController class, which is responsible for handling various API endpoints related to providers.
+
+- It includes methods for enrolling a provider, retrieving provider details, changing provider biography, and creating a new provider.
+""")
 @RestController
 public class ProviderController {
-    @Autowired
-    ProviderService providerService;
-
-    @Autowired
-    HttpServletRequest request;
 
     final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final ProviderService providerService;
 
+    private final HttpServletRequest request;
+
+    public ProviderController (ProviderService providerService, HttpServletRequest request){
+        this.providerService = providerService;
+        this.request = request;
+    };
+
+
+
+    @Operation(summary = "Get Provider List",
+            description = "Get Provider List",
+            tags = { "Provider","Post"})
     @PostMapping("/provider/{locationId}")
     public ResponseWithMessage enrollProvider(@PathVariable Integer locationId, HttpServletRequest request) {
       try {

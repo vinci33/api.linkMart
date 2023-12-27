@@ -21,7 +21,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
                         Our platform isn't just about transactions; it's about building a global community where distances fade and accessibility reigns. Get ready for an unparalleled shopping adventure that brings the world’s treasures directly to your doorstep!
                         
                         Our Frontend Members:
-                        - Elain Chiu  \n ytelainechiu@gmail.com
+                        - Elaine Chiu  \n ytelainechiu@gmail.com
                         
                         - Fredy Cheung  \n e.kuquer@gmail.com
                         
@@ -35,6 +35,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
                         \n https://linkmart.yt20chill.me
                         
                         Documentation Linkmart API v1.0
+                        
+                        For Testing:
+                        
+                        JWT Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhZG1pbiIsInVzZXJJZCI6IjAxSEhaWjAxNVNWWlZESDRYVFpDWUNKTVcwIiwiaWF0IjoxNzAyOTUzODQ5LCJleHAiOjE3MDQyNjk5ODR9.HyEZdN1_402M8UlRmZjXnVI7tIMdNcHp9EibLihk-Qo
+                        
+                        User Id: 01HHZZ015SVZVDH4XTZCYCJMW0
+                        
+                        Request Id: 01HJ3HK0SBBW80KTCAV2JKPPG0
+                        
+                        Offer Id: 01HJ5JXT718C04ZFCTPN8HKW0M
                         """
         )
 

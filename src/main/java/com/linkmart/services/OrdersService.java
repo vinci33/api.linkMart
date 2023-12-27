@@ -25,61 +25,31 @@ import java.util.stream.Collectors;
 public class OrdersService {
 
     final Logger logger = LoggerFactory.getLogger(this.getClass());
-    @Autowired
-    RequestService requestService;
-    @Autowired
-    RequestRepository requestRepository;
-    @Autowired
-    OfferRepository offerRepository;
-    @Autowired
-    OrdersRepository ordersRepository;
-    @Autowired
-    OfferService offerService;
-    @Autowired
-    ReviewService reviewService;
-    @Autowired
-    LocationRepository locationRepository;
-    @Autowired
-    UserAddressRepository userAddressRepository;
-    @Autowired
-    ProviderRepository providerRepository;
-    @Autowired
-    S3Service s3Service;
+    private final RequestService requestService;
+    private final RequestRepository requestRepository;
+    private final OfferRepository offerRepository;
+    private final OrdersRepository ordersRepository;
+    private final OfferService offerService;
+    private final ReviewService reviewService;
+    private final UserAddressRepository userAddressRepository;
+    private final ProviderRepository providerRepository;
+    private final S3Service s3Service;
+    private final ApplicationEventPublisher eventPublisher;
 
-    @Autowired
-    private ApplicationEventPublisher eventPublisher;
-
-    public OrdersService(RequestService requestService, OfferRepository offerRepository, OrdersRepository ordersRepository, OfferService offerService) {
+    public OrdersService(RequestRepository requestRepository,RequestService requestService, OfferRepository offerRepository, OrdersRepository ordersRepository, OfferService offerService, ReviewService reviewService, LocationRepository locationRepository, UserAddressRepository userAddressRepository, ProviderRepository providerRepository, S3Service s3Service, ApplicationEventPublisher eventPublisher) {
         this.requestService = requestService;
+        this.requestRepository = requestRepository;
         this.offerRepository = offerRepository;
         this.ordersRepository = ordersRepository;
         this.offerService = offerService;
+        this.reviewService = reviewService;
+        this.userAddressRepository = userAddressRepository;
+        this.providerRepository = providerRepository;
+        this.s3Service = s3Service;
+        this.eventPublisher = eventPublisher;
     }
 
-    public void setStatusCreate(Orders order) {
-        order.setOrderStatusId(1);
-    }
-    public String getStatusCreate(Orders order) {
-        return "Created";
-    }
-    public void setStatusInProgress(Orders order) {
-        order.setOrderStatusId(2);
-    }
-    public String getStatusInProgress(Orders order) {
-        return "In Progress";
-    }
-    public void setStatusShipped(Orders order) {
-        order.setOrderStatusId(3);
-    }
-    public String getStatusShipped(Orders order) {
-        return "Shipped";
-    }
-    public void setStatusCompleted(Orders order) {
-        order.setOrderStatusId(4);
-    }
-    public String getStatusCompleted(Orders order) {
-        return "Completed";
-    }
+
 
     @Transactional
     public String createOrder(Boolean success, String userId, String offerId, Integer userAddressId) {
@@ -89,29 +59,21 @@ public class OrdersService {
             throw new IllegalArgumentException("OfferId not found");
         }
         var requestId = offer.getRequestId();
-        //Get Pending Offer status
         var allOpenOffers = offerService.getOfferByRequestIdAndOfferStatusId(requestId, 1);
-        //all Offer status aborted
         allOpenOffers.forEach(offerService::setStatusAborted);
-        //Set Offer to accepted
         offer.setOfferStatusId(8);
         offerRepository.saveAndFlush(offer);
-        logger.info("All open offers: " + allOpenOffers );
         requestService.updateRequestStatus(requestId,
                 true , false);
         Orders order = new Orders();
         order.setOfferId(offerId);
         order.setUserAddressId(userAddressId);
         order.setOrderStatusId(2);
-        logger.info("Order status: " + order.getOrderStatusId());
         ordersRepository.saveAndFlush(order);
         return order.getId();
     }
 
-//    public List<OrdersByOrderIdAndStatusDto> getOrdersByUserId(String userId) {
-//        return ordersRepository.findOrdersByUserId(userId);
-//
-//    }
+
 
     public List<OrdersDto> getOrdersByUserIdAndStatus(String userId, List<String> orderStatuses){
         return  ordersRepository.findOrdersByUserIdAndStatus(userId, orderStatuses);
@@ -119,10 +81,10 @@ public class OrdersService {
     }
 
     public List<OrdersDto> userGetOrdersByUserIdAndStatusFromUser(String userId, List<String> orderStatuses){
-        logger.info(orderStatuses.toString());
         return  ordersRepository.findOrdersByUserIdAndStatusFromUser(userId, orderStatuses);
-
     }
+
+
 
     public void updateOrderShippingOrderId( String orderId, Integer logisticCompanyId, String shippingOrderNo, MultipartFile file) {
         Orders order = (Orders)ordersRepository.findOrdersById(orderId);
@@ -134,6 +96,7 @@ public class OrdersService {
         order.setShippingOrderNo(shippingOrderNo);
         String orderProof = s3Service.uploadFile(file);
         order.setShipmentProof(orderProof);
+        updateOrderStatus();
         ordersRepository.saveAndFlush(order);
     }
 
@@ -144,7 +107,7 @@ public class OrdersService {
         for (Orders order : shippedOrders) {
             Timestamp timestamp = order.getUpdatedAt();
             LocalDateTime dateTime = timestamp.toLocalDateTime();
-            if (dateTime.plusMinutes(1).isBefore(LocalDateTime.now())) {
+            if (dateTime.plusMinutes(5).isBefore(LocalDateTime.now())) {
                 order.setOrderStatusId(4);
                 ordersRepository.save(order);
                 eventPublisher.publishEvent(order.getId());
@@ -153,9 +116,7 @@ public class OrdersService {
     }
 
     public OrdersByOrderIdDto getOrdersDetailByOrderId (String orderId){
-        logger.info("Get order detail: " + orderId);
         OrdersByOrderIdWithoutImageDto orderDetail = ordersRepository.findOrdersDetailByOrderId(orderId);
-        logger.info("After SQL Get order detail: " + orderDetail);
         if (orderDetail == null) {
             throw new IllegalArgumentException("Order not found 2");
         }
@@ -172,9 +133,7 @@ public class OrdersService {
     }
 
     public void reviewOrder(String orderId, String userId, Float efficiency, Float attitude, String reviewRemark) {
-        logger.info("Review order: " + orderId);
         var order = ordersRepository.getOneByOfferId(orderId);
-        logger.info("After SQL Review Order: " + order);
         if (order == null) {
             throw new IllegalArgumentException("Order not found");
         }
@@ -194,9 +153,6 @@ public class OrdersService {
         review.setReviewEfficiency(efficiency);
         review.setReviewAttitude(attitude);
         review.setReviewRemark(reviewRemark);
-//        review suppose is finish the order and got the product already,
-//        that's y is suitable to set status to completed
-        //reviewed Status
         order.setOrderStatusId(6);
         ordersRepository.saveAndFlush(order);
         reviewService.saveReview(review);
@@ -209,9 +165,7 @@ public class OrdersService {
     }
 
     public void updateOrderReceived(String orderId, String userId) {
-        logger.info("Update order received: " + orderId);
         var order = ordersRepository.getOneByOfferId(orderId);
-        logger.info("After SQL Update order received: " + order);
         if (order == null) {
             throw new IllegalArgumentException("Order not found");
         }
@@ -226,7 +180,6 @@ public class OrdersService {
         if (!request.getCreatedBy().equals(userId)) {
             throw new IllegalArgumentException("User not authorized");
         }
-        //Status completed
         order.setOrderStatusId(4);
         ordersRepository.saveAndFlush(order);
     }
