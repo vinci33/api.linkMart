@@ -7,6 +7,8 @@ import com.linkmart.forms.UserAddressForm;
 import com.linkmart.mappers.UserAddressFullMapper;
 import com.linkmart.models.UserAddress;
 import com.linkmart.services.UserAddressService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.Map;
 
+@Tag(name = "User")
 @RestController
 @RequestMapping(value = "/api/user")
 
@@ -29,6 +32,9 @@ public class UserAddressController {
 
         final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+        @Operation(summary = "Get all user address in array format",
+                    description = "Get all user address in array format",
+                    tags ={"User","Get"})
         @GetMapping("/addressInArrayFormat")
         public List<Map<String, List<String>>>  getUserAddress(HttpServletRequest request) {
             try {
@@ -41,7 +47,9 @@ public class UserAddressController {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
             }
         }
-
+        @Operation(summary = "Get all user address in json format",
+            description = "Get all user address in json format",
+            tags ={"User","Get"})
         @GetMapping("/address")
         public List<UserAddressFullDto> getUserAddressInJson(HttpServletRequest request) {
             try {
@@ -54,7 +62,9 @@ public class UserAddressController {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
             }
         }
-
+        @Operation(summary = "Update user address",
+            description = "Update user address by addressId",
+            tags ={"User","Put"})
         @PutMapping("/address/{addressId}")
         public ResponseWithMessage changeIsPrimaryUserAddressById(@PathVariable Integer addressId, HttpServletRequest request) {
             try {
@@ -66,6 +76,10 @@ public class UserAddressController {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
             }
         }
+
+        @Operation(summary = "Delete user address",
+            description = "Delete user address by addressId",
+            tags ={"User","Delete"})
         @DeleteMapping("/address/{addressId}")
         public ResponseWithMessage deleteUserAddressById(@PathVariable Integer addressId, HttpServletRequest request) {
             try {
@@ -79,7 +93,9 @@ public class UserAddressController {
             }
 
         }
-
+        @Operation(summary = "Create user address",
+            description = "Create user address",
+            tags ={"User","Post"})
         @RequestMapping(value = "/address", method = RequestMethod.POST)
         public UserAddressIdDto createUserAddress(HttpServletRequest request , @RequestBody UserAddressForm userAddressForm){
             if (userAddressForm == null || userAddressForm.getAddress() == null || userAddressForm.getAddress().isEmpty()) {

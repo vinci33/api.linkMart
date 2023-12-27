@@ -5,6 +5,8 @@ import com.linkmart.dtos.ResponseWithMessage;
 import com.linkmart.dtos.UserPaymentMethodDto;
 import com.linkmart.models.UserPaymentMethod;
 import com.linkmart.services.UserPaymentMethodService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +18,7 @@ import com.linkmart.mappers.UserPaymentMethodMapper;
 import com.linkmart.forms.UserPaymentMethodForm;
 
 import java.util.List;
-
+@Tag(name = "User")
 @RestController
 @RequestMapping(value = "/api/user")
 public class UserPaymentMethodController {
@@ -27,6 +29,9 @@ public class UserPaymentMethodController {
 
     final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    @Operation(summary = "Get all user payment method",
+            description = "Retrieve user payment methods by user id (JWT)",
+            tags ={"User","Get"})
     @GetMapping ("/payment")
     public List<UserPaymentMethodDto> getUserPaymentMethod(HttpServletRequest request) {
         try {
@@ -40,6 +45,9 @@ public class UserPaymentMethodController {
         }
     }
 
+    @Operation(summary = "Update user payment method ",
+            description = "Create user payment method by user id (JWT)",
+            tags ={"User","Post"})
     @PostMapping("/payment")
     public ResponseWithMessage createUserPaymentMethod(HttpServletRequest request, @RequestBody UserPaymentMethodForm userPaymentMethodForm) {
         if (userPaymentMethodForm == null || userPaymentMethodForm.getPayment_method() == null || userPaymentMethodForm.getPayment_method().isEmpty()) {
@@ -58,6 +66,9 @@ public class UserPaymentMethodController {
         }
     }
 
+    @Operation(summary = "Update user payment method ",
+            description = "Update an existing user payment method by user id (JWT), payment method id",
+            tags ={"User","Put"})
     @PutMapping("/payment/{paymentMethodId}")
     public ResponseWithMessage updatePaymentMethodByPaymentMethodId(@PathVariable Integer paymentMethodId,
                                                                     @RequestBody UserPaymentMethodForm userPaymentMethodForm,
@@ -75,7 +86,9 @@ public class UserPaymentMethodController {
         }
     }
 
-
+    @Operation(summary = "Delete user payment method",
+            description = "Delete user payment method by user id (JWT), payment method id",
+            tags ={"User","Delete"})
     @DeleteMapping("/payment/{paymentMethodId}")
     public ResponseWithMessage deleteUserPaymentMethodById(@PathVariable Integer paymentMethodId, HttpServletRequest request) {
         try {
