@@ -38,10 +38,12 @@ public interface ProviderRepository extends JpaRepository<Provider,String> {
     @Query(value = """
                     UPDATE provider
                     SET star_of_efficiency = :starOfEfficiency,
-                        star_of_attitude = :starOfAttitude
+                        star_of_attitude = :starOfAttitude,
+                        number_of_reviews = :numberOfReviews
                     WHERE provider.id = :providerId
             """, nativeQuery = true)
     void updateProviderRating(@Param("providerId")String providerId,
                                      @Param("starOfEfficiency")Float averageEfficiency,
-                                     @Param("starOfAttitude")Float averageAttitude);
+                                     @Param("starOfAttitude")Float averageAttitude,
+                                     @Param("numberOfReviews")Integer reviewCount);
 }

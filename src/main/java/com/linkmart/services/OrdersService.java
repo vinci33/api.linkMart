@@ -203,7 +203,8 @@ public class OrdersService {
         Float averageEfficiency = reviewService.getAverageEfficiency(offer.getProviderId());
         Float averageAttitude = reviewService.getAverageAttitude(offer.getProviderId());
         String providerId = offer.getProviderId();
-        providerRepository.updateProviderRating(providerId, averageEfficiency, averageAttitude);
+        Integer reviewCount = reviewService.getReviewCount(providerId);
+        providerRepository.updateProviderRating(providerId, averageEfficiency, averageAttitude, reviewCount);
     }
 
     public void updateOrderReceived(String orderId, String userId) {

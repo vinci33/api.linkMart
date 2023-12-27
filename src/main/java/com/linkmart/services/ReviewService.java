@@ -48,4 +48,16 @@ public class ReviewService {
             return null;
         }
     }
+
+    public Integer getReviewCount(String providerId) {
+        try
+        {
+            return reviewRepository.getReviewCount(providerId);
+        }
+        catch (Exception e)
+        {
+            logger.error(e.getMessage());
+            return null;
+        }
+    }
 }
