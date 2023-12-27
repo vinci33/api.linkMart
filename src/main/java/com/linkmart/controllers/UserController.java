@@ -6,6 +6,8 @@ import com.linkmart.dtos.UserWithProviderIdDto;
 import com.linkmart.forms.UserInfoForm;
 import com.linkmart.services.ProviderService;
 import com.linkmart.services.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +18,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+
+@Tag(name = "User", description = "User info APIs")
 @RestController
 @RequestMapping(value = "/api")
 public class UserController {
@@ -30,6 +34,9 @@ public class UserController {
 
     final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    @Operation(summary = "Get all user count",
+            description = "Get the count of users",
+            tags ={"User","Get"})
     @GetMapping("/admin/user/count")
     public ResponseWithMessage countUser() {
       try {
@@ -41,6 +48,9 @@ public class UserController {
         }
     }
 
+    @Operation(summary = "Get user info",
+            description = "Get the current user's information",
+            tags ={"User","Get"})
     @GetMapping("/user")
     public ResponseUserDto getUser() {
       try {
@@ -57,6 +67,9 @@ public class UserController {
         }
     }
 
+    @Operation(summary = "Get all user and provider id",
+            description = "Get a list of all users with their provider IDs",
+            tags ={"User","Get"})
     @GetMapping("/user/userAndProvider")
     public List<UserWithProviderIdDto> getAllUser() {
       try {
@@ -68,6 +81,9 @@ public class UserController {
         }
     }
 
+    @Operation(summary = "Update user info",
+            description = "Update the current user's information",
+            tags ={"User","Put"})
     @PutMapping("/user/info")
     public ResponseWithMessage updateUser(@RequestBody UserInfoForm userInfoForm) {
       try {

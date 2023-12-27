@@ -5,6 +5,8 @@ import com.linkmart.models.RandomGenModel;
 import com.linkmart.models.RandomGenModel;
 import com.linkmart.services.UserService;
 import com.linkmart.utils.UtilMethod;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.core.env.Environment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +17,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Random;
 
+
+@Tag(name = "Authenticate" , description = "Auth APIs")
 @RestController
 public class AuthController {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -25,6 +29,12 @@ public class AuthController {
     @Autowired
     Environment env;
 
+    @Operation(summary = "Login",
+            description = """
+                    Handles the login request by authenticating the user's email and password.
+                    If the authentication is successful, it returns a ResponseWithToken object containing a success message and a JWT token
+                    """,
+            tags ={"Authenticate","Post"})
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseWithToken login ( @RequestBody LoginForm loginForm){
         try{
@@ -38,6 +48,13 @@ public class AuthController {
         }
     }
 
+    @Operation(summary = "Signup",
+            description = """
+                    Handles the signup request by creating a new user with the given email and password.
+                    Default username is the provided email.
+                    If the signup is successful, it returns a ResponseWithToken object containing a success message and a JWT token
+                    """,
+            tags ={"Authenticate","Post"})
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public ResponseWithToken signup (@RequestBody LoginForm loginForm){
         try{
@@ -54,9 +71,9 @@ public class AuthController {
 
 
 
-    @GetMapping("/")
-    public String hello() {
-        return "https://api.fight2gether.com/swagger-ui/index.html";
-    }
+//    @GetMapping("/")
+//    public String hello() {
+//        return "https://api.fight2gether.com/swagger-ui/index.html";
+//    }
 
 }
