@@ -116,4 +116,14 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
             WHERE is_active = true
             """, nativeQuery =true)
     Integer getTotalRecords();
+
+    @Query(value = """
+                    SELECT
+                        *
+                        FROM request
+                        WHERE request.id = :requestId
+                        AND is_active = true
+                        ORDER BY updated_at DESC
+            """, nativeQuery = true)
+    RequestModel getRequestByRequestIdAndActive(@Param("requestId") String requestId);
 }

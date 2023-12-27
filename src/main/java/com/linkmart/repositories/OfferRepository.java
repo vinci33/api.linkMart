@@ -15,9 +15,21 @@ public interface OfferRepository extends JpaRepository<Offer, String> {
                 SELECT *
                 FROM offer
                 WHERE offer.request_id = :requestId
+                AND offer.offer_status_id = 1
                 ORDER BY created_at DESC
                 """, nativeQuery = true)
     List<Offer> findByRequestId(@Param("requestId") String requestId);
+
+    @Query(value =
+            """
+            SELECT *
+            FROM offer
+            WHERE offer.provider_id = :providerId
+            AND offer.request_id = :requestId
+            AND offer.offer_status_id = 1
+            ORDER BY created_at DESC
+            """, nativeQuery = true)
+    Offer findByProviderIdAndRequestId(@Param("providerId") String providerId, @Param("requestId") String requestId);
 
     @Query(value =
             """
@@ -52,9 +64,10 @@ public interface OfferRepository extends JpaRepository<Offer, String> {
     @Modifying
     @Query(value =
             """
-            UPDATE offer
+            UPDATE
+            offer
             SET offer_status_id = :offerStatusId
-            WHERE offer.id = :offerId
+            WHERE id = :offerId
             """, nativeQuery = true)
     void updateOfferStatus(@Param("offerId") String offerId, @Param("offerStatusId") Integer offerStatusId);
 

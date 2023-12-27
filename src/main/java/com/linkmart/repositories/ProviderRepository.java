@@ -33,4 +33,15 @@ public interface ProviderRepository extends JpaRepository<Provider,String> {
                     WHERE provider.id = :providerId
             """, nativeQuery = true)
     ProviderDashboardDto findDashBoardByProviderId(@Param("providerId")String providerId);
+
+    @Modifying
+    @Query(value = """
+                    UPDATE provider
+                    SET star_of_efficiency = :starOfEfficiency,
+                        star_of_attitude = :starOfAttitude
+                    WHERE provider.id = :providerId
+            """, nativeQuery = true)
+    void updateProviderRating(@Param("providerId")String providerId,
+                                     @Param("starOfEfficiency")Float averageEfficiency,
+                                     @Param("starOfAttitude")Float averageAttitude);
 }

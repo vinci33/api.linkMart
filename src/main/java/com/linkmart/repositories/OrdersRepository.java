@@ -191,5 +191,15 @@ public interface OrdersRepository extends JpaRepository<Orders, String> {
             AND Orders.order_status_id = 4 OR Orders.order_status_id = 6
             """, nativeQuery = true)
     Float calculateBalanceByProviderId(@Param("providerId") String providerId);
+
+    @Query(value = """
+            SELECT
+            Count(Offer.id)
+            FROM Offer
+            JOIN Orders ON Offer.id = Orders.offer_id
+            WHERE Offer.provider_id = :providerId
+            AND Orders.order_status_id = 2 OR Orders.order_status_id = 3
+                """, nativeQuery = true)
+    Integer getActiveOrderByProviderId(@Param("providerId") String providerId);
 }
 

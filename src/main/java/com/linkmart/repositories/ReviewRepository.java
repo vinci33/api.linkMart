@@ -11,4 +11,20 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
             """
             , nativeQuery = true)
     Review findReviewByOrderId(String orderId);
+
+    @Query(value = """
+            SELECT AVG(review_efficiency)
+            FROM review
+            WHERE provider_id = :providerId
+            """
+            , nativeQuery = true)
+    Float getAverageEfficiency(String providerId);
+
+    @Query(value = """
+            SELECT AVG(review_attitude)
+            FROM review
+            WHERE provider_id = :providerId
+            """
+            , nativeQuery = true)
+    Float getAverageAttitude(String providerId);
 }

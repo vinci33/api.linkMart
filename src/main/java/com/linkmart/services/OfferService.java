@@ -175,7 +175,7 @@ public class OfferService {
             if (providerId == null) {
                 throw new Exception("Provider not found");
             }
-            var thisOffer = offerRepository.findOfferById(offerId);
+            Offer thisOffer = offerRepository.findOfferById(offerId);
             //check if offer exists and not created by this provider
             if (thisOffer == null) {
                 throw new Exception("Offer not found");
@@ -193,7 +193,14 @@ public class OfferService {
             }
             Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
             thisOffer.setUpdatedAt(currentTimestamp);
-            offerRepository.save(thisOffer);
+            logger.info("OfferId: " + thisOffer.getOfferId());
+            logger.info("Status Id:"  + thisOffer.getOfferStatusId());
+            logger.info("Provider Id: " + thisOffer.getProviderId());
+            logger.info("Offer Id: " + thisOffer.getRequestId());
+            logger.info("Price Id: " + thisOffer.getPrice());
+            logger.info("Process Time: " + thisOffer.getEstimatedProcessTime());
+            logger.info("Request remark: " + thisOffer.getOfferRemark());
+            offerRepository.saveAndFlush(thisOffer);
         } catch (Exception e) {
             throw new Exception("Cannot update offer in database");
         }
@@ -254,12 +261,15 @@ public class OfferService {
             userService.validateUserId(userId);
             logger.info("offerId: " + offerId);
             var offer = offerRepository.findOfferByOfferId(offerId);
-            var providerId  =  offer.getProviderId();
-            if (!providerId.equals(userId)) {
+            var providerId = offer.getProviderId();
+            var provider = providerRepository.findProviderById(providerId);
+            if (!providerId.equals(provider.getId())) {
                 throw new IllegalArgumentException("Invalid userId");
             }
             //change to aborted status
-            offerRepository.updateOfferStatus(offerId , 3);
+            offer.setOfferId(offerId);
+            offer.setOfferStatusId(3);
+            offerRepository.save(offer);
         } catch (Exception e) {
             throw new IllegalArgumentException("Invalid ID: " + e.getMessage(), e);
         }
@@ -272,14 +282,18 @@ public class OfferService {
             userService.validateUserId(userId);
             logger.info("offerId: " + offerId);
             var offer = offerRepository.findOfferByOfferId(offerId);
-            var providerId  =  offer.getProviderId();
-            if (!providerId.equals(userId)) {
+            var createdBy = requestRepository.findCreatedByByRequestId(offer.getRequestId());
+            if (!createdBy.equals(userId)) {
                 throw new IllegalArgumentException("Invalid userId");
             }
             //change to rejected status
-            offerRepository.updateOfferStatus(offerId , 4);
+            logger.info("offerId 2: " + offerId);
+            offer.setOfferId(offerId);
+            offer.setOfferStatusId(4);
+            offerRepository.save(offer);
         } catch (Exception e) {
-            throw new IllegalArgumentException("Invalid ID: " + e.getMessage(), e);
+            logger.info(e.getMessage());
+            throw new IllegalArgumentException("Error : " + e.getMessage(), e);
         }
     }
 
@@ -328,29 +342,26 @@ public class OfferService {
         }
     }
 
-    public List<OfferCheckDto> checkIfHasOffer(String requestId, String userId) {
-        try
-        {logger.info("requestId: " + requestId);
-        logger.info("userId: " + userId);
-        var offers = offerRepository.findByRequestId(requestId);
-        var providerId = providerRepository.getIdByUserId(userId);
-        logger.info("offer: " + offers);
-        List<OfferCheckDto> offerCheckDtoList = new ArrayList<>();
-        for (Offer offer : offers) {
-            if (offer.getProviderId().equals(providerId)) {
-                OfferCheckDto offerCheckDto = new OfferCheckDto();
-                offerCheckDto.setOfferId(offer.getOfferId());
-                offerCheckDto.setEstimatedProcessTime(offer.getEstimatedProcessTime());
-                offerCheckDto.setPrice(offer.getPrice());
-                offerCheckDto.setOfferRemark(offer.getOfferRemark());
-                offerCheckDtoList.add(offerCheckDto);
+    //ToDo
+    public OfferCheckDto checkIfHasOffer(String requestId, String userId) {
+        try {
+            logger.info("requestId: " + requestId);
+            logger.info("userId: " + userId);
+            var providerId = providerRepository.getIdByUserId(userId);
+            var offer = offerRepository.findByProviderIdAndRequestId(providerId, requestId);
+            logger.info("offer: " + offer);
+            if (offer == null) {
+                return null;
             }
-            return offerCheckDtoList;
-        }
-        return null;
-        } catch (Exception e) {
+            OfferCheckDto offerCheckDto = new OfferCheckDto();
+            offerCheckDto.setOfferId(offer.getOfferId());
+            offerCheckDto.setEstimatedProcessTime(offer.getEstimatedProcessTime());
+            offerCheckDto.setPrice(offer.getPrice());
+            offerCheckDto.setOfferRemark(offer.getOfferRemark());
+            return offerCheckDto;
+            } catch (Exception e) {
             throw new IllegalArgumentException(e.getMessage());
-        }
+            }
     }
 
     public List<Offer> getOfferByRequestIdAndOfferStatusId(String requestId, Integer offerStatusId){

@@ -2,6 +2,7 @@ package com.linkmart.controllers;
 
 import com.linkmart.dtos.*;
 import com.linkmart.forms.AcceptOfferForm;
+import com.linkmart.forms.EditOfferForm;
 import com.linkmart.forms.OfferForm;
 import com.linkmart.services.OfferService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -79,15 +80,18 @@ public class OfferController {
         }
     }
 
+    //ToDo RequestBody
     @PutMapping(value = "/api/offer/{offerId}")
     public RequestResponseWithMessageDto updateOffer (
             @PathVariable(value = "offerId", required = false) String offerId,
-            @RequestParam(value = "price", required = false) Integer price,
-            @RequestParam(value = "estimatedProcessTime", required = false) Integer estimatedProcessTime,
-            @RequestParam(value = "offerRemark", required = false) String offerRemark) throws Exception {
+            @RequestBody EditOfferForm editOfferForm)
+            throws Exception {
         try{
             var userId = (String)request.getAttribute("userId");
             logger.info("userId: " + userId);
+            Integer price = editOfferForm.getPrice();
+            Integer estimatedProcessTime = editOfferForm.getEstimatedProcessTime();
+            String offerRemark = editOfferForm.getOfferRemark();
             offerService.updateOffer(userId, offerId, price, estimatedProcessTime, offerRemark);
             return new RequestResponseWithMessageDto("Offer updated successfully");
         } catch (Exception e) {

@@ -30,6 +30,9 @@ public class ProviderVerification {
     @Column(name = "bank_document")
     private String bankDocument;
 
+    @Column(name = "location_id")
+    private Integer locationId;
+
     @Column(name = "created_at", insertable = false, updatable = false)
     private Timestamp createdAt;
 
@@ -61,6 +64,10 @@ public class ProviderVerification {
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
+    }
+
+    public String getId() {
+        return id;
     }
 
     public ProviderVerification() {
@@ -126,5 +133,13 @@ public class ProviderVerification {
 
     public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Integer getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(Integer locationId) {
+        this.locationId = locationId;
     }
 }

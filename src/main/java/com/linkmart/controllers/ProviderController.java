@@ -8,11 +8,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class ProviderController {
@@ -36,36 +38,36 @@ public class ProviderController {
       }
     }
 
-    @PostMapping("/api/provider")
-    public ResponseWithMessage applyProvider(HttpServletRequest request,
-                                 @RequestParam(value = "locationId") Integer locationId,
-                                 @RequestParam(value = "addressDocument")MultipartFile addressDocument,
-                                 @RequestParam(value = "idDocument")MultipartFile idDocument,
-                                 @RequestParam(value = "bankDocument")MultipartFile bankDocument) {
-      try {
-          var userId = (String)request.getAttribute("userId");
-          if (userId == null) {
-              throw new IllegalArgumentException("Invalid UserId");
-          }
-          if (locationId == null) {
-              throw new IllegalArgumentException("Invalid LocationId");
-          }
-          if (addressDocument == null) {
-                throw new IllegalArgumentException("Invalid Address Document");
-            }
-          if (idDocument == null) {
-                throw new IllegalArgumentException("Invalid Id Document");
-            }
-          if (bankDocument == null) {
-                throw new IllegalArgumentException("Invalid Bank Document");
-            }
-          providerService.providerApplication(userId, addressDocument, idDocument, bankDocument, locationId);
-          return new ResponseWithMessage(true, "User had applied as provider");
-        }catch (IllegalArgumentException e) {
-          logger.error(e.getMessage());
-          throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-      }
-    }
+//    @PostMapping("/api/provider")
+//    public ResponseWithMessage applyProvider(HttpServletRequest request,
+//                                 @RequestParam(value = "locationId") Integer locationId,
+//                                 @RequestParam(value = "addressDocument")MultipartFile addressDocument,
+//                                 @RequestParam(value = "idDocument")MultipartFile idDocument,
+//                                 @RequestParam(value = "bankDocument")MultipartFile bankDocument) {
+//      try {
+//          var userId = (String)request.getAttribute("userId");
+//          if (userId == null) {
+//              throw new IllegalArgumentException("Invalid UserId");
+//          }
+//          if (locationId == null) {
+//              throw new IllegalArgumentException("Invalid LocationId");
+//          }
+//          if (addressDocument == null) {
+//                throw new IllegalArgumentException("Invalid Address Document");
+//            }
+//          if (idDocument == null) {
+//                throw new IllegalArgumentException("Invalid Id Document");
+//            }
+//          if (bankDocument == null) {
+//                throw new IllegalArgumentException("Invalid Bank Document");
+//            }
+//          providerService.providerApplication(userId, addressDocument, idDocument, bankDocument, locationId);
+//          return new ResponseWithMessage(true, "User had applied as provider");
+//        }catch (IllegalArgumentException e) {
+//          logger.error(e.getMessage());
+//          throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+//      }
+//    }
 
     @GetMapping("/api/provider")
     public VerificationResponseDto getProviderApplicationDetail(HttpServletRequest request) {
@@ -102,12 +104,8 @@ public class ProviderController {
 
     //10.4.2
     @GetMapping("/provider/profile/{providerId}")
-    public ProviderDetailDto publicGetProviderProfile(HttpServletRequest request,@PathVariable String providerId) {
+    public ProviderDetailDto publicGetProviderProfile(@PathVariable String providerId) {
         try {
-            var userId = (String)request.getAttribute("userId");
-            if (userId == null) {
-                throw new IllegalArgumentException("Invalid UserId");
-            }
             return providerService.publicShowProviderDetailByUserId(providerId);
         }catch (IllegalArgumentException e) {
             logger.error(e.getMessage());
@@ -124,6 +122,24 @@ public class ProviderController {
                 throw new IllegalArgumentException("Invalid UserId");
             }
             return providerService.getProviderDashboard(userId);
+        }catch (IllegalArgumentException e) {
+            logger.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    @PostMapping("/api/provider")
+    public ResponseEntity<Map<String, String>> createProvider(@RequestParam(value = "locationId") Integer locationId,
+                                                              @RequestParam(value = "addressDocument")MultipartFile addressDocument,
+                                                              @RequestParam(value = "idDocument")MultipartFile idDocument,
+                                                              @RequestParam(value = "bankDocument")MultipartFile bankDocument) {
+        try {
+            var userId = (String)request.getAttribute("userId");
+            if (userId == null) {
+                throw new IllegalArgumentException("Invalid UserId");
+            }
+            providerService.createProvider(userId, locationId, addressDocument, idDocument, bankDocument);
+            return ResponseEntity.ok(Map.of("message", "Provider had been created"));
         }catch (IllegalArgumentException e) {
             logger.error(e.getMessage());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());

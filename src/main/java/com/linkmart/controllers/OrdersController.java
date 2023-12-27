@@ -87,7 +87,7 @@ public class OrdersController {
             if ("inProgress".equalsIgnoreCase(orderStatus)) {
                 statuses = Arrays.asList("in-progress", "shipped");
             } else if ("complete".equalsIgnoreCase(orderStatus)) {
-                statuses = Arrays.asList("completed", "cancelled");
+                statuses = Arrays.asList("completed", "cancelled", "reviewed");
             } else {
                 throw new IllegalArgumentException("Invalid orderStatus: " + orderStatus);
             }

@@ -39,9 +39,10 @@ public class OrdersService {
     ReviewService reviewService;
     @Autowired
     LocationRepository locationRepository;
-
     @Autowired
     UserAddressRepository userAddressRepository;
+    @Autowired
+    ProviderRepository providerRepository;
     @Autowired
     S3Service s3Service;
 
@@ -88,11 +89,12 @@ public class OrdersService {
             throw new IllegalArgumentException("OfferId not found");
         }
         var requestId = offer.getRequestId();
-        var allOpenOffers = offerService.getOfferByRequestIdAndOfferStatusId(requestId, 6);
+        //Get Pending Offer status
+        var allOpenOffers = offerService.getOfferByRequestIdAndOfferStatusId(requestId, 1);
         //all Offer status aborted
         allOpenOffers.forEach(offerService::setStatusAborted);
-        offerService.setStatusPending(offer);
-        logger.info("Offer status: " + offer.getOfferStatusId());
+        //Set Offer to accepted
+        offer.setOfferStatusId(8);
         offerRepository.saveAndFlush(offer);
         logger.info("All open offers: " + allOpenOffers );
         requestService.updateRequestStatus(requestId,
@@ -198,6 +200,10 @@ public class OrdersService {
         order.setOrderStatusId(6);
         ordersRepository.saveAndFlush(order);
         reviewService.saveReview(review);
+        Float averageEfficiency = reviewService.getAverageEfficiency(offer.getProviderId());
+        Float averageAttitude = reviewService.getAverageAttitude(offer.getProviderId());
+        String providerId = offer.getProviderId();
+        providerRepository.updateProviderRating(providerId, averageEfficiency, averageAttitude);
     }
 
     public void updateOrderReceived(String orderId, String userId) {

@@ -7,7 +7,8 @@ public class ProviderDashboardDto {
     private Integer reviewCount;
     private Float balance;
     private Integer offerCount;
-    private Integer taskCount;
+    private Integer activeTaskCount;
+    private Integer completedTaskCount;
 
     public Float getAverageEfficiency() {
         return averageEfficiency;
@@ -49,11 +50,19 @@ public class ProviderDashboardDto {
         this.offerCount = offerCount;
     }
 
-    public Integer getTaskCount() {
-        return taskCount;
+    public Integer getCompletedTaskCount() {
+        return completedTaskCount;
     }
 
-    public void setTaskCount(Integer taskCount) {
-        this.taskCount = taskCount;
+    public void setCompletedTaskCount(Integer completedTaskCount) {
+        this.completedTaskCount = completedTaskCount;
+    }
+
+    public Integer getActiveTaskCount() {
+        return activeTaskCount;
+    }
+
+    public void setActiveTaskCount(Integer activeTaskCount) {
+        this.activeTaskCount = activeTaskCount;
     }
 }

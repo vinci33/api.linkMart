@@ -19,9 +19,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -221,9 +224,12 @@ public class RequestService {
     @Transactional
     public OneRequestDto getOneRequest(String requestId) throws Exception {
         try {
-            var result = this.requestRepository.getRequestByRequestId(requestId);
+            var result = this.requestRepository.getRequestByRequestIdAndActive(requestId);
             var oneRequest = new OneRequestDto();
             var location = this.locationRepository.findByLocationId(result.getLocationId());
+            if (result == null) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Request not found");
+            }
             oneRequest.setRequestId(result.getRequestId());
             oneRequest.setCreatedBy(userRepository.findByUserId(result.getCreatedBy()));
             oneRequest.setLocationId(result.getLocationId());
@@ -243,7 +249,7 @@ public class RequestService {
             oneRequest.setCreatedBy(userRepository.findByUserId(result.getCreatedBy()));
             return oneRequest;
         } catch (Exception e) {
-            throw new Exception("Cannot get one request");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Request not found");
         }
     }
 

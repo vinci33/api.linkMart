@@ -88,25 +88,25 @@ public class ProviderService {
 
 
     //POST : /api/provider
-    public void providerApplication(String userId, MultipartFile addressDocument, MultipartFile idDocument, MultipartFile bankDocument, Integer locationId) {
-        try{
-            userService.validateUserId((userId));
-            ProviderVerification provider = new ProviderVerification();
-            provider.setUserId(userId);
-            String addressFile = s3Service.uploadFile(addressDocument);
-            String idFile = s3Service.uploadFile(idDocument);
-            String bankFile = s3Service.uploadFile(bankDocument);
-            provider.setAddressDocument(addressFile);
-            provider.setIdDocument(idFile);
-            provider.setBankDocument(bankFile);
-            //Status: pending
-            provider.setStatusId(1);
-            var providerVerificationId = providerVerificationRepository.saveAndFlush(provider);
-            logger.info("providerVerificationId: " + providerVerificationId);
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Cannot create provider application");
-        }
-    }
+//    public void providerApplication(String userId, MultipartFile addressDocument, MultipartFile idDocument, MultipartFile bankDocument, Integer locationId) {
+//        try{
+//            userService.validateUserId((userId));
+//            ProviderVerification provider = new ProviderVerification();
+//            provider.setUserId(userId);
+//            String addressFile = s3Service.uploadFile(addressDocument);
+//            String idFile = s3Service.uploadFile(idDocument);
+//            String bankFile = s3Service.uploadFile(bankDocument);
+//            provider.setAddressDocument(addressFile);
+//            provider.setIdDocument(idFile);
+//            provider.setBankDocument(bankFile);
+//            //Status: pending
+//            provider.setStatusId(1);
+//            var providerVerificationId = providerVerificationRepository.saveAndFlush(provider);
+//            logger.info("providerVerificationId: " + providerVerificationId);
+//        } catch (Exception e) {
+//            throw new IllegalArgumentException("Cannot create provider application");
+//        }
+//    }
 
     //GET : /api/provider
     public VerificationDto getProviderVerificationDetail(String userId) {
@@ -233,6 +233,8 @@ public class ProviderService {
             logger.info("provider: " + provider);
             Integer numberOfOffer = offerRepository.getPendingOfferByProviderId(providerId);
             logger.info("numberOfOffer: " + numberOfOffer);
+            Integer numberOfActiveTask = orderRepository.getActiveOrderByProviderId(providerId);
+            logger.info("numberOfActiveTask: " + numberOfActiveTask);
             Integer numberOfTaskCompleted = orderRepository.getCompletedOrderByProviderId(providerId);
             logger.info("numberOfTaskCompleted: " + numberOfTaskCompleted);
             Float balance = orderRepository.calculateBalanceByProviderId(providerId);
@@ -241,11 +243,36 @@ public class ProviderService {
             DashBoard.setAverageEfficiency(provider.getStarOfEfficiency());
             DashBoard.setReviewCount(provider.getNumberOfReviews());
             DashBoard.setOfferCount(numberOfOffer);
-            DashBoard.setTaskCount(numberOfTaskCompleted);
+            DashBoard.setActiveTaskCount(numberOfActiveTask);
+            DashBoard.setCompletedTaskCount(numberOfTaskCompleted);
             DashBoard.setBalance(balance);
             return DashBoard;
         } catch (Exception e) {
             throw new IllegalArgumentException("Cannot get provider dashboard");
+        }
+    }
+
+    //POST : /api/provider
+    @Transactional
+    public String createProvider(String userId, Integer locationId, MultipartFile addressDocument, MultipartFile idDocument, MultipartFile bankDocument) {
+        try{
+            userService.validateUserId((userId));
+            ProviderVerification provider = new ProviderVerification();
+            provider.setUserId(userId);
+            String addressFile = s3Service.uploadFile(addressDocument);
+            String idFile = s3Service.uploadFile(idDocument);
+            String bankFile = s3Service.uploadFile(bankDocument);
+            provider.setAddressDocument(addressFile);
+            provider.setIdDocument(idFile);
+            provider.setBankDocument(bankFile);
+            //Status: pending
+            provider.setStatusId(1);
+            provider.setLocationId(locationId);
+            ProviderVerification providerVerificationId = providerVerificationRepository.saveAndFlush(provider);
+            logger.info("providerVerificationId: " + providerVerificationId);
+            return providerVerificationId.getId();
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Cannot create provider application");
         }
     }
 }

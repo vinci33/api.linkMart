@@ -24,4 +24,28 @@ public class ReviewService {
             logger.error(e.getMessage());
         }
     }
+
+    public Float getAverageEfficiency(String providerId) {
+        try
+        {
+            return reviewRepository.getAverageEfficiency(providerId);
+        }
+        catch (Exception e)
+        {
+            logger.error(e.getMessage());
+            return null;
+        }
+    }
+
+    public Float getAverageAttitude(String providerId) {
+        try
+        {
+            return reviewRepository.getAverageAttitude(providerId);
+        }
+        catch (Exception e)
+        {
+            logger.error(e.getMessage());
+            return null;
+        }
+    }
 }

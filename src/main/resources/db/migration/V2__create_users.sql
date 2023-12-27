@@ -50,6 +50,7 @@ CREATE TABLE status (
     id_document VARCHAR(1000) not null,
     address_document VARCHAR(1000) not null,
     bank_document VARCHAR(1000) not null,
+    location_id INTEGER not null REFERENCES location(id),
     created_at TIMESTAMP default NOW(),
     updated_at TIMESTAMP default NOW()
  );
