@@ -90,8 +90,9 @@ CREATE TABLE review (
 CREATE TABLE report_case (
     id TEXT PRIMARY KEY,
     orders_id TEXT not null REFERENCES orders(id),
-    admins_id TEXT not null REFERENCES admins(id),
+    admins_id TEXT REFERENCES admins(id),
     status_id INTEGER not null REFERENCES status(id),
+    report_subject TEXT not null,
     report_description TEXT not null,
     created_at TIMESTAMP default NOW(),
     updated_at TIMESTAMP default NOW()
@@ -106,5 +107,7 @@ CREATE TABLE image (
     created_at TIMESTAMP default NOW(),
     updated_at TIMESTAMP default NOW()
 );
+
+
 
 COMMIT;

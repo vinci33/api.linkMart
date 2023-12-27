@@ -355,23 +355,21 @@ public class RequestService {
         }
     }
 
-    public List<AnotherRequestDto> getRequestsByCategoryAndLocation(Integer page, List<String> categories, List<String> locations ) {
+    public List<AnotherRequestDto> getRequestsByCategoryAndLocation(Integer page, List<String> categories, List<String> locations, Integer limit) {
         logger.info("category1: " + categories);
         logger.info("location1: " + locations);
         logger.info("page1: " + page);
+        logger.info("limit1: " + limit);
        try {
-              var limit = 5;
               var offSet = 0;
               System.out.println("locations: " + locations);
            if ( page <= 0 || page == null) {
-               limit = 5;
                 offSet = 0;
-           } else if (page > 1) {
-                limit = 5;
-                offSet = (page - 1) * 5;
+           } else if (page > 0) {
+                offSet = (page - 1) * limit;
            }
            System.out.println("limit: " + limit);
-              System.out.println("offSet: " + offSet);
+           System.out.println("offSet: " + offSet);
            var requestPage =  customRequestRepository.searchRequest(categories, locations, limit, offSet);
            for (AnotherRequestDto request: requestPage) {
                request.setCreatedBy(userRepository.findByUserId(request.getCreatedBy()));
@@ -384,24 +382,20 @@ public class RequestService {
        }
     }
 
-    public Integer getTotalRecords(Integer page, List<String> categories, List<String> locations) {
-        var limit = 5;
+    public Integer getTotalRecords(Integer page, List<String> categories, List<String> locations, Integer limit) {
         var offSet = 0;
         if ( page == 1 || page == null ) {
-            limit = 5;
             offSet = 0;
         } else if (page > 1) {
-            limit = 5;
-            offSet = (page - 1) * 5;
+            offSet = (page - 1) * limit;
         }
         logger.info("Integer limit: " + limit);
         logger.info("Integer offSet: " + offSet);
         return customRequestRepository.requestCount(categories,locations, limit, offSet);
     }
 
-    public Integer getTotalPages(Integer page, List<String> categories, List<String> locations) {
-        Integer limit = 5;
-        var totalRecords = getTotalRecords(page ,categories, locations);
+    public Integer getTotalPages(Integer page, List<String> categories, List<String> locations, Integer limit) {
+        var totalRecords = getTotalRecords(page ,categories, locations, limit);
         var totalPages = totalRecords / limit;
         logger.info("getTotalPages totalRecords: " + totalRecords);
         logger.info("getTotalPages limit: " + limit);

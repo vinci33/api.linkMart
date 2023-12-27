@@ -1,6 +1,7 @@
 package com.linkmart.controllers;
 
 import com.linkmart.dtos.*;
+import com.linkmart.forms.ProviderBioForm;
 import com.linkmart.models.Provider;
 import com.linkmart.services.ProviderService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -100,6 +101,21 @@ public class ProviderController {
           logger.error(e.getMessage());
           throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
       }
+    }
+
+    @PutMapping("/api/provider/profile")
+    public void changeProviderBio(HttpServletRequest request, ProviderBioForm providerBioForm) {
+        try {
+            var userId = (String)request.getAttribute("userId");
+            if (userId == null) {
+                throw new IllegalArgumentException("Invalid UserId");
+            }
+            String bio = providerBioForm.getBiography();
+            providerService.changeProviderBio(userId, bio);
+        }catch (IllegalArgumentException e) {
+            logger.error(e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
     }
 
     //10.4.2

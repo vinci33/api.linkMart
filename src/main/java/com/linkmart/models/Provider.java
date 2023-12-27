@@ -34,12 +34,14 @@ public class Provider {
     @Column(name = "star_of_attitude")
     private Float starOfAttitude;
 
+    @Column(name = "bio")
+    private String biography;
+
     @Column(name = "created_at", insertable = false, updatable = false)
     private Timestamp createdAt;
 
     @Column(name = "updated_at", insertable = false, updatable = false)
     private Timestamp updatedAt;
-
 
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -139,5 +141,13 @@ public class Provider {
 
     public void setReviewList(List<Review> reviewList) {
         this.reviewList = reviewList;
+    }
+
+    public String getBiography() {
+        return biography;
+    }
+
+    public void setBiography(String biography) {
+        this.biography = biography;
     }
 }

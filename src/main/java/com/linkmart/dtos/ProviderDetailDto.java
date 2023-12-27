@@ -13,6 +13,16 @@ public class ProviderDetailDto {
     private Float starOfAttitude;
     private List<ReviewsDto> reviews;
 
+    private String biography;
+
+    public String getBiography() {
+        return biography;
+    }
+
+    public void setBiography(String biography) {
+        this.biography = biography;
+    }
+
     public String getProviderName() {
         return providerName;
     }

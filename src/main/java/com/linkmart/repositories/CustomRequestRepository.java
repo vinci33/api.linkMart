@@ -36,7 +36,7 @@ public class CustomRequestRepository {
         }
         if (locations != null && !locations.isEmpty()) {
             String locationsClause = locations.stream()
-                    .map(location -> "l.location_name LIKE '%" + location + "%'")
+                    .map(location -> "l.location_name ILIKE '%" + location + "%'")
                     .collect(Collectors.joining(" OR "));
             queryBuilder.append("AND (").append(locationsClause).append(") ");
         }

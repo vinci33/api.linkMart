@@ -169,14 +169,16 @@ public class RequestController {
     public RequestFilterDto getAllRequestByCategoryAndLocation (
             @RequestParam(name = "p", required = false, defaultValue = "0") Integer page,
             @RequestParam(name = "category", required = false) List<String> categories,
-            @RequestParam(name = "location", required = false) List<String> locations) {
+            @RequestParam(name = "location", required = false) List<String> locations,
+            @RequestParam(name = "limit", required = false, defaultValue = "15") Integer limit) {
         try {
             logger.info("page: " + page);
             logger.info("categories: " + categories);
             logger.info("locations: " + locations);
-            var request = requestService.getRequestsByCategoryAndLocation(page, categories, locations);
-            var totalRecords = requestService.getTotalRecords(page, categories, locations);
-            var totalPages = requestService.getTotalPages(page, categories, locations);
+            logger.info("limit: " + limit);
+            var request = requestService.getRequestsByCategoryAndLocation(page, categories, locations, limit);
+            var totalRecords = requestService.getTotalRecords(page, categories, locations, limit);
+            var totalPages = requestService.getTotalPages(page, categories, locations, limit);
             return new RequestFilterDto(totalRecords, totalPages, request);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());

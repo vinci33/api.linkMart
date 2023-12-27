@@ -9,6 +9,15 @@ public class ProviderDashboardDto {
     private Integer offerCount;
     private Integer activeTaskCount;
     private Integer completedTaskCount;
+    private String biography;
+
+    public String getBiography() {
+        return biography;
+    }
+
+    public void setBiography(String biography) {
+        this.biography = biography;
+    }
 
     public Float getAverageEfficiency() {
         return averageEfficiency;

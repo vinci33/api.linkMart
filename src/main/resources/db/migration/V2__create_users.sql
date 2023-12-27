@@ -63,6 +63,7 @@ CREATE TABLE status (
      number_of_reviews INTEGER,
      star_of_efficiency float,
      star_of_attitude float,
+     bio TEXT,
      created_at TIMESTAMP default NOW(),
      updated_at TIMESTAMP default NOW()
  );

@@ -5,9 +5,11 @@ import com.linkmart.dtos.OrderPaymentDto;
 import com.linkmart.dtos.OrdersByOrderIdDto;
 import com.linkmart.dtos.OrdersByOrderIdAndStatusDto;
 import com.linkmart.dtos.ResponseWithMessage;
+import com.linkmart.forms.ReportCasesForm;
 import com.linkmart.forms.ReviewForm;
 import com.linkmart.mappers.OrdersByOrderIdAndStatusMapper;
 import com.linkmart.services.OrdersService;
+import com.linkmart.services.ReportService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +35,9 @@ public class OrdersController {
 
     @Autowired
     HttpServletRequest request;
+
+    @Autowired
+    ReportService reportService;
 
     final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -200,6 +205,26 @@ public class OrdersController {
             }
             ordersService.reviewOrder(orderId, userId, efficiency, attitude, reviewRemark);
             return new ResponseWithMessage(true, "Review success");
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    @PostMapping(value = "/order/report/{orderId}")
+    public ResponseWithMessage reportOrder(@PathVariable String orderId,
+                                           @RequestBody ReportCasesForm reportCasesForm) {
+        try {
+            if (orderId == null || reportCasesForm.getContent() == null || reportCasesForm.getSubject() == null) {
+                throw new IllegalArgumentException("Order Id or report remark not found");
+            }
+            var userId = (String)request.getAttribute("userId");
+            if (userId == null) {
+                throw new IllegalArgumentException("UserId not found");
+            }
+            var content = reportCasesForm.getContent();
+            var subject = reportCasesForm.getSubject();
+            reportService.createReportCase(orderId, content, subject);
+            return new ResponseWithMessage(true, "Report success");
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

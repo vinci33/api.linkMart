@@ -139,6 +139,11 @@ public class ProviderService {
             providerDetailDto.setStarOfAttitude(providerDetail.getStarOfAttitude());
             providerDetailDto.setStarOfEfficiency(providerDetail.getStarOfEfficiency());
             providerDetailDto.setNumberOfReviews(providerDetail.getNumberOfReviews());
+            if (providerDetail.getBiography() == null) {
+                providerDetailDto.setBiography("");
+            } else {
+                providerDetailDto.setBiography(providerDetail.getBiography());
+            }
 
              List<ReviewsDto> reviewsDtos = new ArrayList<>();
              try{
@@ -246,6 +251,11 @@ public class ProviderService {
             DashBoard.setActiveTaskCount(numberOfActiveTask);
             DashBoard.setCompletedTaskCount(numberOfTaskCompleted);
             DashBoard.setBalance(balance);
+            if (provider.getBiography() == null) {
+                DashBoard.setBiography("");
+            } else {
+                DashBoard.setBiography(provider.getBiography());
+            }
             return DashBoard;
         } catch (Exception e) {
             throw new IllegalArgumentException("Cannot get provider dashboard");
@@ -273,6 +283,19 @@ public class ProviderService {
             return providerVerificationId.getId();
         } catch (Exception e) {
             throw new IllegalArgumentException("Cannot create provider application");
+        }
+    }
+
+    //PUT : /api/provider/profile
+    public void changeProviderBio(String userId, String bio) {
+        try{
+            userService.validateUserId((userId));
+            Provider provider = providerRepository.findProviderByUserId(userId);
+            provider.setBiography(bio);
+            logger.info("provider bio: " + bio);
+            providerRepository.saveAndFlush(provider);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Cannot change provider bio");
         }
     }
 }

@@ -10,7 +10,8 @@ import java.sql.Timestamp;
 public class ReportCase {
 
     @Id
-    private String id;//ULID
+    @Column(name = "id")
+    private String reportCaseId; //ULID
 
     @Column(name = "orders_id")
     private String ordersId; //ULID
@@ -20,6 +21,9 @@ public class ReportCase {
 
     @Column(name = "status_id")
     private int statusId;
+
+    @Column(name = "report_subject")
+    private String reportSubject;
 
     @Column(name = "report_description")
     private String reportDescription;
@@ -44,17 +48,17 @@ public class ReportCase {
     private Status status;
 
 
-    public ReportCase() {
+    public void MakeReportCase() {
         ULID ulid = new ULID();
-        this.id = ulid.nextULID();
+        this.reportCaseId = ulid.nextULID();
     }
 
-    public String getId() {
-        return id;
+    public String getReportCaseId() {
+        return reportCaseId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setReportCaseId(String reportCaseId) {
+        this.reportCaseId = reportCaseId;
     }
 
     public String getOrdersId() {
@@ -105,10 +109,18 @@ public class ReportCase {
         this.updatedAt = updatedAt;
     }
 
+    public String getReportSubject() {
+        return reportSubject;
+    }
+
+    public void setReportSubject(String reportSubject) {
+        this.reportSubject = reportSubject;
+    }
+
     @Override
     public String toString() {
         return "ReportCase{" +
-                "id='" + id + '\'' +
+                "reportCaseId='" + reportCaseId + '\'' +
                 ", ordersId='" + ordersId + '\'' +
                 ", adminsId='" + adminsId + '\'' +
                 ", statusId=" + statusId +
@@ -117,5 +129,4 @@ public class ReportCase {
                 ", updatedAt=" + updatedAt +
                 '}';
     }
-
 }
