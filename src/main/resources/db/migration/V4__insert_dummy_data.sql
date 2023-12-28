@@ -22,6 +22,7 @@ INSERT INTO users(id,username,user_email,password) VALUES('01HHZZ015SVZVDH4XTZCY
 --JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhZG1pbiIsInVzZXJJZCI6IjAxSEhaWjAxNVNWWlZESDRYVFpDWUNKTVcwIiwiaWF0IjoxNzAyOTUzODQ5LCJleHAiOjE3MDQyNjk5ODR9.HyEZdN1_402M8UlRmZjXnVI7tIMdNcHp9EibLihk-Qo
 --pw: "123"
 
+
 INSERT INTO status(status_name) VALUES ('pending'),('in-progress'),('aborted'),('rejected'),('completed'),('open'),('closed'),('accepted');
 --added open and closed
 
@@ -83,8 +84,6 @@ INSERT INTO category_field(category_id, is_option,category_field_name) VALUES ('
 INSERT INTO category_field_option(category_field_id, category_field_option_name) VALUES ('1','T-shirt'),
                                                                                  ('1','Jeans'),
                                                                                  ('1','Dress'),
-                                                                                 ('1', 'T-shirt'),
-                                                                                        ('1', 'Jeans'),
                                                                                         ('1', 'Dress'),
                                                                                         ('1', 'Blouse'),
                                                                                         ('1', 'Sweater'),
@@ -155,8 +154,129 @@ INSERT INTO request(id, created_by, location_id, category_id, item, item_detail,
  ('01HHV1H3RCJYR25XJWX37NPCQJ', '01HHZYNJ8DRPKVRT1YY0Z9TRHN',1, 2, 'ANIME HEROES - One Piece - Monkey D. Luffy Renewal Version Action Figure',
  '{"size": "S", "color": "blue", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.amazon.com/ANIME-HEROES-Monkey-Renewal-Version/dp/B0CCXQ9H1W/ref=sr_1_2?keywords=luffy%2Bfigure&qid=1702895497&sr=8-2&th=1', 1,
  'Set Sail with your favorite pirates - Luffy is renewed! \n Luffy, Captain of the Straw Hat pirates, has set out to be the King of the Pirates and find the One Piece. Luffy goes on adventures aiding those in need and collecting more friends and members for his crew along the way. \n Luffy has increased his bounty with every adventure, saved cities, eaten lots of food, and encountered endless foes who never seem to be able to beat Captain Luffy and his crew Manga Inspired Packaging - Each Anime Heroes line has manga inspired packaging and beautiful artwork on the front featuring the characters you know and love Endless Play \n - Each figure come with 2 sets of interchangeable hands, character specific accessories, and 20+ points of articulation to pose and play in endless ways Collect them all - Bandai Namco Toys & Collectibles America has a full line-up of One Piece action figures for you to show off your fandom and collect your favorite characters Impressive Likeness - Each figure comes with detailed sculpt and true to show features that Anime Heroes action figures are known for',
- 1900, true, false, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71Hf77Rs3DL._AC_SL1500_.jpg');
--- 01HHV1H3RCJYR25XJWX37NPCQJ has offer
+ 1900, true, false, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71Hf77Rs3DL._AC_SL1500_.jpg'),
+ -- 01HHV1H3RCJYR25XJWX37NPCQJ has offer
+('01HJQ5B9XR4GMD6NQ5JP1XTB1W', '01HHZZ015SVZVDH4XTZCYCJMW0',1, 1, '男子法國毛圈運動衫',
+  '{"size": "S", "color": "Black", "gender": "Men", "apparelType": "Jeans"}',
+   'https://www.nike.com.hk/product/BV2667-010/detail.htm?pdpRecommend=false&preSkuCode=',
+    3, 'Nike Sportswear Club \n 男子法國毛圈運動衫為經典款式帶來極致柔軟舒適的穿著體驗。\n 設計舒適耐穿，任何時候都是你的理想之選。',
+     1899, false, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://static.nike.com.hk/resources/product/BV2667-010/BV2667-010_BL1.png'),
+('01HJQ5KE1CR86B8FK8AS2S1Z7V', '01HHZZ015SVZVDH4XTZCYCJMW0',1, 1, '男子訓練連帽衫',
+    '{"size": "S", "color": "Black", "gender": "Men", "apparelType": "Jeans"}',
+     'https://www.nike.com.hk/product/DQ4845-063/detail.htm?pdpRecommend=false&preSkuCode=',
+      3, '穿上 Nike Therma-FIT \n 男子訓練連帽衫，在寒冷天氣下訓練亦能火力全開。\n 超柔軟毛絨極致舒適，將日常運動提升至另一層次。\n 休閒設計讓你可盡情伸展和舉重，不受拘束。',
+       999, false, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://static.nike.com.hk/resources/product/DQ4845-063/DQ4845-063_BL1.png'),
+('01HJQ5WJXABCNR9TYG8E7Q5Y8S', '01HHZZ015SVZVDH4XTZCYCJMW0',1, 1, 'Therma-FIT ADV 男子全拉鍊式連帽衫',
+    '{"size": "S", "color": "Black", "gender": "Men", "apparelType": "Jeans"}',
+     'https://www.nike.com.hk/product/FB7414-060/detail.htm?pdpRecommend=false&preSkuCode=',
+      3, 'Nike Forward Windrunner Therma-FIT ADV 男子全拉鍊式連帽衫將經典運動衫帶往未來。\n 與傳統針織物料有所不同，Nike Forward 結合多層輕薄精選纖維，打造出色輕盈著感，保暖又舒適。\n 此外，Nike Forward 取代傳統針織毛絨物料，有助減少碳足跡（因為使用再生物料，可減少過程中的能源消耗和降低物料密度）。\n 輕盈邁步，照亮未來。 加入 Forward 之旅。',
+       999, false, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://static.nike.com.hk/resources/product/FB7414-060/FB7414-060_BL1.png'),
+('01HJQ60GMKWWK9JPS6X550CTNQ', '01HHZZ015SVZVDH4XTZCYCJMW0',1, 1, '女子毛絨籃球連帽衫',
+  '{"size": "S", "color": "Gray", "gender": "Women", "apparelType": "Jeans"}',
+   'https://www.nike.com.hk/product/FJ4450-091/detail.htm?pdpRecommend=false&preSkuCode=',
+    3, '不論是如 Sabrina Ionescu 般在場上磨練球技，還是在場外放鬆心情，這個中性設計的專屬系列將是你的最佳選擇。\n Sabrina 女子毛絨籃球連帽衫帶休閒剪裁，中磅毛絨物料經磨毛處理，柔軟舒適。\n 你到處走動，但你的抽繩毋須走位。 將抽繩鎖定至理想長度，並收在標誌布章後，讓你靈活展伸，不受任何阻礙。',
+     1899, false, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://static.nike.com.hk/resources/product/FJ4450-091/FJ4450-091_BL1.png'),
+('01HJQ65F3JNEBA275XY9GZ6JJH', '01HHZZ015SVZVDH4XTZCYCJMW0',1, 1, 'NOCTA 女子毛絨連帽衫',
+  '{"size": "S", "color": "Gray", "gender": "Women", "apparelType": "Jeans"}',
+   'https://www.nike.com.hk/product/fair/WIzp85PL.htm?pdpRecommend=false&preSkuCode=',
+    3, 'NOCTA 女子毛絨連帽衫為你的日常穿著時尚升級。\n 柔軟紋理毛絨助你全日保持舒適，無論晝夜都壯態大勇。',
+     3899, false, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://static.nike.com.hk/resources/product/DV3646-410/DV3646-410_BL1.png'),
+('01HJQ81X93KRJMB725J0VXGMQ5', '01HHZZ015SVZVDH4XTZCYCJMW0',1, 1, 'NIKE THERMA-FIT ONE 女子超寬鬆全拉鍊式毛絨連帽衫',
+  '{"size": "S", "color": "Purple", "gender": "Women", "apparelType": "Hoodie"}',
+   'https://www.nike.com.hk/product/FB5639-536/detail.htm?pdpRecommend=false&preSkuCode=',
+    3, '穿上 Nike Therma-FIT One 女子超寬鬆全拉鍊式毛絨連帽衫，倍感舒適。\n 極致柔軟的輕盈毛絨經雙面磨毛處理，帶來毛茸茸的舒適感，讓你在寒冷日子健身後和放鬆時，都能感覺自己裹在最愛的被子裡。\n 採用保暖技術及帶抽繩連帽，助你在健身征途上保持溫暖。',
+     2899, false, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://static.nike.com.hk/resources/product/FB5639-536/FB5639-536_BL1.png'),
+('01HJQ8EVMV005GVFQTR0TKBR4V', '01HHZZ015SVZVDH4XTZCYCJMW0',1, 1, 'NIKE THERMA-FIT ONE 女子超寬鬆全拉鍊式毛絨連帽衫',
+  '{"size": "S", "color": "Purple", "gender": "Women", "apparelType": "Hoodie", "brand": "Nike"}',
+   'https://www.nike.com.hk/product/DQ5861-716/detail.htm?pdpRecommend=false&preSkuCode=',
+    3, '穿上 Nike Therma-FIT One 女子超寬鬆全拉鍊式毛絨連帽衫，倍感舒適。\n 極致柔軟的輕盈毛絨經雙面磨毛處理，帶來毛茸茸的舒適感，讓你在寒冷日子健身後和放鬆時，都能感覺自己裹在最愛的被子裡。\n 採用保暖技術及帶抽繩連帽，助你在健身征途上保持溫暖。',
+     2899, false, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://static.nike.com.hk/resources/product/DQ5861-716/DQ5861-716_BL1.png'),
+('01HJQ9E73JQ2PNK7PXD8W8B9YM', '01HHAWPJ6068YT0685RZ5AY3XF',3, 2, 'PG UNLEASHED 1/60 RX-78-2 GUNDAM (2024 JAN RESALE VER.) 機動戰士 高達 元祖',
+null, 'https://en.up-next.com.hk/collections/figures/products/pg-unleashed-1-60-rx-78-2-gundam-2024-jan-resale-ver',
+1, '❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗\n - Pre-order Deadline: 28/12/2023 - Release Date: End of 01/2024 ❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗\n The ultimate GunPla building experience that encapsulates 40 years of GunPla has arrived! \nSince the first GunPla released in 1980, new experimental methods of assembly and part molding have been continuously developed leading to this Gundam PG Unleashed 1/60 RX-78-2 Gundam model kit, the culmination of the GunPla Evolution Project started in 2015 to set new standards in model kits.',
+1900, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://en.up-next.com.hk/cdn/shop/files/1_cc66f8f0-1c51-4ce0-9d06-e90209cc92c5_1024x1024.jpg?v=1702974120'),
+('01HJQ9YWA68GDTZKYSVNGNYM65', '01HHAWPJ6068YT0685RZ5AY3XF',3, 2, 'S.H.FIGUARTS MAKIMA 鏈鋸人 電鋸人 真紀真 瑪奇瑪 SHF',
+null, 'https://en.up-next.com.hk/collections/figures/products/s-h-figuarts-makima',
+1, '■ Product Specification - Height: approx. 140 mm - Material: PVC, ABS, cloth \n ■ Set Content - Main body - Interchangeable expression  x 4 - Interchangeable hands (left x 5; right x 6) - Interchangeable paired hands - Interchangeable feet - Cloth coat',
+700, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://en.up-next.com.hk/cdn/shop/files/Layer2_990e6937-0c23-415a-8111-4a3539917641_1024x1024.jpg?v=1702958471'),
+('01HJQA2WDSDFVGXSYSGQ95ZJGV', '01HHAWPJ6068YT0685RZ5AY3XF',3, 2, 'ONE PIECE SPARKLING CLIP WANO COUNTRY EDITION (BOX OF 24 PACKS) 海賊王',
+null, 'https://en.up-next.com.hk/collections/figures/products/s-h-figuarts-makima',
+1, '❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗ - Pre-order Deadline: 17/12/2023 - Release Date: End of 02/2024 ❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗ \n One Piece Sparkling Clip Wano Country Edition is available! ■ Product Specification - Size (each): approx. 35 × 35 × 13 mm - Material: PS, PET, M - A box of 24 packs ■ Set Content (per pack) - Clip x 1 (randomly picked from 12 kinds)',
+700, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://en.up-next.com.hk/cdn/shop/files/1_df40d6b7-9822-46a0-a6b6-2e0d5c34bb75_1024x1024.jpg?v=1702448630'),
+('01HJQABKG3P5RS5CBW6YE2BTMW', '01HHAWPJ6068YT0685RZ5AY3XF',3, 2, 'G.E.M. SERIES ONE PIECE SABO RUN！RUN！RUN！ 海賊王 薩波',
+null, 'https://en.up-next.com.hk/collections/figures/products/g-e-m-series-one-piece-sabo-run-run-run',
+1, '❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗ - Pre-order Deadline: 20/12/2023 - Release Date: End of 06/2024 ❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗ ❗\n From "One Piece'', Sabo joins the MegaHouse''s ''G.E.M.'' series! ■ Product Specification - Height: approx. 125 mm',
+700, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://en.up-next.com.hk/cdn/shop/files/Layer2_033064ca-43ff-4a83-b8d6-38b14a3261a4_1024x1024.jpg?v=1702437384'),
+('01HJQAGA1JSHKR94A8HSJGCCV6', '01HHAWPJ6068YT0685RZ5AY3XF',3, 2, 'FIGUARTSZERO [EXTRA BATTLE] SASUKE UCHIHA-THE LIGHT & DARK OF THE MANGEKYO SHARINGAN- 火影忍者 疾風傳 內輪佐助 宇智波佐助',
+null, 'https://en.up-next.com.hk/collections/figures/products/figuartszero-extra-battle-sasuke-uchiha-the-light-dark-of-the-mangekyo-sharingan',
+1, 'Figuarts ZERO Sasuke Uchiha -The Light & Dark of the Mangekyo Sharingan- is available! \n From the 356th episode of the "Naruto Shippuden" TV anime, the scene of Sasuke against with Itachi is reproduced in a lively pose! \n ■ Product Specification - Height: approx. 200 mm - Material: PVC, ABS \n ■ Set Content - Main body (including effects)',
+700, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://en.up-next.com.hk/cdn/shop/files/0_cee717d2-50e0-4ba4-8179-cd0bc6d96904_1024x1024.jpg?v=1701828028')
+,
+('01HJQAQM04W7VHQJ7HS2QS1AJP', '01HHAWPJ6068YT0685RZ5AY3XF',3, 2, 'FiguartsZERO [EXTRA BATTLE] ITACHI UCHIHA-The Light & Dark of the Mangekyo Sharingan- 火影忍者 疾風傳 宇智波鼬 內輪鼬太知',
+null, 'https://en.up-next.com.hk/collections/figures/products/figuartszero-extra-battle-itachi-uchiha-the-light-dark-of-the-mangekyo-sharingan',
+1, 'Figuarts ZERO Sasuke Uchiha -The Light & Dark of the Mangekyo Sharingan- is available! \n From the 356th episode of the "Naruto Shippuden" TV anime, the scene of Sasuke against with Itachi is reproduced in a lively pose! \n ■ Product Specification - Height: approx. 200 mm - Material: PVC, ABS \n ■ Set Content - Main body (including effects)',
+700, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://en.up-next.com.hk/cdn/shop/files/1_e31158e2-b39b-48a7-9a24-b66db4677fbe_1024x1024.jpg?v=1701828117')
+,
+('01HJQB2BPC4P97X5PGW6VSED6W', '01HHAWPJ6068YT0685RZ5AY3XF',3, 2, 'SOUL OF CHOGOKIN GX-107 GURREN LAGANN 超合金魂 天元突破 紅蓮螺巖 大迴旋巨鑽',
+null, 'https://en.up-next.com.hk/collections/figures/products/soul-of-chogokin-gx-107-gurren-lagann',
+1, 'Figuarts ZERO Sasuke Uchiha -The Light & Dark of the Mangekyo Sharingan- is available! \n From the 356th episode of the "Naruto Shippuden" TV anime, the scene of Sasuke against with Itachi is reproduced in a lively pose! \n ■ Product Specification - Height: approx. 200 mm - Material: PVC, ABS \n ■ Set Content - Main body (including effects)',
+600, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://en.up-next.com.hk/cdn/shop/files/0_d593fac8-ece8-449f-a09e-ef0936d59658_1024x1024.jpg?v=1700718174')
+,
+('01HJQB7J39YH390RDS74ZCAJVN', '01HHQ61P480SRGXG5130R22B53',3, 2, 'THE ROBOT SPIRITS RX-178 GUNDAM Mk-Ⅱ (TITANS) ver. A.N.I.M.E. 機動戰士 高達 MK2 泰坦斯',
+null, 'https://en.up-next.com.hk/collections/figures/products/the-robot-spirits-side-ms-rx-178-gundam-mk-titans-ver-a-n-i-m-e-mk2',
+1, 'Figuarts ZERO Sasuke Uchiha -The Light & Dark of the Mangekyo Sharingan- is available! \n From the 356th episode of the "Naruto Shippuden" TV anime, the scene of Sasuke against with Itachi is reproduced in a lively pose! \n ■ Product Specification - Height: approx. 200 mm - Material: PVC, ABS \n ■ Set Content - Main body (including effects)',
+4600, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://en.up-next.com.hk/cdn/shop/files/2_18912c6e-4aa4-4e08-960e-4e08fdb3d3c5_1024x1024.jpg?v=1700706824')
+,
+('01HJQBA5R79SDD1V1P78TKE4PD', '01HHAWPJ6068YT0685RZ5AY3XF',3, 2, 'S.H.Figuarts SUPER SAIYAN SON GOHAN-THE FIGHTER WHO SURPASSED GOKU- 龍珠 孫悟飯 撒亞人 SHF',
+null, 'https://en.up-next.com.hk/collections/figures/products/s-h-figuarts-super-saiyan-son-gohan-the-fighter-who-surpassed-goku',
+1, 'Figuarts ZERO Sasuke Uchiha -The Light & Dark of the Mangekyo Sharingan- is available! \n From the 356th episode of the "Naruto Shippuden" TV anime, the scene of Sasuke against with Itachi is reproduced in a lively pose! \n ■ Product Specification - Height: approx. 200 mm - Material: PVC, ABS \n ■ Set Content - Main body (including effects)',
+4600, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://en.up-next.com.hk/cdn/shop/files/1_ab890cf5-c5d4-4249-b567-fa2119ffbf0f_1024x1024.jpg?v=1700645582')
+,
+('01HJQJ1PPRS532F2N7CPCX5XJ6', '01HHQ61P480SRGXG5130R22B53',1, 3, 'Classic Cupsole Speckled Shoes - Calvin Klein Footwear',
+null, 'https://www.zalora.com.hk/p/calvin-klein-classic-cupsole-speckled-shoes-calvin-klein-footwear-6555895',
+1, 'Product Details - Speckled detail lace up shoes \n - Recycled polyester and polyurethane upper\n - Textile inner - Rubber outsole - Lace up fastening',
+4600, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://dynamic.zacdn.com/gq6WeCogGdqNifcshACYP89th7Q=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/calvin-klein-0019-5985556-3.jpg')
+,
+('01HJQJBY8T9KF8M7A2XK8W0TB3', '01HHQ61P480SRGXG5130R22B53',1, 3, 'FABRE EX - Onitsuka Tiger Footwear',
+null, 'https://www.zalora.com.hk/p/onitsuka-tiger-fabre-ex-5756328',
+1, 'Product Details - The FABRE™ EX shoe \n - Iconic classic FABRE basketball shoes - Features clean embroidery stripes \n - L-SPEVA midsole and high grip “NCI rubber” outer sole',
+3600, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://dynamic.zacdn.com/kmaXk9k0J1xu7tONaQ9qmG3EKro=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/onitsuka-tiger-4925-8236575-1.jpg')
+,
+('01HJQJVPAK45S1BHPRWPRN3N6F', '01HHQ61P480SRGXG5130R22B53',1, 3, 'VANS Old Skool Color Theory Sneakers',
+null, 'https://www.zalora.com.hk/p/vans-old-skool-color-theory-sneakers-6539384',
+1, 'Product Details - The FABRE™ EX shoe \n - Iconic classic FABRE basketball shoes - Features clean embroidery stripes \n - L-SPEVA midsole and high grip “NCI rubber” outer sole',
+3600, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://dynamic.zacdn.com/Mfctrln0_tOd7Qqb8em0HU4rPEA=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/vans-8049-4839356-1.jpg')
+,
+('01HJQJYANHBJP2CWD721C5J5KP', '01HHAWPJ6068YT0685RZ5AY3XF',1, 3, 'VANS Old Skool Color Theory Sneakers',
+null, 'https://www.zalora.com.hk/p/vans-old-skool-pastel-picnic-sneakers-6417774',
+1, 'Product Details - The FABRE™ EX shoe \n - Iconic classic FABRE basketball shoes - Features clean embroidery stripes \n - L-SPEVA midsole and high grip “NCI rubber” outer sole',
+4600, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://dynamic.zacdn.com/Ev83QwEW1UTnxdZ-9bcebHkONH0=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/vans-8435-4777146-1.jpg')
+,
+('01HJQK0YZH9QGJWT9G2B2A1M9H', '01HHZZ015SVZVDH4XTZCYCJMW0',1, 3, 'Converse Chuck Taylor All Star Move Hi Sneakers',
+null, 'https://www.zalora.com.hk/p/converse-chuck-taylor-all-star-move-hi-sneakers-6439705',
+1, 'Product Details - The FABRE™ EX shoe \n - Iconic classic FABRE basketball shoes - Features clean embroidery stripes \n - L-SPEVA midsole and high grip “NCI rubber” outer sole',
+4600, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://dynamic.zacdn.com/NSw6QLI37tw0C40kgQbpCGOBrRw=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/converse-4464-5079346-1.jpg')
+,
+('01HJQK2WN05Y0HTF816064965J', '01HHZZ015SVZVDH4XTZCYCJMW0',1, 3, 'PUMA Suede Fat Lace Sneakers',
+null, 'https://www.zalora.com.hk/p/puma-suede-fat-lace-sneakers-6489031',
+1, 'Product Details - The FABRE™ EX shoe \n - Iconic classic FABRE basketball shoes - Features clean embroidery stripes \n - L-SPEVA midsole and high grip “NCI rubber” outer sole',
+4600, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://dynamic.zacdn.com/3wenNJP38uoZH0GGNpj5puPKmVk=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/puma-6990-1309846-1.jpg')
+,
+('01HJQK52S123F1F6EQPGPSD4JY', '01HHZZ015SVZVDH4XTZCYCJMW0',1, 3, 'ADIDAS Adult UNISEX SWIFT RUN SPORTS SHOES SNEAKERS',
+null, 'https://www.zalora.com.hk/p/adidas-adult-unisex-swift-run-sports-shoes-sneakers-6302548',
+1, 'Product Details - The FABRE™ EX shoe \n - Iconic classic FABRE basketball shoes - Features clean embroidery stripes \n - L-SPEVA midsole and high grip “NCI rubber” outer sole',
+4600, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://dynamic.zacdn.com/8GU35andmQ4PD3KVvQ_zVwrLH1M=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/adidas-7178-8452036-1.jpg')
+,
+('01HJQK73PET7DHTQ2G86FDG87D', '01HHZZ015SVZVDH4XTZCYCJMW0',1, 3, '361° Basketball Men''s Professional Shoes',
+null, 'https://www.zalora.com.hk/p/adidas-adult-unisex-swift-run-sports-shoes-sneakers-6302548',
+1, 'Product Details - The FABRE™ EX shoe \n - Iconic classic FABRE basketball shoes - Features clean embroidery stripes \n - L-SPEVA midsole and high grip “NCI rubber” outer sole',
+4600, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://dynamic.zacdn.com/SQzeReMLEb-S0aG8qaTeiU6g09Y=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/361-5261-8115446-1.jpg')
+,
+('01HJQKDRHSKW4AB740KTS8MSED', '01HHZZ015SVZVDH4XTZCYCJMW0',1, 3, '361° Basketball Men''s Professional Shoes',
+null, 'https://www.zalora.com.hk/p/adidas-adult-unisex-swift-run-sports-shoes-sneakers-6302548',
+1, 'Product Details - The FABRE™ EX shoe \n - Iconic classic FABRE basketball shoes - Features clean embroidery stripes \n - L-SPEVA midsole and high grip “NCI rubber” outer sole',
+4600, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://dynamic.zacdn.com/8GU35andmQ4PD3KVvQ_zVwrLH1M=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/adidas-7178-8452036-1.jpg')
+;
 
 INSERT INTO user_address(user_id, address, is_primary) VALUES
  ('01HHMV7DKG4Z9JNT1P8DESHW8X','13/f, 11 kennedy Road',true),

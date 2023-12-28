@@ -1,11 +1,13 @@
 package com.linkmart.dtos;
 
+import java.math.BigDecimal;
+
 public class ProviderDashboardDto {
 
     private Float averageEfficiency;
     private Float averageAttitude;
     private Integer reviewCount;
-    private Float balance;
+    private Integer balance;
     private Integer offerCount;
     private Integer activeTaskCount;
     private Integer completedTaskCount;
@@ -43,11 +45,11 @@ public class ProviderDashboardDto {
         this.reviewCount = reviewCount;
     }
 
-    public Float getBalance() {
+    public Integer getBalance() {
         return balance;
     }
 
-    public void setBalance(Float balance) {
+    public void setBalance(Integer balance) {
         this.balance = balance;
     }
 

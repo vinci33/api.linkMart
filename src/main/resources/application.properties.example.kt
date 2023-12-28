@@ -12,5 +12,7 @@ spring.flyway.cleanDisabled=true
 server.error.include-message=always
 server.error.include-stacktra
 
+aws.s3.accessKey=
+aws.s3.secretKey=
 
 jwt.secret=

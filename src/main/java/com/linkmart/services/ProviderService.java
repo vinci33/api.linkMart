@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -246,7 +247,7 @@ public class ProviderService {
             logger.info("numberOfActiveTask: " + numberOfActiveTask);
             Integer numberOfTaskCompleted = orderRepository.getCompletedOrderByProviderId(providerId);
             logger.info("numberOfTaskCompleted: " + numberOfTaskCompleted);
-            Float balance = orderRepository.calculateBalanceByProviderId(providerId);
+            Integer balance = orderRepository.calculateBalanceByProviderId(providerId);
             ProviderDashboardDto DashBoard = new ProviderDashboardDto();
             DashBoard.setAverageAttitude(provider.getStarOfAttitude());
             DashBoard.setAverageEfficiency(provider.getStarOfEfficiency());

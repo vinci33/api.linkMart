@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -190,7 +191,7 @@ public interface OrdersRepository extends JpaRepository<Orders, String> {
             WHERE Offer.provider_id = :providerId
             AND Orders.order_status_id = 4 OR Orders.order_status_id = 6
             """, nativeQuery = true)
-    Float calculateBalanceByProviderId(@Param("providerId") String providerId);
+    Integer calculateBalanceByProviderId(@Param("providerId") String providerId);
 
     @Query(value = """
             SELECT

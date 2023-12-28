@@ -108,6 +108,4 @@ CREATE TABLE image (
     updated_at TIMESTAMP default NOW()
 );
 
-
-
 COMMIT;

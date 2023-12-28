@@ -124,7 +124,7 @@ public class OrdersService {
 
     }
 
-    public void updateOrderShippingOrderId( String orderId, Integer logisticCompanyId, String shippingOrderNo, MultipartFile file) {
+    public void updateOrderShippingOrderId(String orderId, Integer logisticCompanyId, String shippingOrderNo, MultipartFile file) {
         Orders order = (Orders)ordersRepository.findOrdersById(orderId);
         if (order == null) {
             throw new IllegalArgumentException("Order not found");
@@ -132,7 +132,7 @@ public class OrdersService {
         order.setOrderStatusId(3);
         order.setLogisticCompanyId(logisticCompanyId);
         order.setShippingOrderNo(shippingOrderNo);
-        String orderProof = s3Service.uploadFile(file);
+        String orderProof = s3Service.uploadShipmentFile(file);
         order.setShipmentProof(orderProof);
         ordersRepository.saveAndFlush(order);
     }

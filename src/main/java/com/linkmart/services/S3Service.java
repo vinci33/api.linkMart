@@ -34,4 +34,20 @@ public class S3Service {
             );
         }
     }
+    public String uploadShipmentFile(MultipartFile file) {
+        try {
+            var path = "profiles/shipment" + System.currentTimeMillis() + "." +
+                    StringUtils.getFilenameExtension(file.getOriginalFilename());
+            this.s3Client.putObject("cdn.linkmart.com", path,
+                    file.getInputStream(),
+                    new ObjectMetadata());
+            return "http://cdn.linkmart.com.s3-website-ap-southeast-1.amazonaws.com/"+ path;
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Failed to upload file"
+            );
+        }
+    }
 }
