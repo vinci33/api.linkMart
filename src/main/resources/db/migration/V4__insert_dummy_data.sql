@@ -1,11 +1,11 @@
-INSERT INTO users(id,username,user_email,password) VALUES('01HHP4GVCVN1P5FY8YYX9YXKN8','Chris','testingForUser@gmail.com', '$2a$10$aDHsi/qQBce4WL8IoPSjQ.IBYXgG8MJpZBBGyQ2H1oFJLufkTsfPW');
+INSERT INTO users(id,username,user_email,password) VALUES('01HHP4GVCVN1P5FY8YYX9YXKN8','老貓再世','testingForUser@gmail.com', '$2a$10$aDHsi/qQBce4WL8IoPSjQ.IBYXgG8MJpZBBGyQ2H1oFJLufkTsfPW');
 --JWT:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhZG1pbiIsInVzZXJJZCI6IjAxSEhQNEdWQ1ZOMVA1Rlk4WVlYOVlYS044IiwiaWF0IjoxNzAyOTUxNjI2LCJleHAiOjE3MDQyNjc3NjF9.q27M8jcjuRgy4pDhJ7I1gjs05AM0OVdYl5Eqmt7gosY
 --pw: "123"
-INSERT INTO users(id,username,user_email,password) VALUES('01HHAWPJ6068YT0685RZ5AY3XF','Ben','test@gmail.com','$2a$10$xoRl/KKuoriNmgsoZwsrMOwm.5I02Wr/apjqn6hIpI0fhanUBMEwS');
-INSERT INTO users(id,username,user_email,password) VALUES('01HHQ61P480SRGXG5130R22B53','Alex','testingForUser2@gmail.com','$2a$10$aDHsi/qQBce4WL8IoPSjQ.IBYXgG8MJpZBBGyQ2H1oFJLufkTsfPW');
+INSERT INTO users(id,username,user_email,password) VALUES('01HHAWPJ6068YT0685RZ5AY3XF','字我贏公你輸','test@gmail.com','$2a$10$xoRl/KKuoriNmgsoZwsrMOwm.5I02Wr/apjqn6hIpI0fhanUBMEwS');
+INSERT INTO users(id,username,user_email,password) VALUES('01HHQ61P480SRGXG5130R22B53','兔氣揚眉','testingForUser2@gmail.com','$2a$10$aDHsi/qQBce4WL8IoPSjQ.IBYXgG8MJpZBBGyQ2H1oFJLufkTsfPW');
 --JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhZG1pbiIsInVzZXJJZCI6IjAxSEhRNjFQNDgwU1JHWEc1MTMwUjIyQjUzIiwiaWF0IjoxNzAyOTUxNjM5LCJleHAiOjE3MDQyNjc3NzR9.-4G3ChpYL1nueUDyoNIqtFfYMPHusyj8BjGAS6neo4A
 --pw: "123"
-INSERT INTO users(id,username,user_email,password) VALUES('01HHZYNJ8DRPKVRT1YY0Z9TRHN','Fredy','fredy@user.com','$2a$10$aDHsi/qQBce4WL8IoPSjQ.IBYXgG8MJpZBBGyQ2H1oFJLufkTsfPW');
+INSERT INTO users(id,username,user_email,password) VALUES('01HHZYNJ8DRPKVRT1YY0Z9TRHN','連登Fredy','fredy@user.com','$2a$10$aDHsi/qQBce4WL8IoPSjQ.IBYXgG8MJpZBBGyQ2H1oFJLufkTsfPW');
 --JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhZG1pbiIsInVzZXJJZCI6IjAxSEhaWU5KOERSUEtWUlQxWVkwWjlUUkhOIiwiaWF0IjoxNzAyOTU1NjYyLCJleHAiOjE3MDQyNzE3OTZ9.vaWwQnGff24gRZNuhRGfVkLenk3P8VTa8GUQkSaAFw4
 --pw: "123"
 INSERT INTO users(id,username,user_email,password) VALUES('01HHZYZJMQT1F9SF92P0WCHDNJ','FredyProvider','fredy@provider.com','$2a$10$aDHsi/qQBce4WL8IoPSjQ.IBYXgG8MJpZBBGyQ2H1oFJLufkTsfPW');
@@ -18,11 +18,13 @@ INSERT INTO users(id,username,user_email,password) VALUES('01HHZYZY2PSD07ZQS50FC
 --JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhZG1pbiIsInVzZXJJZCI6IjAxSEhaWVpZMlBTRDA3WlFTNTBGQzJEMzNFIiwiaWF0IjoxNzAyOTUzODMwLCJleHAiOjE3MDQyNjk5NjV9.k_XlzXqhvXdIMBwAWaF0MUNLdRPJ7IhIW-4WeJQyAqw
 --pw: "123"
 
-INSERT INTO users(id,username,user_email,password) VALUES('01HHZZ015SVZVDH4XTZCYCJMW0','Nic','nic@gmail.com','$2a$10$aDHsi/qQBce4WL8IoPSjQ.IBYXgG8MJpZBBGyQ2H1oFJLufkTsfPW');
+INSERT INTO users(id,username,user_email,password) VALUES('01HHZZ015SVZVDH4XTZCYCJMW0','連登Sis','lihkgsis@gmail.com','$2a$10$aDHsi/qQBce4WL8IoPSjQ.IBYXgG8MJpZBBGyQ2H1oFJLufkTsfPW');
 --JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhZG1pbiIsInVzZXJJZCI6IjAxSEhaWjAxNVNWWlZESDRYVFpDWUNKTVcwIiwiaWF0IjoxNzAyOTUzODQ5LCJleHAiOjE3MDQyNjk5ODR9.HyEZdN1_402M8UlRmZjXnVI7tIMdNcHp9EibLihk-Qo
 --pw: "123"
 
 INSERT INTO users(id,username,user_email,password) VALUES('01HJQZJTFE9RFC380RYZDM101T','NicProvider','nic@provider.com','$2a$10$aDHsi/qQBce4WL8IoPSjQ.IBYXgG8MJpZBBGyQ2H1oFJLufkTsfPW');
+
+INSERT INTO users(id,username,user_email,password) VALUES('01HJRD77K54V6N5GZ6DE4DBGE0','閉傢伙玩大咗','lihkg2@provider.com','$2a$10$aDHsi/qQBce4WL8IoPSjQ.IBYXgG8MJpZBBGyQ2H1oFJLufkTsfPW');
 
 
 INSERT INTO status(status_name) VALUES ('pending'),('in-progress'),('aborted'),('rejected'),('completed'),('open'),('closed'),('accepted');
@@ -126,28 +128,28 @@ INSERT INTO request(id, created_by, location_id, category_id, item, item_detail,
  ('01HHKFYXSSTKGTSGJ4TPMC096E','01HHQ61P480SRGXG5130R22B53', 3, 1, 'MEN 2WAY SINGLE BREASTED COAT', '{"size": "M", "color": "Black", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.uniqlo.com.hk/zh_HK/product-detail.html?productCode=u0000000028366', 1, 'MEN 2WAY SINGLE BREASTED COAT', 900, FALSE, true, '2023-12-12 20:20:17.367665', '2023-12-12 20:20:17.367665', 'https://www.uniqlo.com.hk/hmall/test/u0000000028366/main/other2/480/3.jpg'),
  ('01HHKFYXSV27CNWMTV5QDDFWCB', '01HHQ61P480SRGXG5130R22B53',3, 2, 'LX Luffy Figure Decoration Statue Figurine Model Toy Gift', null, 'https://www.amazon.com/YOUNAI-Action-Figure-Decoration-Figurine/dp/B0BR9YDRPS/ref=sr_1_1_sspa?keywords=luffy+figure&qid=1702895497&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1', 1, 'YOUNAI Anime Action Figure, LX Luffy Figure Decoration Statue Figurine Model Toy Gift', 1900, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/71CWSymDYJL._AC_SL1500_.jpg'),
  ('01HJ0A6HM4RKRA69S9DHJKC5AY', '01HHZYZTY556HJ3C8YD8GHHP1Y',5, 1, '穿孔飾片連身裙', '{"size": "S", "color": "Black", "gender": "Women", "apparelType": "Dress"}', 'https://hk.louisvuitton.com/zht-hk/products/eyelet-tab-dress-nvprod4940317v/1AFGEC', 1, '主要面料：95%棉質，5%彈性纖維\n黑色標準版型\n意大利製造', 16500, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://hk.louisvuitton.com/images/is/image/lv/1/PP_VP_L/%E8%B7%AF%E6%98%93%E5%A8%81%E7%99%BB-%E7%A9%BF%E5%AD%94%E9%A3%BE%E7%89%87%E9%80%A3%E8%BA%AB%E8%A3%99-%E6%99%82%E8%A3%9D%E7%B3%BB%E5%88%97--FQJD12GXW900_PM1_Cropped%20worn%20view.png?wid=1440&hei=1440'),
- ('01HJ0P24F0S4GP1MTESN4CQAH8', '01HHZYZTY556HJ3C8YD8GHHP1Y',5, 1, '穿孔飾片連身裙', '{"size": "S", "color": "Black", "gender": "Women", "apparelType": "Dress"}', 'https://hk.louisvuitton.com/zht-hk/products/long-sleeved-tiered-dress-nvprod4940305v/1AFGAL', 1, '主要面料：95%棉質，5%彈性纖維\n黑色標準版型\n意大利製造', 16500, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://hk.louisvuitton.com/images/is/image/lv/1/PP_VP_L/%E8%B7%AF%E6%98%93%E5%A8%81%E7%99%BB-%E9%95%B7%E8%A2%96%E5%B1%A4%E6%AC%A1%E9%80%A3%E8%BA%AB%E8%A3%99-%E6%99%82%E8%A3%9D%E7%B3%BB%E5%88%97--FQDR36AKM900_PM1_Ambiance%20view.png?wid=1440&hei=1440'),
- ('01HJ0P7HJTBSN5TZ91035BT3TZ', '01HHZYZTY556HJ3C8YD8GHHP1Y',5, 1, '連身裙', '{"size": "S", "color": "Black", "gender": "Women", "apparelType": "Dress"}', 'https://www.chanel.com/hk-zh/fashion/p/P76290V68068NS941/dress-glittered-cotton-tweed/', 1, '閃亮棉質斜紋\n軟呢白及多色', 79400, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://www.chanel.com/images//t_one///q_auto:good,f_auto,fl_lossy,dpr_1.1/w_1240/dress-white-multicolor-glittered-cotton-tweed-glittered-cotton-tweed-packshot-alternative-p76290v68068ns941-9535823020062.jpg'),
+ ('01HJ0P24F0S4GP1MTESN4CQAH8', '01HHZYZTY556HJ3C8YD8GHHP1Y',5, 1, 'LV 連身裙', '{"size": "S", "color": "Black", "gender": "Women", "apparelType": "Dress"}', 'https://hk.louisvuitton.com/zht-hk/products/long-sleeved-tiered-dress-nvprod4940305v/1AFGAL', 1, '主要面料：95%棉質，5%彈性纖維\n黑色標準版型\n意大利製造', 16500, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://hk.louisvuitton.com/images/is/image/lv/1/PP_VP_L/%E8%B7%AF%E6%98%93%E5%A8%81%E7%99%BB-%E9%95%B7%E8%A2%96%E5%B1%A4%E6%AC%A1%E9%80%A3%E8%BA%AB%E8%A3%99-%E6%99%82%E8%A3%9D%E7%B3%BB%E5%88%97--FQDR36AKM900_PM1_Ambiance%20view.png?wid=1440&hei=1440'),
+ ('01HJ0P7HJTBSN5TZ91035BT3TZ', '01HJQZJTFE9RFC380RYZDM101T',5, 1, '連身裙', '{"size": "S", "color": "Black", "gender": "Women", "apparelType": "Dress"}', 'https://www.chanel.com/hk-zh/fashion/p/P76290V68068NS941/dress-glittered-cotton-tweed/', 1, '閃亮棉質斜紋\n軟呢白及多色', 79400, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://www.chanel.com/images//t_one///q_auto:good,f_auto,fl_lossy,dpr_1.1/w_1240/dress-white-multicolor-glittered-cotton-tweed-glittered-cotton-tweed-packshot-alternative-p76290v68068ns941-9535823020062.jpg'),
  ('01HJ0PFDW43EWKV9B54CBKZKER', '01HHZYZJMQT1F9SF92P0WCHDNJ',1, 2, 'FINAL FANTASY VII BRING ARTS ACTION FIGURE - CLOUD STRIFE', null, 'https://na.store.square-enix-games.com/final-fantasy-vii-bring-arts-action-figure---cloud-strife', 1, 'FINAL FANTASY VII, are now joining the BRING ARTS Action Figure series, starting with the game’s iconic protagonist, Cloud Strife! This Figure comes with one exchange ticket to redeem digital certificate of authenticity.', 1900, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://cdn11.bigcommerce.com/s-6rs11v9w2d/images/stencil/1280x1280/products/2316/7699/FF7_BA_CLOUD_04__65226.1673464513.jpg?c=1'),
- ('01HJ0PJVWFPJ9KS3SYA0W6YTBR', '01HHZYZJMQT1F9SF92P0WCHDNJ',1, 2, 'FINAL FANTASY XVI BRING ARTS ACTION FIGURE - JOSHUA ROSFIELD', null, 'https://na.store.square-enix-games.com/final-fantasy-xvi-bring-arts-action-figure---joshua-rosfield', 1, 'A BRING ARTS Action Figure of Joshua Rosfield, the younger brother of Clive Rosfield, from FINAL FANTASY XVI.', 2000, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://cdn11.bigcommerce.com/s-6rs11v9w2d/images/stencil/1280x1280/products/3144/16397/JOSHUA_ROSFIELD_05__61897.1702518564.jpg?c=1'),
+ ('01HJ0PJVWFPJ9KS3SYA0W6YTBR', '01HJRD77K54V6N5GZ6DE4DBGE0',1, 2, 'FINAL FANTASY XVI BRING ARTS ACTION FIGURE - JOSHUA ROSFIELD', null, 'https://na.store.square-enix-games.com/final-fantasy-xvi-bring-arts-action-figure---joshua-rosfield', 1, 'A BRING ARTS Action Figure of Joshua Rosfield, the younger brother of Clive Rosfield, from FINAL FANTASY XVI.', 2000, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://cdn11.bigcommerce.com/s-6rs11v9w2d/images/stencil/1280x1280/products/3144/16397/JOSHUA_ROSFIELD_05__61897.1702518564.jpg?c=1'),
  ('01HJ0PSAES0318BGZP4AV2SMB2', '01HHZZ015SVZVDH4XTZCYCJMW0',3, 2, 'KINGDOM HEARTS III Knitted Plush KING MICKEY', null, 'https://na.store.square-enix-games.com/kingdom_hearts_iii_knitted_plush_king_mickey', 1, 'The KINGDOM HEARTS series Knitted Plush is here! Featuring KINGDOM HEARTS Knitted Plush King Mickey\n a soft plush toy made of fluffy yarn!', 700, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://cdn11.bigcommerce.com/s-6rs11v9w2d/images/stencil/1280x1280/products/3132/16353/KINGDOM_HEARTS_III__Knitted_Plush_-_KING_MICKEY_02__26333.1698956703.jpg?c=1'),
  ('01HJ0PV70HPFMH9F6ZVJK3FNVW', '01HHZZ015SVZVDH4XTZCYCJMW0',1, 2, 'FINAL FANTASY VII REMAKE Knitted Plush - RED XIII', null, 'https://na.store.square-enix-games.com/final_fantasy_vii_remake_knitted_plush_-_red_xiii', 1, 'Our next FINAL FANTASY Knitted Plush is here, featuring Red XIII as a soft plush toy made of fluffy yarn!', 1700, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://cdn11.bigcommerce.com/s-6rs11v9w2d/images/stencil/1280x1280/products/3133/16358/FINAL_FANTASY_VII_REMAKE__Knitted_Plush_-_RED_XIII_02__78830.1698956715.jpg?c=1'),
- ('01HJ2FTEGZPJ5MH7ZQNXHHAHY5', '01HHZZ015SVZVDH4XTZCYCJMW0',2, 1, 'Publish -Clue Coach Jacket', '{"size": "L", "color": "Black", "gender": "Men", "apparelType": "T-shirt"}', 'https://publishbypb.com/products/publishclue-coach-jacket?variant=41531991294084', 1, 'Features: \n 100% Cotton \n Oversize \n Fitting Side Pockets \n Publish Embroidery \n Signature Publish Patch', 1700, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://publishbypb.com/cdn/shop/files/L1060592_71b2e5ef-24b9-463b-aa85-000a86a99eae.jpg?v=1690803059&width=1600'),
+ ('01HJ2FTEGZPJ5MH7ZQNXHHAHY5', '01HJRD77K54V6N5GZ6DE4DBGE0',2, 1, 'Publish -Clue Coach Jacket', '{"size": "L", "color": "Black", "gender": "Men", "apparelType": "T-shirt"}', 'https://publishbypb.com/products/publishclue-coach-jacket?variant=41531991294084', 1, 'Features: \n 100% Cotton \n Oversize \n Fitting Side Pockets \n Publish Embroidery \n Signature Publish Patch', 1700, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://publishbypb.com/cdn/shop/files/L1060592_71b2e5ef-24b9-463b-aa85-000a86a99eae.jpg?v=1690803059&width=1600'),
  ('01HJ2FZR5WXW0PW2BZHCTZ2RNN', '01HHQ61P480SRGXG5130R22B53',3, 1, 'Special Ordered Supima Typewriter Round Hem Shirt', '{"size": "L", "color": "Black", "gender": "Men", "apparelType": "T-shirt"}', 'https://www.haku-clothing.com/zh_HK/%E7%94%B7%E8%A3%9D/black-friday-2023/all-sale-products/special-ordered-supima-typewriter-round-hem-shirt/14121.html?pid=14121&quantity=1&dwvar_14121_color=White&dwvar_14121_size=undefined', 1, '■Simple and unique special-ordered shirts The round hem shirt has been released in different materials each season and has been loved for a long time.This model is made of Supima super-long staple cotton, specially ordered by ROCOCO, haku-clothing parent brand. \n The high density of the weave gives it an appealing bounce and smoothness.It has a cool and refreshing feeling and can be worn smoothly.', 1700, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://www.haku-clothing.com/dw/image/v2/BFGX_PRD/on/demandware.static/-/Sites-storefront-catalog-haku_jp/default/dwfe73e386/images/14121_rc2.jpg?sw=1280'),
  ('01HJ2G3J4KWJ2AWBVC01XQDERZ', '01HHQ61P480SRGXG5130R22B53',4, 1, 'Top Grade New Autum Brand Fashion Knitwear Japanese Aesthetic Mens Cardigan Sweater Casual Coats Winter Jacket Men Clothing', '{"size": "L", "color": "Black", "gender": "Men", "apparelType": "T-shirt"}', 'https://fairynelf.com/products/top-grade-new-autum-brand-fashion-knitwear-japanese-aesthetic-mens-cardigan-sweater-casual-coats-winter-jacket-men-clothing', 1, 'Wool: Standard Wool\n Thickness: STANDARD\n Technics: Computer Knitted\n Style: Casual Sleeve\n Style: Regular Sleeve\n Length(cm): Full\n Pattern Type: Solid\n Origin: Mainland China\n Material: Polyester,Viscose,Spandex\n Item Type: Cardigan\n Hooded: No\n Gender: MEN', 1700, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://fairynelf.com/cdn/shop/files/H7e3a2833049c4ea7900adf4c0132db6eQ.jpg?v=1689092383'),
  ('01HJ2G8Q5PB9FJ9H71Y873CB44', '01HHZZ015SVZVDH4XTZCYCJMW0',3, 2, '鬼滅之刃 宇髄天元鬼滅之刃 宇髄天元', null, 'https://www.toyc.com.hk/products/demon-slayer-kimetsu-no-yaiba-vibration-stars-tengen-uzuimuichiro-tokito-atengen-uzui', 1, '《鬼滅之刃》中的宇髄天元於VIBRATION STARS系列推出景品！', 1700, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://shoplineimg.com/5eeb2f451a41360008357cc5/656a3f8c4cb105708b9601bf/2000x.webp?source_format=jpg'),
  ('01HJ2GCJ7Y78RJBQP0AJZYXYGR', '01HHZZ015SVZVDH4XTZCYCJMW0',3, 2, '鬼滅之刃 第三十彈 竈門禰豆子', null, 'https://www.toyc.com.hk/products/demon-slayer-kimetsu-no-yaiba-figure-vol30', 1, '彩盒尺寸(cm)：約 (長)12.00 × (闊)9.00 × (高)18.00 cm', 1700, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://shoplineimg.com/5eeb2f451a41360008357cc5/656a3f88602df8001764318f/800x.webp?source_format=jpg'),
- ('01HJ2GJA1YS8364FE6N4498B6W', '01HHZZ015SVZVDH4XTZCYCJMW0',3, 2, '咒術迴戰 呪魂之型 虎杖悠仁 第三彈', null, 'https://www.toyc.com.hk/products/jujutsu-kaisen-jukon-no-kata-yuji-itadorimei-mei-ayuji-itadori', 1, '彩盒尺寸(cm)：約 (長)12.00 × (闊)9.00 × (高)18.00 cm', 1700, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://shoplineimg.com/5eeb2f451a41360008357cc5/652067b03cb1d00020bf7897/800x.webp?source_format=jpg'),
+ ('01HJ2GJA1YS8364FE6N4498B6W', '01HJQZJTFE9RFC380RYZDM101T',3, 2, '咒術迴戰 呪魂之型 虎杖悠仁 第三彈', null, 'https://www.toyc.com.hk/products/jujutsu-kaisen-jukon-no-kata-yuji-itadorimei-mei-ayuji-itadori', 1, '彩盒尺寸(cm)：約 (長)12.00 × (闊)9.00 × (高)18.00 cm', 1700, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://shoplineimg.com/5eeb2f451a41360008357cc5/652067b03cb1d00020bf7897/800x.webp?source_format=jpg'),
  ('01HJ2GP73SDBRM0E95MJ8E2GRM', '01HHZZ015SVZVDH4XTZCYCJMW0',3, 2, '乙骨之刀 -里香顯現-', null, 'https://www.toyc.com.hk/products/proplica-okkotsus-sword-%E2%80%90jujutsukaisen-0%E2%80%90-%EF%BD%9Erevelation-of-rika%EF%BD%9E', 1, '彩盒尺寸(cm)：約 (長)106.00 × (闊)8.70 × (高)19.20 cm', 1700, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://shoplineimg.com/5eeb2f451a41360008357cc5/64921cc7075c660011568fd3/800x.webp?source_format=jpg'),
  ('01HJ2GTKCW2Q91839GV99GQJVV', '01HHZZ015SVZVDH4XTZCYCJMW0',3, 2, '《咒術迴戰 0》夏油傑', null, 'https://www.toyc.com.hk/products/shfiguarts-suguru-geto-%E2%80%90jujutsukaisen-0%E2%80%90', 1, '彩盒尺寸(cm)：約 (長)106.00 × (闊)8.70 × (高)19.20 cm', 1700, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://shoplineimg.com/5eeb2f451a41360008357cc5/6463f2f11d6a031dedaf3c3f/800x.webp?source_format=jpg'),
- ('01HJ2GZ32CE8S58B2FSH2Y0W6Y', '01HHZYZJMQT1F9SF92P0WCHDNJ',3, 2, '咒術迴戰 伏黑惠 第二彈', null, 'https://www.toyc.com.hk/products/jujutsu-kaisen-maximatic-the-megumi-fushiguro-%E2%85%B1', 1, '彩盒尺寸(cm)：約 (長)106.00 × (闊)8.70 × (高)19.20 cm', 2000, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://shoplineimg.com/5eeb2f451a41360008357cc5/63f6884f6369d5000eeeee0c/800x.webp?source_format=jpg'),
+ ('01HJ2GZ32CE8S58B2FSH2Y0W6Y', '01HJRD77K54V6N5GZ6DE4DBGE0',3, 2, '咒術迴戰 伏黑惠 第二彈', null, 'https://www.toyc.com.hk/products/jujutsu-kaisen-maximatic-the-megumi-fushiguro-%E2%85%B1', 1, '彩盒尺寸(cm)：約 (長)106.00 × (闊)8.70 × (高)19.20 cm', 2000, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://shoplineimg.com/5eeb2f451a41360008357cc5/63f6884f6369d5000eeeee0c/800x.webp?source_format=jpg'),
  ('01HJ2SN5NF8BTR1YKEASEATQHC', '01HHZYZJMQT1F9SF92P0WCHDNJ',8, 7, 'BORGHESE - 蜜桔皮亮白泥漿面膜', null, 'https://www.hktvmall.com/hktv/zh/main/Borghese/s/H8891001/%E8%AD%B7%E8%86%9A%E5%8C%96%E5%A6%9D/%E8%AD%B7%E8%86%9A%E5%8C%96%E5%A6%9D/%E9%9D%A2%E9%83%A8%E8%AD%B7%E7%90%86%E8%AD%B7%E8%86%9A/%E9%9D%A2%E8%86%9C/%E6%B3%A5%E7%8B%80%E9%9D%A2%E8%86%9C/%E6%94%B6%E7%B8%AE%E6%AF%9B%E5%AD%94%E6%B3%A5%E7%8B%80%E9%9D%A2%E8%86%9C/%E8%9C%9C%E6%A1%94%E7%9A%AE%E4%BA%AE%E7%99%BD%E6%B3%A5%E6%BC%BF%E9%9D%A2%E8%86%9C/p/H8891001_S_493888', 1, '【潔淨、修護、提亮】重整新生嫩肌光芒\n 糅合蜜桔皮精華、經典活水配方及精選養膚成份，5分鐘提升肌膚晶瑩剔透亮澤\n，為疲倦肌膚重新注入活力，提升肌膚彈性，綻放柔滑細緻的新生嫩肌。', 400, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://cdn-mms.hktvmall.com/hktv/mms/uploadProductImage/4292/f06c/f61e/OpvwDqkleY20230404153337_96.jpg'),
  ('01HJ2SXGBV90YFE5EG25RXXD6G', '01HHZYZJMQT1F9SF92P0WCHDNJ',8, 7, 'SYNERGIE SKIN® - Uberzinc 物理防曬面霜', null, 'https://www.hktvmall.com/hktv/zh/main/MI-MING-MART/s/H5977003/%E8%AD%B7%E8%86%9A%E5%8C%96%E5%A6%9D/%E8%AD%B7%E8%86%9A%E5%8C%96%E5%A6%9D/%E9%98%B2%E6%9B%AC-%E6%9B%AC%E5%BE%8C%E7%94%A8%E5%93%81/%E9%98%B2%E6%9B%AC%E9%9C%9C/SPF16---SPF50/Uberzinc-%E7%89%A9%E7%90%86%E9%98%B2%E6%9B%AC%E9%9D%A2%E9%9C%9C-SPF30-PA-30%E6%AF%AB%E5%8D%87/p/H5977003_S_PRO00359', 1, '21% Zinc Oxide 能完全阻擋100%UVB 和99%UVA，為肌膚帶來最全面的保護\n 成份天然，無添加任何化學成份，不刺激皮膚\n 有效成份高達21%氧化鋅，薄薄塗抹一層已可做到防曬效果\n 可用作日霜/妝前打底霜(無色)\n 質地輕透清爽，絕不油膩\n 適合小朋友、暗瘡、敏感和任何皮膚\n ** 強力建議各位打完laser、彩光和chemical peels的朋友使用。', 400, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://cdn-mms.hktvmall.com/hktv/mms/uploadProductImage/9c1e/29c6/f793/avZuUXsEbf20220610162608_1200.jpg'),
- ('01HJ2T4GEVQYEM5R8K677NANA7', '01HHZYZJMQT1F9SF92P0WCHDNJ',1, 3, 'NIKE AIR FORCE 1 SP', null, 'https://www.nike.com.hk/product/FJ4908-100/detail.htm?pdpRecommend=false&preSkuCode=', 1, '舒適、耐穿、永恆——AF1 成為第一名總有原因。 Nike Air Force 1 SP \n 男子運動鞋採用經典 80 年代結構，以奪目細節點綴，球場內外同樣合適。', 1400, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://static.nike.com.hk/resources/product/FJ4908-100/FJ4908-100_BL2.png'),
+ ('01HJ2T4GEVQYEM5R8K677NANA7', '01HJRD77K54V6N5GZ6DE4DBGE0',1, 3, 'NIKE AIR FORCE 1 SP', null, 'https://www.nike.com.hk/product/FJ4908-100/detail.htm?pdpRecommend=false&preSkuCode=', 1, '舒適、耐穿、永恆——AF1 成為第一名總有原因。 Nike Air Force 1 SP \n 男子運動鞋採用經典 80 年代結構，以奪目細節點綴，球場內外同樣合適。', 1400, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://static.nike.com.hk/resources/product/FJ4908-100/FJ4908-100_BL2.png'),
  ('01HJ2TARW22ADWYXT7M3HDZYE8', '01HHZYZTY556HJ3C8YD8GHHP1Y',1, 3, 'NIKE ZOOM VOMERO 5', null, 'https://www.nike.com.hk/product/BV1358-001/detail.htm?pdpRecommend=false&preSkuCode=', 1, 'Nike Zoom Vomero 5\n 男子運動鞋將 2000 年代初的風格煥新成時尚鞋款。\n 採用透氣耐穿物料，足以承受艱苦的訓練，而 Zoom Air 緩震效能亦帶來順暢步履。', 899, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://static.nike.com.hk/resources/product/BV1358-001/BV1358-001_BL2.png'),
  ('01HJ2TEJZ276WCSCEYT61H7MN5', '01HHZYZTY556HJ3C8YD8GHHP1Y',1, 1, '女子幼肩帶輕度承托胸墊內衣', '{"size": "S", "color": "Black", "gender": "Women", "apparelType": "Dress"}', 'https://www.nike.com.hk/product/DM0527-100/detail.htm?pdpRecommend=false&preSkuCode=', 1, '專為只背上必需品輕裝探索世界的冒險家而設計。\n 適合了解自己風格，無意轉換穿搭的人士穿著。\n 穿上 Nike Alate Minimalist 女子幼肩帶輕度承托胸墊內衣，享受獨特襯墊體驗、可調式肩帶和輕薄百搭設計，全日提供舒適承托感。\n 順滑柔軟的導濕速乾物料，呵護包覆身體，讓你全日保持乾爽。 此產品含有再生聚酯纖維。', 899, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://static.nike.com.hk/resources/product/DM0527-100/DM0527-100_BL2.png'),
  ('01HJ3HK0SBBW80KTCAV2JKPPG0', '01HHZYZY2PSD07ZQS50FC2D33E',1, 1, '男子毛絨運動衫', '{"size": "S", "color": "Black", "gender": "Men", "apparelType": "Jeans"}', 'https://www.nike.com.hk/product/FB7204-010/detail.htm?pdpRecommend=false&preSkuCode=', 1, 'Nike Universa 啟程系列女子中度承托高腰連口袋單車短褲順滑舒適，富有彈性。\n 中磅物料 InfinaSmooth 物料適合深蹲，提供無可比擬的舒適度及俐落舒爽造型，能駕馭任何訓練。\n 同時具備高度耐穿性，可隨動作盡情伸展，經得起反覆穿著及清洗。 適合跑步、訓練或日常穿著。', 899, true, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://static.nike.com.hk/resources/product/FB7204-010/FB7204-010_BL1.png'),
- ('01HJ3HRJ9NXE12RHDB7EKXSRG9', '01HHZYZY2PSD07ZQS50FC2D33E',1, 1, '男子全拉鍊式連帽衫', '{"size": "S", "color": "Black", "gender": "Men", "apparelType": "Jeans"}', 'https://www.nike.com.hk/product/DR0404-437/detail.htm?pdpRecommend=false&preSkuCode=', 1, 'Nike Universa 啟程系列女子中度承托高腰連口袋單車短褲順滑舒適，富有彈性。\n 中磅物料 InfinaSmooth 物料適合深蹲，提供無可比擬的舒適度及俐落舒爽造型，能駕馭任何訓練。\n 同時具備高度耐穿性，可隨動作盡情伸展，經得起反覆穿著及清洗。 適合跑步、訓練或日常穿著。', 899, true, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://static.nike.com.hk/resources/product/DR0404-437/DR0404-437_BL1.png'),
+ ('01HJ3HRJ9NXE12RHDB7EKXSRG9', '01HJRD77K54V6N5GZ6DE4DBGE0',1, 1, '男子全拉鍊式連帽衫', '{"size": "S", "color": "Black", "gender": "Men", "apparelType": "Jeans"}', 'https://www.nike.com.hk/product/DR0404-437/detail.htm?pdpRecommend=false&preSkuCode=', 1, 'Nike Universa 啟程系列女子中度承托高腰連口袋單車短褲順滑舒適，富有彈性。\n 中磅物料 InfinaSmooth 物料適合深蹲，提供無可比擬的舒適度及俐落舒爽造型，能駕馭任何訓練。\n 同時具備高度耐穿性，可隨動作盡情伸展，經得起反覆穿著及清洗。 適合跑步、訓練或日常穿著。', 899, true, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://static.nike.com.hk/resources/product/DR0404-437/DR0404-437_BL1.png'),
  ('01HJ3HV2GZPRR35HGC3HQ2469J', '01HHZYZY2PSD07ZQS50FC2D33E',1, 1, '男子套穿式連帽衫', '{"size": "S", "color": "Black", "gender": "Men", "apparelType": "Jeans"}', 'https://www.nike.com.hk/product/BV2655-657/detail.htm?pdpRecommend=false&preSkuCode=', 1, 'Nike Universa 啟程系列女子中度承托高腰連口袋單車短褲順滑舒適，富有彈性。\n 中磅物料 InfinaSmooth 物料適合深蹲，提供無可比擬的舒適度及俐落舒爽造型，能駕馭任何訓練。\n 同時具備高度耐穿性，可隨動作盡情伸展，經得起反覆穿著及清洗。 適合跑步、訓練或日常穿著。', 899, true, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://static.nike.com.hk/resources/product/BV2655-657/BV2655-657_BL1.png'),
  ('01HJ3HXYT1VVF5WV6FJ07V5C7R', '01HHZYZY2PSD07ZQS50FC2D33E',1, 1, 'Dri-FIT 男子套穿式籃球連帽衫', '{"size": "S", "color": "Black", "gender": "Men", "apparelType": "Jeans"}', 'https://www.nike.com.hk/product/FN2988-386/detail.htm?pdpRecommend=false&preSkuCode=', 1, 'Ja Morant 憑自己努力成為超級巨星。 在鎂光燈以外的 Ja，長大時在南卡羅來納州的自家後院球場孜孜不倦地練習。\n Nike 以其簽名版服裝系列，彰顯由默默無名走到全明星的歷程。\n Nike Dri-FIT 技術有助保持乾爽舒適。\n Ja Dri-FIT 男子套穿式籃球連帽衫採用寬鬆剪裁，印有 Ja 簽名標誌。', 899, true, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://static.nike.com.hk/resources/product/FN2988-386/FN2988-386_BL1.png'),
  ('01HJ0BWPRWKP8PKNRXMYVP0ZPG', '01HHZYNJ8DRPKVRT1YY0Z9TRHN',3, 2, 'Asoucou Zoro Figure', null, 'https://www.amazon.com/Asoucou-Thousand-Sculpture-Realistic-Character/dp/B0BKLB55YP/ref=sr_1_1?crid=2HREX2JJSITXC&keywords=zoro%2Bfigure&qid=1702965006&sprefix=solo%2Bfigu%2Caps%2C379&sr=8-1&th=1', 1, 'Asoucou Zoro Figure, Anime Action Figure', 1900, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://m.media-amazon.com/images/W/MEDIAX_792452-T2/images/I/51qmBCdwSQL._AC_.jpg'),
@@ -249,7 +251,7 @@ null, 'https://www.zalora.com.hk/p/vans-old-skool-color-theory-sneakers-6539384'
 1, 'Product Details - The FABRE™ EX shoe \n - Iconic classic FABRE basketball shoes - Features clean embroidery stripes \n - L-SPEVA midsole and high grip “NCI rubber” outer sole',
 3600, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://dynamic.zacdn.com/Mfctrln0_tOd7Qqb8em0HU4rPEA=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/vans-8049-4839356-1.jpg')
 ,
-('01HJQJYANHBJP2CWD721C5J5KP', '01HHAWPJ6068YT0685RZ5AY3XF',1, 3, 'VANS Old Skool Color Theory Sneakers',
+('01HJQJYANHBJP2CWD721C5J5KP', '01HHAWPJ6068YT0685RZ5AY3XF',1, 3, 'VANS Old Skool Purple Plaid Theory Sneakers',
 null, 'https://www.zalora.com.hk/p/vans-old-skool-pastel-picnic-sneakers-6417774',
 1, 'Product Details - The FABRE™ EX shoe \n - Iconic classic FABRE basketball shoes - Features clean embroidery stripes \n - L-SPEVA midsole and high grip “NCI rubber” outer sole',
 4600, true, FALSE, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://dynamic.zacdn.com/Ev83QwEW1UTnxdZ-9bcebHkONH0=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/vans-8435-4777146-1.jpg')
@@ -264,20 +266,116 @@ null, 'https://www.zalora.com.hk/p/puma-suede-fat-lace-sneakers-6489031',
 1, 'Product Details - The FABRE™ EX shoe \n - Iconic classic FABRE basketball shoes - Features clean embroidery stripes \n - L-SPEVA midsole and high grip “NCI rubber” outer sole',
 4600, true, FALSE, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://dynamic.zacdn.com/3wenNJP38uoZH0GGNpj5puPKmVk=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/puma-6990-1309846-1.jpg')
 ,
-('01HJQK52S123F1F6EQPGPSD4JY', '01HHZZ015SVZVDH4XTZCYCJMW0',1, 3, 'ADIDAS Adult UNISEX SWIFT RUN SPORTS SHOES SNEAKERS',
+('01HJQK52S123F1F6EQPGPSD4JY', '01HHZZ015SVZVDH4XTZCYCJMW0',1, 3, 'Adult MALE ULTIMASHOW RUNNING SHOES SNEAKERS',
 null, 'https://www.zalora.com.hk/p/adidas-adult-unisex-swift-run-sports-shoes-sneakers-6302548',
 1, 'Product Details - The FABRE™ EX shoe \n - Iconic classic FABRE basketball shoes - Features clean embroidery stripes \n - L-SPEVA midsole and high grip “NCI rubber” outer sole',
-4600, true, FALSE, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://dynamic.zacdn.com/8GU35andmQ4PD3KVvQ_zVwrLH1M=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/adidas-7178-8452036-1.jpg')
+4600, true, FALSE, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://dynamic.zacdn.com/N03PUlyVXV49wW7qEBDbETI0lA4=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/adidas-8953-9387656-1.jpg')
 ,
 ('01HJQK73PET7DHTQ2G86FDG87D', '01HHZZ015SVZVDH4XTZCYCJMW0',1, 3, '361° Basketball Men''s Professional Shoes',
 null, 'https://www.zalora.com.hk/p/adidas-adult-unisex-swift-run-sports-shoes-sneakers-6302548',
 1, 'Product Details - The FABRE™ EX shoe \n - Iconic classic FABRE basketball shoes - Features clean embroidery stripes \n - L-SPEVA midsole and high grip “NCI rubber” outer sole',
 4600, true, FALSE, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://dynamic.zacdn.com/SQzeReMLEb-S0aG8qaTeiU6g09Y=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/361-5261-8115446-1.jpg')
 ,
-('01HJQKDRHSKW4AB740KTS8MSED', '01HHZZ015SVZVDH4XTZCYCJMW0',1, 3, '361° Basketball Men''s Professional Shoes',
+('01HJQKDRHSKW4AB740KTS8MSED', '01HHZZ015SVZVDH4XTZCYCJMW0',1, 3, 'Adult UNISEX SWIFT RUN SPORTS SHOES SNEAKERS',
 null, 'https://www.zalora.com.hk/p/adidas-adult-unisex-swift-run-sports-shoes-sneakers-6302548',
 1, 'Product Details - The FABRE™ EX shoe \n - Iconic classic FABRE basketball shoes - Features clean embroidery stripes \n - L-SPEVA midsole and high grip “NCI rubber” outer sole',
 4600, true, FALSE, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://dynamic.zacdn.com/8GU35andmQ4PD3KVvQ_zVwrLH1M=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/adidas-7178-8452036-1.jpg')
+,
+('01HJRBF6DT784Y5ZJRSTEZZ753', '01HJQZJTFE9RFC380RYZDM101T',8, 7, '高清柔霧粉餅',
+null, 'https://makeupforeverhk.shop/collections/%E4%BA%BA%E6%B0%A3%E7%86%B1%E8%B3%A3/products/hdskinpowderfoundation',
+1, '只需一抹遮蓋泛紅及雀斑。它亦有效修飾毛孔及均勻膚色：您也可堆叠遮瑕度，做到中至高度遮瑕。 \n 其絲滑配方能用於護膚產品上，塗抹保濕霜或底霜後，即可使用粉餅，不會出現斑駁或粉痕。',
+1860, FALSE, TRUE, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://makeupforeverhk.shop/cdn/shop/products/HDSkinPwdFdt_1R02_withtag_650x.jpg?v=1693997911')
+,
+('01HJRBR87JXFEAFGHAQSCP2ZN9', '01HJQZJTFE9RFC380RYZDM101T',8, 7, '全效持久妝前底霜 (30ML)',
+null, 'https://makeupforeverhk.shop/collections/%E4%BA%BA%E6%B0%A3%E7%86%B1%E8%B3%A3/products/step1primers_30ml',
+1, '只需一抹遮蓋泛紅及雀斑。它亦有效修飾毛孔及均勻膚色：您也可堆叠遮瑕度，做到中至高度遮瑕。 \n 其絲滑配方能用於護膚產品上，塗抹保濕霜或底霜後，即可使用粉餅，不會出現斑駁或粉痕。',
+2600, FALSE, TRUE, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832',
+ 'https://makeupforeverhk.shop/cdn/shop/products/Shine_Control_bb3b3cc1-754f-43b0-9b75-a52cfcf4a98f_650x.jpg?v=1677567059')
+,
+('01HJRBY840K8APMXD2MWHGD1NV', '01HHZYZTY556HJ3C8YD8GHHP1Y',8, 7, '極持妝柔霧噴霧',
+null, 'https://makeupforeverhk.shop/collections/%E4%BA%BA%E6%B0%A3%E7%86%B1%E8%B3%A3/products/%E6%A5%B5%E6%8C%81%E5%A6%9D%E6%9F%94%E9%9C%A7%E5%99%B4%E9%9C%A7',
+1, '只需一抹遮蓋泛紅及雀斑。它亦有效修飾毛孔及均勻膚色：您也可堆叠遮瑕度，做到中至高度遮瑕。 \n 其絲滑配方能用於護膚產品上，塗抹保濕霜或底霜後，即可使用粉餅，不會出現斑駁或粉痕。',
+300, FALSE, TRUE, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832',
+ 'https://makeupforeverhk.shop/cdn/shop/files/NewMist_FixMatte100ml_650x.jpg?v=1682418260')
+,
+('01HJRC0YGDSPFWETV8SKK2QYJ8', '01HJQZJTFE9RFC380RYZDM101T',8, 7, '中型KABUKI 粉底掃',
+null, 'https://makeupforeverhk.shop/collections/%E4%BA%BA%E6%B0%A3%E7%86%B1%E8%B3%A3/products/foundationkabuki110',
+1, '只需一抹遮蓋泛紅及雀斑。它亦有效修飾毛孔及均勻膚色：您也可堆叠遮瑕度，做到中至高度遮瑕。 \n 其絲滑配方能用於護膚產品上，塗抹保濕霜或底霜後，即可使用粉餅，不會出現斑駁或粉痕。',
+300, FALSE, TRUE, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832',
+ 'https://makeupforeverhk.shop/cdn/shop/files/110FDTKABUKIwithtag_650x.jpg?v=1689157533')
+,
+('01HJRC5QFYBCS76YQMEMJJE8A8', '01HHZYZTY556HJ3C8YD8GHHP1Y',8, 7, '高清持妝氣墊粉底 SPF 50+/PA ++++',
+null, 'https://makeupforeverhk.shop/collections/%E4%BA%BA%E6%B0%A3%E7%86%B1%E8%B3%A3/products/%E9%AB%98%E6%B8%85%E6%8C%81%E5%A6%9D%E6%B0%A3%E5%A2%8A%E7%B2%89%E5%BA%95-spf-50-pa_refill',
+1, '只需一抹遮蓋泛紅及雀斑。它亦有效修飾毛孔及均勻膚色：您也可堆叠遮瑕度，做到中至高度遮瑕。 \n 其絲滑配方能用於護膚產品上，塗抹保濕霜或底霜後，即可使用粉餅，不會出現斑駁或粉痕。',
+300, FALSE, TRUE, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832',
+ 'https://makeupforeverhk.shop/cdn/shop/files/HDSkinCushionRefill_1N00_650x.jpg?v=1696304014')
+,
+('01HJRCDWYHW56D9WEAW5FZTFRA', '01HHZYZTY556HJ3C8YD8GHHP1Y',8, 7, '防水煙燻眼影筆',
+null, 'https://makeupforeverhk.shop/collections/eye-shadow/products/aquaresistsmokyshadow',
+1, '只需一抹遮蓋泛紅及雀斑。它亦有效修飾毛孔及均勻膚色：您也可堆叠遮瑕度，做到中至高度遮瑕。 \n 其絲滑配方能用於護膚產品上，塗抹保濕霜或底霜後，即可使用粉餅，不會出現斑駁或粉痕。',
+300, FALSE, TRUE, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832',
+ 'https://makeupforeverhk.shop/cdn/shop/products/Aqua_Resist_Smoky_Shadow_1_8713fd92-d8cf-4686-bcc8-86bbc0a6fd45_650x.jpg?v=1677576184')
+,
+('01HJRCPTYZKTPWRA1QNH907HCZ', '01HHZYZTY556HJ3C8YD8GHHP1Y',8, 7, '高清持妝三色透亮蜜粉',
+null, 'https://makeupforeverhk.shop/collections/ultra-hd/products/%E9%AB%98%E6%B8%85%E6%8C%81%E5%A6%9D%E4%B8%89%E8%89%B2%E9%80%8F%E4%BA%AE%E8%9C%9C%E7%B2%89',
+1, '只需一抹遮蓋泛紅及雀斑。它亦有效修飾毛孔及均勻膚色：您也可堆叠遮瑕度，做到中至高度遮瑕。 \n 其絲滑配方能用於護膚產品上，塗抹保濕霜或底霜後，即可使用粉餅，不會出現斑駁或粉痕。',
+300, FALSE, TRUE, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832',
+ 'https://makeupforeverhk.shop/cdn/shop/products/HDSkinTwist_Light_1_650x.jpg?v=1660883168')
+,
+('01HJRCS3Q92ADJAD5RJXJ58T63', '01HJQZJTFE9RFC380RYZDM101T',8, 7, '超高清持久定妝蜜粉',
+null, 'https://makeupforeverhk.shop/collections/ultra-hd/products/ultrahdsettingpowder',
+1, '只需一抹遮蓋泛紅及雀斑。它亦有效修飾毛孔及均勻膚色：您也可堆叠遮瑕度，做到中至高度遮瑕。 \n 其絲滑配方能用於護膚產品上，塗抹保濕霜或底霜後，即可使用粉餅，不會出現斑駁或粉痕。',
+300, FALSE, TRUE, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832',
+ 'https://makeupforeverhk.shop/cdn/shop/products/UHDSettingPowder_01_cdcb4159-2d30-4247-b3cb-c340ba7e1623_650x.jpg?v=1677571270')
+,
+('01HJRCXBH1PB4KJSHFDZZYWH11', '01HHQ61P480SRGXG5130R22B53',8, 7, '超高清無瑕蜜粉餅',
+null, 'https://makeupforeverhk.shop/collections/powder/products/ultrahdpressedpowder',
+1, '即時締造陶瓷美肌，能賦予霧面光感妝效，方便攜帶外出補妝，全日提供隱形絲絨保護膜般的定妝效果。 \n 其絲滑配方能用於護膚產品上，塗抹保濕霜或底霜後，即可使用粉餅，不會出現斑駁或粉痕。',
+300, FALSE, TRUE, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832',
+ 'https://makeupforeverhk.shop/cdn/shop/products/UHD_Pressed_Powder_-_Banana_098926df-29dc-45c3-bdef-95bef48a83b3_650x.jpg?v=1677573511')
+,
+('01HJRD0W405PEJ2W7ZVQFR585F', '01HHQ61P480SRGXG5130R22B53',8, 7, '超高清無瑕蜜粉餅',
+null, 'https://makeupforeverhk.shop/collections/powder/products/ultrahdpressedpowder',
+1, '即時締造陶瓷美肌，能賦予霧面光感妝效，方便攜帶外出補妝，全日提供隱形絲絨保護膜般的定妝效果。 \n 其絲滑配方能用於護膚產品上，塗抹保濕霜或底霜後，即可使用粉餅，不會出現斑駁或粉痕。',
+300, FALSE, TRUE, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832',
+ 'https://www.esteelauder.com.hk/media/export/cms/products/558x768/el_sku_PKTJ02_558x768_0.jpg')
+,
+('01HJRD3A7G2E9AHTVEMTX907M7', '01HHQ61P480SRGXG5130R22B53',8, 7, '高清純色透亮胭脂',
+null, 'https://www.esteelauder.com.hk/product/639/101002/product-catalog/pure-color-envy/sculpting-blush',
+1, '立體塑形、加強輪廓、煥發亮澤。 \n輕掃這極緻絲滑的矜貴胭脂，提升立體輪廓，煥發健康光采。 系列色彩經精心研創，令任何膚色色調均能散發動人神采。 \n從閃亮的流麗曲線到非凡品質，體現現代華麗氣派 -- 永恆延續的奢華。 附有能打造輪廓的專屬胭脂掃。',
+300, FALSE, TRUE, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832',
+ 'https://www.esteelauder.com.hk/media/export/cms/products/558x768/el_sku_PKTJ02_558x768_0.jpg')
+,
+('01HJRDBYR1YMXMNYVNJT408EJN', '01HJRD77K54V6N5GZ6DE4DBGE0',8, 7, '節日星空限量版倒數月曆',
+null, 'https://www.esteelauder.com.hk/product/673/117231/product-catalog/sets-gifts/holiday-countdown',
+1, '立體塑形、加強輪廓、煥發亮澤。 \n輕掃這極緻絲滑的矜貴胭脂，提升立體輪廓，煥發健康光采。 系列色彩經精心研創，令任何膚色色調均能散發動人神采。 \n從閃亮的流麗曲線到非凡品質，體現現代華麗氣派 -- 永恆延續的奢華。 附有能打造輪廓的專屬胭脂掃。',
+1600, FALSE, TRUE, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832',
+ 'https://www.esteelauder.com.hk/media/export/cms/products/558x768/el_sku_G40901_558x768_0.jpg')
+,
+('01HJRDESM9BMA264DDMMG12X8H', '01HJRD77K54V6N5GZ6DE4DBGE0',8, 7, '全新高清純色魅惑炫彩4 色眼影盒',
+null, 'https://www.esteelauder.com.hk/product/673/117231/product-catalog/sets-gifts/holiday-countdown',
+1, '立體塑形、加強輪廓、煥發亮澤。 \n輕掃這極緻絲滑的矜貴胭脂，提升立體輪廓，煥發健康光采。 系列色彩經精心研創，令任何膚色色調均能散發動人神采。 \n從閃亮的流麗曲線到非凡品質，體現現代華麗氣派 -- 永恆延續的奢華。 附有能打造輪廓的專屬胭脂掃。',
+1000, FALSE, TRUE, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832',
+ 'https://www.esteelauder.com.hk/media/export/cms/products/558x768/el_sku_PHHT07_558x768_0.jpg')
+,
+('01HJRDF43NXVVYQWVFQTETAXKW', '01HJRD77K54V6N5GZ6DE4DBGE0',8, 7, '節日星空限量版亮肌美妝禮盒',
+null, 'https://www.esteelauder.com.hk/product/673/117231/product-catalog/sets-gifts/holiday-countdown',
+1, '立體塑形、加強輪廓、煥發亮澤。 \n輕掃這極緻絲滑的矜貴胭脂，提升立體輪廓，煥發健康光采。 系列色彩經精心研創，令任何膚色色調均能散發動人神采。 \n從閃亮的流麗曲線到非凡品質，體現現代華麗氣派 -- 永恆延續的奢華。 附有能打造輪廓的專屬胭脂掃。',
+300, FALSE, TRUE, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832',
+ 'https://www.esteelauder.com.hk/media/export/cms/products/558x768/el_sku_G3YJ80_558x768_0.jpg')
+,
+('01HJRDJPAVCWX1S7W3A3B8EP1W', '01HHAWPJ6068YT0685RZ5AY3XF',8, 7, '高清純色柔滑緞面唇膏',
+null, 'https://www.esteelauder.com.hk/product/649/110671/product-catalog/pure-color/creme-lipstick#/shade/260-Eccentric',
+1, '立體塑形、加強輪廓、煥發亮澤。 \n輕掃這極緻絲滑的矜貴胭脂，提升立體輪廓，煥發健康光采。 系列色彩經精心研創，令任何膚色色調均能散發動人神采。 \n從閃亮的流麗曲線到非凡品質，體現現代華麗氣派 -- 永恆延續的奢華。 附有能打造輪廓的專屬胭脂掃。',
+300, FALSE, TRUE, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832',
+ 'https://www.esteelauder.com.hk/media/export/cms/products/558x768/el_sku_GRFT23_558x768_0.jpg')
+,
+('01HJRDPF7VVE4T7MJ0FV41B5N2', '01HHAWPJ6068YT0685RZ5AY3XF',8, 7, '高清純色啞緻唇彩',
+null, 'https://www.esteelauder.com.hk/product/649/110671/product-catalog/pure-color/creme-lipstick#/shade/260-Eccentric',
+1, '立體塑形、加強輪廓、煥發亮澤。 \n輕掃這極緻絲滑的矜貴胭脂，提升立體輪廓，煥發健康光采。 系列色彩經精心研創，令任何膚色色調均能散發動人神采。 \n從閃亮的流麗曲線到非凡品質，體現現代華麗氣派 -- 永恆延續的奢華。 附有能打造輪廓的專屬胭脂掃。',
+300, FALSE, TRUE, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832',
+ 'https://www.esteelauder.com.hk/media/export/cms/products/558x768/el_sku_PN0L15_558x768_0.jpg')
+
 ;
 
 INSERT INTO user_address(user_id, address, is_primary) VALUES

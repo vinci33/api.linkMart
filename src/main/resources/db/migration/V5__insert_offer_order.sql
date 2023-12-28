@@ -139,8 +139,58 @@ INSERT INTO image (request_id, image_path, is_active, is_primary) VALUES
 ,
 ('01HJQK2WN05Y0HTF816064965J','https://dynamic.zacdn.com/3wenNJP38uoZH0GGNpj5puPKmVk=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/puma-6990-1309846-1.jpg',true, true)
 ,
-('01HJQK52S123F1F6EQPGPSD4JY','https://dynamic.zacdn.com/8GU35andmQ4PD3KVvQ_zVwrLH1M=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/adidas-7178-8452036-1.jpg',true, true)
+('01HJQK52S123F1F6EQPGPSD4JY','https://dynamic.zacdn.com/N03PUlyVXV49wW7qEBDbETI0lA4=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/adidas-8953-9387656-1.jpg',true, true)
 ,
 ('01HJQK73PET7DHTQ2G86FDG87D','https://dynamic.zacdn.com/SQzeReMLEb-S0aG8qaTeiU6g09Y=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/361-5261-8115446-1.jpg',true, true)
+,
+('01HJQKDRHSKW4AB740KTS8MSED','https://dynamic.zacdn.com/8GU35andmQ4PD3KVvQ_zVwrLH1M=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/adidas-7178-8452036-1.jpg',true, true)
+,
+('01HJRBF6DT784Y5ZJRSTEZZ753',
+'https://makeupforeverhk.shop/cdn/shop/products/HDSkinPwdFdt_1R02_withtag_650x.jpg?v=1693997911',true, true)
+,
+('01HJRBR87JXFEAFGHAQSCP2ZN9',
+'https://makeupforeverhk.shop/cdn/shop/products/Shine_Control_bb3b3cc1-754f-43b0-9b75-a52cfcf4a98f_650x.jpg?v=1677567059',true, true)
+,
+('01HJRBY840K8APMXD2MWHGD1NV',
+'https://makeupforeverhk.shop/cdn/shop/files/NewMist_FixMatte100ml_650x.jpg?v=1682418260',true, true)
+,
+('01HJRC0YGDSPFWETV8SKK2QYJ8',
+'https://makeupforeverhk.shop/cdn/shop/files/110FDTKABUKIwithtag_650x.jpg?v=1689157533',true, true)
+,
+('01HJRC5QFYBCS76YQMEMJJE8A8',
+'https://makeupforeverhk.shop/cdn/shop/files/HDSkinCushionRefill_1N00_650x.jpg?v=1696304014',true, true)
+,
+('01HJRCDWYHW56D9WEAW5FZTFRA',
+'https://makeupforeverhk.shop/cdn/shop/products/Aqua_Resist_Smoky_Shadow_1_8713fd92-d8cf-4686-bcc8-86bbc0a6fd45_650x.jpg?v=1677576184',true, true)
+,
+('01HJRCPTYZKTPWRA1QNH907HCZ',
+'https://makeupforeverhk.shop/cdn/shop/products/HDSkinTwist_Light_1_650x.jpg?v=1660883168',true, true)
+,
+('01HJRCS3Q92ADJAD5RJXJ58T63',
+'https://makeupforeverhk.shop/cdn/shop/products/UHDSettingPowder_01_cdcb4159-2d30-4247-b3cb-c340ba7e1623_650x.jpg?v=1677571270',true, true)
+,
+('01HJRCXBH1PB4KJSHFDZZYWH11',
+'https://makeupforeverhk.shop/cdn/shop/products/UHD_Pressed_Powder_-_Banana_098926df-29dc-45c3-bdef-95bef48a83b3_650x.jpg?v=1677573511',true, true)
+,
+('01HJRD0W405PEJ2W7ZVQFR585F',
+'https://makeupforeverhk.shop/cdn/shop/products/UHD_Pressed_Powder_-_Banana_098926df-29dc-45c3-bdef-95bef48a83b3_650x.jpg?v=1677573511',true, true)
+,
+('01HJRD3A7G2E9AHTVEMTX907M7',
+'https://www.esteelauder.com.hk/media/export/cms/products/558x768/el_sku_PKTJ02_558x768_0.jpg',true, true)
+,
+('01HJRDBYR1YMXMNYVNJT408EJN',
+'https://www.esteelauder.com.hk/media/export/cms/products/558x768/el_sku_G40901_558x768_0.jpg',true, true)
+,
+('01HJRDESM9BMA264DDMMG12X8H',
+'https://www.esteelauder.com.hk/media/export/cms/products/558x768/el_sku_PHHT07_558x768_0.jpg',true, true)
+,
+('01HJRDF43NXVVYQWVFQTETAXKW',
+'https://www.esteelauder.com.hk/media/export/cms/products/558x768/el_sku_G3YJ80_558x768_0.jpg',true, true)
+,
+('01HJRDJPAVCWX1S7W3A3B8EP1W',
+'https://www.esteelauder.com.hk/media/export/cms/products/558x768/el_sku_GRFT23_558x768_0.jpg',true, true)
+,
+('01HJRDPF7VVE4T7MJ0FV41B5N2',
+'https://www.esteelauder.com.hk/media/export/cms/products/558x768/el_sku_PN0L15_558x768_0.jpg',true, true)
 ;
 
