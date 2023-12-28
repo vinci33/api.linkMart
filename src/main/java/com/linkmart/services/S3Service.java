@@ -18,7 +18,7 @@ public class S3Service {
     @Autowired
     AmazonS3 s3Client;
 
-    private final String s3Link = "https://cdn.linkmart.com.s3-website-ap-southeast-1.amazonaws.com/";
+    private final String s3Link = "https://s3.ap-southeast-1.amazonaws.com/cdn.linkmart.com/";
 
     public String uploadFile(MultipartFile file) {
         try {
