@@ -127,8 +127,8 @@ public class OfferService {
                 getOneOfferDto.setRequestId(offer.getRequestId());
                 getOneOfferDto.setProviderId(offer.getProviderId());
                 getOneOfferDto.setProviderName(userName);
-                getOneOfferDto.setEfficiency(provider.getStarOfAttitude());
-                getOneOfferDto.setAttitude(provider.getStarOfEfficiency());
+                getOneOfferDto.setEfficiency(provider.getStarOfEfficiency());
+                getOneOfferDto.setAttitude(provider.getStarOfAttitude());
                 getOneOfferDto.setStatusName(status);
                 getOneOfferDto.setPrice(offer.getPrice());
                 getOneOfferDto.setEstimatedProcessTime(offer.getEstimatedProcessTime());

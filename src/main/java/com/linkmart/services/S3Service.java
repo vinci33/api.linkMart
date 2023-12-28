@@ -25,7 +25,7 @@ public class S3Service {
             this.s3Client.putObject("cdn.linkmart.com", path,
                     file.getInputStream(),
                     new ObjectMetadata());
-            return "http://cdn.linkmart.com.s3-website-ap-southeast-1.amazonaws.com/"+ path;
+            return "https://cdn.linkmart.com.s3-website-ap-southeast-1.amazonaws.com/"+ path;
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new ResponseStatusException(
@@ -41,7 +41,7 @@ public class S3Service {
             this.s3Client.putObject("cdn.linkmart.com", path,
                     file.getInputStream(),
                     new ObjectMetadata());
-            return "http://cdn.linkmart.com.s3-website-ap-southeast-1.amazonaws.com/"+ path;
+            return "https://cdn.linkmart.com.s3-website-ap-southeast-1.amazonaws.com/"+ path;
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new ResponseStatusException(

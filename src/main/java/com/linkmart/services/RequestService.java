@@ -419,4 +419,17 @@ public class RequestService {
             throw new IllegalArgumentException("Cannot update request primary image"+ e.getMessage(), e);
         }
     }
+
+//    public Boolean checkRequestLimit(String userId) {
+//        try {
+//            var request = requestRepository.getTotalRecords(userId);
+//            if (request == null){
+//                return true;
+//            } else if (request >= 30) {
+//                return false;
+//            }
+//        } catch (IllegalArgumentException e) {
+//            throw new IllegalArgumentException("Cannot check request limit"+ e.getMessage(), e);
+//        }
+//    }
 }

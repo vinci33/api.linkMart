@@ -114,8 +114,9 @@ public interface RequestRepository extends JpaRepository<RequestModel, Integer> 
                 COUNT(*) as totalRecords
             FROM request
             WHERE is_active = true
+            AND created_by = :userId
             """, nativeQuery =true)
-    Integer getTotalRecords();
+    Integer getTotalRecords(@Param("userId") String userId);
 
     @Query(value = """
                     SELECT
