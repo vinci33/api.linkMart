@@ -4,6 +4,8 @@ import com.linkmart.dtos.*;
 import com.linkmart.models.RequestModel;
 import com.linkmart.services.OfferService;
 import com.linkmart.services.RequestService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,18 +20,35 @@ import java.util.List;
 import static java.lang.Math.ceil;
 import static java.lang.Math.log;
 
+@Tag(name = "Request", description = """
+**Request by user APIs**
+
+- Represents the RequestController, ImageController class, which is responsible for handling various API endpoints related to user requests.
+
+- It provides endpoints for creating, retrieving, updating, and deleting requests, change request image, set primary image,
+as well as cloning requests from other users and checking if a request has an offer.
+""")
 @RestController
 public class RequestController {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
-    @Autowired
-    RequestService requestService;
 
-    @Autowired
-    HttpServletRequest request;
+    private final RequestService requestService;
 
-    @Autowired
-    OfferService offerService;
 
+    private final HttpServletRequest request;
+
+
+    private final OfferService offerService;
+
+    public RequestController (RequestService requestService, HttpServletRequest request, OfferService offerService){
+        this.requestService = requestService;
+        this.request = request;
+        this.offerService = offerService;
+    };
+
+    @Operation(summary = "Create a new request",
+            description = "Creates a new request with the provided parameters and files",
+            tags = { "Request", "Post" })
     @PostMapping(value = "/api/request", consumes = {"multipart/form-data"})
     public RequestModel postRequest (
             @RequestParam(value = "locationId") Integer locationId,
@@ -51,6 +70,9 @@ public class RequestController {
         }
     }
 
+    @Operation(summary = "Get all active requests for a user",
+            description = "Retrieves all active requests for a user with user id (JWT)",
+            tags = { "Request", "Get" })
     //5.2.2 Get All - by userId (ACTIVE)
     @GetMapping(value = "/api/request")
     public List<RequestDto> getAllActiveMyRequest (HttpServletRequest request) {
@@ -62,7 +84,9 @@ public class RequestController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
-
+    @Operation(summary = "Get all inactive requests for a user",
+            description = "Retrieves all inactive requests for a user with user id (JWT)",
+            tags = { "Request", "Get" })
     @GetMapping(value = "/api/request/inActive")
     public List<RequestDto> getAllInActiveMyRequest (HttpServletRequest request) {
         try{
@@ -74,6 +98,9 @@ public class RequestController {
         }
     }
 
+    @Operation(summary = "Get details of a specific request",
+            description = "Retrieves the details of a specific request by request id",
+            tags = { "Request", "Get" })
     @GetMapping(value = "/request/{requestId}")
     public OneRequestDto getOneRequest (@PathVariable(value = "requestId") String requestId) throws Exception {
         try{
@@ -84,6 +111,9 @@ public class RequestController {
         }
     }
 
+    @Operation(summary = "Delete a request",
+            description = "Deletes a request by request id",
+            tags = { "Request", "Delete" })
     @DeleteMapping(value = "/api/request/{requestId}")
     public RequestResponseWithMessageDto deleteRequest (HttpServletRequest request, @PathVariable(value = "requestId") String requestId) {
         try{
@@ -95,6 +125,10 @@ public class RequestController {
         }
     }
 
+
+    @Operation(summary = "Update a request",
+            description = "Updates a request by request id",
+            tags = { "Request", "Put" })
     @PutMapping(value = "/api/request/{requestId}")
     public RequestIdDto updateRequest (HttpServletRequest request,
                                                         @PathVariable(value = "requestId") String requestId,
@@ -115,6 +149,10 @@ public class RequestController {
         }
     }
 
+
+    @Operation(summary = "Clone a request from another user",
+            description = "Clones a request from another user and creates a new request with user id (JWT)",
+            tags = { "Request", "Post" })
     @PostMapping(value = "/api/request/clone", consumes = {"multipart/form-data"})
     public RequestModel postRequestClone (
             @RequestParam(value = "locationId") Integer locationId,
@@ -138,6 +176,10 @@ public class RequestController {
         }
     }
 
+
+    @Operation(summary = "Get all request history for a user",
+            description = "Retrieves all request history for a user with user id (JWT)",
+            tags = { "Request", "Get" })
     @GetMapping(value = "/api/request/history")
     public List<RequestDto> getAllMyRequestHistory (HttpServletRequest request) {
         try{
@@ -149,6 +191,10 @@ public class RequestController {
         }
     }
 
+
+    @Operation(summary = "Checks if a request has an offer",
+            description = "Checks if a request has an offer",
+            tags = { "Request", "Get" })
     @GetMapping(value = "/api/request/provider/{requestId}")
     public HasOfferDto checkIfHasOffer (@PathVariable(value = "requestId") String requestId) {
         try{
@@ -164,6 +210,10 @@ public class RequestController {
         }
     }
 
+
+    @Operation(summary = "Get all requests by category and location",
+            description = "Retrieves all requests by category and location with dynamic query",
+            tags = { "Request", "Get" })
     //Page<AnotherRequestDto>
     @GetMapping(value = "/request")
     public RequestFilterDto getAllRequestByCategoryAndLocation (

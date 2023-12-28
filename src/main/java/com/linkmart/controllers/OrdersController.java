@@ -8,8 +8,11 @@ import com.linkmart.dtos.ResponseWithMessage;
 import com.linkmart.forms.ReportCasesForm;
 import com.linkmart.forms.ReviewForm;
 import com.linkmart.mappers.OrdersByOrderIdAndStatusMapper;
+import com.linkmart.repositories.OrdersRepository;
 import com.linkmart.services.OrdersService;
 import com.linkmart.services.ReportService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,21 +30,40 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+@Tag(name = "Orders",description = """
+               **Orders APIs**
+               - Represents the OrdersController class, which is responsible for handling various API endpoints related to orders involving a provider, a user, a request, and an offer.
+               
+               - It interacts with the OrdersService and ReportService classes to perform operations such as creating an order,
+                retrieving orders by user ID and status, updating an order, reviewing an order, reviewing order and report order case.
+                """)
 @RestController
 @RequestMapping(value = "/api")
 public class OrdersController {
-    @Autowired
-    OrdersService ordersService;
-
-    @Autowired
-    HttpServletRequest request;
-
-    @Autowired
-    ReportService reportService;
 
     final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    private final OrdersService ordersService;
 
+    private final HttpServletRequest request;
+
+    private final ReportService reportService;
+
+    private final OrdersRepository ordersRepository;
+
+    private String lastCompletedOrderId;
+
+    public OrdersController (OrdersService ordersService, HttpServletRequest request, ReportService reportService, OrdersRepository ordersRepository){
+        this.ordersService = ordersService;
+        this.ordersRepository = ordersRepository;
+        this.request = request;
+        this.reportService = reportService;
+    };
+
+
+    @Operation(summary = "Create an order",
+            description = "Creates an order with offerId and userAddressId by success or cancelled bollean",
+            tags = { "Orders","Get"})
     @GetMapping("/order")
     public OrderPaymentDto createOrder(
             @RequestParam(value = "success", required = false) Boolean success,
@@ -71,16 +93,11 @@ public class OrdersController {
         }
     }
 
-//    @GetMapping(value = "/user/order")
-//    public List<OrdersByOrderIdAndStatusDto> getOrdersByUserId() {
-//        try {
-//            var userId = (String) request.getAttribute("userId");
-//            return ordersService.getOrdersByUserId(userId);
-//        } catch (Exception e) {
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-//        }
-//    }
 
+
+    @Operation(summary = "Get all orders by user id and order status",
+            description = "Retrieves orders by user ID and order status for a provider.",
+            tags = { "Orders","Get"})
     //for provider find order by order status
     @GetMapping(value = "/provider/order/{orderStatus}")
     public List<OrdersByOrderIdAndStatusDto> providerGetOrdersByUserId(@PathVariable String orderStatus){
@@ -104,6 +121,10 @@ public class OrdersController {
         }
     }
 
+
+    @Operation(summary = "Get all orders by user id and order status",
+            description = "Retrieves orders by user ID and order status for a user.",
+            tags = { "Orders","Get"})
     //for user find order by order status
     @GetMapping(value = "/user/order/{orderStatus}")
     public List<OrdersByOrderIdAndStatusDto> userGetOrdersByUserId(@PathVariable String orderStatus){
@@ -120,7 +141,6 @@ public class OrdersController {
                 throw new IllegalArgumentException("Invalid orderStatus: " + orderStatus);
             }
             var userId = (String)request.getAttribute("userId");
-            logger.info(statuses.toString());
             var ordersDtos = ordersService.userGetOrdersByUserIdAndStatusFromUser(userId, statuses);
             return OrdersByOrderIdAndStatusMapper.INSTANCE.toOrdersByOrderIdAndStatusDtos(ordersDtos);
         } catch (Exception e) {
@@ -128,6 +148,9 @@ public class OrdersController {
         }
     }
 
+    @Operation(summary = "Get order by order id",
+            description = "Retrieves orders by order ID.",
+            tags = { "Orders","Get"})
     @GetMapping(value = "/order/{orderId}")
     public OrdersByOrderIdDto getOrdersDetailByOrderId (@PathVariable String orderId) {
         try {
@@ -141,6 +164,9 @@ public class OrdersController {
         }
     }
 
+    @Operation(summary = "Update order shipping order id",
+            description = "Updates the shipping details of an order and start the schedule function.",
+            tags = { "Orders","Put"})
     @PutMapping(value = "/order/{orderId}")
     public void updateOrderShippingOrderId(@PathVariable String orderId,
                                            @RequestParam(value = "shipmentProof")MultipartFile file,
@@ -159,6 +185,10 @@ public class OrdersController {
         }
     }
 
+
+    @Operation(summary = "Update order received",
+            description = "Updates the status of an order to received.",
+            tags = { "Orders","Put"})
     @PutMapping(value = "/order/{orderId}/received")
     public void updateOrderReceived(@PathVariable String orderId) {
         try {
@@ -173,19 +203,45 @@ public class OrdersController {
     }
 
     private final SseEmitter emitter = new SseEmitter();
+
     @EventListener
-    public void orderCompleteEventhandeler(String orderId){
+    public void orderCompleteEventHandler(String orderId){
         try {
+            lastCompletedOrderId = orderId;
             emitter.send(Map.of("OrderId " , orderId));
         }catch (IOException e){
             emitter.completeWithError(e);
         }
     }
+
+    @Operation(summary = "Get order status",
+            description = """
+                    Retrieve the order status using Server-Sent Events (SSE).
+                    It returns a order Id after validate incoming user Id.
+                    Order Status will be auto update to completed after 5 minutes""",
+            tags = { "Orders","Get"})
     @GetMapping(value = "/order/sse")
-    public SseEmitter sseEmitter(){
-        return emitter;
+    public SseEmitter sseEmitter() throws IOException{
+        String requestUserId = (String)request.getAttribute("userId");
+        if (requestUserId  == null) {
+            throw new IllegalArgumentException("UserId not found");
+        }
+        String orderUserId = ordersRepository.findUserIdByOrderId(lastCompletedOrderId);
+        if (orderUserId == null) {
+            throw new IllegalArgumentException("Order Id not found");
+        }
+        SseEmitter sseEmitter = new SseEmitter();
+        if (!requestUserId.equals(orderUserId)) {
+            sseEmitter.send("Shipping in progress");
+        } else {
+            sseEmitter = emitter;
+        }
+        return sseEmitter;
     }
 
+    @Operation(summary = "Update order review",
+            description = "Reviews an order by orderId with ReviewForm.",
+            tags = { "Orders","Post"})
     //For requester to review order
     @PostMapping(value = "/order/{orderId}/review")
     public ResponseWithMessage reviewOrder(@PathVariable String orderId, @RequestBody ReviewForm reviewForm) {
@@ -210,6 +266,9 @@ public class OrdersController {
         }
     }
 
+    @Operation(summary = "Create report case for order",
+            description = "Report an order by orderId with ReportCasesForm.",
+            tags = { "Orders","Post"})
     @PostMapping(value = "/order/report/{orderId}")
     public ResponseWithMessage reportOrder(@PathVariable String orderId,
                                            @RequestBody ReportCasesForm reportCasesForm) {

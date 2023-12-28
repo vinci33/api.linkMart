@@ -25,15 +25,21 @@ import java.util.Map;
 @RequestMapping(value = "/api/user")
 
 public class UserAddressController {
-        @Autowired
-        UserAddressService userAddressService;
-        @Autowired
-        HttpServletRequest request;
-
         final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+        public final UserAddressService userAddressService;
+
+        public final HttpServletRequest request;
+
+        public UserAddressController (UserAddressService userAddressService, HttpServletRequest request){
+            this.userAddressService = userAddressService;
+            this.request = request;
+        };
+
+
+
         @Operation(summary = "Get all user address in array format",
-                    description = "Get all user address in array format",
+                    description = "Get all user address in array format and the default address is the first element in the array",
                     tags ={"User","Get"})
         @GetMapping("/addressInArrayFormat")
         public List<Map<String, List<String>>>  getUserAddress(HttpServletRequest request) {
@@ -48,7 +54,7 @@ public class UserAddressController {
             }
         }
         @Operation(summary = "Get all user address in json format",
-            description = "Get all user address in json format",
+            description = "Get all user address in json format and the default address is the first element in the array",
             tags ={"User","Get"})
         @GetMapping("/address")
         public List<UserAddressFullDto> getUserAddressInJson(HttpServletRequest request) {
@@ -78,7 +84,7 @@ public class UserAddressController {
         }
 
         @Operation(summary = "Delete user address",
-            description = "Delete user address by addressId",
+            description = "Delete user address by addressId, if the address is primary, the latest address will be set to primary",
             tags ={"User","Delete"})
         @DeleteMapping("/address/{addressId}")
         public ResponseWithMessage deleteUserAddressById(@PathVariable Integer addressId, HttpServletRequest request) {
