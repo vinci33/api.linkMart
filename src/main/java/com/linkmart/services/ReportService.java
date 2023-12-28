@@ -17,7 +17,6 @@ public class ReportService {
     public void createReportCase(String orderId, String content, String subject)
             throws Exception {
         try{
-            logger.info("Report case: " + orderId + " " + subject + " " + content);
             ReportCase reportCase = new ReportCase();
             reportCase.MakeReportCase();
             reportCase.setOrdersId(orderId);

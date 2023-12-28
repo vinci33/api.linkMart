@@ -20,8 +20,6 @@ public class LogisticCompanyService {
     public Integer uploadLogisticCompany (LogisticCompanyForm companyForm, String userId) throws Exception {
         try {
             String providerId = providerService.checkIfProvider(userId);
-            logger.info("providerId: " + providerId);
-            logger.info("companyName: " + companyForm.getCompanyName());
             LogisticCompany logisticCompany = new LogisticCompany();
             logisticCompany.setProviderId(providerId);
             logisticCompany.setCompanyName(companyForm.getCompanyName());

@@ -9,14 +9,21 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class LocationService {
-    @Autowired
-    LocationRepository locationRepository;
+
+    private final LocationRepository locationRepository;
+
+    public LocationService(LocationRepository locationRepository) {
+        this.locationRepository = locationRepository;
+    }
+
+
     public void validateLocationId(Integer locationId) {
         var locationByLocationId = locationRepository.findLocationById(locationId);
         if (locationByLocationId == null ) {
-            throw new IllegalArgumentException("Invalid LocationId ");
+            throw new IllegalArgumentException("Invalid LocationId" + locationId);
         }
     }
+
     public String getLocationNameByLocationId(Integer locationId) {
         var locationNameByLocationId = locationRepository.findLocationNameById(locationId);
         if (locationNameByLocationId  == null ) {

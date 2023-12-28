@@ -14,18 +14,23 @@ import java.util.List;
 public class CategoryService {
     final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
-    CategoryRepository categoryRepository;
 
-    @Autowired
-    CategoryFieldRepository categoryFieldRepository;
 
-    @Autowired
-    CategoryFieldOptionRepository categoryFieldOptionRepository;
+
+
+    private final CategoryFieldRepository categoryFieldRepository;
+
+
+
+
+    public CategoryService(CategoryFieldRepository categoryFieldRepository) {
+        this.categoryFieldRepository = categoryFieldRepository;
+    }
+
 
     //route: /category/{categoryId}
     public List<CategoryFieldModel>  getCategoryFieldOption (Integer categoryId) {
-        List<CategoryFieldModel> categoryField = categoryFieldRepository.findCategoryFieldByCategoryId(categoryId);
-        return categoryField;
+        return  categoryFieldRepository.findCategoryFieldByCategoryId(categoryId);
+
     }
 }

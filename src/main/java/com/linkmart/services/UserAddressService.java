@@ -95,9 +95,7 @@ public class UserAddressService {
     @Transactional
     public void deleteUserAddressByAddressId(Integer addressId, String userId) {
         validateUserAddressId(addressId);
-        logger.info("addressId: "+addressId);
         userService.validateUserId(userId);
-        logger.info("userId: "+userId);
         userAddressRepository.deleteUserAddressByIdAndUserId(addressId,userId);
         validateUserAddressIsPrimary(userId);
     }
@@ -108,7 +106,6 @@ public class UserAddressService {
           userAddress.setUserId(userId);
           userAddress.setAddress(userAddressForm.getAddress());
           userAddress.setPrimary(true);
-          logger.info("userAddress"+ userAddress);
           userAddressRepository.saveAndFlush(userAddress);
           return userAddress;
     }

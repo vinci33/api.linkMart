@@ -36,13 +36,9 @@ public class ImageService {
     @Transactional
     public void setPrimaryImage(Integer imageId) throws Exception {
         try {
-            logger.info("imageId: " + imageId);
             String requestId = imageRepository.findRequestIdByImageId(imageId);
-            logger.info("requestId: " + requestId);
             List<Integer> Images = imageRepository.findImageByRequestId(requestId);
-            logger.info("Images: " + Images);
             for (Integer image : Images) {
-                logger.info("image: " + image);
                 imageRepository.updateImageIsNotPrimaryByImageId(image);
                 }
             imageRepository.updateImageIsPrimaryByImageId(imageId);

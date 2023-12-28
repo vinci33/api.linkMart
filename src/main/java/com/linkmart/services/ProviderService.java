@@ -67,7 +67,6 @@ public class ProviderService {
 
     public String checkIfProvider(String userId) {
         var providerByUserId = providerRepository.getIdByUserId(userId);
-        logger.info("providerByUserId: " + providerByUserId);
         return providerByUserId;
     }
 
@@ -76,7 +75,6 @@ public class ProviderService {
     public ProviderDetailDto getProviderDetail(String userId) {
         var providerId = providerRepository.getIdByUserId(userId);
         var provider = providerRepository.findProviderById(providerId);
-        logger.info("provider: " + provider);
         ProviderDetailDto providerDetailDto = new ProviderDetailDto();
         providerDetailDto.setProviderName(userService.getUserNameById(provider.getUserId()));
         providerDetailDto.setLocationName(locationService.getLocationNameByLocationId(provider.getLocationId()));
@@ -88,26 +86,6 @@ public class ProviderService {
     }
 
 
-    //POST : /api/provider
-//    public void providerApplication(String userId, MultipartFile addressDocument, MultipartFile idDocument, MultipartFile bankDocument, Integer locationId) {
-//        try{
-//            userService.validateUserId((userId));
-//            ProviderVerification provider = new ProviderVerification();
-//            provider.setUserId(userId);
-//            String addressFile = s3Service.uploadFile(addressDocument);
-//            String idFile = s3Service.uploadFile(idDocument);
-//            String bankFile = s3Service.uploadFile(bankDocument);
-//            provider.setAddressDocument(addressFile);
-//            provider.setIdDocument(idFile);
-//            provider.setBankDocument(bankFile);
-//            //Status: pending
-//            provider.setStatusId(1);
-//            var providerVerificationId = providerVerificationRepository.saveAndFlush(provider);
-//            logger.info("providerVerificationId: " + providerVerificationId);
-//        } catch (Exception e) {
-//            throw new IllegalArgumentException("Cannot create provider application");
-//        }
-//    }
 
     //GET : /api/provider
     public VerificationDto getProviderVerificationDetail(String userId) {
@@ -158,19 +136,14 @@ public class ProviderService {
                      for (OfferDto offer : orderDetail) {
                          ReviewsDto reviewsDto = new ReviewsDto();
                          String orderId = orderRepository.findOrderIdByOfferId(offer.getOfferId());
-                         logger.info("orderId: " + orderId);
-                         logger.info("offer1: " + offer.getOfferId());
                          Review review = reviewRepository.findReviewByOrderId(orderId);
-                         logger.info("review: " + review);
                          if (review == null) {
                              logger.info("review is null");
                              continue;
                          }
                          reviewsDto.setUsername(offer.getCreatedBy());
-                         logger.info("username: " + offer.getCreatedBy());
                          reviewsDto.setPrimaryImage(offer.getPrimaryImage());
                          reviewsDto.setItem(offer.getItem());
-                         logger.info("item: " + offer.getItem());
                          reviewsDto.setEfficiency((reviewRepository.findReviewByOrderId(orderId).getReviewEfficiency()));
                          reviewsDto.setAttitude(reviewRepository.findReviewByOrderId(orderId).getReviewAttitude());
                          reviewsDto.setComments(reviewRepository.findReviewByOrderId(orderId).getReviewRemark());
@@ -190,12 +163,8 @@ public class ProviderService {
     //Get: /provider/profile/{providerId}
     public ProviderDetailDto publicShowProviderDetailByUserId(String providerId) {
         try{
-            logger.info("providerId1: " + providerId);
             Provider providerDetail = providerRepository.findProviderById(providerId);
-            logger.info("this is public: " + providerId);
-            //Completed and Done
             List<OfferDto> orderDetail = offerRepository.findOfferAndRequestByProviderIdAndStatus(providerId, 8);
-
             ProviderDetailDto providerDetailDto = new ProviderDetailDto();
             providerDetailDto.setProviderName(userService.getUserNameById(providerDetail.getUserId()));
             providerDetailDto.setLocationName(locationService.getLocationNameByLocationId(providerDetail.getLocationId()));
@@ -238,15 +207,10 @@ public class ProviderService {
     public ProviderDashboardDto getProviderDashboard(String userId) {
         try{
             var providerId = providerRepository.getIdByUserId(userId);
-            logger.info("providerId: " + providerId);
             Provider provider = providerRepository.findProviderById(providerId);
-            logger.info("provider: " + provider);
             Integer numberOfOffer = offerRepository.getPendingOfferByProviderId(providerId);
-            logger.info("numberOfOffer: " + numberOfOffer);
             Integer numberOfActiveTask = orderRepository.getActiveOrderByProviderId(providerId);
-            logger.info("numberOfActiveTask: " + numberOfActiveTask);
             Integer numberOfTaskCompleted = orderRepository.getCompletedOrderByProviderId(providerId);
-            logger.info("numberOfTaskCompleted: " + numberOfTaskCompleted);
             Integer balance = orderRepository.calculateBalanceByProviderId(providerId);
             ProviderDashboardDto DashBoard = new ProviderDashboardDto();
             DashBoard.setAverageAttitude(provider.getStarOfAttitude());
@@ -284,7 +248,6 @@ public class ProviderService {
             provider.setStatusId(1);
             provider.setLocationId(locationId);
             ProviderVerification providerVerificationId = providerVerificationRepository.saveAndFlush(provider);
-            logger.info("providerVerificationId: " + providerVerificationId);
             return providerVerificationId.getId();
         } catch (Exception e) {
             throw new IllegalArgumentException("Cannot create provider application");
@@ -297,7 +260,6 @@ public class ProviderService {
             userService.validateUserId((userId));
             Provider provider = providerRepository.findProviderByUserId(userId);
             provider.setBiography(bio);
-            logger.info("provider bio: " + bio);
             providerRepository.saveAndFlush(provider);
         } catch (Exception e) {
             throw new IllegalArgumentException("Cannot change provider bio");

@@ -60,7 +60,7 @@ public class OrdersService {
         }
         var requestId = offer.getRequestId();
         var allOpenOffers = offerService.getOfferByRequestIdAndOfferStatusId(requestId, 1);
-        allOpenOffers.forEach(offerService::setStatusAborted);
+        allOpenOffers.forEach(offer::setStatusAborted);
         offer.setOfferStatusId(8);
         offerRepository.saveAndFlush(offer);
         requestService.updateRequestStatus(requestId,
@@ -83,9 +83,6 @@ public class OrdersService {
     public List<OrdersDto> userGetOrdersByUserIdAndStatusFromUser(String userId, List<String> orderStatuses){
         return  ordersRepository.findOrdersByUserIdAndStatusFromUser(userId, orderStatuses);
     }
-
-
-
 
 
     public void updateOrderShippingOrderId(String orderId, Integer logisticCompanyId, String shippingOrderNo, MultipartFile file) {

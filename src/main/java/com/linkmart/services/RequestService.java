@@ -129,8 +129,6 @@ public class RequestService {
                                     List<MultipartFile> files)
             throws Exception {
         try {
-            logger.info("userId: " + userId);
-            logger.info("locationId: " + locationId);
             var newRequest = new RequestModel();
             newRequest.setCreatedBy(userId);
             newRequest.setLocationId(locationId);
@@ -138,16 +136,12 @@ public class RequestService {
             newRequest.setItem(item);
             newRequest.setUrl(url);
             newRequest.setQuantity(quantity);
-            logger.info("requestRemark: " + requestRemark);
 
             newRequest.setRequestRemark(requestRemark);
             newRequest.makeRequestCase();
             if (offerPrice != null) {
                 newRequest.setOfferPrice(offerPrice);
             }
-
-            logger.info("urlImages: " + urlImages);
-
             String firstFile = null;
             List<ImageModel> images = new ArrayList<>();
             for (String urlImage: urlImages) {
