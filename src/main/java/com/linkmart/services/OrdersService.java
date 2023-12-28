@@ -98,7 +98,7 @@ public class OrdersService {
         order.setShippingOrderNo(shippingOrderNo);
         String orderProof = s3Service.uploadShipmentFile(file);
         order.setShipmentProof(orderProof);
-        updateOrderStatus();
+//        updateOrderStatus();
         ordersRepository.saveAndFlush(order);
     }
 
