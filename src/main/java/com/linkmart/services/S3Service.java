@@ -18,6 +18,8 @@ public class S3Service {
     @Autowired
     AmazonS3 s3Client;
 
+    private final String s3Link = "https://cdn.linkmart.com.s3-website-ap-southeast-1.amazonaws.com/";
+
     public String uploadFile(MultipartFile file) {
         try {
             var path = "profiles/profile-" + System.currentTimeMillis() + "." +
@@ -25,7 +27,7 @@ public class S3Service {
             this.s3Client.putObject("cdn.linkmart.com", path,
                     file.getInputStream(),
                     new ObjectMetadata());
-            return "https://cdn.linkmart.com.s3-website-ap-southeast-1.amazonaws.com/"+ path;
+            return s3Link + path;
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new ResponseStatusException(
@@ -41,7 +43,7 @@ public class S3Service {
             this.s3Client.putObject("cdn.linkmart.com", path,
                     file.getInputStream(),
                     new ObjectMetadata());
-            return "https://cdn.linkmart.com.s3-website-ap-southeast-1.amazonaws.com/"+ path;
+            return s3Link + path;
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new ResponseStatusException(
