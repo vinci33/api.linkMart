@@ -22,6 +22,8 @@ INSERT INTO users(id,username,user_email,password) VALUES('01HHZZ015SVZVDH4XTZCY
 --JWT: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhZG1pbiIsInVzZXJJZCI6IjAxSEhaWjAxNVNWWlZESDRYVFpDWUNKTVcwIiwiaWF0IjoxNzAyOTUzODQ5LCJleHAiOjE3MDQyNjk5ODR9.HyEZdN1_402M8UlRmZjXnVI7tIMdNcHp9EibLihk-Qo
 --pw: "123"
 
+INSERT INTO users(id,username,user_email,password) VALUES('01HJQZJTFE9RFC380RYZDM101T','NicProvider','nic@provider.com','$2a$10$aDHsi/qQBce4WL8IoPSjQ.IBYXgG8MJpZBBGyQ2H1oFJLufkTsfPW');
+
 
 INSERT INTO status(status_name) VALUES ('pending'),('in-progress'),('aborted'),('rejected'),('completed'),('open'),('closed'),('accepted');
 --added open and closed
@@ -250,32 +252,32 @@ null, 'https://www.zalora.com.hk/p/vans-old-skool-color-theory-sneakers-6539384'
 ('01HJQJYANHBJP2CWD721C5J5KP', '01HHAWPJ6068YT0685RZ5AY3XF',1, 3, 'VANS Old Skool Color Theory Sneakers',
 null, 'https://www.zalora.com.hk/p/vans-old-skool-pastel-picnic-sneakers-6417774',
 1, 'Product Details - The FABRE™ EX shoe \n - Iconic classic FABRE basketball shoes - Features clean embroidery stripes \n - L-SPEVA midsole and high grip “NCI rubber” outer sole',
-4600, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://dynamic.zacdn.com/Ev83QwEW1UTnxdZ-9bcebHkONH0=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/vans-8435-4777146-1.jpg')
+4600, true, FALSE, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://dynamic.zacdn.com/Ev83QwEW1UTnxdZ-9bcebHkONH0=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/vans-8435-4777146-1.jpg')
 ,
 ('01HJQK0YZH9QGJWT9G2B2A1M9H', '01HHZZ015SVZVDH4XTZCYCJMW0',1, 3, 'Converse Chuck Taylor All Star Move Hi Sneakers',
 null, 'https://www.zalora.com.hk/p/converse-chuck-taylor-all-star-move-hi-sneakers-6439705',
 1, 'Product Details - The FABRE™ EX shoe \n - Iconic classic FABRE basketball shoes - Features clean embroidery stripes \n - L-SPEVA midsole and high grip “NCI rubber” outer sole',
-4600, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://dynamic.zacdn.com/NSw6QLI37tw0C40kgQbpCGOBrRw=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/converse-4464-5079346-1.jpg')
+4600, true, FALSE, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://dynamic.zacdn.com/NSw6QLI37tw0C40kgQbpCGOBrRw=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/converse-4464-5079346-1.jpg')
 ,
 ('01HJQK2WN05Y0HTF816064965J', '01HHZZ015SVZVDH4XTZCYCJMW0',1, 3, 'PUMA Suede Fat Lace Sneakers',
 null, 'https://www.zalora.com.hk/p/puma-suede-fat-lace-sneakers-6489031',
 1, 'Product Details - The FABRE™ EX shoe \n - Iconic classic FABRE basketball shoes - Features clean embroidery stripes \n - L-SPEVA midsole and high grip “NCI rubber” outer sole',
-4600, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://dynamic.zacdn.com/3wenNJP38uoZH0GGNpj5puPKmVk=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/puma-6990-1309846-1.jpg')
+4600, true, FALSE, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://dynamic.zacdn.com/3wenNJP38uoZH0GGNpj5puPKmVk=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/puma-6990-1309846-1.jpg')
 ,
 ('01HJQK52S123F1F6EQPGPSD4JY', '01HHZZ015SVZVDH4XTZCYCJMW0',1, 3, 'ADIDAS Adult UNISEX SWIFT RUN SPORTS SHOES SNEAKERS',
 null, 'https://www.zalora.com.hk/p/adidas-adult-unisex-swift-run-sports-shoes-sneakers-6302548',
 1, 'Product Details - The FABRE™ EX shoe \n - Iconic classic FABRE basketball shoes - Features clean embroidery stripes \n - L-SPEVA midsole and high grip “NCI rubber” outer sole',
-4600, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://dynamic.zacdn.com/8GU35andmQ4PD3KVvQ_zVwrLH1M=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/adidas-7178-8452036-1.jpg')
+4600, true, FALSE, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://dynamic.zacdn.com/8GU35andmQ4PD3KVvQ_zVwrLH1M=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/adidas-7178-8452036-1.jpg')
 ,
 ('01HJQK73PET7DHTQ2G86FDG87D', '01HHZZ015SVZVDH4XTZCYCJMW0',1, 3, '361° Basketball Men''s Professional Shoes',
 null, 'https://www.zalora.com.hk/p/adidas-adult-unisex-swift-run-sports-shoes-sneakers-6302548',
 1, 'Product Details - The FABRE™ EX shoe \n - Iconic classic FABRE basketball shoes - Features clean embroidery stripes \n - L-SPEVA midsole and high grip “NCI rubber” outer sole',
-4600, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://dynamic.zacdn.com/SQzeReMLEb-S0aG8qaTeiU6g09Y=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/361-5261-8115446-1.jpg')
+4600, true, FALSE, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://dynamic.zacdn.com/SQzeReMLEb-S0aG8qaTeiU6g09Y=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/361-5261-8115446-1.jpg')
 ,
 ('01HJQKDRHSKW4AB740KTS8MSED', '01HHZZ015SVZVDH4XTZCYCJMW0',1, 3, '361° Basketball Men''s Professional Shoes',
 null, 'https://www.zalora.com.hk/p/adidas-adult-unisex-swift-run-sports-shoes-sneakers-6302548',
 1, 'Product Details - The FABRE™ EX shoe \n - Iconic classic FABRE basketball shoes - Features clean embroidery stripes \n - L-SPEVA midsole and high grip “NCI rubber” outer sole',
-4600, FALSE, true, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://dynamic.zacdn.com/8GU35andmQ4PD3KVvQ_zVwrLH1M=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/adidas-7178-8452036-1.jpg')
+4600, true, FALSE, '2023-12-12 20:22:54.04832', '2023-12-12 20:22:54.04832', 'https://dynamic.zacdn.com/8GU35andmQ4PD3KVvQ_zVwrLH1M=/filters:quality(70):format(webp)/https://static-hk.zacdn.com/p/adidas-7178-8452036-1.jpg')
 ;
 
 INSERT INTO user_address(user_id, address, is_primary) VALUES
@@ -412,9 +414,11 @@ INSERT INTO users (id, username, user_email, password) VALUES
 
 INSERT INTO provider (id, user_id, location_id, star_of_efficiency, star_of_attitude, number_of_reviews) VALUES
 --FredyP
-('01HJ016MJHEPFWWTA19JQ7Q2Q8', '01HHZYZJMQT1F9SF92P0WCHDNJ', '1','5','5', 0),
+('01HJ016MJHEPFWWTA19JQ7Q2Q8', '01HHZYZJMQT1F9SF92P0WCHDNJ', '3','1.33','2.67', 3),
 --ElaineP
-('01HJ017JH7A2J9XYPTY64YG5EK', '01HHZYZY2PSD07ZQS50FC2D33E', '1','5','5', 0);
+('01HJ017JH7A2J9XYPTY64YG5EK', '01HHZYZY2PSD07ZQS50FC2D33E', '1','4.75','5', 5),
+--NicP
+('01HJQZJTFE9RFC380RYZDM101T', '01HHZZ015SVZVDH4XTZCYCJMW0', '1','0','0', 0);
 
 
 
